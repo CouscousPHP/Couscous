@@ -26,6 +26,7 @@ versioned in your repository with your source, compiled to HTML and published to
 
 ## Features
 
+* preview your website using `couscous preview`
 * write your website template using Twig
 * Markdown compiler supports GitHub fenced code blocks
 * easily extensible, clean PHP code
