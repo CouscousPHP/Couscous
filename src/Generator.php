@@ -60,6 +60,7 @@ class Generator
         // Process each page
         $finder = new Finder();
         $finder->files()->in($sourceDirectory)
+            ->ignoreDotFiles(true)
             ->exclude(array_merge($config->exclude, array('.generated')))
             ->name('*.md');
         foreach ($finder as $file) {
