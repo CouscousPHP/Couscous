@@ -64,12 +64,18 @@ versioned in your repository with your source, compiled to HTML and published to
 <li>Markdown compiler supports GitHub fenced code blocks</li>
 <li>easily extensible, clean PHP code</li>
 </ul>
+<h2>Installation</h2>
+<pre><code>wget http://mnapoli.fr/Couscous/couscous.phar
+sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 <h2>Usage</h2>
-<p>Check out the repository and install the dependencies (<code>composer install</code>).</p>
-<pre><code>$ bin/couscous generate
-$ bin/couscous preview</code></pre>
-<p>To generate the phar archive:</p>
-<pre><code>$ bin/compile</code></pre>
+<pre><code>$ couscous generate
+$ couscous preview
+$ couscous deploy</code></pre>
+<h2>Generating the phar</h2>
+<p>To generate the phar archive yourself, check out the repository and:</p>
+<pre><code>$ composer install
+$ bin/compile</code></pre>
+<p>The phar is generated as <code>bin/couscous.phar</code>.</p>
 <h2>Read more</h2>
 <ul>
 <li><a href="docs/">Documentation</a></li>
