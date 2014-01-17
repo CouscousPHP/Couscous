@@ -29,8 +29,31 @@ class Config
      */
     public $baseUrl = '/';
 
+    /**
+     * Scripts to execute before generating the website.
+     * @var string[]
+     */
+    public $before = array();
+
+    /**
+     * Scripts to execute after generating the website.
+     * @var string[]
+     */
+    public $after = array();
+
+    /**
+     * Create the config from a YAML file.
+     *
+     * @param string $file If the file doesn't exist, returns a default config.
+     *
+     * @return Config
+     */
     public static function fromYaml($file)
     {
+        if (! file_exists($file)) {
+            return new self();
+        }
+
         $values = Yaml::parse(file_get_contents($file));
 
         $config = new self();
@@ -47,6 +70,12 @@ class Config
         }
         if (array_key_exists('baseUrl', $values)) {
             $config->baseUrl = rtrim(trim($values['baseUrl']), '/');
+        }
+        if (array_key_exists('before', $values)) {
+            $config->before = (array) $values['before'];
+        }
+        if (array_key_exists('after', $values)) {
+            $config->after = (array) $values['after'];
         }
 
         return $config;

@@ -1,1 +1,8 @@
 baseUrl: http://mnapoli.github.io/Couscous
+
+before:
+  - bin/compile
+  - cp bin/couscous.phar website/public/
+
+after:
+  - rm website/public/couscous.phar

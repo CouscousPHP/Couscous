@@ -50,6 +50,9 @@ class Generator
         $targetFinder = new Finder();
         $filesystem->remove($targetFinder->in($targetDirectory));
 
+        // Execute the "before" scripts
+        $this->execScripts($config->before, $sourceDirectory, $output);
+
         // Copy the template files
         $output->writeln('Copying template files');
         $filesystem->mirror($templateDirectory . '/public', $targetDirectory, null, array('delete' => true));
@@ -80,6 +83,28 @@ class Generator
             }
 
             $filesystem->dumpFile($targetFile, $page->content);
+        }
+
+        // Execute the "after" scripts
+        $this->execScripts($config->after, $sourceDirectory, $output);
+    }
+
+    private function execScripts(array $scripts, $sourceDirectory, OutputInterface $output)
+    {
+        foreach ($scripts as $script) {
+            $script = 'cd "' . $sourceDirectory . '" && ' . $script;
+
+            $output->writeln("Executing <info>$script</info>");
+
+            $scriptOutput = array();
+            $returnValue = 0;
+            exec($script, $scriptOutput, $returnValue);
+
+            if ($returnValue !== 0) {
+                throw new \RuntimeException(
+                    "Error while running '$script':" . PHP_EOL . implode(PHP_EOL, $scriptOutput)
+                );
+            }
         }
     }
 

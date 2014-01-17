@@ -44,7 +44,7 @@ class PreviewCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Target directory in which to generate the files.',
-                getcwd() . '/.couscous'
+                getcwd() . '/.couscous/generated'
             );
     }
 
