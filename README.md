@@ -26,11 +26,8 @@ versioned in your repository with your source, compiled to HTML and published to
 
 ## Features
 
-* full control over the website layout: you write your own template and menus
-* supports any number of pages, images, links, Javascript (in the template), …
-* hosted by GitHub on "Github pages", you don't have to host your website
-* your README will be your home page, your code repository will always be in sync with your website
-* supports GitHub fenced code blocks
+* write your website template using Twig
+* Markdown compiler supports GitHub fenced code blocks
 * easily extensible, clean PHP code
 
 
