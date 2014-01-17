@@ -1,0 +1,19 @@
+{
+    "name": "mnapoli/couscous",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Couscous\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/console": "~2.4",
+        "twig/twig": "~1.0",
+        "symfony/filesystem": "~2.4",
+        "symfony/finder": "~2.4",
+        "symfony/process": "~2.4",
+        "symfony/yaml": "~2.4",
+        "erusev/parsedown": "~0.8"
+    }
+}
