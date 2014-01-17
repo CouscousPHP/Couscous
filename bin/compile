@@ -1,5 +1,10 @@
 #!/usr/bin/env php
 <?php
+/**
+ * Generates the PHAR archive.
+ *
+ * @author Matthieu Napoli <matthieu@mnapoli.fr>
+ */
 
 use Phine\Phar\Builder;
 use Phine\Phar\Stub;

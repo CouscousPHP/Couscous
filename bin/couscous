@@ -1,5 +1,10 @@
 #!/usr/bin/env php
 <?php
+/**
+ * Runs Couscous.
+ *
+ * @author Matthieu Napoli <matthieu@mnapoli.fr>
+ */
 
 use Couscous\CLI\GenerateCommand;
 use Couscous\CLI\PreviewCommand;
