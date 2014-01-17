@@ -71,6 +71,8 @@ class DeployCommand extends Command
         $generator = new Generator();
         $generator->generate($config, $sourceDirectory, $targetDirectory, $output);
 
+        $output->writeln('');
+
         // Publish it
         $publisher = new Publisher();
         $publisher->publish($targetDirectory, $repositoryUrl, $targetBranch, $tempDirectory, $output);

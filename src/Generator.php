@@ -39,7 +39,7 @@ class Generator
             throw new \InvalidArgumentException("The template directory doesn't exist: $templateDirectory");
         }
 
-        $output->writeln('Generating ' . $sourceDirectory . ' to ' . $targetDirectory);
+        $output->writeln("<comment>Generating $sourceDirectory to $targetDirectory</comment>");
 
         // Create the target directory
         if (! $filesystem->exists($targetDirectory)) {
@@ -68,7 +68,7 @@ class Generator
             ->name('*.md');
         foreach ($finder as $file) {
             /** @var SplFileInfo $file */
-            $output->writeln('Generating ' . $file->getRelativePathname());
+            $output->writeln('Processing ' . $file->getRelativePathname());
 
             // Process the file content
             $page = new Page($file->getFilename(), $file->getContents());
