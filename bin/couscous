@@ -6,6 +6,7 @@
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
 
+use Couscous\CLI\DeployCommand;
 use Couscous\CLI\GenerateCommand;
 use Couscous\CLI\PreviewCommand;
 use Symfony\Component\Console\Application;
@@ -13,6 +14,9 @@ use Symfony\Component\Console\Application;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $application = new Application('Couscous', '1.0');
+
 $application->add(new GenerateCommand);
 $application->add(new PreviewCommand());
+$application->add(new DeployCommand());
+
 $application->run();
