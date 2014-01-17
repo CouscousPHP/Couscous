@@ -32,6 +32,22 @@ versioned in your repository with your source, compiled to HTML and published to
 * easily extensible, clean PHP code
 
 
+## Usage
+
+Check out the repository and install the dependencies (`composer install`).
+
+```
+$ bin/couscous generate
+$ bin/couscous preview
+```
+
+To generate the phar archive:
+
+```
+$ bin/compile
+```
+
+
 ## Read more
 
 * [Documentation](docs/)

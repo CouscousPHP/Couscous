@@ -2,3 +2,4 @@ vendor/*
 composer.phar
 composer.lock
 .couscous/
+bin/couscous.phar

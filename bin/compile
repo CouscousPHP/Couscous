@@ -1,0 +1,59 @@
+#!/usr/bin/env php
+<?php
+
+use Phine\Phar\Builder;
+use Phine\Phar\Stub;
+use Symfony\Component\Finder\Finder;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$couscousDir = realpath(__DIR__ . '/..');
+
+// Delete existing phar
+if (file_exists(__DIR__ . '/couscous.phar')) {
+    unlink(__DIR__ . '/couscous.phar');
+}
+
+// Create a new Phar in the same directory
+$builder = Builder::create(__DIR__ . '/couscous.phar');
+
+// Add the source files
+$builder->buildFromIterator(
+    Finder::create()
+        ->files()
+        ->name('*.php')
+        ->in($couscousDir . '/src')
+        ->getIterator(),
+    $couscousDir
+);
+
+// add the dependencies
+$builder->buildFromIterator(
+    Finder::create()
+        ->files()
+        ->name('*.php')
+        ->exclude('Tests')
+        ->in($couscousDir . '/vendor')
+        ->getIterator(),
+    $couscousDir
+);
+
+$builder->addFile("$couscousDir/LICENSE", 'LICENSE');
+
+$source = file_get_contents("$couscousDir/bin/couscous");
+$source = preg_replace('{^#!/usr/bin/env php\s*}', '', $source);
+$source = str_replace('<?php', '', $source);
+
+$builder->setStub(
+    Stub::create()
+        ->mapPhar('couscous.phar')
+        ->addSource($source)
+        ->getStub()
+);
+
+echo Stub::create()
+    ->mapPhar('couscous.phar')
+    ->addSource($source)
+    ->getStub();
+
+chmod(__DIR__ . '/couscous.phar', 0755);
