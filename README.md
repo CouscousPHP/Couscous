@@ -32,21 +32,34 @@ versioned in your repository with your source, compiled to HTML and published to
 * easily extensible, clean PHP code
 
 
+## Installation
+
+```
+wget http://mnapoli.fr/Couscous/couscous.phar
+chmod +x couscous.phar
+sudo mv couscous.phar /usr/local/bin/couscous
+```
+
+
 ## Usage
 
-Check out the repository and install the dependencies (`composer install`).
-
 ```
-$ bin/couscous generate
-$ bin/couscous preview
-$ bin/couscous deploy
+$ couscous generate
+$ couscous preview
+$ couscous deploy
 ```
 
-To generate the phar archive:
+
+## Generating the phar
+
+To generate the phar archive yourself, check out the repository and:
 
 ```
+$ composer install
 $ bin/compile
 ```
+
+The phar is generated as `bin/couscous.phar`.
 
 
 ## Read more
