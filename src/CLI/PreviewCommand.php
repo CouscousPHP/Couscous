@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
@@ -65,17 +66,37 @@ class PreviewCommand extends Command
         // Override baseUrl since we are running it ourselves
         $config->baseUrl = '';
 
+        // Generate the website
         $generator = new Generator();
         $generator->generate($config, $sourceDirectory, $targetDirectory, $output);
+        $lastCheckDate = date('Y-m-d H:i:s');
 
-        $output->writeln(sprintf("Server running on <info>%s</info>\n", $input->getArgument('address')));
-
+        // Start the webserver
         $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address')));
         $builder->setWorkingDirectory($targetDirectory);
         $builder->setTimeout(null);
-        $builder->getProcess()->run(function ($type, $buffer) use ($output) {
-            $output->write($buffer);
-        });
+        $process = $builder->getProcess();
+        $process->start();
+        $output->writeln(sprintf("Server running on <info>%s</info>\n", $input->getArgument('address')));
+
+        // Watch for changes
+        while (true) {
+            if ($this->hasChanges($sourceDirectory, $lastCheckDate, $generator, $output)) {
+                $output->writeln('<info>File changes detected, regenerating</info>');
+                $generator->generate($config, $sourceDirectory, $targetDirectory, $output);
+            }
+
+            $lastCheckDate = date('Y-m-d H:i:s');
+            sleep(1);
+        }
+    }
+
+    private function hasChanges($sourceDirectory, $lastCheckDate)
+    {
+        $changedFiles = new Finder();
+        $changedFiles->files()->in($sourceDirectory)->date('after ' . $lastCheckDate);
+
+        return (count($changedFiles) > 0);
     }
 
     /**
