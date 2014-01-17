@@ -39,6 +39,7 @@ Check out the repository and install the dependencies (`composer install`).
 ```
 $ bin/couscous generate
 $ bin/couscous preview
+$ bin/couscous deploy
 ```
 
 To generate the phar archive:
