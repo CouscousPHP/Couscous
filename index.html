@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Couscous by mnapoli</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/mnapoli/Couscous">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Couscous</h1>
+            <h2>Couscous is great.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/mnapoli/Couscous/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/mnapoli/Couscous/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a name="couscous" class="anchor" href="#couscous"><span class="octicon octicon-link"></span></a>Couscous</h1>
+
+<p>Couscous is great. Couscous generates a website from your markdown documentation.</p>
+
+<h2>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p><a href="http://pages.github.com/">Github pages</a> are good, but what do you do:</p>
+
+<ul>
+<li>if you want to write your documentation in <strong>Markdown</strong> and not in HTML?</li>
+<li>if you want your documentation to be transformed into a <strong>website</strong>?</li>
+<li>if you want to <strong>keep the documentation with your code</strong>, versioned in the repository?</li>
+</ul><p><em>Couscous</em> is here to help you. <strong>Your documentation is written in Markdown,
+versioned in your repository with your source, compiled to HTML and published to <em>Github pages</em>.</strong></p>
+
+<h2>
+<a name="how-does-it-work" class="anchor" href="#how-does-it-work"><span class="octicon octicon-link"></span></a>How does it work</h2>
+
+<ol>
+<li>you write your README and documentation in <code>.md</code> files (Markdown) on your repository</li>
+<li>you generate you website with <em>Couscous</em>
+
+<ul>
+<li>it turns <code>.md</code> files into HTML files</li>
+<li>HTML files are committed to the <code>gh-pages</code> branch of your repository, and thus are published as a website by Github</li>
+</ul>
+</li>
+<li>profit!</li>
+</ol><h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>preview your website using <code>couscous preview</code>
+</li>
+<li>write your website template using Twig</li>
+<li>Markdown compiler supports GitHub fenced code blocks</li>
+<li>easily extensible, clean PHP code</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Check out the repository and install the dependencies (<code>composer install</code>).</p>
+
+<pre><code>$ bin/couscous generate
+$ bin/couscous preview
+</code></pre>
+
+<p>To generate the phar archive:</p>
+
+<pre><code>$ bin/compile
+</code></pre>
+
+<h2>
+<a name="read-more" class="anchor" href="#read-more"><span class="octicon octicon-link"></span></a>Read more</h2>
+
+<ul>
+<li><a href="docs/">Documentation</a></li>
+</ul><h2>
+<a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h2>
+
+<p>Follow the project <a href="https://github.com/mnapoli/Couscous/">on Github</a></p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/mnapoli">mnapoli</a> can be found on <a href="https://github.com/mnapoli/Couscous">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
