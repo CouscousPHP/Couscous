@@ -23,3 +23,7 @@ footer p {
     clear: left;
     margin-bottom: 0;
 }
+
+pre.prettyprint {
+    border: 1px solid #ccc;
+}
