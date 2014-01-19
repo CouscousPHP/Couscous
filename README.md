@@ -1,6 +1,6 @@
 # Couscous
 
-Couscous is great. Couscous generates a website from your markdown documentation.
+Couscous is good. Couscous generates a website (for [Github pages](http://pages.github.com/)) from your markdown documentation.
 
 
 ## Introduction
@@ -11,7 +11,7 @@ Couscous is great. Couscous generates a website from your markdown documentation
 * if you want your documentation to be transformed into a **website**?
 * if you want to **keep the documentation with your code**, versioned in the repository?
 
-*Couscous* is here to help you. **Your documentation is written in Markdown,
+Couscous is here to help you. **Your documentation is written in Markdown,
 versioned in your repository with your source, compiled to HTML and published to *Github pages*.**
 
 
@@ -24,15 +24,11 @@ versioned in your repository with your source, compiled to HTML and published to
 3. profit!
 
 
-## Features
+## Getting started
 
-* preview your website using `couscous preview`
-* write your website template using Twig
-* Markdown compiler supports GitHub fenced code blocks
-* easily extensible, clean PHP code
+### Installation
 
-
-## Installation
+You can [download it manually](http://mnapoli.fr/Couscous/couscous.phar) or install it through CLI:
 
 ```
 wget http://mnapoli.fr/Couscous/couscous.phar
@@ -40,19 +36,38 @@ chmod +x couscous.phar
 sudo mv couscous.phar /usr/local/bin/couscous
 ```
 
-
 ## Usage
+
+Use the following commands in your project's repository.
 
 ```
 $ couscous generate
+```
+
+Generates the website in `.couscous/generated`. Can be used to check if the website generates correctly.
+
+```
 $ couscous preview
+```
+
+Generates the website and starts a webserver so that you can preview the website at http://localhost:8000.
+
+```
 $ couscous deploy
 ```
+
+Generates the website and publish it in the `gh-pages` branch of your git repository.
+This will remove everything that exists in the `gh-pages` branch, commit in your name, and **push** to GitHub.
+
+**The `gh-pages` branch must already exist.** You can use the official
+[Automatic Page Generator](https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator) for this.
 
 
 ## Generating the phar
 
-To generate the phar archive yourself, check out the repository and:
+To generate the phar yourself, you need to allow Phar generation in your `php.ini` ([`phar.readonly = On`](http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly)).
+
+The procedure is then quite simple, check out the repository and:
 
 ```
 $ composer install
@@ -69,4 +84,4 @@ The phar is generated as `bin/couscous.phar`.
 
 ## Contribute
 
-Follow the project [on Github](https://github.com/mnapoli/Couscous/)
+Fork or follow the project [on GitHub](https://github.com/mnapoli/Couscous/).
