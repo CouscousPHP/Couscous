@@ -7,7 +7,7 @@ That configuration file is optional.
 Reference:
 
 ```yaml
-# Base URL of the published website
+# Base URL of the published website (no "/" at the end!)
 baseUrl: http://mnapoli.github.io/Couscous
 
 # Scripts to execute before generating the website
