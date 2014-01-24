@@ -36,7 +36,56 @@ chmod +x couscous.phar
 sudo mv couscous.phar /usr/local/bin/couscous
 ```
 
-## Usage
+### Setting up your repository
+
+Couscous will take every `*.md` file it finds in your repository and convert it to HTML.
+
+In order to have those HTML files look like real web pages, you are encourage to write a *template* for these pages.
+Templates are written with Twig, and are extremely easy to write.
+
+Basic example:
+
+```twig
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My project!</title>
+    </head>
+    <body>
+        {{ content|raw }}
+    </body>
+</html>
+```
+
+Variables available in the template are:
+
+- `content`: Markdown turned to HTML. Make sur to echo it with `{{ content|raw }}` else the HTML will be escaped.
+- `baseUrl`: Base URL, if defined in `couscous.yml`. When previewing with `couscous preview`, the base URL will always be `http://localhost:8000`. Useful for writing links.
+
+
+### Configuration
+
+You can define options in a `couscous.yml` file at the root of your repository.
+
+Example:
+
+```yaml
+# Base URL of the published website
+baseUrl: http://mnapoli.github.io/Couscous
+
+# Scripts to execute before generating the website
+before:
+  - cp bin/couscous.phar website/public/
+
+# Scripts to execute after generating the website
+after:
+  - rm website/public/couscous.phar
+```
+
+That configuration file is optional.
+
+
+### CLI Usage
 
 Use the following commands in your project's repository.
 
