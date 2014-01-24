@@ -7,8 +7,8 @@
     <meta name="description" content="Website generator">
 
     <link href="http://mnapoli.github.io/Couscous/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://mnapoli.github.io/Couscous/css/theme.css" rel="stylesheet">
     <link href="http://mnapoli.github.io/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.github.io/Couscous/css/theme.css" rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="http://mnapoli.github.io/Couscous/">Home</a></li>
                     <li><a href="http://mnapoli.github.io/Couscous/docs/">Documentation</a></li>
-                    <li><a href="https://github.com/mnapoli/Couscous">Source</a></li>
+                    <li><a href="https://github.com/mnapoli/Couscous">GitHub</a></li>
                 </ul>
             </div>
         </div>
@@ -37,7 +37,7 @@
 
         <section>
             <h1>Couscous</h1>
-<p>Couscous is great. Couscous generates a website from your markdown documentation.</p>
+<p>Couscous is good. Couscous generates a website (for <a href="http://pages.github.com/">Github pages</a>) from your markdown documentation.</p>
 <h2>Introduction</h2>
 <p><a href="http://pages.github.com/">Github pages</a> are good, but what do you do:</p>
 <ul>
@@ -45,7 +45,7 @@
 <li>if you want your documentation to be transformed into a <strong>website</strong>?</li>
 <li>if you want to <strong>keep the documentation with your code</strong>, versioned in the repository?</li>
 </ul>
-<p><em>Couscous</em> is here to help you. <strong>Your documentation is written in Markdown,
+<p>Couscous is here to help you. <strong>Your documentation is written in Markdown,
 versioned in your repository with your source, compiled to HTML and published to <em>Github pages</em>.</strong></p>
 <h2>How does it work</h2>
 <ol>
@@ -57,23 +57,52 @@ versioned in your repository with your source, compiled to HTML and published to
 </li>
 <li>profit!</li>
 </ol>
-<h2>Features</h2>
-<ul>
-<li>preview your website using <code>couscous preview</code></li>
-<li>write your website template using Twig</li>
-<li>Markdown compiler supports GitHub fenced code blocks</li>
-<li>easily extensible, clean PHP code</li>
-</ul>
-<h2>Installation</h2>
+<h2>Getting started</h2>
+<h3>Installation</h3>
+<p>You can <a href="http://mnapoli.fr/Couscous/couscous.phar">download it manually</a> or install it through CLI:</p>
 <pre><code>wget http://mnapoli.fr/Couscous/couscous.phar
 chmod +x couscous.phar
 sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
-<h2>Usage</h2>
-<pre><code>$ couscous generate
-$ couscous preview
-$ couscous deploy</code></pre>
+<h3>Setting up your repository</h3>
+<p>Couscous will take every <code>*.md</code> file it finds in your repository and convert it to HTML (keeping the same directory structure).</p>
+<p>In order to have those HTML files look like real web pages, you are encouraged to write a <em>template</em> for these pages.
+Templates are written with Twig, and are extremely easy to write.</p>
+<p>The template files should be in a <code>website</code> directory at the root of your repository (this path will be customizable in the future).</p>
+<p>Basic example (<code>website/page.twig</code>):</p>
+<pre><code class="language-twig">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;title&gt;My project!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        {{ content|raw }}
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Variables available in the template are:</p>
+<ul>
+<li><code>content</code>: Markdown turned to HTML. Make sur to echo it with <code>{{ content|raw }}</code> else the HTML will be escaped.</li>
+<li><code>baseUrl</code>: Base URL, if defined in <code>couscous.yml</code>. When previewing with <code>couscous preview</code>, the base URL will always be <code>http://localhost:8000</code>. Useful for writing links.</li>
+</ul>
+<h3>Configuration</h3>
+<p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
+<p>Simple example:</p>
+<pre><code class="language-yaml">baseUrl: http://mnapoli.github.io/Couscous</code></pre>
+<p>That configuration file is optional. See the <a href="doc/configuration.html">complete reference</a> for more information.</p>
+<h3>CLI Usage</h3>
+<p>Use the following commands in your project's repository.</p>
+<pre><code>$ couscous generate</code></pre>
+<p>Generates the website in <code>.couscous/generated</code>. Can be used to check if the website generates correctly.</p>
+<pre><code>$ couscous preview</code></pre>
+<p>Generates the website and starts a webserver so that you can preview the website at <a href="http://localhost:8000">http://localhost:8000</a>.
+If files are changed, the website will be regenerated.</p>
+<pre><code>$ couscous deploy</code></pre>
+<p>Generates the website and publish it in the <code>gh-pages</code> branch of your git repository.
+This will remove everything that exists in the <code>gh-pages</code> branch, commit in your name, and <strong>push</strong> to GitHub.</p>
+<p><strong>The <code>gh-pages</code> branch must already exist.</strong> You can use the official
+<a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator">Automatic Page Generator</a> for this.</p>
 <h2>Generating the phar</h2>
-<p>To generate the phar archive yourself, check out the repository and:</p>
+<p>To generate the phar yourself, you need to allow Phar generation in your <code>php.ini</code> (<a href="http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly"><code>phar.readonly = On</code></a>).</p>
+<p>The procedure is then quite simple, check out the repository and:</p>
 <pre><code>$ composer install
 $ bin/compile</code></pre>
 <p>The phar is generated as <code>bin/couscous.phar</code>.</p>
@@ -82,7 +111,7 @@ $ bin/compile</code></pre>
 <li><a href="docs/">Documentation</a></li>
 </ul>
 <h2>Contribute</h2>
-<p>Follow the project <a href="https://github.com/mnapoli/Couscous/">on Github</a></p>
+<p>Fork or follow the project <a href="https://github.com/mnapoli/Couscous/">on GitHub</a>.</p>
         </section>
 
     </div>

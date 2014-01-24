@@ -7,8 +7,8 @@
     <meta name="description" content="Website generator">
 
     <link href="http://mnapoli.github.io/Couscous/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://mnapoli.github.io/Couscous/css/theme.css" rel="stylesheet">
     <link href="http://mnapoli.github.io/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.github.io/Couscous/css/theme.css" rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="http://mnapoli.github.io/Couscous/">Home</a></li>
                     <li><a href="http://mnapoli.github.io/Couscous/docs/">Documentation</a></li>
-                    <li><a href="https://github.com/mnapoli/Couscous">Source</a></li>
+                    <li><a href="https://github.com/mnapoli/Couscous">GitHub</a></li>
                 </ul>
             </div>
         </div>
@@ -36,7 +36,20 @@
     <div class="container">
 
         <section>
-            <h1>Getting started</h1>
+            <h1>Configuration with couscous.yml</h1>
+<p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
+<p>That configuration file is optional.</p>
+<p>Reference:</p>
+<pre><code class="language-yaml"># Base URL of the published website (no "/" at the end!)
+baseUrl: http://mnapoli.github.io/Couscous
+
+# Scripts to execute before generating the website
+before:
+  - cp bin/couscous.phar website/public/
+
+# Scripts to execute after generating the website
+after:
+  - rm website/public/couscous.phar</code></pre>
         </section>
 
     </div>
