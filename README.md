@@ -1,6 +1,8 @@
-# Couscous
+---
+template: home
+---
 
-Couscous is good. Couscous generates a website (for [Github pages](http://pages.github.com/)) from your markdown documentation.
+Couscous generates a website (for [Github pages](http://pages.github.com/)) from your markdown documentation.
 
 
 ## Introduction
@@ -47,7 +49,7 @@ The template files should be in a `website` directory at the root of your reposi
 
 Basic example (`website/page.twig`):
 
-```twig
+```html
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -63,6 +65,9 @@ Variables available in the template are:
 
 - `content`: Markdown turned to HTML. Make sur to echo it with `{{ content|raw }}` else the HTML will be escaped.
 - `baseUrl`: Base URL, if defined in `couscous.yml`. When previewing with `couscous preview`, the base URL will always be `http://localhost:8000`. Useful for writing links.
+
+You can write different templates (for example to make the home page different).
+For this, read the [template documentation](doc/templates.md).
 
 
 ### Configuration
