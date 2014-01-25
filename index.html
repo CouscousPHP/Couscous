@@ -33,11 +33,16 @@
         </div>
     </div>
 
-    <div class="container">
+        <div class="container">
+        <div class="jumbotron">
+            <h1>This is Couscous!</h1>
+            <p>
+                Couscous is good.
+            </p>
+        </div>
 
         <section>
-            <h1>Couscous</h1>
-<p>Couscous is good. Couscous generates a website (for <a href="http://pages.github.com/">Github pages</a>) from your markdown documentation.</p>
+            <p>Couscous generates a website (for <a href="http://pages.github.com/">Github pages</a>) from your markdown documentation.</p>
 <h2>Introduction</h2>
 <p><a href="http://pages.github.com/">Github pages</a> are good, but what do you do:</p>
 <ul>
@@ -50,7 +55,8 @@ versioned in your repository with your source, compiled to HTML and published to
 <h2>How does it work</h2>
 <ol>
 <li>you write your README and documentation in <code>.md</code> files (Markdown) on your repository</li>
-<li>you generate you website with <em>Couscous</em><ul>
+<li>you generate you website with <em>Couscous</em>
+<ul>
 <li>it turns <code>.md</code> files into HTML files</li>
 <li>HTML files are committed to the <code>gh-pages</code> branch of your repository, and thus are published as a website by Github</li>
 </ul>
@@ -69,7 +75,7 @@ sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 Templates are written with Twig, and are extremely easy to write.</p>
 <p>The template files should be in a <code>website</code> directory at the root of your repository (this path will be customizable in the future).</p>
 <p>Basic example (<code>website/page.twig</code>):</p>
-<pre><code class="language-twig">&lt;!DOCTYPE html&gt;
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
     &lt;head&gt;
         &lt;title&gt;My project!&lt;/title&gt;
@@ -83,11 +89,13 @@ Templates are written with Twig, and are extremely easy to write.</p>
 <li><code>content</code>: Markdown turned to HTML. Make sur to echo it with <code>{{ content|raw }}</code> else the HTML will be escaped.</li>
 <li><code>baseUrl</code>: Base URL, if defined in <code>couscous.yml</code>. When previewing with <code>couscous preview</code>, the base URL will always be <code>http://localhost:8000</code>. Useful for writing links.</li>
 </ul>
+<p>You can write different templates (for example to make the home page different).
+For this, read the <a href="docs/templates.html">template documentation</a>.</p>
 <h3>Configuration</h3>
 <p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
 <p>Simple example:</p>
 <pre><code class="language-yaml">baseUrl: http://mnapoli.github.io/Couscous</code></pre>
-<p>That configuration file is optional. See the <a href="doc/configuration.html">complete reference</a> for more information.</p>
+<p>That configuration file is optional. See the <a href="docs/configuration.html">complete reference</a> for more information.</p>
 <h3>CLI Usage</h3>
 <p>Use the following commands in your project's repository.</p>
 <pre><code>$ couscous generate</code></pre>
@@ -113,8 +121,13 @@ $ bin/compile</code></pre>
 <h2>Contribute</h2>
 <p>Fork or follow the project <a href="https://github.com/mnapoli/Couscous/">on GitHub</a>.</p>
         </section>
-
     </div>
+
+    <footer>
+        <div class="container">
+            <p class="text-muted">This website was generated using Couscous (obviously…)</p>
+        </div>
+    </footer>
 
     <script src="http://mnapoli.github.io/Couscous/js/jquery-1.10.2.min.js"></script>
     <script src="http://mnapoli.github.io/Couscous/js/bootstrap.min.js"></script>

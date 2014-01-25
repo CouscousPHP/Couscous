@@ -33,15 +33,24 @@
         </div>
     </div>
 
-    <div class="container">
-
-        <section>
-            <h1>Configuration with couscous.yml</h1>
+    
+        <div class="container">
+            <section>
+                <h1>Configuration with couscous.yml</h1>
 <p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
 <p>That configuration file is optional.</p>
 <p>Reference:</p>
 <pre><code class="language-yaml"># Base URL of the published website (no "/" at the end!)
 baseUrl: http://mnapoli.github.io/Couscous
+
+# Name of the directory containing the website template (default is "website")
+directory: website
+
+# List of directories to exclude from the processing (default contains "vendor")
+# Paths are relative to the repository root
+exclude:
+  - vendor
+  - some/dir
 
 # Scripts to execute before generating the website
 before:
@@ -50,10 +59,10 @@ before:
 # Scripts to execute after generating the website
 after:
   - rm website/public/couscous.phar</code></pre>
-        </section>
+            </section>
+        </div>
 
-    </div>
-
+    
     <script src="http://mnapoli.github.io/Couscous/js/jquery-1.10.2.min.js"></script>
     <script src="http://mnapoli.github.io/Couscous/js/bootstrap.min.js"></script>
     <script src="http://mnapoli.github.io/Couscous/google-code-prettify/prettify.js"></script>

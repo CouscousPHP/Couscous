@@ -36,13 +36,64 @@
     
         <div class="container">
             <section>
-                <h1>Documentation</h1>
-<p>This is the documentation root. Here are some articles to help you:</p>
-<ul>
-<li><a href="configuration.html">Configuration using <code>couscous.yml</code></a></li>
-<li><a href="templates.html">Writing templates</a></li>
-<li><a href="faq.html">FAQ</a></li>
-</ul>
+                <h1>Templates</h1>
+<p>Templates are Twig templates, and should all in the root of the <code>website</code> directory (or whatever you named it).</p>
+<p>The default template that is used for rendering the pages is in <code>page.twig</code>.</p>
+<p>Example of a <code>page.twig</code>:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;title&gt;My project!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        {% block content %}
+
+            {{ content|raw }}
+
+        {% endblock %}
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>If, for example, you want your home page to have a different template, you can write a <code>home.twig</code>
+that overrides <code>page.twig</code>:</p>
+<pre><code class="language-html">{% extends "page.twig" %}
+
+{% block content %}
+    &lt;h1&gt;This is the home page!&lt;/h1&gt;
+
+    {{ content|raw }}
+{% endblock %}</code></pre>
+<p>You can set your <code>README.md</code> (i.e. your home page) to use that template using YAML Front matter in the Markdown file:</p>
+<pre><code class="language-markdown">---
+template: home
+---
+This is my documentation.
+
+## Subtitle
+
+This is a *sub-chapter*.</code></pre>
+<h2>Links</h2>
+<p>To ensure all your links are working correctly, you should define a <code>baseUrl</code> in <code>configuration.yml</code>
+(see <a href="configuration.html">the configuration documentation</a>).</p>
+<p>Then you can use it in the templates:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+
+        &lt;ul class="menu"&gt;
+            &lt;li&gt;
+                &lt;a href="{{ baseUrl }}/doc/my-sub-article.md"&gt;Sub-article&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+
+        {% block content %}
+
+            {{ content|raw }}
+
+        {% endblock %}
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>All your Markdown links should be rewritten and work. However, make sure you write relative links.
+A good rule of thumb is: if it works on GitHub.com, it will work with Couscous.</p>
             </section>
         </div>
 
