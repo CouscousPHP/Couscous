@@ -67,7 +67,7 @@ Variables available in the template are:
 - `baseUrl`: Base URL, if defined in `couscous.yml`. When previewing with `couscous preview`, the base URL will always be `http://localhost:8000`. Useful for writing links.
 
 You can write different templates (for example to make the home page different).
-For this, read the [template documentation](doc/templates.md).
+For this, read the [template documentation](docs/templates.md).
 
 
 ### Configuration
@@ -80,7 +80,7 @@ Simple example:
 baseUrl: http://mnapoli.github.io/Couscous
 ```
 
-That configuration file is optional. See the [complete reference](doc/configuration.md) for more information.
+That configuration file is optional. See the [complete reference](docs/configuration.md) for more information.
 
 
 ### CLI Usage
