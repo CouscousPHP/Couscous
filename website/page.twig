@@ -33,13 +33,15 @@
         </div>
     </div>
 
-    <div class="container">
+    {% block content %}
 
-        <section>
-            {{ content|raw }}
-        </section>
+        <div class="container">
+            <section>
+                {{ content|raw }}
+            </section>
+        </div>
 
-    </div>
+    {% endblock %}
 
     <script src="{{ baseUrl }}/js/jquery-1.10.2.min.js"></script>
     <script src="{{ baseUrl }}/js/bootstrap.min.js"></script>

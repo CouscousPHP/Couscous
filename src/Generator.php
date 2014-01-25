@@ -66,6 +66,7 @@ class Generator
             ->ignoreDotFiles(true)
             ->exclude(array_merge($config->exclude, array('.generated')))
             ->name('*.md');
+
         foreach ($finder as $file) {
             /** @var SplFileInfo $file */
             $output->writeln('Processing ' . $file->getRelativePathname());

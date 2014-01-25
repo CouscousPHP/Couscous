@@ -1,5 +1,11 @@
 baseUrl: http://mnapoli.github.io/Couscous
 
+directory: website
+
+exclude:
+  - vendor
+  - bin
+
 before:
   - bin/compile
   - cp bin/couscous.phar website/public/

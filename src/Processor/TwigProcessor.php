@@ -40,6 +40,6 @@ class TwigProcessor implements Processor
         $context = (array) $page;
         $context['baseUrl'] = $this->baseUrl;
 
-        $page->content = $this->twig->render('page.twig', $context);
+        $page->content = $this->twig->render($page->template . '.twig', $context);
     }
 }

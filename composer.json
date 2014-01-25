@@ -15,6 +15,7 @@
         "symfony/process": "~2.4",
         "symfony/yaml": "~2.4",
         "erusev/parsedown": "~0.8",
-        "phine/phar": "~1.0"
+        "phine/phar": "~1.0",
+        "mnapoli/front-yaml": "~1.0"
     }
 }

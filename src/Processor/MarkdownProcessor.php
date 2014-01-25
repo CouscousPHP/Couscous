@@ -3,6 +3,7 @@
 namespace Couscous\Processor;
 
 use Couscous\Page;
+use Mni\FrontYAML\Parser;
 
 /**
  * Turns Markdown to HTML.
@@ -16,6 +17,17 @@ class MarkdownProcessor implements Processor
      */
     public function process(Page $page)
     {
-        $page->content = \Parsedown::instance()->parse($page->content);
+        $parser = new Parser();
+
+        $document = $parser->parse($page->content);
+
+        $yaml = $document->getYAML();
+        if (is_array($yaml)) {
+            foreach ($yaml as $property => $value) {
+                $page->$property = $value;
+            }
+        }
+
+        $page->content = $document->getContent();
     }
 }

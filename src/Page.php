@@ -12,6 +12,8 @@ namespace Couscous;
 class Page extends \stdClass
 {
     /**
+     * File name (no path).
+     *
      * @var string
      */
     public $filename;
@@ -29,6 +31,13 @@ class Page extends \stdClass
      * @var string
      */
     public $content;
+
+    /**
+     * Template to use to render the page.
+     *
+     * @var string
+     */
+    public $template = 'page';
 
     public function __construct($filename, $content)
     {

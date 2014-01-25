@@ -1,0 +1,22 @@
+{% extends "page.twig" %}
+
+{% block content %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1>This is Couscous!</h1>
+            <p>
+                Couscous is good.
+            </p>
+        </div>
+
+        <section>
+            {{ content|raw }}
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="text-muted">This website was generated using Couscous (obviously…)</p>
+        </div>
+    </footer>
+{% endblock %}
