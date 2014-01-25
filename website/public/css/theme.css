@@ -26,6 +26,10 @@ footer p {
     margin-bottom: 0;
 }
 
+code {
+    color: #25A7C7;
+}
+
 pre.prettyprint {
     border: 1px solid #ccc;
     padding: 10px;
