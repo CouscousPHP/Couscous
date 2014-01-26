@@ -48,6 +48,20 @@ This is my documentation.
 This is a *sub-chapter*.
 ```
 
+**Good to know: any variable you put in the YAML Front matter is accessible in the view.**
+
+Example:
+
+```markdown
+---
+template: home
+myVar: true
+myOtherVar: "Some string"
+---
+This is my documentation.
+```
+
+
 ## Links
 
 To ensure all your links are working correctly, you should define a `baseUrl` in `configuration.yml`

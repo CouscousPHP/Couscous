@@ -38,14 +38,28 @@ chmod +x couscous.phar
 sudo mv couscous.phar /usr/local/bin/couscous
 ```
 
-### Setting up your repository
 
-Couscous will take every `*.md` file it finds in your repository and convert it to HTML (keeping the same directory structure).
+### Configuration
 
-In order to have those HTML files look like real web pages, you are encouraged to write a *template* for these pages.
-Templates are written with Twig, and are extremely easy to write.
+You can define options in a `couscous.yml` file at the root of your repository.
 
-The template files should be in a `website` directory at the root of your repository (this path will be customizable in the future).
+Simple example:
+
+```yaml
+baseUrl: http://mnapoli.github.io/Couscous
+```
+
+That configuration file is optional. See the [complete reference](docs/configuration.md) for more information.
+
+
+### Website template
+
+Couscous will take every `*.md` file it finds in your repository and convert it to `.html` files, keeping the same directory structure
+(`README.md` files a renamed to `index.html`).
+
+In order to have those HTML files look like real web pages, you can write a *template* for these pages.
+Templates are written with Twig, and are extremely easy to write. The template files should be in a `website/` directory
+at the root of your repository (this path is customizable).
 
 Basic example (`website/page.twig`):
 
@@ -69,18 +83,8 @@ Variables available in the template are:
 You can write different templates (for example to make the home page different).
 For this, read the [template documentation](docs/templates.md).
 
-
-### Configuration
-
-You can define options in a `couscous.yml` file at the root of your repository.
-
-Simple example:
-
-```yaml
-baseUrl: http://mnapoli.github.io/Couscous
-```
-
-That configuration file is optional. See the [complete reference](docs/configuration.md) for more information.
+If your template has assets (CSS, JS, images, …), put them in `website/public`. The content of this directory will be
+copied in the generated website.
 
 
 ### CLI Usage
@@ -111,25 +115,7 @@ This will remove everything that exists in the `gh-pages` branch, commit in your
 [Automatic Page Generator](https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator) for this.
 
 
-## Generating the phar
-
-To generate the phar yourself, you need to allow Phar generation in your `php.ini` ([`phar.readonly = On`](http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly)).
-
-The procedure is then quite simple, check out the repository and:
-
-```
-$ composer install
-$ bin/compile
-```
-
-The phar is generated as `bin/couscous.phar`.
-
-
 ## Read more
 
 * [Documentation](docs/)
-
-
-## Contribute
-
-Fork or follow the project [on GitHub](https://github.com/mnapoli/Couscous/).
+* [Building the phar](docs/contributing.md)
