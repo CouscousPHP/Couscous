@@ -7,6 +7,10 @@ h2 {
     margin-top: 30px;
 }
 
+strong {
+    color: black;
+}
+
 #banner {
     border-bottom: none;
 }

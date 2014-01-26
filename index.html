@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Couscous!</title>
+    <title>Couscous! Put your documentation in a website!</title>
     <meta name="description" content="Website generator">
 
-    <link href="http://mnapoli.github.io/Couscous/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://mnapoli.github.io/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
-    <link href="http://mnapoli.github.io/Couscous/css/theme.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/theme.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="http://mnapoli.github.io/Couscous/" class="navbar-brand">Couscous</a>
+                <a href="http://mnapoli.fr/Couscous/" class="navbar-brand">Couscous</a>
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -25,8 +25,8 @@
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li><a href="http://mnapoli.github.io/Couscous/">Home</a></li>
-                    <li><a href="http://mnapoli.github.io/Couscous/docs/">Documentation</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/">Home</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/">Documentation</a></li>
                     <li><a href="https://github.com/mnapoli/Couscous">GitHub</a></li>
                 </ul>
             </div>
@@ -69,11 +69,17 @@ versioned in your repository with your source, compiled to HTML and published to
 <pre><code>wget http://mnapoli.fr/Couscous/couscous.phar
 chmod +x couscous.phar
 sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
-<h3>Setting up your repository</h3>
-<p>Couscous will take every <code>*.md</code> file it finds in your repository and convert it to HTML (keeping the same directory structure).</p>
-<p>In order to have those HTML files look like real web pages, you are encouraged to write a <em>template</em> for these pages.
-Templates are written with Twig, and are extremely easy to write.</p>
-<p>The template files should be in a <code>website</code> directory at the root of your repository (this path will be customizable in the future).</p>
+<h3>Configuration</h3>
+<p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
+<p>Simple example:</p>
+<pre><code class="language-yaml">baseUrl: http://mnapoli.github.io/Couscous</code></pre>
+<p>That configuration file is optional. See the <a href="docs/configuration.html">complete reference</a> for more information.</p>
+<h3>Website template</h3>
+<p>Couscous will take every <code>*.md</code> file it finds in your repository and convert it to <code>.html</code> files, keeping the same directory structure
+(<code>README.md</code> files a renamed to <code>index.html</code>).</p>
+<p>In order to have those HTML files look like real web pages, you can write a <em>template</em> for these pages.
+Templates are written with Twig, and are extremely easy to write. The template files should be in a <code>website/</code> directory
+at the root of your repository (this path is customizable).</p>
 <p>Basic example (<code>website/page.twig</code>):</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -91,11 +97,8 @@ Templates are written with Twig, and are extremely easy to write.</p>
 </ul>
 <p>You can write different templates (for example to make the home page different).
 For this, read the <a href="docs/templates.html">template documentation</a>.</p>
-<h3>Configuration</h3>
-<p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
-<p>Simple example:</p>
-<pre><code class="language-yaml">baseUrl: http://mnapoli.github.io/Couscous</code></pre>
-<p>That configuration file is optional. See the <a href="docs/configuration.html">complete reference</a> for more information.</p>
+<p>If your template has assets (CSS, JS, images, …), put them in <code>website/public</code>. The content of this directory will be
+copied in the generated website.</p>
 <h3>CLI Usage</h3>
 <p>Use the following commands in your project's repository.</p>
 <pre><code>$ couscous generate</code></pre>
@@ -108,18 +111,11 @@ If files are changed, the website will be regenerated.</p>
 This will remove everything that exists in the <code>gh-pages</code> branch, commit in your name, and <strong>push</strong> to GitHub.</p>
 <p><strong>The <code>gh-pages</code> branch must already exist.</strong> You can use the official
 <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator">Automatic Page Generator</a> for this.</p>
-<h2>Generating the phar</h2>
-<p>To generate the phar yourself, you need to allow Phar generation in your <code>php.ini</code> (<a href="http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly"><code>phar.readonly = On</code></a>).</p>
-<p>The procedure is then quite simple, check out the repository and:</p>
-<pre><code>$ composer install
-$ bin/compile</code></pre>
-<p>The phar is generated as <code>bin/couscous.phar</code>.</p>
 <h2>Read more</h2>
 <ul>
 <li><a href="docs/">Documentation</a></li>
+<li><a href="docs/contributing.html">Building the phar</a></li>
 </ul>
-<h2>Contribute</h2>
-<p>Fork or follow the project <a href="https://github.com/mnapoli/Couscous/">on GitHub</a>.</p>
         </section>
     </div>
 
@@ -129,9 +125,9 @@ $ bin/compile</code></pre>
         </div>
     </footer>
 
-    <script src="http://mnapoli.github.io/Couscous/js/jquery-1.10.2.min.js"></script>
-    <script src="http://mnapoli.github.io/Couscous/js/bootstrap.min.js"></script>
-    <script src="http://mnapoli.github.io/Couscous/google-code-prettify/prettify.js"></script>
+    <script src="http://mnapoli.fr/Couscous/js/jquery-1.10.2.min.js"></script>
+    <script src="http://mnapoli.fr/Couscous/js/bootstrap.min.js"></script>
+    <script src="http://mnapoli.fr/Couscous/google-code-prettify/prettify.js"></script>
 
     <script>
         $(function() {
