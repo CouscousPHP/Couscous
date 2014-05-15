@@ -101,7 +101,7 @@ copied in the generated website.
 
 ### Preview
 
-```shell
+```bash
 $ couscous preview
 ```
 
@@ -114,7 +114,7 @@ This command will not modify your repository.
 
 ### Deployment
 
-```shell
+```bash
 $ couscous deploy
 ```
 
@@ -127,6 +127,17 @@ to create it (or you can create it manually).
 
 This command will not change anything in your current branch (e.g. master branch).
 It will only affect the `gh-pages` branch.
+
+
+## Built using Couscous
+
+Here are examples of website built using Couscous:
+
+- [Couscous](http://mnapoli.fr/Couscous/) itself (of course)
+- [PHP-DI](http://php-di.org)
+- [MyCLabs\ACL](http://myclabs.github.io/ACL/)
+
+Add your own to the list with a pull request.
 
 
 ## Read more
