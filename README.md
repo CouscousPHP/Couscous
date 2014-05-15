@@ -101,13 +101,12 @@ copied in the generated website.
 
 ### Preview
 
-```
+```shell
 $ couscous preview
 ```
 
 This command will generate the website (in a temp directory) and starts a
-webserver so that you can preview the website at http://localhost:8000.
-
+webserver so that you can preview the website at [http://localhost:8000](http://localhost:8000).
 If files are changed, the website will be regenerated.
 
 This command will not modify your repository.
@@ -115,7 +114,7 @@ This command will not modify your repository.
 
 ### Deployment
 
-```
+```shell
 $ couscous deploy
 ```
 
@@ -123,7 +122,8 @@ This command will generate the website (in a temp directory) and publish it in t
 This will remove everything that exists in the `gh-pages` branch, commit in your name, and **push** to GitHub.
 
 **The `gh-pages` branch must already exist.** You can use the official
-[Automatic Page Generator](https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator) for this.
+[Automatic Page Generator](https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator)
+to create it (or you can create it manually).
 
 This command will not change anything in your current branch (e.g. master branch).
 It will only affect the `gh-pages` branch.
