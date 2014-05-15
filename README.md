@@ -57,9 +57,21 @@ That configuration file is optional. See the [complete reference](docs/configura
 Couscous will take every `*.md` file it finds in your repository and convert it to `.html` files, keeping the same directory structure
 (`README.md` files a renamed to `index.html`).
 
-In order to have those HTML files look like real web pages, you can write a *template* for these pages.
-Templates are written with Twig, and are extremely easy to write. The template files should be in a `website/` directory
-at the root of your repository (this path is customizable).
+In order to have those HTML files look like real web pages, you need to write a *template* for these pages.
+Templates are written with Twig, and are extremely easy to write.
+
+The template files should be in a `website/` directory at the root of your repository
+(this path is customizable).
+
+Here is the default directory layout you should create:
+
+```
+your-repository/
+    couscous.yml
+    website/
+        public/
+        page.twig
+```
 
 Basic example (`website/page.twig`):
 
