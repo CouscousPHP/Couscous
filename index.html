@@ -77,9 +77,16 @@ sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 <h3>Website template</h3>
 <p>Couscous will take every <code>*.md</code> file it finds in your repository and convert it to <code>.html</code> files, keeping the same directory structure
 (<code>README.md</code> files a renamed to <code>index.html</code>).</p>
-<p>In order to have those HTML files look like real web pages, you can write a <em>template</em> for these pages.
-Templates are written with Twig, and are extremely easy to write. The template files should be in a <code>website/</code> directory
-at the root of your repository (this path is customizable).</p>
+<p>In order to have those HTML files look like real web pages, you need to write a <em>template</em> for these pages.
+Templates are written with Twig, and are extremely easy to write.</p>
+<p>The template files should be in a <code>website/</code> directory at the root of your repository
+(this path is customizable).</p>
+<p>Here is the default directory layout you should create:</p>
+<pre><code>your-repository/
+    couscous.yml
+    website/
+        public/
+        page.twig</code></pre>
 <p>Basic example (<code>website/page.twig</code>):</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -99,18 +106,29 @@ at the root of your repository (this path is customizable).</p>
 For this, read the <a href="docs/templates.html">template documentation</a>.</p>
 <p>If your template has assets (CSS, JS, images, …), put them in <code>website/public</code>. The content of this directory will be
 copied in the generated website.</p>
-<h3>CLI Usage</h3>
-<p>Use the following commands in your project's repository.</p>
-<pre><code>$ couscous generate</code></pre>
-<p>Generates the website in <code>.couscous/generated</code>. Can be used to check if the website generates correctly.</p>
-<pre><code>$ couscous preview</code></pre>
-<p>Generates the website and starts a webserver so that you can preview the website at <a href="http://localhost:8000">http://localhost:8000</a>.
+<h3>Preview</h3>
+<pre><code class="language-bash">$ couscous preview</code></pre>
+<p>This command will generate the website (in a temp directory) and starts a
+webserver so that you can preview the website at <a href="http://localhost:8000"><a href="http://localhost:8000">http://localhost:8000</a></a>.
 If files are changed, the website will be regenerated.</p>
-<pre><code>$ couscous deploy</code></pre>
-<p>Generates the website and publish it in the <code>gh-pages</code> branch of your git repository.
+<p>This command will not modify your repository.</p>
+<h3>Deployment</h3>
+<pre><code class="language-bash">$ couscous deploy</code></pre>
+<p>This command will generate the website (in a temp directory) and publish it in the <code>gh-pages</code> branch of your git repository.
 This will remove everything that exists in the <code>gh-pages</code> branch, commit in your name, and <strong>push</strong> to GitHub.</p>
 <p><strong>The <code>gh-pages</code> branch must already exist.</strong> You can use the official
-<a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator">Automatic Page Generator</a> for this.</p>
+<a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator">Automatic Page Generator</a>
+to create it (or you can create it manually).</p>
+<p>This command will not change anything in your current branch (e.g. master branch).
+It will only affect the <code>gh-pages</code> branch.</p>
+<h2>Built using Couscous</h2>
+<p>Here are examples of website built using Couscous:</p>
+<ul>
+<li><a href="http://mnapoli.fr/Couscous/">Couscous</a> itself (of course)</li>
+<li><a href="http://php-di.org">PHP-DI</a></li>
+<li><a href="http://myclabs.github.io/ACL/">MyCLabs\ACL</a></li>
+</ul>
+<p>Add your own to the list with a pull request.</p>
 <h2>Read more</h2>
 <ul>
 <li><a href="docs/">Documentation</a></li>
