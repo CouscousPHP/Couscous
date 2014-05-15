@@ -99,32 +99,34 @@ If your template has assets (CSS, JS, images, …), put them in `website/public`
 copied in the generated website.
 
 
-### CLI Usage
-
-Use the following commands in your project's repository.
-
-```
-$ couscous generate
-```
-
-Generates the website in `.couscous/generated`. Can be used to check if the website generates correctly.
+### Preview
 
 ```
 $ couscous preview
 ```
 
-Generates the website and starts a webserver so that you can preview the website at http://localhost:8000.
+This command will generate the website (in a temp directory) and starts a
+webserver so that you can preview the website at http://localhost:8000.
+
 If files are changed, the website will be regenerated.
+
+This command will not modify your repository.
+
+
+### Deployment
 
 ```
 $ couscous deploy
 ```
 
-Generates the website and publish it in the `gh-pages` branch of your git repository.
+This command will generate the website (in a temp directory) and publish it in the `gh-pages` branch of your git repository.
 This will remove everything that exists in the `gh-pages` branch, commit in your name, and **push** to GitHub.
 
 **The `gh-pages` branch must already exist.** You can use the official
 [Automatic Page Generator](https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator) for this.
+
+This command will not change anything in your current branch (e.g. master branch).
+It will only affect the `gh-pages` branch.
 
 
 ## Read more
