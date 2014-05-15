@@ -69,7 +69,7 @@ class PreviewCommand extends Command
         // Generate the website
         $generator = new Generator();
         $generator->generate($config, $sourceDirectory, $targetDirectory, $output);
-        $lastCheckDate = date('Y-m-d H:i:s');
+        $lastGenerationDate = date('Y-m-d H:i:s');
 
         // Start the webserver
         $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address')));
@@ -81,12 +81,13 @@ class PreviewCommand extends Command
 
         // Watch for changes
         while (true) {
-            if ($this->hasChanges($sourceDirectory, $lastCheckDate, $generator, $output)) {
+            if ($this->hasChanges($sourceDirectory, $lastGenerationDate)) {
+                $output->writeln('');
                 $output->writeln('<info>File changes detected, regenerating</info>');
+                $lastGenerationDate = date('Y-m-d H:i:s');
                 $generator->generate($config, $sourceDirectory, $targetDirectory, $output);
             }
 
-            $lastCheckDate = date('Y-m-d H:i:s');
             sleep(1);
         }
     }
