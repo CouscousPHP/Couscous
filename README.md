@@ -69,7 +69,8 @@ You can define options in a `couscous.yml` file at the root of your repository.
 Simple example:
 
 ```yaml
-baseUrl: http://mnapoli.github.io/Couscous
+template:
+    baseUrl: http://mnapoli.github.io/Couscous
 ```
 
 That configuration file is optional. See the [complete reference](docs/configuration.md) for more information.

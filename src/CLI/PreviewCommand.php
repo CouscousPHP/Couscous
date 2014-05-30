@@ -64,7 +64,7 @@ class PreviewCommand extends Command
         $config = Config::fromYaml($sourceDirectory . '/couscous.yml');
 
         // Override baseUrl since we are running it ourselves
-        $config->baseUrl = '';
+        $config->templateVariables['baseUrl'] = '';
 
         // Generate the website
         $generator = new Generator();

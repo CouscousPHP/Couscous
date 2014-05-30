@@ -19,13 +19,6 @@ class Page extends \stdClass
     public $filename;
 
     /**
-     * Page title.
-     *
-     * @var string
-     */
-    public $title;
-
-    /**
      * Content of the page.
      *
      * @var string
@@ -39,9 +32,18 @@ class Page extends \stdClass
      */
     public $template = 'page';
 
-    public function __construct($filename, $content)
+    /**
+     * @param string $filename
+     * @param string $content
+     * @param array  $variables Arbitrary variables that we want to add to the page.
+     */
+    public function __construct($filename, $content, array $variables)
     {
         $this->filename = $filename;
         $this->content = $content;
+
+        foreach ($variables as $name => $variable) {
+            $this->$name = $variable;
+        }
     }
 }

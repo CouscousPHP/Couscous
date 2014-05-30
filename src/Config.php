@@ -24,12 +24,6 @@ class Config
     public $directory = 'website';
 
     /**
-     * Base URL for the templates.
-     * @var string
-     */
-    public $baseUrl = '/';
-
-    /**
      * Scripts to execute before generating the website.
      * @var string[]
      */
@@ -40,6 +34,18 @@ class Config
      * @var string[]
      */
     public $after = array();
+
+    /**
+     * URL of the template.
+     * @var string
+     */
+    public $templateUrl;
+
+    /**
+     * Variables made available in templates.
+     * @var array
+     */
+    public $templateVariables = array();
 
     /**
      * Create the config from a YAML file.
@@ -68,14 +74,21 @@ class Config
         if (array_key_exists('directory', $values)) {
             $config->directory = trim($values['directory']);
         }
-        if (array_key_exists('baseUrl', $values)) {
-            $config->baseUrl = rtrim(trim($values['baseUrl']), '/');
-        }
         if (array_key_exists('before', $values)) {
             $config->before = (array) $values['before'];
         }
         if (array_key_exists('after', $values)) {
             $config->after = (array) $values['after'];
+        }
+        if (array_key_exists('templateUrl', $values)) {
+            $config->templateUrl = (string) $values['templateUrl'];
+        }
+        if (array_key_exists('template', $values)) {
+            $config->templateVariables = (array) $values['template'];
+            // Trim any trailing "/" in the base url
+            if (array_key_exists('baseUrl', $config->templateVariables)) {
+                $config->templateVariables['baseUrl'] = rtrim(trim($config->templateVariables['baseUrl']), '/');
+            }
         }
 
         return $config;

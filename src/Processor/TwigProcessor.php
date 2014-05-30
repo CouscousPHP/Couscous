@@ -18,18 +18,11 @@ class TwigProcessor implements Processor
     private $twig;
 
     /**
-     * @var string
-     */
-    private $baseUrl;
-
-    /**
      * @param Twig_Environment $twig
-     * @param string           $baseUrl
      */
-    public function __construct(Twig_Environment $twig, $baseUrl)
+    public function __construct(Twig_Environment $twig)
     {
         $this->twig = $twig;
-        $this->baseUrl = $baseUrl;
     }
 
     /**
@@ -38,7 +31,6 @@ class TwigProcessor implements Processor
     public function process(Page $page)
     {
         $context = (array) $page;
-        $context['baseUrl'] = $this->baseUrl;
 
         $page->content = $this->twig->render($page->template . '.twig', $context);
     }

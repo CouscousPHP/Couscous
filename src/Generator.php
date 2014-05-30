@@ -54,13 +54,31 @@ class Generator
         $this->execScripts($config->before, $sourceDirectory, $output);
 
         // Copy the template files
-        $output->writeln('Copying template files');
-        $filesystem->mirror($templateDirectory . '/public', $targetDirectory, null, array('delete' => true));
-
-        // Processors
-        $processor = $this->getProcessor($config, $templateDirectory);
+        $this->processTemplate($templateDirectory, $targetDirectory, $output, $filesystem);
 
         // Process each page
+        $this->processPages($config, $sourceDirectory, $templateDirectory, $targetDirectory, $output, $filesystem);
+
+        // Execute the "after" scripts
+        $this->execScripts($config->after, $sourceDirectory, $output);
+    }
+
+    private function processTemplate($templateDirectory, $targetDirectory, OutputInterface $output, Filesystem $filesystem)
+    {
+        $output->writeln('Copying template files');
+        $filesystem->mirror($templateDirectory . '/public', $targetDirectory, null, array('delete' => true));
+    }
+
+    private function processPages(
+        Config $config,
+        $sourceDirectory,
+        $templateDirectory,
+        $targetDirectory,
+        OutputInterface $output,
+        Filesystem $filesystem
+    ) {
+        $processor = $this->getProcessor($templateDirectory);
+
         $finder = new Finder();
         $finder->files()->in($sourceDirectory)
             ->ignoreDotFiles(true)
@@ -72,7 +90,7 @@ class Generator
             $output->writeln('Processing ' . $file->getRelativePathname());
 
             // Process the file content
-            $page = new Page($file->getFilename(), $file->getContents());
+            $page = new Page($file->getFilename(), $file->getContents(), $config->templateVariables);
             $processor->process($page);
 
             // If the file doesn't already exist, we convert from markdown to HTML
@@ -85,9 +103,6 @@ class Generator
 
             $filesystem->dumpFile($targetFile, $page->content);
         }
-
-        // Execute the "after" scripts
-        $this->execScripts($config->after, $sourceDirectory, $output);
     }
 
     private function execScripts(array $scripts, $sourceDirectory, OutputInterface $output)
@@ -110,18 +125,17 @@ class Generator
     }
 
     /**
-     * @param Config $config
      * @param string $templateDirectory
      * @return Processor
      */
-    private function getProcessor(Config $config, $templateDirectory)
+    private function getProcessor($templateDirectory)
     {
         $processor = new ProcessorChain();
         $processor->chain(new MarkdownProcessor());
         $processor->chain(new LinkProcessor());
         $loader = new Twig_Loader_Filesystem($templateDirectory);
         $twig = new Twig_Environment($loader);
-        $processor->chain(new TwigProcessor($twig, $config->baseUrl));
+        $processor->chain(new TwigProcessor($twig));
         $processor->chain(new FileNameProcessor());
 
         return $processor;

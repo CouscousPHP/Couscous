@@ -1,5 +1,3 @@
-baseUrl: http://mnapoli.fr/Couscous
-
 directory: website
 
 exclude:
@@ -12,3 +10,6 @@ before:
 
 after:
   - rm website/public/couscous.phar
+
+template:
+    baseUrl: http://mnapoli.fr/Couscous
