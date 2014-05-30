@@ -30,11 +30,6 @@ class Generator
     {
         $filesystem = new Filesystem();
 
-        $templateDirectory = $generation->sourceDirectory . '/' . $generation->config->directory;
-        if (! $filesystem->exists($templateDirectory)) {
-            throw new \InvalidArgumentException("The template directory doesn't exist: $templateDirectory");
-        }
-
         $generation->output->writeln(sprintf(
             "<comment>Generating %s to %s</comment>",
             $generation->sourceDirectory,
@@ -54,7 +49,7 @@ class Generator
         $this->execScripts($generation, $generation->config->before);
 
         // Copy the template files
-        $this->processTemplate($generation, $templateDirectory, $filesystem);
+        $templateDirectory = $this->processTemplate($generation, $filesystem);
 
         // Process each page
         $this->processPages($generation, $templateDirectory, $filesystem);
@@ -63,10 +58,38 @@ class Generator
         $this->execScripts($generation, $generation->config->after);
     }
 
-    private function processTemplate(GenerationHelper $generation, $templateDirectory, Filesystem $filesystem)
+    private function processTemplate(GenerationHelper $generation, Filesystem $filesystem)
     {
+        $templateUrl = $generation->config->templateUrl;
+
+        if ($templateUrl !== null) {
+            // Template is in a git repo
+            $generation->output->writeln("Fetching template from <info>$templateUrl</info>");
+
+            $templateDirectory = $generation->tempDirectory . '/template';
+            if (file_exists($templateDirectory)) {
+                $command = "cd $templateDirectory && git pull 2>&1";
+            } else {
+                $command = "git clone $templateUrl $templateDirectory 2>&1";
+            }
+            $gitOutput = array();
+            exec($command, $gitOutput, $returnValue);
+            if ($returnValue !== 0) {
+                throw new \RuntimeException(implode(PHP_EOL, $gitOutput));
+            }
+        } else {
+            // Template is in a directory
+            $templateDirectory = $generation->sourceDirectory . '/' . $generation->config->directory;
+
+            if (! $filesystem->exists($templateDirectory)) {
+                throw new \InvalidArgumentException("The template directory doesn't exist: $templateDirectory");
+            }
+        }
+
         $generation->output->writeln('Copying template files');
         $filesystem->mirror($templateDirectory . '/public', $generation->targetDirectory, null, array('delete' => true));
+
+        return $templateDirectory;
     }
 
     private function processPages(GenerationHelper $generation, $templateDirectory, Filesystem $filesystem)
