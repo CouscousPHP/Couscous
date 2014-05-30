@@ -3,6 +3,7 @@
 namespace Couscous\CLI;
 
 use Couscous\Config;
+use Couscous\GenerationHelper;
 use Couscous\Generator;
 use Couscous\Publisher;
 use Symfony\Component\Console\Command\Command;
@@ -47,34 +48,35 @@ class DeployCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $filesystem = new Filesystem();
-
         $sourceDirectory = $input->getArgument('source');
-        $targetBranch = $input->getOption('branch');
-
         $repositoryUrl = trim(shell_exec('git config --get remote.origin.url'));
+        $targetBranch = $input->getOption('branch');
 
         $config = Config::fromYaml($sourceDirectory . '/couscous.yml');
 
+        $generation = new GenerationHelper($config, $output);
+        $generation->sourceDirectory = $sourceDirectory;
+        $generation->targetDirectory = getcwd() . '/.couscous/generated';
+        $generation->tempDirectory = getcwd() . '/.couscous/deploy';
+
         // Create the directories
-        $targetDirectory = '.couscous/generated';
-        if (! $filesystem->exists($targetDirectory)) {
-            $filesystem->mkdir($targetDirectory);
+        $filesystem = new Filesystem();
+        if (! $filesystem->exists($generation->targetDirectory)) {
+            $filesystem->mkdir($generation->targetDirectory);
         }
-        $tempDirectory = '.couscous/deploy';
-        if ($filesystem->exists($tempDirectory)) {
-            $filesystem->remove($tempDirectory);
+        if ($filesystem->exists($generation->tempDirectory)) {
+            $filesystem->remove($generation->tempDirectory);
         }
-        $filesystem->mkdir($tempDirectory);
+        $filesystem->mkdir($generation->tempDirectory);
 
         // Generate the website
         $generator = new Generator();
-        $generator->generate($config, $sourceDirectory, $targetDirectory, $output);
+        $generator->generate($generation);
 
         $output->writeln('');
 
         // Publish it
         $publisher = new Publisher();
-        $publisher->publish($targetDirectory, $repositoryUrl, $targetBranch, $tempDirectory, $output);
+        $publisher->publish($generation, $generation->targetDirectory, $repositoryUrl, $targetBranch);
     }
 }

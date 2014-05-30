@@ -3,6 +3,7 @@
 namespace Couscous\CLI;
 
 use Couscous\Config;
+use Couscous\GenerationHelper;
 use Couscous\Generator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -59,21 +60,24 @@ class PreviewCommand extends Command
         }
 
         $sourceDirectory = $input->getArgument('source');
-        $targetDirectory = $input->getOption('target');
 
         $config = Config::fromYaml($sourceDirectory . '/couscous.yml');
+
+        $generation = new GenerationHelper($config, $output);
+        $generation->sourceDirectory = $sourceDirectory;
+        $generation->targetDirectory = $input->getOption('target');
 
         // Override baseUrl since we are running it ourselves
         $config->templateVariables['baseUrl'] = '';
 
         // Generate the website
         $generator = new Generator();
-        $generator->generate($config, $sourceDirectory, $targetDirectory, $output);
+        $generator->generate($generation);
         $lastGenerationDate = date('Y-m-d H:i:s');
 
         // Start the webserver
         $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address')));
-        $builder->setWorkingDirectory($targetDirectory);
+        $builder->setWorkingDirectory($generation->targetDirectory);
         $builder->setTimeout(null);
         $process = $builder->getProcess();
         $process->start();
@@ -81,11 +85,11 @@ class PreviewCommand extends Command
 
         // Watch for changes
         while (true) {
-            if ($this->hasChanges($sourceDirectory, $lastGenerationDate)) {
+            if ($this->hasChanges($generation->sourceDirectory, $lastGenerationDate)) {
                 $output->writeln('');
                 $output->writeln('<info>File changes detected, regenerating</info>');
                 $lastGenerationDate = date('Y-m-d H:i:s');
-                $generator->generate($config, $sourceDirectory, $targetDirectory, $output);
+                $generator->generate($generation);
             }
 
             sleep(1);
