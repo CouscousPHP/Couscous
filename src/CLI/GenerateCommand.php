@@ -44,9 +44,13 @@ class GenerateCommand extends Command
 
         $config = Config::fromYaml($sourceDirectory . '/couscous.yml');
 
-        $generation = new GenerationHelper($config, $output);
-        $generation->sourceDirectory = $sourceDirectory;
-        $generation->targetDirectory = $input->getOption('target');
+        $generation = new GenerationHelper(
+            $config,
+            $sourceDirectory,
+            $input->getOption('target'),
+            getcwd() . '/.couscous',
+            $output
+        );
 
         $generator = new Generator();
         $generator->generate($generation);

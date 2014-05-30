@@ -12,6 +12,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GenerationHelper
 {
     /**
+     * @var Config
+     */
+    public $config;
+
+    /**
      * Directory containing the sources (Markdown files) to compile to HTML.
      * @var string
      */
@@ -30,18 +35,22 @@ class GenerationHelper
     public $tempDirectory;
 
     /**
-     * @var Config
-     */
-    public $config;
-
-    /**
      * @var OutputInterface
      */
     public $output;
 
-    public function __construct(Config $config, OutputInterface $output)
+    public function __construct(
+        Config $config,
+        $sourceDirectory,
+        $targetDirectory,
+        $tempDirectory,
+        OutputInterface $output
+    )
     {
         $this->config = $config;
+        $this->sourceDirectory = (string) $sourceDirectory;
+        $this->targetDirectory = (string) $targetDirectory;
+        $this->tempDirectory = (string) $tempDirectory;
         $this->output = $output;
     }
 }

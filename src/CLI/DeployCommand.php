@@ -54,14 +54,17 @@ class DeployCommand extends Command
 
         $config = Config::fromYaml($sourceDirectory . '/couscous.yml');
 
-        $generation = new GenerationHelper($config, $output);
-        $generation->sourceDirectory = $sourceDirectory;
-        $generation->targetDirectory = getcwd() . '/.couscous/generated';
-        $generation->tempDirectory = getcwd() . '/.couscous/deploy';
+        $generation = new GenerationHelper(
+            $config,
+            $sourceDirectory,
+            getcwd() . '/.couscous/generated',
+            getcwd() . '/.couscous',
+            $output
+        );
 
         // Create the directories
         $filesystem = new Filesystem();
-        if (! $filesystem->exists($generation->targetDirectory)) {
+        if (!$filesystem->exists($generation->targetDirectory)) {
             $filesystem->mkdir($generation->targetDirectory);
         }
         if ($filesystem->exists($generation->tempDirectory)) {
