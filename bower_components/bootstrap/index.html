@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couscous! Put your documentation in a website!</title>
+    <meta name="description" content="Website generator">
+
+    <link href="http://mnapoli.fr/Couscous/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="http://mnapoli.fr/Couscous/" class="navbar-brand">Couscous</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li><a href="http://mnapoli.fr/Couscous/">Home</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/">Documentation</a></li>
+                    <li><a href="https://github.com/mnapoli/Couscous">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="container">
+            <section>
+                <h1><a href="http://getbootstrap.com">Bootstrap</a> <a href="http://badge.fury.io/bo/bootstrap"><img alt="Bower version" src="https://badge.fury.io/bo/bootstrap.png" /></a> <a href="http://travis-ci.org/twbs/bootstrap"><img alt="Build Status" src="https://secure.travis-ci.org/twbs/bootstrap.png" /></a> <a href="https://david-dm.org/twbs/bootstrap#info=devDependencies"><img alt="devDependency Status" src="https://david-dm.org/twbs/bootstrap/dev-status.png?theme=shields.io" /></a></h1>
+<p><a href="https://saucelabs.com/u/bootstrap"><img alt="Selenium Test Status" src="https://saucelabs.com/browser-matrix/bootstrap.svg" /></a></p>
+<p>Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development, created by <a href="http://twitter.com/mdo">Mark Otto</a> and <a href="http://twitter.com/fat">Jacob Thornton</a>, and maintained by the <a href="https://github.com/twbs?tab=members">core team</a> with the massive support and involvement of the community.</p>
+<p>To get started, check out <a href="http://getbootstrap.com">http://getbootstrap.com</a>!</p>
+<h2>Table of contents</h2>
+<ul>
+<li><a href="#quick-start">Quick start</a></li>
+<li><a href="#bugs-and-feature-requests">Bugs and feature requests</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#compiling-css-and-javascript">Compiling CSS and JavaScript</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#community">Community</a></li>
+<li><a href="#versioning">Versioning</a></li>
+<li><a href="#authors">Authors</a></li>
+<li><a href="#copyright-and-license">Copyright and license</a></li>
+</ul>
+<h2>Quick start</h2>
+<p>Three quick start options are available:</p>
+<ul>
+<li><a href="https://github.com/twbs/bootstrap/archive/v3.1.1.zip">Download the latest release</a>.</li>
+<li>Clone the repo: <code>git clone https://github.com/twbs/bootstrap.git</code>.</li>
+<li>Install with <a href="http://bower.io">Bower</a>: <code>bower install bootstrap</code>.</li>
+</ul>
+<p>Read the <a href="http://getbootstrap.com/getting-started/">Getting Started page</a> for information on the framework contents, templates and examples, and more.</p>
+<h3>What's included</h3>
+<p>Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:</p>
+<pre><code>bootstrap/
+├── css/
+│   ├── bootstrap.css
+│   ├── bootstrap.min.css
+│   ├── bootstrap-theme.css
+│   └── bootstrap-theme.min.css
+├── js/
+│   ├── bootstrap.js
+│   └── bootstrap.min.js
+└── fonts/
+    ├── glyphicons-halflings-regular.eot
+    ├── glyphicons-halflings-regular.svg
+    ├── glyphicons-halflings-regular.ttf
+    └── glyphicons-halflings-regular.woff</code></pre>
+<p>We provide compiled CSS and JS (<code>bootstrap.*</code>), as well as compiled and minified CSS and JS (<code>bootstrap.min.*</code>). Fonts from Glyphicons are included, as is the optional Bootstrap theme.</p>
+<h2>Bugs and feature requests</h2>
+<p>Have a bug or a feature request? Please first read the <a href="https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#using-the-issue-tracker">issue guidelines</a> and search for existing and closed issues. If your problem or idea is not addressed yet, <a href="https://github.com/twbs/bootstrap/issues/new">please open a new issue</a>.</p>
+<h2>Documentation</h2>
+<p>Bootstrap's documentation, included in this repo in the root directory, is built with <a href="http://jekyllrb.com">Jekyll</a> and publicly hosted on GitHub Pages at <a href="http://getbootstrap.com">http://getbootstrap.com</a>. The docs may also be run locally.</p>
+<h3>Running documentation locally</h3>
+<ol>
+<li>If necessary, <a href="http://jekyllrb.com/docs/installation">install Jekyll</a> (requires v1.x).
+<ul>
+<li><strong>Windows users:</strong> Read <a href="https://github.com/juthilo/run-jekyll-on-windows/">this unofficial guide</a> to get Jekyll up and running without problems. We use Pygments for syntax highlighting, so make sure to read the sections on installing Python and Pygments.</li>
+</ul>
+</li>
+<li>From the root <code>/bootstrap</code> directory, run <code>jekyll serve</code> in the command line.
+<ul>
+<li><strong>Windows users:</strong> While we use Jekyll's <code>encoding</code> setting, you might still need to change the command prompt's character encoding (<a href="http://en.wikipedia.org/wiki/Windows_code_page">code page</a>) to UTF-8 so Jekyll runs without errors. For Ruby 2.0.0, run <code>chcp 65001</code> first. For Ruby 1.9.3, you can alternatively do <code>SET LANG=en_EN.UTF-8</code>.</li>
+</ul>
+</li>
+<li>Open <a href="http://localhost:9001">http://localhost:9001</a> in your browser, and voilà.</li>
+</ol>
+<p>Learn more about using Jekyll by reading its <a href="http://jekyllrb.com/docs/home/">documentation</a>.</p>
+<h3>Documentation for previous releases</h3>
+<p>Documentation for v2.3.2 has been made available for the time being at <a href="http://getbootstrap.com/2.3.2/">http://getbootstrap.com/2.3.2/</a> while folks transition to Bootstrap 3.</p>
+<p><a href="https://github.com/twbs/bootstrap/releases">Previous releases</a> and their documentation are also available for download.</p>
+<h2>Compiling CSS and JavaScript</h2>
+<p>Bootstrap uses <a href="http://gruntjs.com/">Grunt</a> with convenient methods for working with the framework. It's how we compile our code, run tests, and more. To use it, install the required dependencies as directed and then run some Grunt commands.</p>
+<h3>Install Grunt</h3>
+<p>From the command line:</p>
+<ol>
+<li>Install <code>grunt-cli</code> globally with <code>npm install -g grunt-cli</code>.</li>
+<li>Navigate to the root <code>/bootstrap</code> directory, then run <code>npm install</code>. npm will look at <a href="https://github.com/twbs/bootstrap/blob/master/package.json">package.json</a> and automatically install the necessary local dependencies listed there.</li>
+</ol>
+<p>When completed, you'll be able to run the various Grunt commands provided from the command line.</p>
+<p><strong>Unfamiliar with <code>npm</code>? Don't have node installed?</strong> That's a-okay. npm stands for <a href="http://npmjs.org/">node packaged modules</a> and is a way to manage development dependencies through node.js. <a href="http://nodejs.org/download/">Download and install node.js</a> before proceeding.</p>
+<h3>Available Grunt commands</h3>
+<h4>Build - <code>grunt</code></h4>
+<p>Run <code>grunt</code> to run tests locally and compile the CSS and JavaScript into <code>/dist</code>. <strong>Uses <a href="http://lesscss.org/">Less</a> and <a href="http://lisperator.net/uglifyjs/">UglifyJS</a>.</strong></p>
+<h4>Only compile CSS and JavaScript - <code>grunt dist</code></h4>
+<p><code>grunt dist</code> creates the <code>/dist</code> directory with compiled files. <strong>Uses <a href="http://lesscss.org/">Less</a> and <a href="http://lisperator.net/uglifyjs/">UglifyJS</a>.</strong></p>
+<h4>Tests - <code>grunt test</code></h4>
+<p>Runs <a href="http://jshint.com">JSHint</a> and <a href="http://qunitjs.com/">QUnit</a> tests headlessly in <a href="http://phantomjs.org/">PhantomJS</a> (used for CI).</p>
+<h4>Watch - <code>grunt watch</code></h4>
+<p>This is a convenience method for watching just Less files and automatically building them whenever you save.</p>
+<h3>Troubleshooting dependencies</h3>
+<p>Should you encounter problems with installing dependencies or running Grunt commands, uninstall all previous dependency versions (global and local). Then, rerun <code>npm install</code>.</p>
+<h2>Contributing</h2>
+<p>Please read through our <a href="https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.html">contributing guidelines</a>. Included are directions for opening issues, coding standards, and notes on development.</p>
+<p>Moreover, if your pull request contains JavaScript patches or features, you must include relevant unit tests. All HTML and CSS should conform to the <a href="http://github.com/mdo/code-guide">Code Guide</a>, maintained by <a href="http://github.com/mdo">Mark Otto</a>.</p>
+<p>Editor preferences are available in the <a href="https://github.com/twbs/bootstrap/blob/master/.editorconfig">editor config</a> for easy use in common text editors. Read more and download plugins at <a href="http://editorconfig.org">http://editorconfig.org</a>.</p>
+<h2>Community</h2>
+<p>Keep track of development and community news.</p>
+<ul>
+<li>Follow <a href="http://twitter.com/twbootstrap">@twbootstrap on Twitter</a>.</li>
+<li>Read and subscribe to <a href="http://blog.getbootstrap.com">The Official Bootstrap Blog</a>.</li>
+<li>Chat with fellow Bootstrappers in IRC. On the <code>irc.freenode.net</code> server, in the <code>##twitter-bootstrap</code> channel.</li>
+<li>Implementation help may be found at Stack Overflow (tagged <a href="http://stackoverflow.com/questions/tagged/twitter-bootstrap-3"><code>twitter-bootstrap-3</code></a>).</li>
+</ul>
+<h2>Versioning</h2>
+<p>For transparency into our release cycle and in striving to maintain backward compatibility, Bootstrap is maintained under the Semantic Versioning guidelines. Sometimes we screw up, but we'll adhere to these rules whenever possible.</p>
+<p>Releases will be numbered with the following format:</p>
+<p><code>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</code></p>
+<p>And constructed with the following guidelines:</p>
+<ul>
+<li>Breaking backward compatibility <strong>bumps the major</strong> while resetting minor and patch</li>
+<li>New additions without breaking backward compatibility <strong>bumps the minor</strong> while resetting the patch</li>
+<li>Bug fixes and misc changes <strong>bumps only the patch</strong></li>
+</ul>
+<p>For more information on SemVer, please visit <a href="http://semver.org/">http://semver.org/</a>.</p>
+<h2>Authors</h2>
+<p><strong>Mark Otto</strong></p>
+<ul>
+<li><a href="http://twitter.com/mdo">http://twitter.com/mdo</a></li>
+<li><a href="http://github.com/mdo">http://github.com/mdo</a></li>
+</ul>
+<p><strong>Jacob Thornton</strong></p>
+<ul>
+<li><a href="http://twitter.com/fat">http://twitter.com/fat</a></li>
+<li><a href="http://github.com/fat">http://github.com/fat</a></li>
+</ul>
+<h2>Copyright and license</h2>
+<p>Code and documentation copyright 2011-2014 Twitter, Inc. Code released under <a href="LICENSE">the MIT license</a>. Docs released under <a href="docs/LICENSE">Creative Commons</a>.</p>
+            </section>
+        </div>
+
+    
+    <script src="http://mnapoli.fr/Couscous/js/jquery-1.10.2.min.js"></script>
+    <script src="http://mnapoli.fr/Couscous/js/bootstrap.min.js"></script>
+    <script src="http://mnapoli.fr/Couscous/google-code-prettify/prettify.js"></script>
+
+    <script>
+        $(function() {
+            $("section h1").wrap('<div class="page-header" />');
+            $("section p:first-child").addClass('lead');
+            $("pre").addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+
+</body>
+</html>

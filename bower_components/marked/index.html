@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couscous! Put your documentation in a website!</title>
+    <meta name="description" content="Website generator">
+
+    <link href="http://mnapoli.fr/Couscous/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="http://mnapoli.fr/Couscous/" class="navbar-brand">Couscous</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li><a href="http://mnapoli.fr/Couscous/">Home</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/">Documentation</a></li>
+                    <li><a href="https://github.com/mnapoli/Couscous">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="container">
+            <section>
+                <h1>marked</h1>
+<blockquote>
+<p>A full-featured markdown parser and compiler, written in JavaScript. Built
+for speed.</p>
+</blockquote>
+<p><a href="http://badge.fury.io/js/marked"><img alt="NPM version" src="https://badge.fury.io/js/marked.png" /></a></p>
+<h2>Install</h2>
+<pre><code class="language-bash">npm install marked --save</code></pre>
+<h2>Usage</h2>
+<p>Minimal usage:</p>
+<pre><code class="language-js">var marked = require('marked');
+console.log(marked('I am using __markdown__.'));
+// Outputs: &lt;p&gt;I am using &lt;strong&gt;markdown&lt;/strong&gt;.&lt;/p&gt;</code></pre>
+<p>Example setting options with default values:</p>
+<pre><code class="language-js">var marked = require('marked');
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false
+});
+
+console.log(marked('I am using __markdown__.'));</code></pre>
+<h2>marked(markdownString [,options] [,callback])</h2>
+<h3>markdownString</h3>
+<p>Type: <code>string</code></p>
+<p>String of markdown source to be compiled.</p>
+<h3>options</h3>
+<p>Type: <code>object</code></p>
+<p>Hash of options. Can also be set using the <code>marked.setOptions</code> method as seen
+above.</p>
+<h3>callback</h3>
+<p>Type: <code>function</code></p>
+<p>Function called when the <code>markdownString</code> has been fully parsed when using
+async highlighting. If the <code>options</code> argument is omitted, this can be used as
+the second argument.</p>
+<h2>Options</h2>
+<h3>highlight</h3>
+<p>Type: <code>function</code></p>
+<p>A function to highlight code blocks. The first example below uses async highlighting with
+<a href="https://github.com/rvagg/node-pygmentize-bundled">node-pygmentize-bundled</a>, and the second is a synchronous example using
+<a href="https://github.com/isagalaev/highlight.js">highlight.js</a>:</p>
+<pre><code class="language-js">var marked = require('marked');
+
+var markdownString = '```js\n console.log("hello"); \n```';
+
+// Async highlighting with pygmentize-bundled
+marked.setOptions({
+  highlight: function (code, lang, callback) {
+    require('pygmentize-bundled')({ lang: lang, format: 'html' }, code, function (err, result) {
+      callback(err, result.toString());
+    });
+  }
+});
+
+// Using async version of marked
+marked(markdownString, function (err, content) {
+  if (err) throw err;
+  console.log(content);
+});
+
+// Synchronous highlighting with highlight.js
+marked.setOptions({
+  highlight: function (code) {
+    return require('highlight.js').highlightAuto(code).value;
+  }
+});
+
+console.log(marked(markdownString));</code></pre>
+<h4>highlight arguments</h4>
+<p><code>code</code></p>
+<p>Type: <code>string</code></p>
+<p>The section of code to pass to the highlighter.</p>
+<p><code>lang</code></p>
+<p>Type: <code>string</code></p>
+<p>The programming language specified in the code block.</p>
+<p><code>callback</code></p>
+<p>Type: <code>function</code></p>
+<p>The callback function to call when using an async highlighter.</p>
+<h3>renderer</h3>
+<p>Type: <code>object</code>
+Default: <code>new Renderer()</code></p>
+<p>An object containing functions to render tokens to HTML.</p>
+<h4>Overriding renderer methods</h4>
+<p>The renderer option allows you to render tokens in a custom manor. Here is an
+example of overriding the default heading token rendering by adding an embedded anchor tag like on GitHub:</p>
+<pre><code class="language-javascript">var marked = require('marked');
+var renderer = new marked.Renderer();
+
+renderer.heading = function (text, level) {
+  var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+  return '&lt;h' + level + '&gt;&lt;a name="' +
+                escapedText +
+                 '" class="anchor" href="#' +
+                 escapedText +
+                 '"&gt;&lt;span class="header-link"&gt;&lt;/span&gt;&lt;/a&gt;' +
+                  text + '&lt;/h' + level + '&gt;';
+},
+
+console.log(marked('# heading+', { renderer: renderer }));</code></pre>
+<p>This code will output the following HTML:</p>
+<pre><code class="language-html">&lt;h1&gt;
+  &lt;a name="heading-" class="anchor" href="#heading-"&gt;
+    &lt;span class="header-link"&gt;&lt;/span&gt;
+  &lt;/a&gt;
+  heading+
+&lt;/h1&gt;</code></pre>
+<h4>Block level renderer methods</h4>
+<ul>
+<li>code(<em>string</em> code, <em>string</em> language)</li>
+<li>blockquote(<em>string</em> quote)</li>
+<li>html(<em>string</em> html)</li>
+<li>heading(<em>string</em> text, <em>number</em>  level)</li>
+<li>hr()</li>
+<li>list(<em>string</em> body, <em>boolean</em> ordered)</li>
+<li>listitem(<em>string</em>  text)</li>
+<li>paragraph(<em>string</em> text)</li>
+<li>table(<em>string</em> header, <em>string</em> body)</li>
+<li>tablerow(<em>string</em> content)</li>
+<li>tablecell(<em>string</em> content, <em>object</em> flags)</li>
+</ul>
+<p><code>flags</code> has the following properties:</p>
+<pre><code class="language-js">{
+    header: true || false,
+    align: 'center' || 'left' || 'right'
+}</code></pre>
+<h4>Inline level renderer methods</h4>
+<ul>
+<li>strong(<em>string</em> text)</li>
+<li>em(<em>string</em> text)</li>
+<li>codespan(<em>string</em> code)</li>
+<li>br()</li>
+<li>del(<em>string</em> text)</li>
+<li>link(<em>string</em> href, <em>string</em> title, <em>string</em> text)</li>
+<li>image(<em>string</em> href, <em>string</em> title, <em>string</em> text)</li>
+</ul>
+<h3>gfm</h3>
+<p>Type: <code>boolean</code>
+Default: <code>true</code></p>
+<p>Enable <a href="https://help.github.com/articles/github-flavored-markdown">GitHub flavored markdown</a>.</p>
+<h3>tables</h3>
+<p>Type: <code>boolean</code>
+Default: <code>true</code></p>
+<p>Enable GFM <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#wiki-tables">tables</a>.
+This option requires the <code>gfm</code> option to be true.</p>
+<h3>breaks</h3>
+<p>Type: <code>boolean</code>
+Default: <code>false</code></p>
+<p>Enable GFM <a href="https://help.github.com/articles/github-flavored-markdown#newlines">line breaks</a>.
+This option requires the <code>gfm</code> option to be true.</p>
+<h3>pedantic</h3>
+<p>Type: <code>boolean</code>
+Default: <code>false</code></p>
+<p>Conform to obscure parts of <code>markdown.pl</code> as much as possible. Don't fix any of
+the original markdown bugs or poor behavior.</p>
+<h3>sanitize</h3>
+<p>Type: <code>boolean</code>
+Default: <code>false</code></p>
+<p>Sanitize the output. Ignore any HTML that has been input.</p>
+<h3>smartLists</h3>
+<p>Type: <code>boolean</code>
+Default: <code>true</code></p>
+<p>Use smarter list behavior than the original markdown. May eventually be
+default with the old behavior moved into <code>pedantic</code>.</p>
+<h3>smartypants</h3>
+<p>Type: <code>boolean</code>
+Default: <code>false</code></p>
+<p>Use "smart" typograhic punctuation for things like quotes and dashes.</p>
+<h2>Access to lexer and parser</h2>
+<p>You also have direct access to the lexer and parser if you so desire.</p>
+<pre><code class="language-js">var tokens = marked.lexer(text, options);
+console.log(marked.parser(tokens));</code></pre>
+<pre><code class="language-js">var lexer = new marked.Lexer(options);
+var tokens = lexer.lex(text);
+console.log(tokens);
+console.log(lexer.rules);</code></pre>
+<h2>CLI</h2>
+<pre><code class="language-bash">$ marked -o hello.html
+hello world
+^D
+$ cat hello.html
+&lt;p&gt;hello world&lt;/p&gt;</code></pre>
+<h2>Philosophy behind marked</h2>
+<p>The point of marked was to create a markdown compiler where it was possible to
+frequently parse huge chunks of markdown without having to worry about
+caching the compiled output somehow...or blocking for an unnecesarily long time.</p>
+<p>marked is very concise and still implements all markdown features. It is also
+now fully compatible with the client-side.</p>
+<p>marked more or less passes the official markdown test suite in its
+entirety. This is important because a surprising number of markdown compilers
+cannot pass more than a few tests. It was very difficult to get marked as
+compliant as it is. It could have cut corners in several areas for the sake
+of performance, but did not in order to be exactly what you expect in terms
+of a markdown rendering. In fact, this is why marked could be considered at a
+disadvantage in the benchmarks above.</p>
+<p>Along with implementing every markdown feature, marked also implements <a href="http://github.github.com/github-flavored-markdown/">GFM
+features</a>.</p>
+<h2>Benchmarks</h2>
+<p>node v0.8.x</p>
+<pre><code class="language-bash">$ node test --bench
+marked completed in 3411ms.
+marked (gfm) completed in 3727ms.
+marked (pedantic) completed in 3201ms.
+robotskirt completed in 808ms.
+showdown (reuse converter) completed in 11954ms.
+showdown (new converter) completed in 17774ms.
+markdown-js completed in 17191ms.</code></pre>
+<p><strong>Marked is now faster than Discount, which is written in C.</strong></p>
+<p>For those feeling skeptical: These benchmarks run the entire markdown test suite 1000 times. The test suite tests every feature. It doesn't cater to specific aspects.</p>
+<h3>Pro level</h3>
+<p>You also have direct access to the lexer and parser if you so desire.</p>
+<pre><code class="language-js">var tokens = marked.lexer(text, options);
+console.log(marked.parser(tokens));</code></pre>
+<pre><code class="language-js">var lexer = new marked.Lexer(options);
+var tokens = lexer.lex(text);
+console.log(tokens);
+console.log(lexer.rules);</code></pre>
+<pre><code class="language-bash">$ node
+&gt; require('marked').lexer('&gt; i am using marked.')
+[ { type: 'blockquote_start' },
+  { type: 'paragraph',
+    text: 'i am using marked.' },
+  { type: 'blockquote_end' },
+  links: {} ]</code></pre>
+<h2>Running Tests &amp; Contributing</h2>
+<p>If you want to submit a pull request, make sure your changes pass the test
+suite. If you're adding a new feature, be sure to add your own test.</p>
+<p>The marked test suite is set up slightly strangely: <code>test/new</code> is for all tests
+that are not part of the original markdown.pl test suite (this is where your
+test should go if you make one). <code>test/original</code> is only for the original
+markdown.pl tests. <code>test/tests</code> houses both types of tests after they have been
+combined and moved/generated by running <code>node test --fix</code> or `marked --test
+--fix`.</p>
+<p>In other words, if you have a test to add, add it to <code>test/new/</code> and then
+regenerate the tests with <code>node test --fix</code>. Commit the result. If your test
+uses a certain feature, for example, maybe it assumes GFM is <em>not</em> enabled, you
+can add <code>.nogfm</code> to the filename. So, <code>my-test.text</code> becomes
+<code>my-test.nogfm.text</code>. You can do this with any marked option. Say you want
+line breaks and smartypants enabled, your filename should be:
+<code>my-test.breaks.smartypants.text</code>.</p>
+<p>To run the tests:</p>
+<pre><code class="language-bash">cd marked/
+node test</code></pre>
+<h3>Contribution and License Agreement</h3>
+<p>If you contribute code to this project, you are implicitly allowing your code
+to be distributed under the MIT license. You are also implicitly verifying that
+all code is your original work. <code>&lt;/legalese&gt;</code></p>
+<h2>License</h2>
+<p>Copyright (c) 2011-2014, Christopher Jeffrey. (MIT License)</p>
+<p>See LICENSE for more info.</p>
+            </section>
+        </div>
+
+    
+    <script src="http://mnapoli.fr/Couscous/js/jquery-1.10.2.min.js"></script>
+    <script src="http://mnapoli.fr/Couscous/js/bootstrap.min.js"></script>
+    <script src="http://mnapoli.fr/Couscous/google-code-prettify/prettify.js"></script>
+
+    <script>
+        $(function() {
+            $("section h1").wrap('<div class="page-header" />');
+            $("section p:first-child").addClass('lead');
+            $("pre").addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+
+</body>
+</html>

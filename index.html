@@ -67,7 +67,7 @@ versioned in your repository with your source, compiled to HTML and published to
 <h3>Installation</h3>
 <p>You can <a href="http://mnapoli.fr/Couscous/couscous.phar">download it manually</a> or install it through CLI:</p>
 <pre><code class="language-bash"># Download couscous.phar
-wget http://mnapoli.fr/Couscous/couscous.phar
+curl -OS http://mnapoli.fr/Couscous/couscous.phar
 
 # Move it to /usr/local/bin
 chmod +x couscous.phar
@@ -87,16 +87,20 @@ You can read them now or jump to the "Preview" section and read them later.</p>
 <h3>Configuration</h3>
 <p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
 <p>Simple example:</p>
-<pre><code class="language-yaml">baseUrl: http://mnapoli.github.io/Couscous</code></pre>
+<pre><code class="language-yaml">template:
+    baseUrl: http://mnapoli.github.io/Couscous</code></pre>
 <p>That configuration file is optional. See the <a href="docs/configuration.html">complete reference</a> for more information.</p>
 <h3>Website template</h3>
 <p>Couscous will take every <code>*.md</code> file it finds in your repository and convert it to <code>.html</code> files, keeping the same directory structure
 (<code>README.md</code> files a renamed to <code>index.html</code>).</p>
 <p>In order to have those HTML files look like real web pages, you need to write a <em>template</em> for these pages.
 Templates are written with Twig, and are extremely easy to write.</p>
-<p>The template files should be in a <code>website/</code> directory at the root of your repository
-(this path is customizable).</p>
-<p>Here is the default directory layout you should create:</p>
+<p>Templates can be:</p>
+<ul>
+<li>in your repository (the default directory is <code>website/</code>)</li>
+<li>in a remote repository (which allow to reuse templates)</li>
+</ul>
+<p>As a quickstart, you can create a template locally. Here is the default directory layout you should create:</p>
 <pre><code>your-repository/
     couscous.yml
     website/
@@ -133,8 +137,10 @@ If files are changed, the website will be regenerated.</p>
 This will remove everything that exists in the <code>gh-pages</code> branch, commit in your name, and <strong>push</strong> to GitHub.</p>
 <p><strong>The <code>gh-pages</code> branch must already exist.</strong> You can use the official
 <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator">Automatic Page Generator</a>
-to create it (or you can create it manually).</p>
-<p>This command will not change anything in your current branch (e.g. master branch).
+to create it or you can create it manually:</p>
+<pre><code class="language-bash">git branch gh-pages
+git push -u origin gh-pages</code></pre>
+<p>The <code>deploy</code> command will not change anything in your current branch (e.g. master branch).
 It will only affect the <code>gh-pages</code> branch.</p>
 <h2>Built using Couscous</h2>
 <p>Here are examples of website built using Couscous:</p>
