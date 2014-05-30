@@ -84,10 +84,12 @@ Couscous will take every `*.md` file it finds in your repository and convert it 
 In order to have those HTML files look like real web pages, you need to write a *template* for these pages.
 Templates are written with Twig, and are extremely easy to write.
 
-The template files should be in a `website/` directory at the root of your repository
-(this path is customizable).
+Templates can be:
 
-Here is the default directory layout you should create:
+- in your repository (the default directory is `website/`)
+- in a remote repository (which allow to reuse templates)
+
+As a quickstart, you can create a template locally. Here is the default directory layout you should create:
 
 ```
 your-repository/

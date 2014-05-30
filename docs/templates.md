@@ -1,5 +1,31 @@
 # Templates
 
+
+## Remote templates
+
+A "remote template" is a template that is hosted separately in a git repository.
+It allows many project to reuse the same template.
+
+To write a remote template, just write a normal template inside a directory (so read below).
+Then publish that directory on GitHub (for example).
+
+Layout example:
+
+```
+my-template/
+    public/
+        style.css
+    page.twig
+    README.md # explain how to install your template
+```
+
+Here are some examples of templates:
+
+- [MyCLabs template](https://github.com/myclabs/couscous-template)
+
+
+## Local templates
+
 Templates are Twig templates, and should all in the root of the `website` directory (or whatever you named it).
 
 The default template that is used for rendering the pages is in `page.twig`.
