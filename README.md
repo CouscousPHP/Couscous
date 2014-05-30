@@ -32,11 +32,34 @@ versioned in your repository with your source, compiled to HTML and published to
 
 You can [download it manually](http://mnapoli.fr/Couscous/couscous.phar) or install it through CLI:
 
-```
+```bash
+# Download couscous.phar
 wget http://mnapoli.fr/Couscous/couscous.phar
+
+# Move it to /usr/local/bin
 chmod +x couscous.phar
 sudo mv couscous.phar /usr/local/bin/couscous
 ```
+
+If you don't want to install it globally, you can also just download the phar in the current directory
+and later run it with `php couscous.phar` instead of just `couscous`.
+
+
+### Init
+
+You have two options to start using Couscous:
+
+- automatically init the project with default files
+- write the files yourself
+
+To init your project automatically, just run:
+
+```bash
+couscous init
+```
+
+The next sections explain how to create the files manually (and customize them).
+You can read them now or jump to the "Preview" section and read them later.
 
 
 ### Configuration
