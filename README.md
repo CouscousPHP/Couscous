@@ -34,7 +34,7 @@ You can [download it manually](http://mnapoli.fr/Couscous/couscous.phar) or inst
 
 ```bash
 # Download couscous.phar
-wget http://mnapoli.fr/Couscous/couscous.phar
+curl -OS http://mnapoli.fr/Couscous/couscous.phar
 
 # Move it to /usr/local/bin
 chmod +x couscous.phar
