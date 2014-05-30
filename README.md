@@ -149,9 +149,14 @@ This will remove everything that exists in the `gh-pages` branch, commit in your
 
 **The `gh-pages` branch must already exist.** You can use the official
 [Automatic Page Generator](https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator)
-to create it (or you can create it manually).
+to create it or you can create it manually:
 
-This command will not change anything in your current branch (e.g. master branch).
+```bash
+git branch gh-pages
+git push -u origin gh-pages
+```
+
+The `deploy` command will not change anything in your current branch (e.g. master branch).
 It will only affect the `gh-pages` branch.
 
 
