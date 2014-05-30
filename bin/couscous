@@ -6,9 +6,11 @@
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
 
+use Couscous\CLI\ClearCommand;
 use Couscous\CLI\DeployCommand;
 use Couscous\CLI\GenerateCommand;
-use Couscous\CLI\InitCommand;use Couscous\CLI\PreviewCommand;
+use Couscous\CLI\InitCommand;
+use Couscous\CLI\PreviewCommand;
 use Symfony\Component\Console\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -19,5 +21,6 @@ $application->add(new InitCommand);
 $application->add(new GenerateCommand);
 $application->add(new PreviewCommand());
 $application->add(new DeployCommand());
+$application->add(new ClearCommand());
 
 $application->run();
