@@ -66,9 +66,24 @@ versioned in your repository with your source, compiled to HTML and published to
 <h2>Getting started</h2>
 <h3>Installation</h3>
 <p>You can <a href="http://mnapoli.fr/Couscous/couscous.phar">download it manually</a> or install it through CLI:</p>
-<pre><code>wget http://mnapoli.fr/Couscous/couscous.phar
+<pre><code class="language-bash"># Download couscous.phar
+wget http://mnapoli.fr/Couscous/couscous.phar
+
+# Move it to /usr/local/bin
 chmod +x couscous.phar
 sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
+<p>If you don't want to install it globally, you can also just download the phar in the current directory
+and later run it with <code>php couscous.phar</code> instead of just <code>couscous</code>.</p>
+<h3>Init</h3>
+<p>You have two options to start using Couscous:</p>
+<ul>
+<li>automatically init the project with default files</li>
+<li>write the files yourself</li>
+</ul>
+<p>To init your project automatically, just run:</p>
+<pre><code class="language-bash">couscous init</code></pre>
+<p>The next sections explain how to create the files manually (and customize them).
+You can read them now or jump to the "Preview" section and read them later.</p>
 <h3>Configuration</h3>
 <p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
 <p>Simple example:</p>
