@@ -15,7 +15,7 @@ use Symfony\Component\Console\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$application = new Application('Couscous', '0.2.0');
+$application = new Application('Couscous', '0.3.0');
 
 $application->add(new InitCommand);
 $application->add(new GenerateCommand);
