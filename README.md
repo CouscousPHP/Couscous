@@ -30,6 +30,19 @@ versioned in your repository with your source, compiled to HTML and published to
 
 ### Installation
 
+#### Composer
+
+If you have already [set up a global install of Composer (with your PATH)](http://akrabat.com/php/global-installation-of-php-tools-with-composer/),
+you can install Couscous through it:
+
+```
+composer global require 'mnapoli/couscous=*'
+```
+
+If you haven't, you can download the PHAR (see below).
+
+#### Downloading
+
 You can [download it manually](http://mnapoli.fr/Couscous/couscous.phar) or install it through CLI:
 
 ```bash

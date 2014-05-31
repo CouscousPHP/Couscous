@@ -6,6 +6,9 @@
             "Couscous\\": "src/"
         }
     },
+    "bin": [
+        "couscous"
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/console": "~2.4",
