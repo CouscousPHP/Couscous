@@ -7,7 +7,7 @@
         }
     },
     "bin": [
-        "couscous"
+        "bin/couscous"
     ],
     "require": {
         "php": ">=5.3.3",
