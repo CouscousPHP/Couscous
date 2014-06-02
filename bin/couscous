@@ -13,7 +13,11 @@ use Couscous\CLI\InitCommand;
 use Couscous\CLI\PreviewCommand;
 use Symfony\Component\Console\Application;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+} else {
+    require_once __DIR__ . '/../../../autoload.php';
+}
 
 $application = new Application('Couscous', '0.3.0');
 
