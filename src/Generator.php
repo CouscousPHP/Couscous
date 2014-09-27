@@ -150,7 +150,10 @@ class Generator
         $processor->chain(new MarkdownProcessor());
         $processor->chain(new LinkProcessor());
         $loader = new Twig_Loader_Filesystem($templateDirectory);
-        $twig = new Twig_Environment($loader);
+        $twig = new Twig_Environment($loader, array(
+            'cache' => false,
+            'auto_reload' => true,
+        ));
         $processor->chain(new TwigProcessor($twig));
         $processor->chain(new FileNameProcessor());
 
