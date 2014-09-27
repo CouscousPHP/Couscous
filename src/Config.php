@@ -12,6 +12,12 @@ use Symfony\Component\Yaml\Yaml;
 class Config
 {
     /**
+     * File from which the configuration was read.
+     * @var string
+     */
+    private $configFile;
+
+    /**
      * List of directories to exclude.
      * @var string[]
      */
@@ -56,14 +62,14 @@ class Config
      */
     public static function fromYaml($file)
     {
+        $config = new self();
+        $config->configFile = $file;
+
         if (! file_exists($file)) {
-            return new self();
+            return $config;
         }
 
         $values = Yaml::parse(file_get_contents($file));
-
-        $config = new self();
-
         if (! is_array($values)) {
             return $config;
         }
@@ -92,5 +98,15 @@ class Config
         }
 
         return $config;
+    }
+
+    /**
+     * Reload the configuration from disk.
+     *
+     * @return Config
+     */
+    public function reload()
+    {
+        return self::fromYaml($this->configFile);
     }
 }

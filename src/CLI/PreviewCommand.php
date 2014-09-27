@@ -93,6 +93,9 @@ class PreviewCommand extends Command
                 $output->writeln('');
                 $output->writeln('<info>File changes detected, regenerating</info>');
                 $lastGenerationDate = date('Y-m-d H:i:s');
+                // Reload the config
+                $generation->config = $generation->config->reload();
+                // Regenerate the website
                 $generator->generate($generation);
             }
 
