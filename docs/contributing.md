@@ -2,7 +2,7 @@
 
 ## Building the phar
 
-To generate the phar yourself, you need to allow Phar generation in your `php.ini` ([`phar.readonly = On`](http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly)).
+To generate the phar yourself, you need to allow Phar generation in your `php.ini` ([`phar.readonly = Off`](http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly)).
 
 The procedure is then quite simple, check out the repository and:
 
