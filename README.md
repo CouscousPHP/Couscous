@@ -146,9 +146,9 @@ $ couscous preview
 
 This command will generate the website (in a temp directory) and starts a
 webserver so that you can preview the website at [http://localhost:8000](http://localhost:8000).
-If files are changed, the website will be regenerated.
+If Markdown files are changed, the website will be regenerated.
 
-This command will not modify your repository.
+**This command will not modify your repository.**
 
 
 ### Deployment
