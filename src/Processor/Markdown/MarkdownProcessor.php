@@ -1,8 +1,9 @@
 <?php
 
-namespace Couscous\Processor;
+namespace Couscous\Processor\Markdown;
 
 use Couscous\Page;
+use Couscous\Processor\Processor;
 use Mni\FrontYAML\Parser;
 
 /**

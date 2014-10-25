@@ -1,15 +1,16 @@
 <?php
 
-namespace Couscous\Processor;
+namespace Couscous\Processor\Markdown;
 
 use Couscous\Page;
+use Couscous\Processor\Processor;
 
 /**
  * Processes links to *.md (markdown) files.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class LinkProcessor implements Processor
+class MarkdownLinkProcessor implements Processor
 {
     /**
      * {@inheritdoc}

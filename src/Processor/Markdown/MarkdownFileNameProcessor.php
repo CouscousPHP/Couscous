@@ -1,15 +1,16 @@
 <?php
 
-namespace Couscous\Processor;
+namespace Couscous\Processor\Markdown;
 
 use Couscous\Page;
+use Couscous\Processor\Processor;
 
 /**
- * Processes the file name.
+ * Processes the name of Markdown files.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class FileNameProcessor implements Processor
+class MarkdownFileNameProcessor implements Processor
 {
     /**
      * {@inheritdoc}

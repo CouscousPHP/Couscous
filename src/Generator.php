@@ -2,9 +2,9 @@
 
 namespace Couscous;
 
-use Couscous\Processor\FileNameProcessor;
-use Couscous\Processor\LinkProcessor;
-use Couscous\Processor\MarkdownProcessor;
+use Couscous\Processor\Markdown\MarkdownFileNameProcessor;
+use Couscous\Processor\Markdown\MarkdownLinkProcessor;
+use Couscous\Processor\Markdown\MarkdownProcessor;
 use Couscous\Processor\Processor;
 use Couscous\Processor\ProcessorChain;
 use Couscous\Processor\TwigProcessor;
@@ -148,14 +148,14 @@ class Generator
     {
         $processor = new ProcessorChain();
         $processor->chain(new MarkdownProcessor());
-        $processor->chain(new LinkProcessor());
+        $processor->chain(new MarkdownLinkProcessor());
         $loader = new Twig_Loader_Filesystem($templateDirectory);
         $twig = new Twig_Environment($loader, array(
             'cache' => false,
             'auto_reload' => true,
         ));
         $processor->chain(new TwigProcessor($twig));
-        $processor->chain(new FileNameProcessor());
+        $processor->chain(new MarkdownFileNameProcessor());
 
         return $processor;
     }
