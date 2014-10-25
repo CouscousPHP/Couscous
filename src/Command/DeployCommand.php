@@ -21,6 +21,30 @@ use Symfony\Component\Filesystem\Filesystem;
 class DeployCommand extends Command
 {
     /**
+     * @var Generator
+     */
+    private $generator;
+
+    /**
+     * @var Publisher
+     */
+    private $publisher;
+
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
+    public function __construct(Generator $generator, Publisher $publisher, Filesystem $filesystem)
+    {
+        $this->generator = $generator;
+        $this->publisher = $publisher;
+        $this->filesystem = $filesystem;
+
+        parent::__construct();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -63,23 +87,20 @@ class DeployCommand extends Command
         );
 
         // Create the directories
-        $filesystem = new Filesystem();
-        if (!$filesystem->exists($generation->targetDirectory)) {
-            $filesystem->mkdir($generation->targetDirectory);
+        if (! $this->filesystem->exists($generation->targetDirectory)) {
+            $this->filesystem->mkdir($generation->targetDirectory);
         }
-        if ($filesystem->exists($generation->tempDirectory)) {
-            $filesystem->remove($generation->tempDirectory);
+        if ($this->filesystem->exists($generation->tempDirectory)) {
+            $this->filesystem->remove($generation->tempDirectory);
         }
-        $filesystem->mkdir($generation->tempDirectory);
+        $this->filesystem->mkdir($generation->tempDirectory);
 
         // Generate the website
-        $generator = new Generator();
-        $generator->generate($generation);
+        $this->generator->generate($generation);
 
         $output->writeln('');
 
         // Publish it
-        $publisher = new Publisher();
-        $publisher->publish($generation, $generation->targetDirectory, $repositoryUrl, $targetBranch);
+        $this->publisher->publish($generation, $generation->targetDirectory, $repositoryUrl, $targetBranch);
     }
 }

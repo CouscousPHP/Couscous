@@ -18,6 +18,18 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GenerateCommand extends Command
 {
+    /**
+     * @var Generator
+     */
+    private $generator;
+
+    public function __construct(Generator $generator)
+    {
+        $this->generator = $generator;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -52,7 +64,6 @@ class GenerateCommand extends Command
             $output
         );
 
-        $generator = new Generator();
-        $generator->generate($generation);
+        $this->generator->generate($generation);
     }
 }

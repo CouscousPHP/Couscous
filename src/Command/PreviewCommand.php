@@ -21,6 +21,18 @@ use Symfony\Component\Process\ProcessBuilder;
 class PreviewCommand extends Command
 {
     /**
+     * @var Generator
+     */
+    private $generator;
+
+    public function __construct(Generator $generator)
+    {
+        $this->generator = $generator;
+
+        parent::__construct();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -75,8 +87,7 @@ class PreviewCommand extends Command
         $config->templateVariables['baseUrl'] = '';
 
         // Generate the website
-        $generator = new Generator();
-        $generator->generate($generation);
+        $this->generator->generate($generation);
         $lastGenerationDate = date('Y-m-d H:i:s');
 
         // Start the webserver
@@ -96,7 +107,7 @@ class PreviewCommand extends Command
                 // Reload the config
                 $generation->config = $generation->config->reload();
                 // Regenerate the website
-                $generator->generate($generation);
+                $this->generator->generate($generation);
             }
 
             sleep(1);

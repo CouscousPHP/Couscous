@@ -6,11 +6,7 @@
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
 
-use Couscous\Command\ClearCommand;
-use Couscous\Command\DeployCommand;
-use Couscous\Command\GenerateCommand;
-use Couscous\Command\InitCommand;
-use Couscous\Command\PreviewCommand;
+use DI\ContainerBuilder;
 use Symfony\Component\Console\Application;
 
 if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
@@ -19,12 +15,15 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require_once __DIR__ . '/../../../autoload.php';
 }
 
+$builder = new ContainerBuilder();
+$container = $builder->build();
+
 $application = new Application('Couscous', '0.3.0');
 
-$application->add(new InitCommand);
-$application->add(new GenerateCommand);
-$application->add(new PreviewCommand());
-$application->add(new DeployCommand());
-$application->add(new ClearCommand());
+$application->add($container->get('Couscous\Command\InitCommand'));
+$application->add($container->get('Couscous\Command\GenerateCommand'));
+$application->add($container->get('Couscous\Command\PreviewCommand'));
+$application->add($container->get('Couscous\Command\DeployCommand'));
+$application->add($container->get('Couscous\Command\ClearCommand'));
 
 $application->run();
