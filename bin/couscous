@@ -6,11 +6,11 @@
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
 
-use Couscous\CLI\ClearCommand;
-use Couscous\CLI\DeployCommand;
-use Couscous\CLI\GenerateCommand;
-use Couscous\CLI\InitCommand;
-use Couscous\CLI\PreviewCommand;
+use Couscous\Command\ClearCommand;
+use Couscous\Command\DeployCommand;
+use Couscous\Command\GenerateCommand;
+use Couscous\Command\InitCommand;
+use Couscous\Command\PreviewCommand;
 use Symfony\Component\Console\Application;
 
 if (file_exists(__DIR__ . '/../vendor/autoload.php')) {

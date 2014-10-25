@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\CLI;
+namespace Couscous\Command;
 
 use Couscous\Config;
 use Couscous\GenerationHelper;
