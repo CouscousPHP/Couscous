@@ -2,6 +2,7 @@
 
 namespace Couscous;
 
+use Couscous\Model\Config;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**

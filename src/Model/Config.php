@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous;
+namespace Couscous\Model;
 
 use Symfony\Component\Yaml\Yaml;
 

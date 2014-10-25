@@ -2,7 +2,7 @@
 
 namespace Couscous\Command;
 
-use Couscous\Config;
+use Couscous\Model\Config;
 use Couscous\GenerationHelper;
 use Couscous\Generator;
 use Couscous\Publisher;
