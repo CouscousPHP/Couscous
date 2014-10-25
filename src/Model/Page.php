@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous;
+namespace Couscous\Model;
 
 /**
  * Represents a page of the website.

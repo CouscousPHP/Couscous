@@ -2,6 +2,7 @@
 
 namespace Couscous;
 
+use Couscous\Model\Page;
 use Couscous\Processor\Markdown\MarkdownFileNameProcessor;
 use Couscous\Processor\Markdown\MarkdownLinkProcessor;
 use Couscous\Processor\Markdown\MarkdownProcessor;

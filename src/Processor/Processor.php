@@ -2,7 +2,7 @@
 
 namespace Couscous\Processor;
 
-use Couscous\Page;
+use Couscous\Model\Page;
 
 /**
  * Processes a page.

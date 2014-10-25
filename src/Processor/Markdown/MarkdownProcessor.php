@@ -2,7 +2,7 @@
 
 namespace Couscous\Processor\Markdown;
 
-use Couscous\Page;
+use Couscous\Model\Page;
 use Couscous\Processor\Processor;
 use Mni\FrontYAML\Parser;
 
