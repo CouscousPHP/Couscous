@@ -6,7 +6,7 @@
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
 
-use DI\ContainerBuilder;
+use Couscous\ContainerFactory;
 use Symfony\Component\Console\Application;
 
 if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
@@ -15,8 +15,8 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require_once __DIR__ . '/../../../autoload.php';
 }
 
-$builder = new ContainerBuilder();
-$container = $builder->build();
+$factory = new ContainerFactory();
+$container = $factory->createContainer();
 
 $application = new Application('Couscous', '0.3.0');
 

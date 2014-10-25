@@ -5,6 +5,7 @@ namespace Couscous\Command;
 use Couscous\Model\Config;
 use Couscous\GenerationHelper;
 use Couscous\Generator;
+use Couscous\Model\Repository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -52,18 +53,8 @@ class GenerateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $sourceDirectory = $input->getArgument('source');
+        $repository = new Repository($input->getArgument('source'), $input->getOption('target'));
 
-        $config = Config::fromYaml($sourceDirectory . '/couscous.yml');
-
-        $generation = new GenerationHelper(
-            $config,
-            $sourceDirectory,
-            $input->getOption('target'),
-            getcwd() . '/.couscous',
-            $output
-        );
-
-        $this->generator->generate($generation);
+        $this->generator->generate($repository, $output);
     }
 }

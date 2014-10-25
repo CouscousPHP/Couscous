@@ -61,7 +61,7 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
         $targetDirectory = __DIR__ . '/generated';
 
         return sprintf(
-            '%s generate --target="%s" %s 2>&1',
+            '%s generate -v --target="%s" %s 2>&1',
             $bin,
             $targetDirectory,
             $fixtureName
