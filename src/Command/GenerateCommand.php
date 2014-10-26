@@ -2,8 +2,6 @@
 
 namespace Couscous\Command;
 
-use Couscous\Model\Config;
-use Couscous\GenerationHelper;
 use Couscous\Generator;
 use Couscous\Model\Repository;
 use Symfony\Component\Console\Command\Command;
