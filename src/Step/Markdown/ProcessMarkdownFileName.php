@@ -22,18 +22,27 @@ class ProcessMarkdownFileName implements StepInterface
         foreach ($markdownFiles as $markdownFile) {
             $repository->removeFile($markdownFile);
 
-            $this->renameFile($markdownFile);
+            $this->renameFileExtension($markdownFile);
+            $this->renameReadme($markdownFile);
 
             $repository->addFile($markdownFile);
         }
     }
 
-    private function renameFile(MarkdownFile $file)
+    private function renameFileExtension(MarkdownFile $file)
     {
         $file->relativeFilename = $this->replaceExtension($file->relativeFilename);
+    }
 
-        if ($file->relativeFilename === 'README.html') {
-            $file->relativeFilename = 'index.html';
+    private function renameReadme(MarkdownFile $file)
+    {
+        $filename = basename($file->relativeFilename);
+
+        if ($filename === 'README.html') {
+            $path = dirname($file->relativeFilename);
+            $path = ($path === '.') ? '' : $path . '/';
+
+            $file->relativeFilename = $path . 'index.html';
         }
     }
 
