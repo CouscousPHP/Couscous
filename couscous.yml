@@ -3,6 +3,7 @@ directory: website
 exclude:
   - vendor
   - bin
+  - tests
 
 before:
   - bin/compile
