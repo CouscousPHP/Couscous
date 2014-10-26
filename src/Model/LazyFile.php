@@ -9,8 +9,16 @@ namespace Couscous\Model;
  */
 class LazyFile extends File
 {
+    private $fullFilename;
+
+    public function __construct($fullFilename, $relativeFilename)
+    {
+        $this->fullFilename = $fullFilename;
+        $this->relativeFilename = $relativeFilename;
+    }
+
     public function getContent()
     {
-        return file_get_contents($this->relativeFilename);
+        return file_get_contents($this->fullFilename);
     }
 }

@@ -27,7 +27,7 @@ class LoadPublicFiles implements StepInterface
 
         foreach ($files as $file) {
             /** @var SplFileInfo $file */
-            $repository->addFile($file->getRelativePathname(), new LazyFile($file->getPathname()));
+            $repository->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
         }
     }
 }
