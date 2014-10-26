@@ -2,10 +2,9 @@
 
 namespace Couscous\Command;
 
-use Couscous\Model\Config;
-use Couscous\GenerationHelper;
 use Couscous\Generator;
-use Couscous\Publisher;
+use Couscous\Model\Repository;
+use Couscous\Deployer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,19 +25,19 @@ class DeployCommand extends Command
     private $generator;
 
     /**
-     * @var Publisher
+     * @var Deployer
      */
-    private $publisher;
+    private $deployer;
 
     /**
      * @var Filesystem
      */
     private $filesystem;
 
-    public function __construct(Generator $generator, Publisher $publisher, Filesystem $filesystem)
+    public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem)
     {
         $this->generator = $generator;
-        $this->publisher = $publisher;
+        $this->deployer = $deployer;
         $this->filesystem = $filesystem;
 
         parent::__construct();
@@ -62,7 +61,7 @@ class DeployCommand extends Command
                 'branch',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Target branch in which to publish the website.',
+                'Target branch in which to deploy the website.',
                 'gh-pages'
             );
     }
@@ -76,31 +75,14 @@ class DeployCommand extends Command
         $repositoryUrl = trim(shell_exec('git config --get remote.origin.url'));
         $targetBranch = $input->getOption('branch');
 
-        $config = Config::fromYaml($sourceDirectory . '/couscous.yml');
-
-        $generation = new GenerationHelper(
-            $config,
-            $sourceDirectory,
-            getcwd() . '/.couscous/generated',
-            getcwd() . '/.couscous',
-            $output
-        );
-
-        // Create the directories
-        if (! $this->filesystem->exists($generation->targetDirectory)) {
-            $this->filesystem->mkdir($generation->targetDirectory);
-        }
-        if ($this->filesystem->exists($generation->tempDirectory)) {
-            $this->filesystem->remove($generation->tempDirectory);
-        }
-        $this->filesystem->mkdir($generation->tempDirectory);
+        $repository = new Repository($sourceDirectory, getcwd() . '/.couscous/generated');
 
         // Generate the website
-        $this->generator->generate($generation);
+        $this->generator->generate($repository, $output);
 
         $output->writeln('');
 
-        // Publish it
-        $this->publisher->publish($generation, $generation->targetDirectory, $repositoryUrl, $targetBranch);
+        // Deploy it
+        $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
     }
 }
