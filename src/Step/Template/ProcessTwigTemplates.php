@@ -37,7 +37,16 @@ class ProcessTwigTemplates implements StepInterface
             $context = array_merge($file->customVariables, $repository->config->templateVariables);
             $context['content'] = $file->content;
 
-            $file->content = $twig->render($template, $context);
+            try {
+                $file->content = $twig->render($template, $context);
+            } catch (\Exception $e) {
+                throw new \RuntimeException(sprintf(
+                    'There was an error while rendering the file "%s" with the template "%s": %s',
+                    $file->relativeFilename,
+                    $template,
+                    $e->getMessage()
+                ), 0, $e);
+            }
         }
     }
 
