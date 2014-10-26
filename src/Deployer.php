@@ -52,7 +52,7 @@ class Deployer
 
     private function createTempDirectory()
     {
-        $tempFile = tempnam(sys_get_temp_dir(), 'couscous');
+        $tempFile = tempnam(sys_get_temp_dir(), 'couscous_deploy_');
         // Turn the temp file into a temp directory
         $this->filesystem->remove($tempFile);
         $this->filesystem->mkdir($tempFile);

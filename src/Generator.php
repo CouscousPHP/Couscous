@@ -44,38 +44,4 @@ class Generator
             $step->__invoke($repository, $output);
         }
     }
-
-    private function processTemplate(GenerationHelper $generation, Filesystem $filesystem)
-    {
-        $templateUrl = $generation->config->templateUrl;
-
-        if ($templateUrl !== null) {
-            // Template is in a git repo
-            $generation->output->writeln("Fetching template from <info>$templateUrl</info>");
-
-            $templateDirectory = $generation->tempDirectory . '/template';
-            if (file_exists($templateDirectory)) {
-                $command = "cd $templateDirectory && git pull 2>&1";
-            } else {
-                $command = "git clone $templateUrl $templateDirectory 2>&1";
-            }
-            $gitOutput = array();
-            exec($command, $gitOutput, $returnValue);
-            if ($returnValue !== 0) {
-                throw new \RuntimeException(implode(PHP_EOL, $gitOutput));
-            }
-        } else {
-            // Template is in a directory
-            $templateDirectory = $generation->sourceDirectory . '/' . $generation->config->directory;
-
-            if (! $filesystem->exists($templateDirectory)) {
-                throw new \InvalidArgumentException("The template directory doesn't exist: $templateDirectory");
-            }
-        }
-
-        $generation->output->writeln('Copying template files');
-        $filesystem->mirror($templateDirectory . '/public', $generation->targetDirectory, null, array('delete' => true));
-
-        return $templateDirectory;
-    }
 }
