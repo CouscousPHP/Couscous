@@ -11,7 +11,7 @@ use Symfony\Component\Finder\Finder;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class Repository
+class Repository extends \stdClass
 {
     /**
      * Directory containing the sources files to process.

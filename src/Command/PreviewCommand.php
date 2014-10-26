@@ -2,9 +2,8 @@
 
 namespace Couscous\Command;
 
-use Couscous\Model\Config;
-use Couscous\GenerationHelper;
 use Couscous\Generator;
+use Couscous\Model\Repository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -72,46 +71,45 @@ class PreviewCommand extends Command
         }
 
         $sourceDirectory = $input->getArgument('source');
+        $targetDirectory = $input->getOption('target');
 
-        $config = Config::fromYaml($sourceDirectory . '/couscous.yml');
-
-        $generation = new GenerationHelper(
-            $config,
-            $sourceDirectory,
-            $input->getOption('target'),
-            getcwd() . '/.couscous',
-            $output
-        );
-
-        // Override baseUrl since we are running it ourselves
-        $config->templateVariables['baseUrl'] = '';
-
-        // Generate the website
-        $this->generator->generate($generation);
         $lastGenerationDate = date('Y-m-d H:i:s');
+        $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
 
-        // Start the webserver
-        $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address')));
-        $builder->setWorkingDirectory($generation->targetDirectory);
-        $builder->setTimeout(null);
-        $process = $builder->getProcess();
-        $process->start();
-        $output->writeln(sprintf("Server running on <info>%s</info>\n", $input->getArgument('address')));
+        $this->startWebServer($input, $output, $targetDirectory);
 
         // Watch for changes
         while (true) {
-            if ($this->hasChanges($generation->sourceDirectory, $lastGenerationDate)) {
+            if ($this->hasChanges($sourceDirectory, $lastGenerationDate)) {
                 $output->writeln('');
                 $output->writeln('<info>File changes detected, regenerating</info>');
                 $lastGenerationDate = date('Y-m-d H:i:s');
-                // Reload the config
-                $generation->config = $generation->config->reload();
-                // Regenerate the website
-                $this->generator->generate($generation);
+                $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
             }
 
             sleep(1);
         }
+    }
+
+    private function generateWebsite(OutputInterface $output, $sourceDirectory, $targetDirectory)
+    {
+        $repository = new Repository($sourceDirectory, $targetDirectory);
+
+        // Override baseUrl since we are running it ourselves
+        $repository->overrideBaseUrl = '';
+
+        $this->generator->generate($repository, $output);
+    }
+
+    private function startWebServer(InputInterface $input, OutputInterface $output, $targetDirectory)
+    {
+        $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address')));
+        $builder->setWorkingDirectory($targetDirectory);
+        $builder->setTimeout(null);
+        $process = $builder->getProcess();
+        $process->start();
+
+        $output->writeln(sprintf("Server running on <info>%s</info>\n", $input->getArgument('address')));
     }
 
     private function hasChanges($sourceDirectory, $lastCheckDate)
@@ -122,9 +120,6 @@ class PreviewCommand extends Command
         return (count($changedFiles) > 0);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     private function isSupported()
     {
         if (version_compare(phpversion(), '5.4.0', '<')) {
