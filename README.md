@@ -109,10 +109,10 @@ your-repository/
     couscous.yml
     website/
         public/
-        page.twig
+        default.twig
 ```
 
-Basic example (`website/page.twig`):
+Basic example (`website/default.twig`):
 
 ```html
 <!DOCTYPE html>

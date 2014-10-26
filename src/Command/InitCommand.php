@@ -32,7 +32,7 @@ class InitCommand extends Command
             mkdir(getcwd() . '/website');
         }
 
-        if (! file_exists(getcwd() . '/website/page.twig')) {
+        if (! file_exists(getcwd() . '/website/default.twig')) {
             $output->writeln('<comment>Importing the default template.</comment>');
             $template = <<<HTML
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ class InitCommand extends Command
     </body>
 </html>
 HTML;
-            file_put_contents(getcwd() . '/website/page.twig', $template);
+            file_put_contents(getcwd() . '/website/default.twig', $template);
             mkdir(getcwd() . '/website/public');
         }
 

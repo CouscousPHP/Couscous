@@ -15,7 +15,7 @@ Layout example:
 my-template/
     public/
         style.css
-    page.twig
+    default.twig
     README.md # explain how to install your template
 ```
 
@@ -28,9 +28,9 @@ Here are some examples of templates:
 
 Templates are Twig templates, and should all in the root of the `website` directory (or whatever you named it).
 
-The default template that is used for rendering the pages is in `page.twig`.
+The default template that is used for rendering the pages is `default.twig`.
 
-Example of a `page.twig`:
+Example of a `default.twig`:
 
 ```html
 <!DOCTYPE html>
@@ -49,10 +49,10 @@ Example of a `page.twig`:
 ```
 
 If, for example, you want your home page to have a different template, you can write a `home.twig`
-that overrides `page.twig`:
+that overrides `default.twig`:
 
 ```html
-{% extends "page.twig" %}
+{% extends "default.twig" %}
 
 {% block content %}
     <h1>This is the home page!</h1>
