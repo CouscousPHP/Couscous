@@ -52,7 +52,7 @@ class AddPageListToTemplateVariables implements StepInterface
     private function setValue(array &$array, array $path, $value)
     {
         if (empty($path)) {
-            $array[] = $value;
+            $array[$value] = $value;
             return;
         }
 

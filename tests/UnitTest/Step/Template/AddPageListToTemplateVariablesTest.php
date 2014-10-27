@@ -48,21 +48,21 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
         $this->invokeStep($repository, $this->files());
 
         $expected = array(
-            'index.html',
             'docs' => array(
-                'index.html',
-                'foo.html',
+                'foo.html' => 'foo.html',
+                'index.html' => 'index.html',
                 'subdirectory' => array(
-                    'bar.html'
+                    'bar.html' => 'bar.html',
                 ),
                 'sub' => array(
                     'sub' => array(
-                        'foo.html'
+                        'foo.html' => 'foo.html',
                     ),
                 ),
             ),
+            'index.html' => 'index.html',
             'weird.path-test [foo]' => array(
-                'bar.html'
+                'bar.html' => 'bar.html',
             ),
         );
 
