@@ -1,0 +1,20 @@
+Page list:
+{% for page in pageList %}
+    {{ page }}
+{% endfor %}
+
+Page tree:
+
+root:
+{% for page in pageTree %}
+{% if page is not iterable %}
+    {{ page }}
+{% endif %}
+{% endfor %}
+
+docs:
+{% for page in pageTree['docs'] %}
+{% if page is not iterable %}
+    {{ page }}
+{% endif %}
+{% endfor %}

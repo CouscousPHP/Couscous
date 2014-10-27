@@ -21,6 +21,12 @@ class Template
      */
     public $publicDirectory;
 
+    /**
+     * Variables made available in templates.
+     * @var array
+     */
+    public $templateVariables = array();
+
     public function __construct($directory, $publicDirectory)
     {
         $this->directory = $directory;

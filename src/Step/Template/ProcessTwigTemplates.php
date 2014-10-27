@@ -34,8 +34,12 @@ class ProcessTwigTemplates implements StepInterface
                 ? $file->customVariables['template'] . '.twig'
                 : self::DEFAULT_TEMPLATE_NAME;
 
-            $context = array_merge($file->customVariables, $repository->config->templateVariables);
-            $context['content'] = $file->content;
+            $context = array_merge(
+                $repository->template->templateVariables,
+                $repository->config->templateVariables,
+                $file->customVariables,
+                array('content' => $file->content)
+            );
 
             try {
                 $file->content = $twig->render($template, $context);

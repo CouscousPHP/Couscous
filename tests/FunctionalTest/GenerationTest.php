@@ -18,4 +18,12 @@ class GenerationTest extends BaseFunctionalTest
     {
         $this->assertGeneratedWebsite('custom-variables');
     }
+
+    /**
+     * Test the pageList and pageTree template variables.
+     */
+    public function testPageList()
+    {
+        $this->assertGeneratedWebsite('page-list');
+    }
 }

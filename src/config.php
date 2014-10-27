@@ -15,6 +15,7 @@ return array(
         'Couscous\Step\Markdown\ProcessMarkdownFileName',
         'Couscous\Step\Markdown\ProcessMarkdownLinks',
         'Couscous\Step\Markdown\RenderMarkdown',
+        'Couscous\Step\Template\AddPageListToTemplateVariables',
         'Couscous\Step\Template\ProcessTwigTemplates',
         'Couscous\Step\WriteFiles',
         'Couscous\Step\ExecuteAfterScripts',
