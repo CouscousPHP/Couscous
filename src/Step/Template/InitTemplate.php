@@ -30,7 +30,7 @@ class InitTemplate implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        $templateUrl = $repository->templateUrl;
+        $templateUrl = $repository->config->templateUrl;
 
         if ($templateUrl !== null) {
             $this->templateFromGitUrl($repository, $templateUrl, $output);
