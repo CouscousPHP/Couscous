@@ -41,6 +41,10 @@ class AddPageListToTemplateVariables implements StepInterface
             $this->setValue($pageTree, $path, $filename);
         }
 
+        // Sort
+        natsort($pageList);
+        $this->sortRecursively($pageTree);
+
         $repository->template->templateVariables['pageList'] = $pageList;
         $repository->template->templateVariables['pageTree'] = $pageTree;
     }
@@ -59,5 +63,15 @@ class AddPageListToTemplateVariables implements StepInterface
         }
 
         $this->setValue($array[$dir], $path, $value);
+    }
+
+    private function sortRecursively(&$array)
+    {
+        foreach ($array as &$value) {
+            if (is_array($value)) {
+                $this->sortRecursively($value);
+            }
+        }
+        ksort($array);
     }
 }
