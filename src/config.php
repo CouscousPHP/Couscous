@@ -10,6 +10,7 @@ return array(
         'Couscous\Step\OverrideBaseUrl',
         'Couscous\Step\ExecuteBeforeScripts',
         'Couscous\Step\Template\InitTemplate',
+        'Couscous\Step\Assets\RunBowerInstall',
         'Couscous\Step\Template\LoadPublicFiles',
         'Couscous\Step\Markdown\LoadMarkdownFiles',
         'Couscous\Step\Markdown\ProcessMarkdownFileName',
