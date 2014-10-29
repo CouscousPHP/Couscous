@@ -28,9 +28,15 @@ class RunBowerInstall implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
+        if ($repository->regenerate) {
+            return;
+        }
+
         if (! $this->filesystem->exists($repository->template->publicDirectory . '/bower.json')) {
             return;
         }
+
+        $output->writeln('Executing <comment>bower install</comment>');
 
         $workingDir = getcwd();
         chdir($repository->template->publicDirectory);

@@ -84,19 +84,25 @@ class PreviewCommand extends Command
                 $output->writeln('');
                 $output->writeln('<info>File changes detected, regenerating</info>');
                 $lastGenerationDate = date('Y-m-d H:i:s');
-                $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
+                $this->generateWebsite($output, $sourceDirectory, $targetDirectory, true);
             }
 
             sleep(1);
         }
     }
 
-    private function generateWebsite(OutputInterface $output, $sourceDirectory, $targetDirectory)
-    {
+    private function generateWebsite(
+        OutputInterface $output,
+        $sourceDirectory,
+        $targetDirectory,
+        $regenerate = false
+    ) {
         $repository = new Repository($sourceDirectory, $targetDirectory);
 
         // Override baseUrl since we are running it ourselves
         $repository->overrideBaseUrl = '';
+
+        $repository->regenerate = $regenerate;
 
         $this->generator->generate($repository, $output);
     }

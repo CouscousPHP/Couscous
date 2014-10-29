@@ -36,6 +36,16 @@ class Repository extends \stdClass
     public $template;
 
     /**
+     * If true then we are in "preview" mode and we are regenerating the website.
+     *
+     * Use this to prevent doing anything costly twice so that the regeneration is faster,
+     * e.g. downloading files…
+     *
+     * @var bool
+     */
+    public $regenerate = false;
+
+    /**
      * Files that will be written to disk at the end of the generation.
      *
      * @var File[]
