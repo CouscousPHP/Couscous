@@ -68,7 +68,7 @@ class PreviewCommand extends Command
     {
         if (! $this->isSupported()) {
             $output->writeln('<error>PHP 5.4 or above is required to run the internal webserver</error>');
-            return;
+            return 1;
         }
 
         $sourceDirectory = $input->getArgument('source');
