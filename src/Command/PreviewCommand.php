@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
@@ -80,9 +81,11 @@ class PreviewCommand extends Command
 
         // Watch for changes
         while (true) {
-            if ($this->hasChanges($sourceDirectory, $lastGenerationDate)) {
+            $files = $this->filesChanged($sourceDirectory, $lastGenerationDate);
+            if (count($files) > 0) {
                 $output->writeln('');
-                $output->writeln('<info>File changes detected, regenerating</info>');
+                $output->write(sprintf('<info>%d file(s) changed: regenerating</info>', count($files)));
+                $output->writeln(sprintf(' (%s)', $this->fileListToDisplay($files)));
                 $lastGenerationDate = date('Y-m-d H:i:s');
                 $this->generateWebsite($output, $sourceDirectory, $targetDirectory, true);
             }
@@ -115,15 +118,15 @@ class PreviewCommand extends Command
         $process = $builder->getProcess();
         $process->start();
 
-        $output->writeln(sprintf("Server running on <info>%s</info>\n", $input->getArgument('address')));
+        $output->writeln(sprintf("Server running on <info>%s</info>", $input->getArgument('address')));
     }
 
-    private function hasChanges($sourceDirectory, $lastCheckDate)
+    private function filesChanged($sourceDirectory, $lastCheckDate)
     {
         $changedFiles = new Finder();
         $changedFiles->files()->in($sourceDirectory)->date('after ' . $lastCheckDate);
 
-        return (count($changedFiles) > 0);
+        return $changedFiles;
     }
 
     private function isSupported()
@@ -132,5 +135,20 @@ class PreviewCommand extends Command
             return false;
         }
         return true;
+    }
+
+    private function fileListToDisplay(Finder $files)
+    {
+        $files = array_map(function (SplFileInfo $file) {
+            return $file->getRelativePathname();
+        }, iterator_to_array($files));
+
+        $str = implode(', ', $files);
+
+        if (strlen($str) > 40) {
+            $str = substr($str, 0, 40) . '…';
+        }
+
+        return $str;
     }
 }
