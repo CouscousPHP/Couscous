@@ -117,3 +117,11 @@ Then you can use it in the templates:
 
 All your Markdown links should be rewritten and work. However, make sure you write relative links.
 A good rule of thumb is: if it works on GitHub.com, it will work with Couscous.
+
+## Bower
+
+If a `bower.json` file is present in the `website/public/` directory, dependencies will be
+installed automatically.
+
+You don't need to have Bower installed on your machine, Couscous internally uses
+[BowerPHP](http://bowerphp.org/).
