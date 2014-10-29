@@ -36,7 +36,7 @@ class RunBowerInstall implements StepInterface
             return;
         }
 
-        $output->writeln('Executing <comment>bower install</comment>');
+        $output->writeln('Executing <info>bower install</info>');
 
         $workingDir = getcwd();
         chdir($repository->template->publicDirectory);

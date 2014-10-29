@@ -27,5 +27,7 @@ class LoadConfig implements StepInterface
         }
 
         $repository->config = Config::fromYaml($filename);
+
+        $repository->watchlist->watchFile($filename);
     }
 }

@@ -26,5 +26,7 @@ class LoadMarkdownFiles implements StepInterface
 
             $repository->addFile(new MarkdownFile($file->getRelativePathname(), $content));
         }
+
+        $repository->watchlist->watchFiles($files);
     }
 }

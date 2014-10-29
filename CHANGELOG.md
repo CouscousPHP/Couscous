@@ -13,3 +13,7 @@ Major new features:
 Minor new features:
 
 - The preview command will show the name of the files that have changed when regenerating
+
+Bugfixes
+
+- The preview command now detects any file change (to regenerate the website)

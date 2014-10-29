@@ -9,8 +9,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
@@ -74,24 +72,24 @@ class PreviewCommand extends Command
         $sourceDirectory = $input->getArgument('source');
         $targetDirectory = $input->getOption('target');
 
-        $lastGenerationDate = date('Y-m-d H:i:s');
-        $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
+        $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
 
         $this->startWebServer($input, $output, $targetDirectory);
 
         // Watch for changes
         while (true) {
-            $files = $this->filesChanged($sourceDirectory, $lastGenerationDate);
+            $files = $watchlist->getChangedFiles();
             if (count($files) > 0) {
                 $output->writeln('');
-                $output->write(sprintf('<info>%d file(s) changed: regenerating</info>', count($files)));
-                $output->writeln(sprintf(' (%s)', $this->fileListToDisplay($files)));
-                $lastGenerationDate = date('Y-m-d H:i:s');
-                $this->generateWebsite($output, $sourceDirectory, $targetDirectory, true);
+                $output->write(sprintf('<comment>%d file(s) changed: regenerating</comment>', count($files)));
+                $output->writeln(sprintf(' (%s)', $this->fileListToDisplay($files, $sourceDirectory)));
+                $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, true);
             }
 
             sleep(1);
         }
+
+        return 0;
     }
 
     private function generateWebsite(
@@ -108,6 +106,8 @@ class PreviewCommand extends Command
         $repository->regenerate = $regenerate;
 
         $this->generator->generate($repository, $output);
+
+        return $repository->watchlist;
     }
 
     private function startWebServer(InputInterface $input, OutputInterface $output, $targetDirectory)
@@ -121,14 +121,6 @@ class PreviewCommand extends Command
         $output->writeln(sprintf("Server running on <info>%s</info>", $input->getArgument('address')));
     }
 
-    private function filesChanged($sourceDirectory, $lastCheckDate)
-    {
-        $changedFiles = new Finder();
-        $changedFiles->files()->in($sourceDirectory)->date('after ' . $lastCheckDate);
-
-        return $changedFiles;
-    }
-
     private function isSupported()
     {
         if (version_compare(phpversion(), '5.4.0', '<')) {
@@ -137,16 +129,16 @@ class PreviewCommand extends Command
         return true;
     }
 
-    private function fileListToDisplay(Finder $files)
+    private function fileListToDisplay(array $files, $sourceDirectory)
     {
-        $files = array_map(function (SplFileInfo $file) {
-            return $file->getRelativePathname();
-        }, iterator_to_array($files));
+        $files = array_map(function ($file) use ($sourceDirectory) {
+            return substr($file, strlen($sourceDirectory) + 1);
+        }, $files);
 
         $str = implode(', ', $files);
 
-        if (strlen($str) > 40) {
-            $str = substr($str, 0, 40) . '…';
+        if (strlen($str) > 60) {
+            $str = substr($str, 0, 60) . '…';
         }
 
         return $str;

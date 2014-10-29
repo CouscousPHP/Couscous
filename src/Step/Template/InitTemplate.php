@@ -48,6 +48,8 @@ class InitTemplate implements StepInterface
             throw new \RuntimeException("The template directory doesn't exist: $templateDirectory");
         }
 
+        $repository->watchlist->watchDirectory($templateDirectory);
+
         $repository->template = new Template($templateDirectory, $publicDirectory);
     }
 

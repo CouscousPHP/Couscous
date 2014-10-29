@@ -25,6 +25,8 @@ class LoadPublicFiles implements StepInterface
         $files = new Finder();
         $files->files()->in($repository->template->publicDirectory);
 
+        $repository->watchlist->watchFiles($files);
+
         foreach ($files as $file) {
             /** @var SplFileInfo $file */
             $repository->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));

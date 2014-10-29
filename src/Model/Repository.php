@@ -2,6 +2,7 @@
 
 namespace Couscous\Model;
 
+use Couscous\Model\WatchList\WatchList;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -46,6 +47,11 @@ class Repository extends \stdClass
     public $regenerate = false;
 
     /**
+     * @var WatchList
+     */
+    public $watchlist;
+
+    /**
      * Files that will be written to disk at the end of the generation.
      *
      * @var File[]
@@ -56,6 +62,7 @@ class Repository extends \stdClass
     {
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
+        $this->watchlist = new WatchList();
     }
 
     public function addFile(File $file)
