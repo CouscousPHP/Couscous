@@ -16,4 +16,4 @@ Minor new features:
 
 Bugfixes
 
-- The preview command now detects any file change (to regenerate the website)
+- [#7](https://github.com/mnapoli/Couscous/issues/7), [#12](https://github.com/mnapoli/Couscous/issues/12) The preview command now detects any file change (to regenerate the website)
