@@ -27,7 +27,7 @@ class ClearTargetDirectory implements StepInterface
     public function __invoke(Repository $repository, OutputInterface $output)
     {
         $files = new Finder();
-        $files->files()->in($repository->targetDirectory);
+        $files->in($repository->targetDirectory);
 
         $this->filesystem->remove($files);
     }
