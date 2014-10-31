@@ -1,0 +1,268 @@
+@import "variables.less";
+@import "mixins.less";
+@import "menu.less";
+@import "home-header.less";
+@import "timeline.less";
+@import "portfolio.less";
+
+// Global Components
+
+body {
+  overflow-x: hidden;
+  .body-font;
+  color: @text-color;
+  padding-top: 80px;
+}
+
+.text-muted {
+  color: @gray;
+}
+
+.text-primary {
+  color: @brand-primary;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+p.large {
+  font-size: 16px;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+  outline: none;
+}
+
+a {
+  color: @brand-primary;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+  color: darken(@brand-primary, 10%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  .heading-font;
+  font-weight: 700;
+  color: @title-color;
+}
+
+.img-centered {
+  margin: 0 auto;
+}
+
+.bg-light-gray {
+  background-color: @gray-lighter;
+}
+
+.bg-darkest-gray {
+  background-color: @gray-darkest;
+}
+
+// Restyled Primary Buttons
+
+.btn-primary {
+  .button-variant(white; @brand-primary; @brand-primary);
+  .heading-font;
+  font-weight: 700;
+}
+
+.btn-xl {
+  .button-variant(white; @brand-primary; @brand-primary);
+  .heading-font;
+  font-weight: 700;
+  border-radius: 3px;
+  font-size: 18px;
+  padding: 20px 40px;
+}
+
+// Global Section Styles
+
+section, header {
+  margin-bottom: 100px;
+}
+section {
+  h2.section-heading {
+	font-size: 40px;
+	margin-top: 0;
+	margin-bottom: 15px;
+  }
+  h3.section-subheading {
+	font-size: 16px;
+	.serif-font;
+	text-transform: none;
+	font-style: italic;
+	font-weight: 400;
+	margin-bottom: 75px;
+  }
+}
+
+@media(min-width:768px) {
+  section, header {
+    margin-bottom: 150px;
+  }
+}
+
+// Team Section
+
+.team-member {
+  text-align: center;
+  margin-bottom: 50px;
+  img {
+	margin: 0 auto;
+	border: 7px solid white;
+  }
+  h4 {
+	margin-top: 25px;
+	margin-bottom: 0;
+	text-transform: none;
+  }
+  p {
+	margin-top: 0;
+  }
+}
+
+// Clients Aside
+
+aside.clients {
+  img {
+	margin: 50px auto;
+  }
+}
+
+// Contact Section
+
+section#contact {
+  background-color: @gray-darkest;
+  background-image: url('../img/map-image.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  .section-heading {
+	color: white;
+  }
+  .form-group {
+	margin-bottom: 25px;
+	input,
+	textarea {
+	  padding: 20px;
+	}
+	input.form-control {
+	  height: auto;
+	}
+	textarea.form-control {
+	  height: 236px;
+	}
+  }
+  .form-control:focus {
+	border-color: @brand-primary;
+	box-shadow: none;
+  }
+  ::-webkit-input-placeholder {
+	.heading-font;
+	font-weight: 700;
+	color: @placeholder-text;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+	.heading-font;
+	font-weight: 700;
+	color: @placeholder-text;
+  }
+  ::-moz-placeholder {  /* Firefox 19+ */
+	.heading-font;
+	font-weight: 700;
+	color: @placeholder-text;
+  }
+  :-ms-input-placeholder {
+	.heading-font;
+	font-weight: 700;
+	color: @placeholder-text;
+  }
+  .text-danger {
+	color: @brand-danger;
+  }
+}
+
+// Footer
+
+footer {
+  padding: 25px 0;
+  text-align: center;
+  span.copyright {
+	line-height: 40px;
+	.heading-font;
+	text-transform: none;
+  }
+  ul.quicklinks {
+	margin-bottom: 0;
+	line-height: 40px;
+	.heading-font;
+	text-transform: none;
+  }
+}
+
+// Social Buttons
+
+ul.social-buttons {
+  margin-bottom: 0;
+  li {
+	a {
+	  display: block;
+	  background-color: @gray-darkest;
+	  height: 40px;
+	  width: 40px;
+	  border-radius: 100%;
+	  font-size: 20px;
+	  line-height: 40px;
+	  color: white;
+	  outline: none;
+	  -webkit-transition: all 0.3s;
+	  -moz-transition: all 0.3s;
+	  transition: all 0.3s;
+	  &:hover,
+	  &:focus,
+	  &:active {
+		background-color: @brand-primary;
+	  }
+	}
+  }
+}
+
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn:active:focus {
+  outline: none;
+}
+
+// Highlight Color Customization
+
+::-moz-selection {
+  text-shadow: none;
+  background: @brand-primary;
+}
+
+::selection {
+  text-shadow: none;
+  background: @brand-primary;
+}
+
+img::selection {
+  background: transparent;
+}
+
+img::-moz-selection {
+  background: transparent;
+}
+
+body {
+  webkit-tap-highlight-color: @brand-primary;
+}

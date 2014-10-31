@@ -8,6 +8,7 @@ exclude:
 before:
   - bin/compile
   - cp bin/couscous.phar website/public/
+  - lessc --clean-css website/public/less/main.less website/public/css/all.min.css
 
 after:
   - rm website/public/couscous.phar
