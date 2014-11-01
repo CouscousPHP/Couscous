@@ -46,3 +46,7 @@ Couscous will generate the website (in a temp directory) and publish it in the `
 The website is now online: [http://your-username.github.io/your-project/](http://your-username.github.io/your-project/).
 
 The `deploy` command will not change anything in your current branch (e.g. master branch). It will only affect the `gh-pages` branch.
+
+## Customizing the template
+
+Couscous provides a default template, but you can of course come up with your own. Writing templates is really simple, and it is all explained in the [templates documentation](templates.md).
