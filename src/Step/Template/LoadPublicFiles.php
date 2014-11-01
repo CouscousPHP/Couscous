@@ -6,6 +6,7 @@ use Couscous\Model\LazyFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -16,9 +17,23 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class LoadPublicFiles implements StepInterface
 {
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
+    public function __construct(Filesystem $filesystem)
+    {
+        $this->filesystem = $filesystem;
+    }
+
     public function __invoke(Repository $repository, OutputInterface $output)
     {
         if (! $repository->template) {
+            return;
+        }
+
+        if (! $this->filesystem->exists($repository->template->publicDirectory)) {
             return;
         }
 

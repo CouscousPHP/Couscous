@@ -4,8 +4,8 @@ namespace Piwik\Tests\FunctionalTest;
 
 class ErrorsTest extends BaseFunctionalTest
 {
-    public function testTemplateNeeded()
+    public function testMissingTemplate()
     {
-        $this->assertGenerationError('no-template', "The template directory doesn't exist:");
+        $this->assertGenerationError('missing-template-file', 'There was an error while rendering the file "index.html" with the template "home.twig": Template "home.twig" is not defined.');
     }
 }

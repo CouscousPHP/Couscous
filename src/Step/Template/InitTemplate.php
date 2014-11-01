@@ -45,7 +45,8 @@ class InitTemplate implements StepInterface
         $publicDirectory = $templateDirectory . '/' . self::PUBLIC_DIRECTORY;
 
         if (! $this->filesystem->exists($templateDirectory)) {
-            throw new \RuntimeException("The template directory doesn't exist: $templateDirectory");
+            $this->useDefaultTemplate($repository);
+            return;
         }
 
         $repository->watchlist->watchDirectory($templateDirectory);
@@ -66,6 +67,14 @@ class InitTemplate implements StepInterface
         }
 
         $publicDirectory = $templateDirectory . '/' . self::PUBLIC_DIRECTORY;
+        $repository->template = new Template($templateDirectory, $publicDirectory);
+    }
+
+    private function useDefaultTemplate(Repository $repository)
+    {
+        $templateDirectory = __DIR__ . '/DefaultTemplate/';
+        $publicDirectory = $templateDirectory . '/' . self::PUBLIC_DIRECTORY;
+
         $repository->template = new Template($templateDirectory, $publicDirectory);
     }
 
