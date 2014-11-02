@@ -8,6 +8,8 @@ If you have already [set up a global install of Composer](http://akrabat.com/php
 $ composer global require mnapoli/couscous
 ```
 
+You can also add Couscous as a dependency for a project with `composer require mnapoli/couscous`.
+
 Alternatively, you can download [couscous.phar](http://mnapoli.fr/Couscous/couscous.phar):
 
 ```bash
@@ -31,7 +33,7 @@ $ couscous preview
 
 Couscous will take every `*.md` file it finds in your repository and convert it to HTML files, keeping the same directory structure (`README.md` files will be renamed to `index.html`). You can then visit [http://localhost:8000/](http://localhost:8000/) to preview the result!
 
-Be advised that this command will not modify your repository.
+Be assured that this command will not modify your repository.
 
 ## Deploy
 

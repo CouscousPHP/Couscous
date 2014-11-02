@@ -18,7 +18,7 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
 $factory = new ContainerFactory();
 $container = $factory->createContainer();
 
-$application = new Application('Couscous', '0.3.0');
+$application = new Application('Couscous', '1.0.0');
 
 $application->add($container->get('Couscous\Command\InitCommand'));
 $application->add($container->get('Couscous\Command\GenerateCommand'));
