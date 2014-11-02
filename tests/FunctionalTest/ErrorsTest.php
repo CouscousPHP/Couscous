@@ -1,6 +1,6 @@
 <?php
 
-namespace Piwik\Tests\FunctionalTest;
+namespace Couscous\Tests\FunctionalTest;
 
 class ErrorsTest extends BaseFunctionalTest
 {

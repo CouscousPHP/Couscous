@@ -1,6 +1,6 @@
 <?php
 
-namespace Piwik\Tests\UnitTest\Step\Template;
+namespace Couscous\Tests\UnitTest\Step\Template;
 
 use Couscous\Model\HtmlFile;
 use Couscous\Model\Repository;

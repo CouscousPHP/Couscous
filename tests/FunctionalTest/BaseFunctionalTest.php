@@ -1,6 +1,6 @@
 <?php
 
-namespace Piwik\Tests\FunctionalTest;
+namespace Couscous\Tests\FunctionalTest;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;

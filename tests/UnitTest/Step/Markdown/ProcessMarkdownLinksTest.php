@@ -1,6 +1,6 @@
 <?php
 
-namespace Piwik\Tests\UnitTest\Step\Markdown;
+namespace Couscous\Tests\UnitTest\Step\Markdown;
 
 use Couscous\Model\MarkdownFile;
 use Couscous\Model\Repository;
