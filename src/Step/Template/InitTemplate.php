@@ -16,7 +16,6 @@ use Symfony\Component\Filesystem\Filesystem;
 class InitTemplate implements StepInterface
 {
     const TEMPLATE_DIRECTORY = 'website';
-    const PUBLIC_DIRECTORY = 'public';
 
     /**
      * @var Filesystem
@@ -42,7 +41,6 @@ class InitTemplate implements StepInterface
     private function templateFromDirectory(Repository $repository)
     {
         $templateDirectory = $repository->sourceDirectory . '/' . self::TEMPLATE_DIRECTORY;
-        $publicDirectory = $templateDirectory . '/' . self::PUBLIC_DIRECTORY;
 
         if (! $this->filesystem->exists($templateDirectory)) {
             $this->useDefaultTemplate($repository);
@@ -51,7 +49,7 @@ class InitTemplate implements StepInterface
 
         $repository->watchlist->watchDirectory($templateDirectory);
 
-        $repository->template = new Template($templateDirectory, $publicDirectory);
+        $repository->template = new Template($templateDirectory);
     }
 
     private function templateFromGitUrl(Repository $repository, $gitUrl, OutputInterface $output)
@@ -66,16 +64,14 @@ class InitTemplate implements StepInterface
             throw new \RuntimeException(implode(PHP_EOL, $gitOutput));
         }
 
-        $publicDirectory = $templateDirectory . '/' . self::PUBLIC_DIRECTORY;
-        $repository->template = new Template($templateDirectory, $publicDirectory);
+        $repository->template = new Template($templateDirectory);
     }
 
     private function useDefaultTemplate(Repository $repository)
     {
         $templateDirectory = __DIR__ . '/DefaultTemplate/';
-        $publicDirectory = $templateDirectory . '/' . self::PUBLIC_DIRECTORY;
 
-        $repository->template = new Template($templateDirectory, $publicDirectory);
+        $repository->template = new Template($templateDirectory);
     }
 
     private function createTempDirectory($prefix)

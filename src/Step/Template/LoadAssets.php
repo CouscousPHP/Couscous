@@ -11,11 +11,13 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * Read public files from the template directory to the target directory.
+ * Load asset files from the template directory.
+ *
+ * Assets are any file that is not a Twig template.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class LoadPublicFiles implements StepInterface
+class LoadAssets implements StepInterface
 {
     /**
      * @var Filesystem
@@ -33,12 +35,11 @@ class LoadPublicFiles implements StepInterface
             return;
         }
 
-        if (! $this->filesystem->exists($repository->template->publicDirectory)) {
-            return;
-        }
-
         $files = new Finder();
-        $files->files()->in($repository->template->publicDirectory);
+        $files->files()
+            ->in($repository->template->directory)
+            ->ignoreDotFiles(true)
+            ->notName('*.twig');
 
         $repository->watchlist->watchFiles($files);
 

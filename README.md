@@ -108,7 +108,6 @@ As a quickstart, you can create a template locally. Here is the default director
 your-repository/
     couscous.yml
     website/
-        public/
         default.twig
 ```
 
@@ -134,7 +133,7 @@ Variables available in the Twig layouts are:
 You can write different layouts (for example to make the home page different).
 For this, read the [template documentation](docs/templates.md).
 
-If your template has assets (CSS, JS, images, …), put them in `website/public`. The content of this directory will be copied in the generated website.
+If your template has assets (CSS, JS, images, …), put them in `website/`. All files that are not Twig layouts will be copied to the generated website.
 
 
 ### Preview

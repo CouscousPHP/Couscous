@@ -11,7 +11,7 @@ return array(
         'Couscous\Step\ExecuteBeforeScripts',
         'Couscous\Step\Template\InitTemplate',
         'Couscous\Step\Assets\RunBowerInstall',
-        'Couscous\Step\Template\LoadPublicFiles',
+        'Couscous\Step\Template\LoadAssets',
         'Couscous\Step\Markdown\LoadMarkdownFiles',
         'Couscous\Step\Markdown\ProcessMarkdownFileName',
         'Couscous\Step\Markdown\ProcessMarkdownLinks',

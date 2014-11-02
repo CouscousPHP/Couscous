@@ -32,14 +32,14 @@ class RunBowerInstall implements StepInterface
             return;
         }
 
-        if (! $this->filesystem->exists($repository->template->publicDirectory . '/bower.json')) {
+        if (! $this->filesystem->exists($repository->template->directory . '/bower.json')) {
             return;
         }
 
         $output->writeln('Executing <info>bower install</info>');
 
         $workingDir = getcwd();
-        chdir($repository->template->publicDirectory);
+        chdir($repository->template->directory);
 
         $command = new InstallCommand();
         $command->run(new ArrayInput(array()), $output);

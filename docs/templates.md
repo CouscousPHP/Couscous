@@ -13,8 +13,7 @@ Layout example:
 
 ```
 my-template/
-    public/
-        style.css
+    style.css
     default.twig
     README.md # explain how to install your template
 ```
@@ -120,7 +119,7 @@ A good rule of thumb is: if it works on GitHub.com, it will work with Couscous.
 
 ## Bower
 
-If a `bower.json` file is present in the `website/public/` directory, dependencies will be
+If a `bower.json` file is present in the `website/` directory, dependencies will be
 installed automatically.
 
 You don't need to have Bower installed on your machine, Couscous internally uses

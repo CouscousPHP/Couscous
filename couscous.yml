@@ -7,11 +7,11 @@ exclude:
 
 before:
   - bin/compile
-  - cp bin/couscous.phar website/public/
-  - lessc --clean-css website/public/less/main.less website/public/css/all.min.css
+  - cp bin/couscous.phar website/
+  - lessc --clean-css website/less/main.less website/css/all.min.css
 
 after:
-  - rm website/public/couscous.phar
+  - rm website/couscous.phar
 
 template:
     baseUrl: http://mnapoli.fr/Couscous

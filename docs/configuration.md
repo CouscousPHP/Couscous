@@ -18,11 +18,11 @@ exclude:
 
 # Scripts to execute before generating the website
 before:
-    - cp bin/couscous.phar website/public/
+    - cp bin/couscous.phar website/
 
 # Scripts to execute after generating the website
 after:
-    - rm website/public/couscous.phar
+    - rm website/couscous.phar
 
 # Any variable you put in "template" is available in the Twig layouts
 template:

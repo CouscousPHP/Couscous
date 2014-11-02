@@ -19,6 +19,11 @@ class GenerationTest extends BaseFunctionalTest
         $this->assertGeneratedWebsite('missing-public-directory');
     }
 
+    public function testAssetsAreCopied()
+    {
+        $this->assertGeneratedWebsite('assets');
+    }
+
     /**
      * Test custom variables defined:
      *     - in FrontYAML inside Markdown files

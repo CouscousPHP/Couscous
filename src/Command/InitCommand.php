@@ -46,7 +46,6 @@ class InitCommand extends Command
 </html>
 HTML;
             file_put_contents(getcwd() . '/website/default.twig', $template);
-            mkdir(getcwd() . '/website/public');
         }
 
         if (! file_exists(getcwd() . '/README.md')) {

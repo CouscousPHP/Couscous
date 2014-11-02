@@ -10,16 +10,9 @@ namespace Couscous\Model;
 class Template
 {
     /**
-     * Directory containing the template files.
      * @var string
      */
     public $directory;
-
-    /**
-     * Directory containing the public files.
-     * @var string
-     */
-    public $publicDirectory;
 
     /**
      * Variables made available in layouts.
@@ -27,9 +20,8 @@ class Template
      */
     public $layoutVariables = array();
 
-    public function __construct($directory, $publicDirectory)
+    public function __construct($directory)
     {
         $this->directory = $directory;
-        $this->publicDirectory = $publicDirectory;
     }
 }
