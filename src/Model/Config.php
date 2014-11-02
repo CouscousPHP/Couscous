@@ -27,7 +27,7 @@ class Config
      * Directory in which the website template is.
      * @var string
      */
-    public $directory = 'website';
+    public $directory;
 
     /**
      * Scripts to execute before generating the website.

@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class InitTemplate implements StepInterface
 {
-    const TEMPLATE_DIRECTORY = 'website';
+    const DEFAULT_TEMPLATE_DIRECTORY = 'website';
 
     /**
      * @var Filesystem
@@ -40,11 +40,22 @@ class InitTemplate implements StepInterface
 
     private function templateFromDirectory(Repository $repository)
     {
-        $templateDirectory = $repository->sourceDirectory . '/' . self::TEMPLATE_DIRECTORY;
+        if (!is_null($repository->config->directory)) {
+            $templateDirectory = $repository->sourceDirectory . '/' . $repository->config->directory;
 
-        if (! $this->filesystem->exists($templateDirectory)) {
-            $this->useDefaultTemplate($repository);
-            return;
+            if (!$this->filesystem->exists($templateDirectory)) {
+                throw new \RuntimeException(sprintf(
+                    "The template directory '%s' doesn't exist",
+                    $templateDirectory
+                ));
+            }
+        } else {
+            $templateDirectory = $repository->sourceDirectory . '/' . self::DEFAULT_TEMPLATE_DIRECTORY;
+
+            if (! $this->filesystem->exists($templateDirectory)) {
+                $this->useDefaultTemplate($repository);
+                return;
+            }
         }
 
         $repository->watchlist->watchDirectory($templateDirectory);
