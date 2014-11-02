@@ -5,7 +5,7 @@ namespace Piwik\Tests\UnitTest\Step\Template;
 use Couscous\Model\HtmlFile;
 use Couscous\Model\Repository;
 use Couscous\Model\Template;
-use Couscous\Step\Template\AddPageListToTemplateVariables;
+use Couscous\Step\Template\AddPageListToLayoutVariables;
 use Symfony\Component\Console\Output\NullOutput;
 
 class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
@@ -38,7 +38,7 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             'weird.path-test [foo]/bar.html',
         );
 
-        $this->assertEquals($expected, $repository->template->templateVariables['pageList']);
+        $this->assertEquals($expected, $repository->template->layoutVariables['pageList']);
     }
 
     public function testPageTree()
@@ -66,7 +66,7 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->assertEquals($expected, $repository->template->templateVariables['pageTree']);
+        $this->assertEquals($expected, $repository->template->layoutVariables['pageTree']);
     }
 
     private function invokeStep(Repository $repository, $files)
@@ -77,7 +77,7 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             $repository->addFile($file);
         }
 
-        $step = new AddPageListToTemplateVariables();
+        $step = new AddPageListToLayoutVariables();
         $step->__invoke($repository, new NullOutput());
     }
 }

@@ -8,11 +8,11 @@ use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Add to the template variables the list of the pages of the website.
+ * Add to the layout variables the list of the pages of the website.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class AddPageListToTemplateVariables implements StepInterface
+class AddPageListToLayoutVariables implements StepInterface
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {
@@ -45,8 +45,8 @@ class AddPageListToTemplateVariables implements StepInterface
         natsort($pageList);
         $this->sortRecursively($pageTree);
 
-        $repository->template->templateVariables['pageList'] = $pageList;
-        $repository->template->templateVariables['pageTree'] = $pageTree;
+        $repository->template->layoutVariables['pageList'] = $pageList;
+        $repository->template->layoutVariables['pageTree'] = $pageTree;
     }
 
     private function setValue(array &$array, array $path, $value)

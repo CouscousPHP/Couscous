@@ -4,7 +4,8 @@
 
 BC breaking changes:
 
-- the default template is now `default.twig` (it was previously `page.twig`)
+- in Markdown files, you now need to use `layout: custom.twig` instead of `template: custom.twig`. Template now means the whole template (all files) while layout is a single Twig file.
+- the default layout is now `default.twig` (it was previously `page.twig`)
 
 Major new features:
 

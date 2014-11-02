@@ -22,10 +22,10 @@ class Template
     public $publicDirectory;
 
     /**
-     * Variables made available in templates.
+     * Variables made available in layouts.
      * @var array
      */
-    public $templateVariables = array();
+    public $layoutVariables = array();
 
     public function __construct($directory, $publicDirectory)
     {

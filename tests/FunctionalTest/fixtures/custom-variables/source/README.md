@@ -1,5 +1,5 @@
 ---
-template: page
+layout: page
 customVariable: "This is a custom variable"
 ---
 

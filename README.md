@@ -1,5 +1,5 @@
 ---
-template: home
+layout: home
 ---
 
 Couscous generates a website (for [Github pages](http://pages.github.com/)) from your markdown documentation.
@@ -94,8 +94,8 @@ That configuration file is optional. See the [complete reference](docs/configura
 Couscous will take every `*.md` file it finds in your repository and convert it to `.html` files, keeping the same directory structure
 (`README.md` files a renamed to `index.html`).
 
-In order to have those HTML files look like real web pages, you need to write a *template* for these pages.
-Templates are written with Twig, and are extremely easy to write.
+In order to have those HTML files look like real web pages, you need to create a *template*.
+Templates contain Twig layouts, which are extremely easy to write.
 
 Templates can be:
 
@@ -126,16 +126,15 @@ Basic example (`website/default.twig`):
 </html>
 ```
 
-Variables available in the template are:
+Variables available in the Twig layouts are:
 
 - `content`: Markdown turned to HTML. Make sur to echo it with `{{ content|raw }}` else the HTML will be escaped.
 - `baseUrl`: Base URL, if defined in `couscous.yml`. When previewing with `couscous preview`, the base URL will always be `http://localhost:8000`. Useful for writing links.
 
-You can write different templates (for example to make the home page different).
+You can write different layouts (for example to make the home page different).
 For this, read the [template documentation](docs/templates.md).
 
-If your template has assets (CSS, JS, images, …), put them in `website/public`. The content of this directory will be
-copied in the generated website.
+If your template has assets (CSS, JS, images, …), put them in `website/public`. The content of this directory will be copied in the generated website.
 
 
 ### Preview

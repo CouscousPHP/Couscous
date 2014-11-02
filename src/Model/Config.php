@@ -48,7 +48,7 @@ class Config
     public $templateUrl;
 
     /**
-     * Variables made available in templates.
+     * Variables made available in layouts.
      * @var array
      */
     public $templateVariables = array();

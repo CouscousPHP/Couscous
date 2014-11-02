@@ -26,9 +26,9 @@ Here are some examples of templates:
 
 ## Local templates
 
-Templates are Twig templates, and should all in the root of the `website` directory (or whatever you named it).
+Templates contain Twig layouts and assets (javascripts, css…). They should be inside `website` directory (or whatever you named it).
 
-The default template that is used for rendering the pages is `default.twig`.
+The default Twig layout that is used for rendering the pages is named `default.twig`.
 
 Example of a `default.twig`:
 
@@ -48,7 +48,7 @@ Example of a `default.twig`:
 </html>
 ```
 
-If, for example, you want your home page to have a different template, you can write a `home.twig`
+If, for example, you want your home page to have a different layout, you can write a `home.twig`
 that overrides `default.twig`:
 
 ```html
@@ -61,11 +61,11 @@ that overrides `default.twig`:
 {% endblock %}
 ```
 
-You can set your `README.md` (i.e. your home page) to use that template using YAML Front matter in the Markdown file:
+You can set your `README.md` (i.e. your home page) to use that layout using YAML Front matter in the Markdown file:
 
 ```markdown
 ---
-template: home
+layout: home
 ---
 This is my documentation.
 
@@ -80,7 +80,7 @@ Example:
 
 ```markdown
 ---
-template: home
+layout: home
 myVar: true
 myOtherVar: "Some string"
 ---
@@ -93,7 +93,7 @@ This is my documentation.
 To ensure all your links are working correctly, you should define a `baseUrl` in `configuration.yml`
 (see [the configuration documentation](configuration.md)).
 
-Then you can use it in the templates:
+Then you can use it in the layouts:
 
 ```html
 <!DOCTYPE html>

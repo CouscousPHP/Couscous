@@ -12,13 +12,13 @@ use Twig_Environment;
 use Twig_Loader_Array;
 
 /**
- * Renders a template using Twig.
+ * Renders file layouts using Twig.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ProcessTwigTemplates implements StepInterface
+class ProcessTwigLayouts implements StepInterface
 {
-    const DEFAULT_TEMPLATE_NAME = 'default.twig';
+    const DEFAULT_LAYOUT_NAME = 'default.twig';
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
@@ -32,24 +32,24 @@ class ProcessTwigTemplates implements StepInterface
         $htmlFiles = $repository->findFilesByType('Couscous\Model\HtmlFile');
 
         foreach ($htmlFiles as $file) {
-            $template = isset($file->customVariables['template'])
-                ? $file->customVariables['template'] . '.twig'
-                : self::DEFAULT_TEMPLATE_NAME;
+            $layout = isset($file->customVariables['layout'])
+                ? $file->customVariables['layout'] . '.twig'
+                : self::DEFAULT_LAYOUT_NAME;
 
             $context = array_merge(
-                $repository->template->templateVariables,
+                $repository->template->layoutVariables,
                 $repository->config->templateVariables,
                 $file->customVariables,
                 array('content' => $file->content)
             );
 
             try {
-                $file->content = $twig->render($template, $context);
+                $file->content = $twig->render($layout, $context);
             } catch (\Exception $e) {
                 throw new \RuntimeException(sprintf(
-                    'There was an error while rendering the file "%s" with the template "%s": %s',
+                    'There was an error while rendering the file "%s" with the layout "%s": %s',
                     $file->relativeFilename,
-                    $template,
+                    $layout,
                     $e->getMessage()
                 ), 0, $e);
             }
@@ -81,13 +81,13 @@ class ProcessTwigTemplates implements StepInterface
             ->in($templateDirectory)
             ->name('*.twig');
 
-        $templates = array();
+        $layouts = array();
         foreach ($finder as $file) {
             /** @var SplFileInfo $file */
             $name = $file->getFilename();
-            $templates[$name] = $file->getContents();
+            $layouts[$name] = $file->getContents();
         }
 
-        return new Twig_Loader_Array($templates);
+        return new Twig_Loader_Array($layouts);
     }
 }

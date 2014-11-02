@@ -1,3 +1,3 @@
 ---
-template: empty
+layout: empty
 ---
