@@ -13,3 +13,16 @@ Here are a few rules to follow in order to ease code reviews and merging:
 One may ask you to [squash your commits](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html) too. This is used to "clean" your pull request before merging it (we don't want commits such as `fix tests`, `fix 2`, `fix 3`, etc.).
 
 When creating your pull request on GitHub, please write a description which gives the context and/or explains why you are creating it.
+
+## Building the phar
+
+To generate the phar yourself, you need to allow Phar generation in your `php.ini` ([`phar.readonly = Off`](http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly)).
+
+The procedure is then quite simple, check out the repository and:
+
+```
+$ composer update
+$ bin/compile
+```
+
+The phar is generated as `bin/couscous.phar`.
