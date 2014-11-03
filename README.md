@@ -10,11 +10,15 @@ Read more about Couscous and its documentation on [the website](http://mnapoli.f
 
 ## Why?
 
-Couscous is different from Sculpin or Phrozn. They are generic static websites generator, at best targeted for blogs, and using them to put documentation online is clunky.
+Couscous is different from [Sculpin](https://sculpin.io/) or [Phrozn](http://phrozn.info/). They are generic static websites generator, at best targeted for blogs, and using them to put documentation online is clunky.
 
 Couscous lets you get started with *no requirements* and a single command. And deploy without prior configuration with one command too.
 
 So if you want to put a blog online, use Sculpin! If you want documentation, use Couscous!
+
+## Usage
+
+Everything is documented on [the website](http://mnapoli.fr/Couscous/).
 
 ## How Couscous works?
 
