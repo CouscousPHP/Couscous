@@ -3,13 +3,15 @@ directory: website
 exclude:
   - vendor
   - bin
+  - tests
 
 before:
   - bin/compile
-  - cp bin/couscous.phar website/public/
+  - cp bin/couscous.phar website/
+  - lessc --clean-css website/less/main.less website/css/all.min.css
 
 after:
-  - rm website/public/couscous.phar
+  - rm website/couscous.phar
 
 template:
     baseUrl: http://mnapoli.fr/Couscous

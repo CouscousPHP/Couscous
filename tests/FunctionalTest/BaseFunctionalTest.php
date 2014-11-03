@@ -1,6 +1,6 @@
 <?php
 
-namespace Piwik\Tests\FunctionalTest;
+namespace Couscous\Tests\FunctionalTest;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -31,9 +31,11 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(0, $return, implode(PHP_EOL, $output));
 
         $fixtureDir = __DIR__ . '/fixtures/' . $fixtureName;
+        $expectedDir = $fixtureDir . '/expected';
 
+        // Check against expected files
         $finder = new Finder();
-        $finder->files()->in($fixtureDir . '/expected');
+        $finder->files()->in($expectedDir);
         foreach ($finder as $file) {
             /** @var SplFileInfo $file */
             $generatedFile = $this->generatedDirectory . '/' . $file->getRelativePathname();
@@ -43,6 +45,19 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
                 $generatedFile,
                 sprintf("The generated file doesn't equals the expected file: %s", $file->getRelativePathname())
             );
+        }
+
+        // Check that there is no additional file generated that wasn't expected
+        $finder = new Finder();
+        $finder->files()->in($this->generatedDirectory);
+        foreach ($finder as $file) {
+            /** @var SplFileInfo $file */
+            $expectedFile = $expectedDir . '/' . $file->getRelativePathname();
+            $message = sprintf(
+                "The file %s was generated but wasn't expected",
+                $file->getRelativePathname()
+            );
+            $this->assertFileExists($expectedFile, $message);
         }
     }
 
@@ -61,7 +76,7 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
         $targetDirectory = __DIR__ . '/generated';
 
         return sprintf(
-            '%s generate --target="%s" %s 2>&1',
+            '%s generate -v --target="%s" %s 2>&1',
             $bin,
             $targetDirectory,
             $fixtureName

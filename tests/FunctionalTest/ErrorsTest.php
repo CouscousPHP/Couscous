@@ -1,11 +1,11 @@
 <?php
 
-namespace Piwik\Tests\FunctionalTest;
+namespace Couscous\Tests\FunctionalTest;
 
 class ErrorsTest extends BaseFunctionalTest
 {
-    public function testTemplateNeeded()
+    public function testMissingTemplate()
     {
-        $this->assertGenerationError('no-template', "The template directory doesn't exist:");
+        $this->assertGenerationError('missing-layout-file', 'Template "home.twig" is not defined.');
     }
 }

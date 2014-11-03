@@ -3,5 +3,5 @@ composer.phar
 composer.lock
 .couscous/
 bin/couscous.phar
-website/public/couscous.phar
 tests/FunctionalTest/generated/
+theme/

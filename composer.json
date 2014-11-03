@@ -17,14 +17,16 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/console": "~2.4",
-        "twig/twig": "~1.0",
         "symfony/filesystem": "~2.4",
         "symfony/finder": "~2.4",
         "symfony/process": "~2.4",
         "symfony/yaml": "~2.4",
+        "twig/twig": "~1.0",
         "erusev/parsedown": "~0.8",
         "phine/phar": "~1.0",
-        "mnapoli/front-yaml": "~1.0"
+        "mnapoli/front-yaml": "~1.0",
+        "mnapoli/php-di": "~4.4",
+        "beelab/bowerphp": "0.1.*@alpha"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3"

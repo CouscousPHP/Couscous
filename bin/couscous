@@ -6,11 +6,7 @@
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
 
-use Couscous\CLI\ClearCommand;
-use Couscous\CLI\DeployCommand;
-use Couscous\CLI\GenerateCommand;
-use Couscous\CLI\InitCommand;
-use Couscous\CLI\PreviewCommand;
+use Couscous\ContainerFactory;
 use Symfony\Component\Console\Application;
 
 if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
@@ -19,12 +15,15 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require_once __DIR__ . '/../../../autoload.php';
 }
 
-$application = new Application('Couscous', '0.3.0');
+$factory = new ContainerFactory();
+$container = $factory->createContainer();
 
-$application->add(new InitCommand);
-$application->add(new GenerateCommand);
-$application->add(new PreviewCommand());
-$application->add(new DeployCommand());
-$application->add(new ClearCommand());
+$application = new Application('Couscous', '1.0.0');
+
+$application->add($container->get('Couscous\Command\InitCommand'));
+$application->add($container->get('Couscous\Command\GenerateCommand'));
+$application->add($container->get('Couscous\Command\PreviewCommand'));
+$application->add($container->get('Couscous\Command\DeployCommand'));
+$application->add($container->get('Couscous\Command\ClearCommand'));
 
 $application->run();
