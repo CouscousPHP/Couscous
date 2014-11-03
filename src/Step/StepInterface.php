@@ -16,7 +16,7 @@ interface StepInterface
      * Process the given repository.
      *
      * @param Repository      $repository
-     * @param OutputInterface $output
+     * @param OutputInterface $output     Output for the user.
      */
     public function __invoke(Repository $repository, OutputInterface $output);
 }
