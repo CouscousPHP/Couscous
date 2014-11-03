@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Couscous! Put your documentation in a website!</title>
     <meta name="description" content="Couscous! Put your documentation in a website!">
 
-    <link href="http://mnapoli.fr/Couscous/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://mnapoli.fr/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
-    <link href="http://mnapoli.fr/Couscous/css/theme.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
 </head>
 
-<body>
+<body class="">
 
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div id="menu" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a href="http://mnapoli.fr/Couscous/" class="navbar-brand">Couscous</a>
@@ -24,10 +36,15 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://mnapoli.fr/Couscous/">Home</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/getting-started.html">Getting started</a></li>
                     <li><a href="http://mnapoli.fr/Couscous/docs/">Documentation</a></li>
-                    <li><a href="https://github.com/mnapoli/Couscous">GitHub</a></li>
+                    <li>
+                        <a href="https://github.com/mnapoli/Couscous">
+                            <i class="fa fa-github"></i> GitHub
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -39,43 +56,47 @@
                 <h1>Documentation</h1>
 <p>This is the documentation root. Here are some articles to help you:</p>
 <ul>
+<li><a href="getting-started.html">Getting started</a></li>
 <li><a href="configuration.html">Configuration using <code>couscous.yml</code></a></li>
 <li><a href="templates.html">Writing templates</a></li>
 <li><a href="faq.html">FAQ</a></li>
-<li><a href="contributing.html">Contributing</a></li>
+<li><a href="../CONTRIBUTING.html">Contributing</a></li>
+<li><a href="../CHANGELOG.html">Change log</a></li>
 </ul>
             </section>
         </div>
 
     
-    <script src="http://mnapoli.fr/Couscous/js/jquery-1.10.2.min.js"></script>
-    <script src="http://mnapoli.fr/Couscous/js/bootstrap.min.js"></script>
-    <script src="http://mnapoli.fr/Couscous/google-code-prettify/prettify.js"></script>
 
-    <script>
-        $(function() {
-            $("section h1").wrap('<div class="page-header" />');
-            $("section p:first-child").addClass('lead');
-            $("pre").addClass('prettyprint');
-            prettyPrint();
-        });
-    </script>
+    
+        <script src="http://mnapoli.fr/Couscous/bower_components/jquery/jquery.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.js"></script>
 
-    <!-- Piwik -->
-    <script type="text/javascript">
-        var _paq = _paq || [];
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-            var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
-            _paq.push(['setTrackerUrl', u+'piwik.php']);
-            _paq.push(['setSiteId', 2]);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
-            g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-    </script>
-    <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
-    <!-- End Piwik Code -->
+        <script>
+            $(function() {
+                $("section h1").wrap('<div class="page-header" />');
+                $("pre").addClass('prettyprint');
+                prettyPrint();
+            });
+        </script>
 
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', 2]);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+                g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+        <!-- End Piwik Code -->
+
+    
 </body>
 </html>

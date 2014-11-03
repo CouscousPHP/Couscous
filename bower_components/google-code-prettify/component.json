@@ -1,0 +1,6 @@
+{
+	"name": "google-code-prettify",
+	"version": "1.0.0",
+	"main": ["./src/prettify.js", "./styles/sons-of-obsidian.css"],
+	"dependencies": {}
+}

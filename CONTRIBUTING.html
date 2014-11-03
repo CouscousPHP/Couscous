@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Couscous! Put your documentation in a website!</title>
+    <meta name="description" content="Couscous! Put your documentation in a website!">
+
+    <link href="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body class="">
+
+    <div id="menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="http://mnapoli.fr/Couscous/" class="navbar-brand">Couscous</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://mnapoli.fr/Couscous/">Home</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/getting-started.html">Getting started</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/">Documentation</a></li>
+                    <li>
+                        <a href="https://github.com/mnapoli/Couscous">
+                            <i class="fa fa-github"></i> GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="container">
+            <section>
+                <h1>Contributing</h1>
+<p>First of all, <strong>thank you</strong> for contributing!</p>
+<p>Here are a few rules to follow in order to ease code reviews and merging:</p>
+<ul>
+<li>follow <a href="http://www.php-fig.org/psr/1/">PSR-1</a> and <a href="http://www.php-fig.org/psr/2/">PSR-2</a></li>
+<li>run the test suite</li>
+<li>write (or update) unit tests when applicable</li>
+<li>write documentation for new features</li>
+<li>use <a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">commit messages that make sense</a></li>
+</ul>
+<p>One may ask you to <a href="http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html">squash your commits</a> too. This is used to "clean" your pull request before merging it (we don't want commits such as <code>fix tests</code>, <code>fix 2</code>, <code>fix 3</code>, etc.).</p>
+<p>When creating your pull request on GitHub, please write a description which gives the context and/or explains why you are creating it.</p>
+<h2>Building the phar</h2>
+<p>To generate the phar yourself, you need to allow Phar generation in your <code>php.ini</code> (<a href="http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly"><code>phar.readonly = Off</code></a>).</p>
+<p>The procedure is then quite simple, check out the repository and:</p>
+<pre><code>$ composer update
+$ bin/compile</code></pre>
+<p>The phar is generated as <code>bin/couscous.phar</code>.</p>
+            </section>
+        </div>
+
+    
+
+    
+        <script src="http://mnapoli.fr/Couscous/bower_components/jquery/jquery.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.js"></script>
+
+        <script>
+            $(function() {
+                $("section h1").wrap('<div class="page-header" />');
+                $("pre").addClass('prettyprint');
+                prettyPrint();
+            });
+        </script>
+
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', 2]);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+                g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+        <!-- End Piwik Code -->
+
+    
+</body>
+</html>

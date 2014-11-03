@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "fontawesome": "~4.0",
+    "google-code-prettify": "~1.0.0"
+  }
+}

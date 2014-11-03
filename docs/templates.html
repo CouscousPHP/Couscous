@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Couscous! Put your documentation in a website!</title>
     <meta name="description" content="Couscous! Put your documentation in a website!">
 
-    <link href="http://mnapoli.fr/Couscous/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://mnapoli.fr/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
-    <link href="http://mnapoli.fr/Couscous/css/theme.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
 </head>
 
-<body>
+<body class="">
 
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div id="menu" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a href="http://mnapoli.fr/Couscous/" class="navbar-brand">Couscous</a>
@@ -24,10 +36,15 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://mnapoli.fr/Couscous/">Home</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/getting-started.html">Getting started</a></li>
                     <li><a href="http://mnapoli.fr/Couscous/docs/">Documentation</a></li>
-                    <li><a href="https://github.com/mnapoli/Couscous">GitHub</a></li>
+                    <li>
+                        <a href="https://github.com/mnapoli/Couscous">
+                            <i class="fa fa-github"></i> GitHub
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -44,18 +61,17 @@ It allows many project to reuse the same template.</p>
 Then publish that directory on GitHub (for example).</p>
 <p>Layout example:</p>
 <pre><code>my-template/
-    public/
-        style.css
-    page.twig
+    style.css
+    default.twig
     README.md # explain how to install your template</code></pre>
 <p>Here are some examples of templates:</p>
 <ul>
 <li><a href="https://github.com/myclabs/couscous-template">MyCLabs template</a></li>
 </ul>
 <h2>Local templates</h2>
-<p>Templates are Twig templates, and should all in the root of the <code>website</code> directory (or whatever you named it).</p>
-<p>The default template that is used for rendering the pages is in <code>page.twig</code>.</p>
-<p>Example of a <code>page.twig</code>:</p>
+<p>Templates contain Twig layouts and assets (javascripts, css…). They should be inside <code>website</code> directory (or whatever you named it).</p>
+<p>The default Twig layout that is used for rendering the pages is named <code>default.twig</code>.</p>
+<p>Example of a <code>default.twig</code>:</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
     &lt;head&gt;
@@ -69,18 +85,18 @@ Then publish that directory on GitHub (for example).</p>
         {% endblock %}
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-<p>If, for example, you want your home page to have a different template, you can write a <code>home.twig</code>
-that overrides <code>page.twig</code>:</p>
-<pre><code class="language-html">{% extends "page.twig" %}
+<p>If, for example, you want your home page to have a different layout, you can write a <code>home.twig</code>
+that overrides <code>default.twig</code>:</p>
+<pre><code class="language-html">{% extends "default.twig" %}
 
 {% block content %}
     &lt;h1&gt;This is the home page!&lt;/h1&gt;
 
     {{ content|raw }}
 {% endblock %}</code></pre>
-<p>You can set your <code>README.md</code> (i.e. your home page) to use that template using YAML Front matter in the Markdown file:</p>
+<p>You can set your <code>README.md</code> (i.e. your home page) to use that layout using YAML Front matter in the Markdown file:</p>
 <pre><code class="language-markdown">---
-template: home
+layout: home
 ---
 This is my documentation.
 
@@ -90,7 +106,7 @@ This is a *sub-chapter*.</code></pre>
 <p><strong>Good to know: any variable you put in the YAML Front matter is accessible in the view.</strong></p>
 <p>Example:</p>
 <pre><code class="language-markdown">---
-template: home
+layout: home
 myVar: true
 myOtherVar: "Some string"
 ---
@@ -98,7 +114,7 @@ This is my documentation.</code></pre>
 <h2>Links</h2>
 <p>To ensure all your links are working correctly, you should define a <code>baseUrl</code> in <code>configuration.yml</code>
 (see <a href="configuration.html">the configuration documentation</a>).</p>
-<p>Then you can use it in the templates:</p>
+<p>Then you can use it in the layouts:</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;body&gt;
@@ -118,38 +134,45 @@ This is my documentation.</code></pre>
 &lt;/html&gt;</code></pre>
 <p>All your Markdown links should be rewritten and work. However, make sure you write relative links.
 A good rule of thumb is: if it works on GitHub.com, it will work with Couscous.</p>
+<h2>Bower</h2>
+<p>If a <code>bower.json</code> file is present in the <code>website/</code> directory, dependencies will be
+installed automatically.</p>
+<p>You don't need to have Bower installed on your machine, Couscous internally uses
+<a href="http://bowerphp.org/">BowerPHP</a>.</p>
             </section>
         </div>
 
     
-    <script src="http://mnapoli.fr/Couscous/js/jquery-1.10.2.min.js"></script>
-    <script src="http://mnapoli.fr/Couscous/js/bootstrap.min.js"></script>
-    <script src="http://mnapoli.fr/Couscous/google-code-prettify/prettify.js"></script>
 
-    <script>
-        $(function() {
-            $("section h1").wrap('<div class="page-header" />');
-            $("section p:first-child").addClass('lead');
-            $("pre").addClass('prettyprint');
-            prettyPrint();
-        });
-    </script>
+    
+        <script src="http://mnapoli.fr/Couscous/bower_components/jquery/jquery.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.js"></script>
 
-    <!-- Piwik -->
-    <script type="text/javascript">
-        var _paq = _paq || [];
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-            var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
-            _paq.push(['setTrackerUrl', u+'piwik.php']);
-            _paq.push(['setSiteId', 2]);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
-            g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-    </script>
-    <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
-    <!-- End Piwik Code -->
+        <script>
+            $(function() {
+                $("section h1").wrap('<div class="page-header" />');
+                $("pre").addClass('prettyprint');
+                prettyPrint();
+            });
+        </script>
 
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', 2]);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+                g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+        <!-- End Piwik Code -->
+
+    
 </body>
 </html>

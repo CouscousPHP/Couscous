@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Couscous! Put your documentation in a website!</title>
     <meta name="description" content="Couscous! Put your documentation in a website!">
 
-    <link href="http://mnapoli.fr/Couscous/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://mnapoli.fr/Couscous/google-code-prettify/prettify.css" rel="stylesheet">
-    <link href="http://mnapoli.fr/Couscous/css/theme.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
 </head>
 
-<body>
+<body class="home">
 
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div id="menu" class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a href="http://mnapoli.fr/Couscous/" class="navbar-brand">Couscous</a>
@@ -24,180 +36,184 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://mnapoli.fr/Couscous/">Home</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/getting-started.html">Getting started</a></li>
                     <li><a href="http://mnapoli.fr/Couscous/docs/">Documentation</a></li>
-                    <li><a href="https://github.com/mnapoli/Couscous">GitHub</a></li>
+                    <li>
+                        <a href="https://github.com/mnapoli/Couscous">
+                            <i class="fa fa-github"></i> GitHub
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 
+    
+    <header>
         <div class="container">
-        <div class="jumbotron">
-            <h1>This is Couscous!</h1>
-            <p>
-                Couscous is good.
-            </p>
+            <div class="intro-text">
+                <div class="intro-lead-in">This is Couscous</div>
+                <div class="intro-heading">Couscous is good.</div>
+                <a href="#wat" class="page-scroll btn btn-xl">What?</a>
+            </div>
         </div>
+    </header>
 
-        <section>
-            <p>Couscous generates a website (for <a href="http://pages.github.com/">Github pages</a>) from your markdown documentation.</p>
-<h2>Introduction</h2>
-<p><a href="http://pages.github.com/">Github pages</a> are good, but what do you do:</p>
-<ul>
-<li>if you want to write your documentation in <strong>Markdown</strong> and not in HTML?</li>
-<li>if you want your documentation to be transformed into a <strong>website</strong>?</li>
-<li>if you want to <strong>keep the documentation with your code</strong>, versioned in the repository?</li>
-</ul>
-<p>Couscous is here to help you. <strong>Your documentation is written in Markdown,
-versioned in your repository with your source, compiled to HTML and published to <em>Github pages</em>.</strong></p>
-<h2>How does it work</h2>
-<ol>
-<li>you write your README and documentation in <code>.md</code> files (Markdown) on your repository</li>
-<li>you generate you website with <em>Couscous</em>
-<ul>
-<li>it turns <code>.md</code> files into HTML files</li>
-<li>HTML files are committed to the <code>gh-pages</code> branch of your repository, and thus are published as a website by Github</li>
-</ul>
-</li>
-<li>profit!</li>
-</ol>
-<h2>Getting started</h2>
-<h3>Installation</h3>
-<h4>Composer</h4>
-<p>If you have already <a href="http://akrabat.com/php/global-installation-of-php-tools-with-composer/">set up a global install of Composer (with your PATH)</a>,
-you can install Couscous through it:</p>
-<pre><code>composer global require 'mnapoli/couscous=*'</code></pre>
-<p>If you haven't, you can download the PHAR (see below).</p>
-<h4>Downloading</h4>
-<p>You can <a href="http://mnapoli.fr/Couscous/couscous.phar">download it manually</a> or install it through CLI:</p>
-<pre><code class="language-bash"># Download couscous.phar
-curl -OS http://mnapoli.fr/Couscous/couscous.phar
-
-# Move it to /usr/local/bin
-chmod +x couscous.phar
-sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
-<p>If you don't want to install it globally, you can also just download the phar in the current directory
-and later run it with <code>php couscous.phar</code> instead of just <code>couscous</code>.</p>
-<h3>Init</h3>
-<p>You have two options to start using Couscous:</p>
-<ul>
-<li>automatically init the project with default files</li>
-<li>write the files yourself</li>
-</ul>
-<p>To init your project automatically, just run:</p>
-<pre><code class="language-bash">couscous init</code></pre>
-<p>The next sections explain how to create the files manually (and customize them).
-You can read them now or jump to the "Preview" section and read them later.</p>
-<h3>Configuration</h3>
-<p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
-<p>Simple example:</p>
-<pre><code class="language-yaml">template:
-    baseUrl: http://mnapoli.github.io/Couscous</code></pre>
-<p>That configuration file is optional. See the <a href="docs/configuration.html">complete reference</a> for more information.</p>
-<h3>Website template</h3>
-<p>Couscous will take every <code>*.md</code> file it finds in your repository and convert it to <code>.html</code> files, keeping the same directory structure
-(<code>README.md</code> files a renamed to <code>index.html</code>).</p>
-<p>In order to have those HTML files look like real web pages, you need to write a <em>template</em> for these pages.
-Templates are written with Twig, and are extremely easy to write.</p>
-<p>Templates can be:</p>
-<ul>
-<li>in your repository (the default directory is <code>website/</code>)</li>
-<li>in a remote repository (which allow to reuse templates)</li>
-</ul>
-<p>As a quickstart, you can create a template locally. Here is the default directory layout you should create:</p>
-<pre><code>your-repository/
-    couscous.yml
-    website/
-        public/
-        page.twig</code></pre>
-<p>Basic example (<code>website/page.twig</code>):</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-    &lt;head&gt;
-        &lt;title&gt;My project!&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        {{ content|raw }}
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p>Variables available in the template are:</p>
-<ul>
-<li><code>content</code>: Markdown turned to HTML. Make sur to echo it with <code>{{ content|raw }}</code> else the HTML will be escaped.</li>
-<li><code>baseUrl</code>: Base URL, if defined in <code>couscous.yml</code>. When previewing with <code>couscous preview</code>, the base URL will always be <code>http://localhost:8000</code>. Useful for writing links.</li>
-</ul>
-<p>You can write different templates (for example to make the home page different).
-For this, read the <a href="docs/templates.html">template documentation</a>.</p>
-<p>If your template has assets (CSS, JS, images, …), put them in <code>website/public</code>. The content of this directory will be
-copied in the generated website.</p>
-<h3>Preview</h3>
-<pre><code class="language-bash">$ couscous preview</code></pre>
-<p>This command will generate the website (in a temp directory) and starts a
-webserver so that you can preview the website at <a href="http://localhost:8000"><a href="http://localhost:8000">http://localhost:8000</a></a>.
-If Markdown files are changed, the website will be regenerated.</p>
-<p><strong>This command will not modify your repository.</strong></p>
-<h3>Deployment</h3>
-<pre><code class="language-bash">$ couscous deploy</code></pre>
-<p>This command will generate the website (in a temp directory) and publish it in the <code>gh-pages</code> branch of your git repository.
-This will remove everything that exists in the <code>gh-pages</code> branch, commit in your name, and <strong>push</strong> to GitHub.</p>
-<p><strong>The <code>gh-pages</code> branch must already exist.</strong> You can use the official
-<a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator#the-automatic-page-generator">Automatic Page Generator</a>
-to create it or you can create it manually:</p>
-<pre><code class="language-bash">git branch gh-pages
-git push -u origin gh-pages</code></pre>
-<p>The <code>deploy</code> command will not change anything in your current branch (e.g. master branch).
-It will only affect the <code>gh-pages</code> branch.</p>
-<h2>Built using Couscous</h2>
-<p>Here are examples of website built using Couscous:</p>
-<ul>
-<li><a href="http://mnapoli.fr/Couscous/">Couscous</a> itself (of course)</li>
-<li><a href="http://php-di.org">PHP-DI</a></li>
-<li><a href="http://myclabs.github.io/ACL/">MyCLabs\ACL</a></li>
-</ul>
-<p>Add your own to the list with a pull request.</p>
-<h2>Read more</h2>
-<ul>
-<li><a href="docs/">Documentation</a></li>
-<li><a href="docs/contributing.html">Building the phar</a></li>
-</ul>
-        </section>
-    </div>
-
-    <footer>
+    <section id="wat">
         <div class="container">
-            <p class="text-muted">This website was generated using Couscous (obviously…)</p>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Put your documentation online</h2>
+                    <h3 class="section-subheading text-muted">
+                        Couscous turn Markdown documentation into beautiful websites.
+                        It's <a href="https://pages.github.com/">GitHub Pages</a> on steroid.
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <h4>
+                                    <br/>
+                                    README.md
+                                </h4>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Step 1</h4>
+                                    <h4 class="subheading">Write documentation</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">
+                                        Write your documentation in Markdown inside your repository,
+                                        versioned with your code. Couscous will turn those Markdown
+                                        files to HTML.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/timeline/laptop.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Step 2</h4>
+                                    <h4 class="subheading">Preview</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">
+                                        <code>couscous preview</code> will render the website
+                                        on your machine. Tweak the default template, fix some typos
+                                        and the changes will be reflected in real time.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/timeline/deploy.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Step 3</h4>
+                                    <h4 class="subheading">Publish</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">
+                                        <code>couscous deploy</code> will publish your website
+                                        on the <em>gh-pages</em> Git branch. GitHub will automatically
+                                        put it online and host it for you.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/timeline/profit.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Step 4</h4>
+                                    <h4 class="subheading">Profit</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">
+                                        Your website is online, just sit back and relax.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <script src="http://mnapoli.fr/Couscous/js/jquery-1.10.2.min.js"></script>
-    <script src="http://mnapoli.fr/Couscous/js/bootstrap.min.js"></script>
-    <script src="http://mnapoli.fr/Couscous/google-code-prettify/prettify.js"></script>
+    <section id="wat">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Curious?</h2>
 
-    <script>
-        $(function() {
-            $("section h1").wrap('<div class="page-header" />');
-            $("section p:first-child").addClass('lead');
-            $("pre").addClass('prettyprint');
-            prettyPrint();
-        });
-    </script>
+                    <h3 class="section-subheading text-muted">
+                        Try it out in one of your project.
+                    </h3>
 
-    <!-- Piwik -->
-    <script type="text/javascript">
-        var _paq = _paq || [];
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function() {
-            var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
-            _paq.push(['setTrackerUrl', u+'piwik.php']);
-            _paq.push(['setSiteId', 2]);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
-            g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-    </script>
-    <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
-    <!-- End Piwik Code -->
+                    <p>
+                        <code>curl -OS http://mnapoli.fr/Couscous/couscous.phar</code>
+                    </p>
+                    <p>
+                        <code>php couscous.phar preview</code>.
+                    </p>
+                    <p>
+                        The website should be running at
+                        <a href="http://localhost:8000/">http://localhost:8000/</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+        
+        <script src="http://mnapoli.fr/Couscous/bower_components/jquery/jquery.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.js"></script>
+
+        <script>
+            $(function() {
+                $("section h1").wrap('<div class="page-header" />');
+                $("pre").addClass('prettyprint');
+                prettyPrint();
+            });
+        </script>
+
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', 2]);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+                g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+        <!-- End Piwik Code -->
+
+    
+
+    <script src="http://mnapoli.fr/Couscous/js/classie.js"></script>
+    <script src="http://mnapoli.fr/Couscous/js/animated-menu.js"></script>
 
 </body>
 </html>

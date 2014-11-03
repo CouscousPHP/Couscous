@@ -1,0 +1,92 @@
+// Custom Navigation Bar
+
+.navbar-default {
+  background-color: @gray-darkest;
+  border-color: transparent;
+  .navbar-brand {
+    color: @brand-primary;
+    .script-font;
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: darken(@brand-primary, 10%);
+    }
+  }
+  .navbar-collapse {
+    border-color: fade(white, 2%);
+  }
+  .navbar-toggle {
+    background-color: @brand-primary;
+    border-color: @brand-primary;
+    .icon-bar {
+      background-color: white;
+    }
+    &:hover,
+    &:focus {
+      background-color: @brand-primary;
+    }
+  }
+  .nav {
+    li {
+      a {
+        .heading-font;
+        text-transform: uppercase;
+        font-weight: 400;
+        letter-spacing: 1px;
+        color: white;
+        &:hover,
+        &:focus {
+          color: @brand-primary;
+          outline: none;
+        }
+      }
+    }
+  }
+  .navbar-nav>.active>a {
+    border-radius: 0;
+    color: white;
+    background-color: @brand-primary;
+  }
+  .navbar-nav>.active>a:hover,
+  .navbar-nav>.active>a:focus {
+    color: white;
+    background-color: darken(@brand-primary, 10%);
+  }
+}
+
+@media(min-width:768px) {
+  .home {
+    .navbar-default {
+      background-color: transparent;
+      padding: 25px 0;
+      -webkit-transition: padding 0.3s;
+      -moz-transition: padding 0.3s;
+      transition: padding 0.3s;
+      border: none;
+      .navbar-brand {
+        font-size: 2em;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+      .navbar-nav>.active>a {
+        border-radius: 3px;
+      }
+    }
+    .navbar-default.navbar-shrink {
+      background-color: @gray-darkest;
+      padding: 10px 0;
+      .navbar-brand {
+        font-size: 1.5em;
+      }
+    }
+  }
+  .navbar-default {
+    background-color: @gray-darkest;
+    padding: 10px 0;
+    .navbar-brand {
+      font-size: 1.5em;
+    }
+  }
+}

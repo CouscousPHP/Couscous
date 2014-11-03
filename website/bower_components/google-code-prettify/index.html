@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Couscous! Put your documentation in a website!</title>
+    <meta name="description" content="Couscous! Put your documentation in a website!">
+
+    <link href="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://mnapoli.fr/Couscous/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body class="">
+
+    <div id="menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="http://mnapoli.fr/Couscous/" class="navbar-brand">Couscous</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://mnapoli.fr/Couscous/">Home</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/getting-started.html">Getting started</a></li>
+                    <li><a href="http://mnapoli.fr/Couscous/docs/">Documentation</a></li>
+                    <li>
+                        <a href="https://github.com/mnapoli/Couscous">
+                            <i class="fa fa-github"></i> GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="container">
+            <section>
+                <h1>Google Code Prettify</h1>
+<p>Direct port of svn into git from <a href="http://google-code-prettify.googlecode.com/svn/trunk/">http://google-code-prettify.googlecode.com/svn/trunk/</a></p>
+<h2>Install</h2>
+<p>via <a href="http://twitter.github.com/bower/">Bower</a></p>
+<pre><code>bower install google-code-prettify</code></pre>
+<p>or <a href="http://yeoman.io/">Yeoman</a></p>
+<pre><code>yeoman install google-code-prettify</code></pre>
+<h2>Usage</h2>
+<p>The prettify script is AMD compatible and can be used modularly. Here is an example of it using RequireJS:</p>
+<pre><code class="language-javascript">    define(['jquery', 'prettify'], function($, prettify){
+        var code = null;
+        $('pre').addClass('prettyprint').each(function(idx, el){
+                code = el.firstChild;
+                code.innerHTML = prettify.prettyPrintOne(code.innerHTML);
+            })
+        );
+    });</code></pre>
+<p>Or it may just be used in a global context like the following:</p>
+<pre><code class="language-javascript">    (function(){
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    })();</code></pre>
+<p>More information can be found in the original <a href="http://google-code-prettify.googlecode.com/svn/trunk/README.html">README.html</a></p>
+            </section>
+        </div>
+
+    
+
+    
+        <script src="http://mnapoli.fr/Couscous/bower_components/jquery/jquery.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://mnapoli.fr/Couscous/bower_components/google-code-prettify/src/prettify.js"></script>
+
+        <script>
+            $(function() {
+                $("section h1").wrap('<div class="page-header" />');
+                $("pre").addClass('prettyprint');
+                prettyPrint();
+            });
+        </script>
+
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', 2]);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+                g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+        <!-- End Piwik Code -->
+
+    
+</body>
+</html>
