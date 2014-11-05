@@ -15,6 +15,7 @@ Major new features:
 Minor new features:
 
 - The preview command will show the name of the files that have changed when regenerating
+- You don't need to create the `gh-pages` branch if it doesn't exist
 
 Bugfixes
 
