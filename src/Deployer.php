@@ -74,7 +74,7 @@ class Deployer
     {
         $output->writeln("Checking out branch <info>$branch</info>");
 
-        exec("cd '$tmpDirectory' && git checkout -b $branch origin/$branch 2>&1", $cmdOutput, $returnValue);
+        exec("cd '$tmpDirectory' && git checkout -b $branch 2>&1", $cmdOutput, $returnValue);
         if ($returnValue !== 0) {
             throw new \RuntimeException(
                 "Does the branch '$branch' exist?" . PHP_EOL . implode(PHP_EOL, $cmdOutput)
