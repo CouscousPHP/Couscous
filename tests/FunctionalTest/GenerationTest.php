@@ -9,11 +9,6 @@ class GenerationTest extends BaseFunctionalTest
         $this->assertGeneratedWebsite('basic');
     }
 
-    public function testDefaultTemplate()
-    {
-        $this->assertGeneratedWebsite('default-template');
-    }
-
     public function testMissingPublicDirectory()
     {
         $this->assertGeneratedWebsite('missing-public-directory');

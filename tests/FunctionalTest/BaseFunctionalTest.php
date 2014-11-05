@@ -30,7 +30,7 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(0, $return, implode(PHP_EOL, $output));
 
-        $fixtureDir = __DIR__ . '/fixtures/' . $fixtureName;
+        $fixtureDir = __DIR__ . '/Fixture/' . $fixtureName;
         $expectedDir = $fixtureDir . '/expected';
 
         // Check against expected files
@@ -72,7 +72,7 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
     private function createCommand($fixtureName)
     {
         $bin = realpath(__DIR__ . '/../../bin/couscous');
-        $fixtureName = __DIR__ . '/fixtures/' . $fixtureName . '/source';
+        $fixtureName = __DIR__ . '/Fixture/' . $fixtureName . '/source';
         $targetDirectory = __DIR__ . '/generated';
 
         return sprintf(
