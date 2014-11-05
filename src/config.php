@@ -9,6 +9,7 @@ return array(
         'Couscous\Step\LoadConfig',
         'Couscous\Step\OverrideBaseUrl',
         'Couscous\Step\ExecuteBeforeScripts',
+        'Couscous\Step\Template\UseDefaultTemplate',
         'Couscous\Step\Template\InitTemplate',
         'Couscous\Step\Assets\RunBowerInstall',
         'Couscous\Step\Template\LoadAssets',

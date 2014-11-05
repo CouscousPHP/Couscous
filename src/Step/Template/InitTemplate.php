@@ -53,8 +53,10 @@ class InitTemplate implements StepInterface
             $templateDirectory = $repository->sourceDirectory . '/' . self::DEFAULT_TEMPLATE_DIRECTORY;
 
             if (! $this->filesystem->exists($templateDirectory)) {
-                $this->useDefaultTemplate($repository);
-                return;
+                throw new \RuntimeException(sprintf(
+                    'The template directory %s does not exist',
+                    $templateDirectory
+                ));
             }
         }
 
@@ -74,13 +76,6 @@ class InitTemplate implements StepInterface
         if ($returnValue !== 0) {
             throw new \RuntimeException(implode(PHP_EOL, $gitOutput));
         }
-
-        $repository->template = new Template($templateDirectory);
-    }
-
-    private function useDefaultTemplate(Repository $repository)
-    {
-        $templateDirectory = __DIR__ . '/DefaultTemplate/';
 
         $repository->template = new Template($templateDirectory);
     }
