@@ -10,10 +10,10 @@ $ composer global require mnapoli/couscous
 
 You can also add Couscous as a dependency for a project with `composer require mnapoli/couscous`.
 
-Alternatively, you can download [couscous.phar](http://mnapoli.fr/Couscous/couscous.phar):
+Alternatively, you can download [couscous.phar](http://couscousphp.github.io/Couscous/couscous.phar):
 
 ```bash
-$ curl -OS http://mnapoli.fr/Couscous/couscous.phar
+$ curl -OS http://couscousphp.github.io/Couscous/couscous.phar
 ```
 
 If you want to run `couscous` instead of `php couscous.phar`, move it to `/usr/local/bin`:

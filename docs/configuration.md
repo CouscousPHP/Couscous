@@ -31,5 +31,5 @@ template:
 
     # Base URL of the published website (no "/" at the end!)
     # You are advised to set and use this variable to write your links in the HTML layouts
-    baseUrl: http://mnapoli.github.io/Couscous
+    baseUrl: http://couscousphp.github.io/Couscous
 ```
