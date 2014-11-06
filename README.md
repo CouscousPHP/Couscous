@@ -4,9 +4,9 @@ layout: home
 
 Couscous generates a [GitHub pages](http://pages.github.com/) website from your markdown documentation.
 
-[![Build Status](https://travis-ci.org/mnapoli/Couscous.svg?branch=master)](https://travis-ci.org/mnapoli/Couscous)
+[![Build Status](https://travis-ci.org/CouscousPHP/Couscous.svg?branch=master)](https://travis-ci.org/CouscousPHP/Couscous)
 
-Read more about Couscous and its documentation on [the website](http://mnapoli.fr/Couscous/). This README is targeted at developers.
+Read more about Couscous and its documentation on [the website](http://couscousphp.github.io/Couscous/). This README is targeted at developers.
 
 ## Why?
 
@@ -18,7 +18,7 @@ So if you want to put a blog online, use Sculpin! If you want documentation, use
 
 ## Usage
 
-Everything is documented on [the website](http://mnapoli.fr/Couscous/).
+Everything is documented on [the website](http://couscousphp.github.io/Couscous/).
 
 ## How Couscous works?
 
