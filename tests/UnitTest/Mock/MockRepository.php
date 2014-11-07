@@ -11,7 +11,7 @@ class MockRepository extends Repository
     {
         parent::__construct('', '');
 
-        $this->config = new Config();
+        $this->config    = new Config();
         $this->watchlist = new MockWatchList();
     }
 }

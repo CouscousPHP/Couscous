@@ -62,7 +62,7 @@ class Repository extends \stdClass
     {
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
-        $this->watchlist = new WatchList();
+        $this->watchlist       = new WatchList();
     }
 
     public function addFile(File $file)

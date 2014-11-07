@@ -27,7 +27,7 @@ class Generator
     public function __construct(Filesystem $filesystem, array $steps)
     {
         $this->filesystem = $filesystem;
-        $this->steps = $steps;
+        $this->steps      = $steps;
     }
 
     public function generate(Repository $repository, OutputInterface $output)

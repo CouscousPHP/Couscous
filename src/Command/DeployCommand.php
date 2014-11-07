@@ -36,8 +36,8 @@ class DeployCommand extends Command
 
     public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem)
     {
-        $this->generator = $generator;
-        $this->deployer = $deployer;
+        $this->generator  = $generator;
+        $this->deployer   = $deployer;
         $this->filesystem = $filesystem;
 
         parent::__construct();
@@ -72,8 +72,8 @@ class DeployCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sourceDirectory = $input->getArgument('source');
-        $repositoryUrl = trim(shell_exec('git config --get remote.origin.url'));
-        $targetBranch = $input->getOption('branch');
+        $repositoryUrl   = trim(shell_exec('git config --get remote.origin.url'));
+        $targetBranch    = $input->getOption('branch');
 
         $repository = new Repository($sourceDirectory, getcwd() . '/.couscous/generated');
 

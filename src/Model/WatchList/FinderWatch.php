@@ -18,7 +18,7 @@ class FinderWatch implements WatchInterface
     public function __construct(Finder $finder)
     {
         $this->finder = clone $finder;
-        $this->date = date('Y-m-d H:i:s');
+        $this->date   = date('Y-m-d H:i:s');
     }
 
     public function getChangedFiles()

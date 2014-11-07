@@ -83,6 +83,7 @@ class PreviewCommand extends Command
                 $output->writeln('');
                 $output->write(sprintf('<comment>%d file(s) changed: regenerating</comment>', count($files)));
                 $output->writeln(sprintf(' (%s)', $this->fileListToDisplay($files, $sourceDirectory)));
+
                 $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, true);
             }
 
@@ -115,6 +116,7 @@ class PreviewCommand extends Command
         $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address')));
         $builder->setWorkingDirectory($targetDirectory);
         $builder->setTimeout(null);
+
         $process = $builder->getProcess();
         $process->start();
 

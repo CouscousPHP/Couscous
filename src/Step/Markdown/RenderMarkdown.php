@@ -43,7 +43,7 @@ class RenderMarkdown implements StepInterface
     {
         $document = $this->markdownParser->parse($file->getContent());
 
-        $yaml = $document->getYAML();
+        $yaml      = $document->getYAML();
         $variables = is_array($yaml) ? $yaml : array();
 
         $filename = $this->replaceExtension($file->relativeFilename);

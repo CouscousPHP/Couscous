@@ -34,7 +34,7 @@ class Deployer
     {
         $output->writeln("<comment>Deploying the website</comment>");
 
-        $directory = $repository->targetDirectory;
+        $directory    = $repository->targetDirectory;
         $tmpDirectory = $this->createTempDirectory();
 
         $this->cloneRepository($output, $repositoryUrl, $tmpDirectory);

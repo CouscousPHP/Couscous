@@ -30,7 +30,7 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
 
     public function testNonMarkdownFileNotRenamed()
     {
-        $file = new LazyFile('foo.txt', 'foo.txt');
+        $file       = new LazyFile('foo.txt', 'foo.txt');
         $repository = new Repository('foo', 'bar');
         $repository->addFile($file);
 
@@ -49,7 +49,7 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
 
     private function assertFileRenamed($expected, $filename)
     {
-        $file = new MarkdownFile($filename, '');
+        $file       = new MarkdownFile($filename, '');
         $repository = new Repository('foo', 'bar');
         $repository->addFile($file);
 

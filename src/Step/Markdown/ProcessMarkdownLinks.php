@@ -16,7 +16,7 @@ class ProcessMarkdownLinks implements StepInterface
 {
     // OMG regexes...
     const MARKDOWN_LINK_REGEX = '#\[([^\]]+)\]\(([^\)]+)\.md\)#';
-    const REGEX_REPLACEMENT = '[$1]($2.html)';
+    const REGEX_REPLACEMENT   = '[$1]($2.html)';
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
