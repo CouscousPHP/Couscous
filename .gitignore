@@ -1,7 +1,9 @@
-vendor/*
-composer.phar
-composer.lock
-.couscous/
-bin/couscous.phar
-tests/FunctionalTest/generated/
-theme/
+/vendor/
+/composer.phar
+/composer.lock
+/.couscous/
+/bin/couscous.phar
+/tests/FunctionalTest/generated/
+/theme/
+/Vagrantfile
+/.vagrant
