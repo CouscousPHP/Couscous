@@ -5,7 +5,6 @@ layout: home
 Couscous generates a [GitHub pages](http://pages.github.com/) website from your markdown documentation.
 
 [![Build Status](https://travis-ci.org/CouscousPHP/Couscous.svg?branch=master)](https://travis-ci.org/CouscousPHP/Couscous)
-
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/?branch=master)
 
 Read more about Couscous and its documentation on [the website](http://couscous.io/). This README is targeted at developers.
