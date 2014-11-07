@@ -9,7 +9,10 @@
 use Couscous\ContainerFactory;
 use Symfony\Component\Console\Application;
 
-if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+// Phar
+if (isset($include)) {
+    require_once $include . '/vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require_once __DIR__ . '/../vendor/autoload.php';
 } else {
     require_once __DIR__ . '/../../../autoload.php';

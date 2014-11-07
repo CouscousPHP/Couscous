@@ -48,11 +48,6 @@ $builder->addFile("$couscousDir/LICENSE", 'LICENSE');
 $source = file_get_contents("$couscousDir/bin/couscous");
 $source = preg_replace('{^#!/usr/bin/env php\s*}', '', $source);
 $source = str_replace('<?php', '', $source);
-$source = str_replace(
-    "require_once __DIR__ . '/../vendor/autoload.php';",
-    "require_once \$include . '/vendor/autoload.php';",
-     $source
-);
 
 $builder->setStub(
     Stub::create()
