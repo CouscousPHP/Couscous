@@ -21,7 +21,7 @@ class ClearCommand extends Command
      */
     private $filesystem;
 
-    public function __construct(Filesystem$filesystem)
+    public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
 

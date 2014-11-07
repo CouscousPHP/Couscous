@@ -18,7 +18,7 @@ class FileWatch implements WatchInterface
     public function __construct($filename)
     {
         $this->filename = $filename;
-        $this->time = time();
+        $this->time     = time();
     }
 
     public function getChangedFiles()

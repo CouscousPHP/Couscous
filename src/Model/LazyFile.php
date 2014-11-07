@@ -13,7 +13,7 @@ class LazyFile extends File
 
     public function __construct($fullFilename, $relativeFilename)
     {
-        $this->fullFilename = $fullFilename;
+        $this->fullFilename     = $fullFilename;
         $this->relativeFilename = $relativeFilename;
     }
 

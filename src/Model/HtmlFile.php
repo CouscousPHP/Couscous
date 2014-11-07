@@ -23,7 +23,7 @@ class HtmlFile extends File
     {
         parent::__construct($relativeFilename);
 
-        $this->content = $content;
+        $this->content         = $content;
         $this->customVariables = $customVariables;
     }
 

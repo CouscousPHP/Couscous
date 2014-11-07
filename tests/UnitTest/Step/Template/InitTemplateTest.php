@@ -11,7 +11,7 @@ class InitTemplateTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefaultDirectory()
     {
-        $step = new InitTemplate($this->createFilesystem());
+        $step       = new InitTemplate($this->createFilesystem());
         $repository = new MockRepository();
         $step->__invoke($repository, new NullOutput());
 
@@ -20,7 +20,7 @@ class InitTemplateTest extends \PHPUnit_Framework_TestCase
 
     public function testCustomDirectory()
     {
-        $step = new InitTemplate($this->createFilesystem());
+        $step       = new InitTemplate($this->createFilesystem());
         $repository = new MockRepository();
         $repository->config->directory = 'foo';
         $step->__invoke($repository, new NullOutput());

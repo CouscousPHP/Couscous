@@ -29,7 +29,7 @@ class AddPageListToLayoutVariables implements StepInterface
         foreach ($htmlFiles as $file) {
             $pageList[] = $file->relativeFilename;
 
-            $path = dirname($file->relativeFilename);
+            $path     = dirname($file->relativeFilename);
             $filename = basename($file->relativeFilename);
 
             if ($path === '.') {
