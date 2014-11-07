@@ -6,7 +6,7 @@ Couscous generates a [GitHub pages](http://pages.github.com/) website from your 
 
 [![Build Status](https://travis-ci.org/CouscousPHP/Couscous.svg?branch=master)](https://travis-ci.org/CouscousPHP/Couscous)
 
-Read more about Couscous and its documentation on [the website](http://couscousphp.github.io/Couscous/). This README is targeted at developers.
+Read more about Couscous and its documentation on [the website](http://couscous.io/). This README is targeted at developers.
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/CouscousPHP/Couscous)
 
@@ -20,7 +20,7 @@ So if you want to put a blog online, use Sculpin! If you want documentation, use
 
 ## Usage
 
-Everything is documented on [the website](http://couscousphp.github.io/Couscous/).
+Everything is documented on [the website](http://couscous.io/).
 
 ## How Couscous works?
 

@@ -14,4 +14,4 @@ after:
   - rm website/couscous.phar
 
 template:
-    baseUrl: http://couscousphp.github.io/Couscous
+    baseUrl: http://couscous.io
