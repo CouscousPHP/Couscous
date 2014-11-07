@@ -10,10 +10,11 @@ Reference:
 # Name of the directory containing the website template (default is "website")
 directory: website
 
-# List of directories to exclude from the processing (default contains "vendor")
+# List of directories to exclude from the processing (default contains "vendor" and "website")
 # Paths are relative to the repository root
 exclude:
     - vendor
+    - website
     - some/dir
 
 # Scripts to execute before generating the website
