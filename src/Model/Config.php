@@ -21,7 +21,7 @@ class Config
      * List of directories to exclude.
      * @var string[]
      */
-    public $exclude = array('vendor');
+    public $exclude = array('vendor', 'website');
 
     /**
      * Directory in which the website template is.
