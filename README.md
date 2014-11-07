@@ -8,6 +8,8 @@ Couscous generates a [GitHub pages](http://pages.github.com/) website from your 
 
 Read more about Couscous and its documentation on [the website](http://couscousphp.github.io/Couscous/). This README is targeted at developers.
 
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/CouscousPHP/Couscous)
+
 ## Why?
 
 Couscous is different from [Sculpin](https://sculpin.io/) or [Phrozn](http://phrozn.info/). They are generic static websites generator, at best targeted for blogs, and using them to put documentation online is clunky.
