@@ -1,5 +1,5 @@
 {
-    "name": "mnapoli/couscous",
+    "name": "couscous/couscous",
     "license": "MIT",
     "autoload": {
         "psr-4": {

@@ -69,7 +69,7 @@ class ProcessTwigLayouts implements StepInterface
     /**
      * We have to use a Twig_Loader_Array because of #12
      *
-     * @link https://github.com/mnapoli/Couscous/issues/12
+     * @link https://github.com/CouscousPHP/Couscous/issues/12
      *
      * @param string $templateDirectory
      * @return Twig_Loader_Array

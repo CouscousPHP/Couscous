@@ -10,7 +10,7 @@ BC breaking changes:
 
 Major new features:
 
-- [#10](https://github.com/mnapoli/Couscous/pull/10) automatically install Bower dependencies if a `bower.json` file is in `website/public/`
+- [#10](https://github.com/CouscousPHP/Couscous/pull/10) automatically install Bower dependencies if a `bower.json` file is in `website/public/`
 
 Minor new features:
 
@@ -19,4 +19,4 @@ Minor new features:
 
 Bugfixes
 
-- [#7](https://github.com/mnapoli/Couscous/issues/7), [#12](https://github.com/mnapoli/Couscous/issues/12) The preview command now detects any file change (to regenerate the website)
+- [#7](https://github.com/CouscousPHP/Couscous/issues/7), [#12](https://github.com/CouscousPHP/Couscous/issues/12) The preview command now detects any file change (to regenerate the website)

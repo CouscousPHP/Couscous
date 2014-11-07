@@ -5,10 +5,10 @@
 If you have already [set up a global install of Composer](http://akrabat.com/php/global-installation-of-php-tools-with-composer/) just run:
 
 ```
-$ composer global require mnapoli/couscous
+$ composer global require couscous/couscous
 ```
 
-You can also add Couscous as a dependency for a project with `composer require mnapoli/couscous`.
+You can also add Couscous as a dependency for a project with `composer require couscous/couscous`.
 
 Alternatively, you can download [couscous.phar](http://couscousphp.github.io/Couscous/couscous.phar):
 
