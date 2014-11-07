@@ -42,7 +42,7 @@ class PreviewCommand extends Command
                 'address',
                 InputArgument::OPTIONAL,
                 'Address:port',
-                'localhost:8000'
+                '127.0.0.1:8000'
             )
             ->addArgument(
                 'source',
