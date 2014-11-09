@@ -25,12 +25,13 @@ before:
 after:
     - rm website/couscous.phar
 
-# Any variable you put in "template" is available in the Twig layouts
-template:
+# Any variable you put in this file is also available in the Twig layouts:
+title: Hello!
 
-    title: Hello!
-
-    # Base URL of the published website (no "/" at the end!)
-    # You are advised to set and use this variable to write your links in the HTML layouts
-    baseUrl: http://username.github.io/your-project
+# Base URL of the published website (no "/" at the end!)
+# You are advised to set and use this variable to write your links in the HTML layouts
+baseUrl: http://username.github.io/your-project
 ```
+
+**Note:** any variable you put in the `couscous.yml` is available in templates.
+You can use this to define the website's title for example, or any global variable.
