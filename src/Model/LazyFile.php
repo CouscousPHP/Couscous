@@ -21,4 +21,9 @@ class LazyFile extends File
     {
         return file_get_contents($this->fullFilename);
     }
+
+    public function getMetadata()
+    {
+        return array();
+    }
 }

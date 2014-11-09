@@ -32,14 +32,15 @@ class ProcessTwigLayouts implements StepInterface
         $htmlFiles = $repository->findFilesByType('Couscous\Model\HtmlFile');
 
         foreach ($htmlFiles as $file) {
-            $layout = isset($file->customVariables['layout'])
-                ? $file->customVariables['layout'] . '.twig'
+            $fileMetadata = $file->getMetadata();
+            $layout = isset($fileMetadata['layout'])
+                ? $fileMetadata['layout'] . '.twig'
                 : self::DEFAULT_LAYOUT_NAME;
 
             $context = array_merge(
                 $repository->template->layoutVariables,
                 $repository->config->templateVariables,
-                $file->customVariables,
+                $fileMetadata,
                 array('content' => $file->content)
             );
 

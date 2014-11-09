@@ -75,6 +75,12 @@ class Repository extends \stdClass
         unset($this->files[$file->relativeFilename]);
     }
 
+    public function replaceFile(File $oldFile, File $newFile)
+    {
+        $this->removeFile($oldFile);
+        $this->addFile($newFile);
+    }
+
     /**
      * @return File[]
      */

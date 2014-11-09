@@ -12,15 +12,31 @@ class MarkdownFile extends File
      */
     public $content;
 
-    public function __construct($relativeFilename, $content)
+    /**
+     * @var array
+     */
+    private $metadata;
+
+    public function __construct($relativeFilename, $content, array $metadata = array())
     {
         parent::__construct($relativeFilename);
 
         $this->content = $content;
+        $this->metadata = $metadata;
     }
 
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    public function setMetadata(array $metadata)
+    {
+        $this->metadata = $metadata;
     }
 }

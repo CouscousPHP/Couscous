@@ -34,8 +34,7 @@ class RenderMarkdown implements StepInterface
         foreach ($markdownFiles as $markdownFile) {
             $htmlFile = $this->renderFile($markdownFile);
 
-            $repository->removeFile($markdownFile);
-            $repository->addFile($htmlFile);
+            $repository->replaceFile($markdownFile, $htmlFile);
         }
     }
 
@@ -43,12 +42,9 @@ class RenderMarkdown implements StepInterface
     {
         $document = $this->markdownParser->parse($file->getContent());
 
-        $yaml      = $document->getYAML();
-        $variables = is_array($yaml) ? $yaml : array();
-
         $filename = $this->replaceExtension($file->relativeFilename);
 
-        return new HtmlFile($filename, $document->getContent(), $variables);
+        return new HtmlFile($filename, $document->getContent(), $file);
     }
 
     private function replaceExtension($filename)

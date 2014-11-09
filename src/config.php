@@ -14,6 +14,7 @@ return array(
         'Couscous\Step\Assets\RunBowerInstall',
         'Couscous\Step\Template\LoadAssets',
         'Couscous\Step\Markdown\LoadMarkdownFiles',
+        'Couscous\Step\Markdown\ParseMarkdownFrontMatter',
         'Couscous\Step\Markdown\ProcessMarkdownFileName',
         'Couscous\Step\Markdown\ProcessMarkdownLinks',
         'Couscous\Step\Markdown\RenderMarkdown',

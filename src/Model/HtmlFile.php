@@ -8,27 +8,30 @@ namespace Couscous\Model;
 class HtmlFile extends File
 {
     /**
-     * Array of custom variables that can be used to render templates or whatever.
-     *
-     * @var array
-     */
-    public $customVariables = array();
-
-    /**
      * @var string
      */
     public $content;
 
-    public function __construct($relativeFilename, $content, array $customVariables = array())
+    /**
+     * @var File
+     */
+    private $wrappedFile;
+
+    public function __construct($relativeFilename, $content, File $wrappedFile = null)
     {
         parent::__construct($relativeFilename);
 
-        $this->content         = $content;
-        $this->customVariables = $customVariables;
+        $this->content     = $content;
+        $this->wrappedFile = $wrappedFile;
     }
 
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function getMetadata()
+    {
+        return $this->wrappedFile ? $this->wrappedFile->getMetadata() : array();
     }
 }
