@@ -13,7 +13,7 @@ Read more about Couscous and its documentation on [the website](http://couscous.
 
 ## Why?
 
-Couscous is different from [Sculpin](https://sculpin.io/) or [Phrozn](http://phrozn.info/). They are generic static websites generator, at best targeted for blogs, and using them to put documentation online is clunky.
+Couscous is different from other static websites generators like [Sculpin](https://sculpin.io/), [Phrozn](http://phrozn.info/) or [Gumdropp](http://gumdropapp.com/). They are generic static websites generator, sometimes targeted for blogs, and using them to put documentation online is clunky. They also all require a specific directory layout which is incompatible with how we usually store documentation alongside our code.
 
 Couscous lets you get started with *no requirements* and a single command. And deploy without prior configuration with one command too.
 
