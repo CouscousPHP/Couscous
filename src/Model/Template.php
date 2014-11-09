@@ -15,10 +15,11 @@ class Template
     public $directory;
 
     /**
-     * Variables made available in layouts.
+     * Metadata/variables made available in layouts.
+     *
      * @var array
      */
-    public $layoutVariables = array();
+    public $metadata = array();
 
     public function __construct($directory)
     {

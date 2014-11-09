@@ -7,12 +7,15 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * Configuration.
  *
+ * Extends stdClass so that any property (i.e. config value) can be set.
+ *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class Config
+class Config extends \stdClass
 {
     /**
      * File from which the configuration was read.
+     * TODO remove (useless)
      * @var string
      */
     private $configFile;
@@ -48,15 +51,11 @@ class Config
     public $templateUrl;
 
     /**
-     * Variables made available in layouts.
-     * @var array
-     */
-    public $templateVariables = array();
-
-    /**
      * Create the config from a YAML file.
      *
      * @param string $file If the file doesn't exist, returns a default config.
+     *
+     * @todo rename to "fromArray" and move the YAML parsing into "LoadConfig"
      *
      * @return Config
      */
@@ -66,35 +65,41 @@ class Config
         $config->configFile = $file;
 
         if (! file_exists($file)) {
+            // TODO throw exception
             return $config;
         }
 
         $values = Yaml::parse(file_get_contents($file));
         if (! is_array($values)) {
+            // TODO throw exception
             return $config;
         }
 
+        // Validate some config values
+        // TODO move to private method
         if (array_key_exists('exclude', $values)) {
-            $config->exclude = (array) $values['exclude'];
+            $values['exclude'] = (array) $values['exclude'];
         }
         if (array_key_exists('directory', $values)) {
-            $config->directory = trim($values['directory']);
+            $values['directory'] = trim($values['directory']);
         }
         if (array_key_exists('before', $values)) {
-            $config->before = (array) $values['before'];
+            $values['before'] = (array) $values['before'];
         }
         if (array_key_exists('after', $values)) {
-            $config->after = (array) $values['after'];
+            $values['after'] = (array) $values['after'];
         }
         if (array_key_exists('templateUrl', $values)) {
-            $config->templateUrl = (string) $values['templateUrl'];
+            $values['templateUrl'] = (string) $values['templateUrl'];
         }
-        if (array_key_exists('template', $values)) {
-            $config->templateVariables = (array) $values['template'];
+        if (array_key_exists('baseUrl', $values)) {
             // Trim any trailing "/" in the base url
-            if (array_key_exists('baseUrl', $config->templateVariables)) {
-                $config->templateVariables['baseUrl'] = rtrim(trim($config->templateVariables['baseUrl']), '/');
-            }
+            $values['baseUrl'] = rtrim(trim($values['baseUrl']), '/');
+        }
+
+        // Set the properties
+        foreach ($values as $key => $value) {
+            $config->$key = $value;
         }
 
         return $config;
@@ -103,10 +108,22 @@ class Config
     /**
      * Reload the configuration from disk.
      *
+     * @todo remove (unused)
+     *
      * @return Config
      */
     public function reload()
     {
         return self::fromYaml($this->configFile);
+    }
+
+    /**
+     * Returns the config values in an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return (array) $this;
     }
 }

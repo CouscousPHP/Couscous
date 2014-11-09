@@ -39,7 +39,7 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             'weird.path-test [foo]/bar.html',
         );
 
-        $this->assertEquals($expected, $repository->template->layoutVariables['pageList']);
+        $this->assertEquals($expected, $repository->template->metadata['pageList']);
     }
 
     public function testPageTree()
@@ -67,7 +67,7 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->assertEquals($expected, $repository->template->layoutVariables['pageTree']);
+        $this->assertEquals($expected, $repository->template->metadata['pageTree']);
     }
 
     private function invokeStep(Repository $repository, $files)

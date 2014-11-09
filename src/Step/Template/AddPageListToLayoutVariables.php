@@ -45,8 +45,8 @@ class AddPageListToLayoutVariables implements StepInterface
         natsort($pageList);
         $this->sortRecursively($pageTree);
 
-        $repository->template->layoutVariables['pageList'] = $pageList;
-        $repository->template->layoutVariables['pageTree'] = $pageTree;
+        $repository->template->metadata['pageList'] = $pageList;
+        $repository->template->metadata['pageTree'] = $pageTree;
     }
 
     private function setValue(array &$array, array $path, $value)

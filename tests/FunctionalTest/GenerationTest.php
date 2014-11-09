@@ -20,13 +20,13 @@ class GenerationTest extends BaseFunctionalTest
     }
 
     /**
-     * Test custom variables defined:
+     * Test metadata defined:
      *     - in FrontYAML inside Markdown files
      *     - in couscous.yml
      */
-    public function testCustomVariables()
+    public function testMetadata()
     {
-        $this->assertGeneratedWebsite('custom-variables');
+        $this->assertGeneratedWebsite('metadata');
     }
 
     /**
