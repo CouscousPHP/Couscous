@@ -14,13 +14,6 @@ class Template
      */
     public $directory;
 
-    /**
-     * Metadata/variables made available in layouts.
-     *
-     * @var array
-     */
-    public $metadata = array();
-
     public function __construct($directory)
     {
         $this->directory = $directory;

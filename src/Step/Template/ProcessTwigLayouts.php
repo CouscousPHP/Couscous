@@ -38,7 +38,6 @@ class ProcessTwigLayouts implements StepInterface
                 : self::DEFAULT_LAYOUT_NAME;
 
             $context = array_merge(
-                $repository->template->metadata,
                 $repository->metadata->toArray(),
                 $fileMetadata,
                 array('content' => $file->content)
