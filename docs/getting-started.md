@@ -1,5 +1,9 @@
 # Getting started
 
+## Requirements
+
+Couscous requires PHP 5.4 or above.
+
 ## Installation
 
 If you have already [set up a global install of Composer](http://akrabat.com/php/global-installation-of-php-tools-with-composer/) just run:
