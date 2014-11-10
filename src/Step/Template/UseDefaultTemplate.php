@@ -28,11 +28,11 @@ class UseDefaultTemplate implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        if ($repository->config->templateUrl !== null) {
+        if ($repository->metadata->templateUrl !== null) {
             // Use a remote template
             return;
         }
-        if (! is_null($repository->config->directory)) {
+        if (! is_null($repository->metadata->directory)) {
             // Customized the template directory: we shouldn't silently override that
             return;
         }
@@ -47,6 +47,6 @@ class UseDefaultTemplate implements StepInterface
 
     protected function setDefaultTemplateUrl(Repository $repository)
     {
-        $repository->config->templateUrl = self::DEFAULT_TEMPLATE_URL;
+        $repository->metadata->templateUrl = self::DEFAULT_TEMPLATE_URL;
     }
 }

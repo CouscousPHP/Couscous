@@ -16,10 +16,6 @@ class AddPageListToLayoutVariables implements StepInterface
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        if (! $repository->template) {
-            return;
-        }
-
         /** @var HtmlFile[] $htmlFiles */
         $htmlFiles = $repository->findFilesByType('Couscous\Model\HtmlFile');
 
@@ -45,8 +41,8 @@ class AddPageListToLayoutVariables implements StepInterface
         natsort($pageList);
         $this->sortRecursively($pageTree);
 
-        $repository->template->metadata['pageList'] = $pageList;
-        $repository->template->metadata['pageTree'] = $pageTree;
+        $repository->metadata->pageList = $pageList;
+        $repository->metadata->pageTree = $pageTree;
     }
 
     private function setValue(array &$array, array $path, $value)

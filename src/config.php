@@ -6,7 +6,7 @@ return array(
 
     'steps.classes' => array(
         'Couscous\Step\ClearTargetDirectory',
-        'Couscous\Step\LoadConfig',
+        'Couscous\Step\Config\LoadConfig',
         'Couscous\Step\OverrideBaseUrl',
         'Couscous\Step\ExecuteBeforeScripts',
         'Couscous\Step\Template\UseDefaultTemplate',

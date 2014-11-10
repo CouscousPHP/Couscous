@@ -27,9 +27,9 @@ class Repository extends \stdClass
     public $targetDirectory;
 
     /**
-     * @var Config
+     * @var RepositoryMetadata
      */
-    public $config;
+    public $metadata;
 
     /**
      * @var Template|null
@@ -56,13 +56,14 @@ class Repository extends \stdClass
      *
      * @var File[]
      */
-    protected $files = array();
+    protected $files = [];
 
     public function __construct($sourceDirectory, $targetDirectory)
     {
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
         $this->watchlist       = new WatchList();
+        $this->metadata        = new RepositoryMetadata();
     }
 
     public function addFile(File $file)
@@ -107,13 +108,13 @@ class Repository extends \stdClass
      */
     public function sourceFiles()
     {
-        $excludedDirectories = $this->config ? $this->config->exclude : array();
+        $excludedDirectories = $this->metadata ? $this->metadata->exclude : [];
 
         $finder = new Finder();
         $finder->files()
             ->in($this->sourceDirectory)
             ->ignoreDotFiles(true)
-            ->exclude(array_merge($excludedDirectories, array('.couscous')));
+            ->exclude(array_merge($excludedDirectories, ['.couscous']));
 
         return $finder;
     }

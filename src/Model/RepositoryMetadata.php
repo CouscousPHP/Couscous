@@ -2,24 +2,15 @@
 
 namespace Couscous\Model;
 
-use Symfony\Component\Yaml\Yaml;
-
 /**
- * Configuration.
+ * Repository metadata.
  *
- * Extends stdClass so that any property (i.e. config value) can be set.
+ * Extends stdClass so that any custom value can be set.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class Config extends \stdClass
+class RepositoryMetadata extends \stdClass
 {
-    /**
-     * File from which the configuration was read.
-     * TODO remove (useless)
-     * @var string
-     */
-    private $configFile;
-
     /**
      * List of directories to exclude.
      * @var string[]
@@ -51,31 +42,15 @@ class Config extends \stdClass
     public $templateUrl;
 
     /**
-     * Create the config from a YAML file.
+     * @param array $values
      *
-     * @param string $file If the file doesn't exist, returns a default config.
-     *
-     * @todo rename to "fromArray" and move the YAML parsing into "LoadConfig"
-     *
-     * @return Config
+     * @return RepositoryMetadata
      */
-    public static function fromYaml($file)
+    public static function fromArray(array $values)
     {
-        $config = new self();
-        $config->configFile = $file;
+        $metadata = new self();
 
-        if (! file_exists($file)) {
-            // TODO throw exception
-            return $config;
-        }
-
-        $values = Yaml::parse(file_get_contents($file));
-        if (! is_array($values)) {
-            // TODO throw exception
-            return $config;
-        }
-
-        // Validate some config values
+        // Validate some values
         // TODO move to private method
         if (array_key_exists('exclude', $values)) {
             $values['exclude'] = (array) $values['exclude'];
@@ -97,24 +72,11 @@ class Config extends \stdClass
             $values['baseUrl'] = rtrim(trim($values['baseUrl']), '/');
         }
 
-        // Set the properties
         foreach ($values as $key => $value) {
-            $config->$key = $value;
+            $metadata->$key = $value;
         }
 
-        return $config;
-    }
-
-    /**
-     * Reload the configuration from disk.
-     *
-     * @todo remove (unused)
-     *
-     * @return Config
-     */
-    public function reload()
-    {
-        return self::fromYaml($this->configFile);
+        return $metadata;
     }
 
     /**

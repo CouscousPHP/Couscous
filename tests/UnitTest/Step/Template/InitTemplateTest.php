@@ -22,7 +22,7 @@ class InitTemplateTest extends \PHPUnit_Framework_TestCase
     {
         $step       = new InitTemplate($this->createFilesystem());
         $repository = new MockRepository();
-        $repository->config->directory = 'foo';
+        $repository->metadata->directory = 'foo';
         $step->__invoke($repository, new NullOutput());
 
         $this->assertEquals('/foo', $repository->template->directory);
