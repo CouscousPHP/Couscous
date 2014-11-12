@@ -8,6 +8,11 @@ php:
 
 before_script:
   - composer install --no-progress
+  - npm install -g less
+  - npm install -g less-plugin-clean-css
 
 script:
   - phpunit
+
+after_script:
+  - bin/couscous deploy
