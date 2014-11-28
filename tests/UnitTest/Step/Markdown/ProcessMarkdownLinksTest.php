@@ -2,7 +2,7 @@
 
 namespace Couscous\Tests\UnitTest\Step\Markdown;
 
-use Couscous\Model\MarkdownFile;
+use Couscous\Model\File\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step\Markdown\ProcessMarkdownLinks;
 use Symfony\Component\Console\Output\NullOutput;

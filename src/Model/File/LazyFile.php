@@ -1,6 +1,9 @@
 <?php
 
-namespace Couscous\Model;
+namespace Couscous\Model\File;
+
+use Couscous\Model\File;
+use Couscous\Model\Metadata;
 
 /**
  * Generic implementation that reads a file lazily.
@@ -20,5 +23,10 @@ class LazyFile extends File
     public function getContent()
     {
         return file_get_contents($this->fullFilename);
+    }
+
+    public function getMetadata()
+    {
+        return new Metadata();
     }
 }

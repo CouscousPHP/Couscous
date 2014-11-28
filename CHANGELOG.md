@@ -7,6 +7,9 @@ BC breaking changes:
 - in Markdown files, you now need to use `layout: custom.twig` instead of `template: custom.twig`. Template now means the whole template (all files) while layout is a single Twig file.
 - the default layout is now `default.twig` (it was previously `page.twig`)
 - template directories are simpler: the `website/public/` directory is not needed anymore, assets should be placed directly in the `website/` directory
+- the config option `templateVariables.baseUrl` is now `baseUrl`
+- the config option `templateUrl` is now `template.url`
+- the config option `directory` is now `template.directory`
 
 Major new features:
 

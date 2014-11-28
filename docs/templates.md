@@ -73,7 +73,8 @@ This is my documentation.
 This is a *sub-chapter*.
 ```
 
-**Good to know: any variable you put in the YAML Front matter is accessible in the view.**
+**Good to know: any variable you put in the YAML Front matter is accessible in the view,**
+just like with `couscous.yml` (and you can override values from `couscous.yml`).
 
 Example:
 

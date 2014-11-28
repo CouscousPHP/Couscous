@@ -2,9 +2,8 @@
 
 namespace Couscous\Tests\UnitTest\Step\Template;
 
-use Couscous\Model\HtmlFile;
+use Couscous\Model\File\HtmlFile;
 use Couscous\Model\Repository;
-use Couscous\Model\Template;
 use Couscous\Step\Template\AddPageListToLayoutVariables;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
@@ -39,7 +38,7 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             'weird.path-test [foo]/bar.html',
         );
 
-        $this->assertEquals($expected, $repository->template->layoutVariables['pageList']);
+        $this->assertEquals($expected, $repository->metadata['pageList']);
     }
 
     public function testPageTree()
@@ -67,13 +66,11 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->assertEquals($expected, $repository->template->layoutVariables['pageTree']);
+        $this->assertEquals($expected, $repository->metadata['pageTree']);
     }
 
     private function invokeStep(Repository $repository, $files)
     {
-        $repository->template = new Template('', '');
-
         foreach ($files as $file) {
             $repository->addFile($file);
         }

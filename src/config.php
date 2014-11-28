@@ -6,7 +6,8 @@ return array(
 
     'steps.classes' => array(
         'Couscous\Step\ClearTargetDirectory',
-        'Couscous\Step\LoadConfig',
+        'Couscous\Step\Config\SetDefaultConfig',
+        'Couscous\Step\Config\LoadConfig',
         'Couscous\Step\OverrideBaseUrl',
         'Couscous\Step\ExecuteBeforeScripts',
         'Couscous\Step\Template\UseDefaultTemplate',
@@ -14,6 +15,7 @@ return array(
         'Couscous\Step\Assets\RunBowerInstall',
         'Couscous\Step\Template\LoadAssets',
         'Couscous\Step\Markdown\LoadMarkdownFiles',
+        'Couscous\Step\Markdown\ParseMarkdownFrontMatter',
         'Couscous\Step\Markdown\ProcessMarkdownFileName',
         'Couscous\Step\Markdown\ProcessMarkdownLinks',
         'Couscous\Step\Markdown\RenderMarkdown',

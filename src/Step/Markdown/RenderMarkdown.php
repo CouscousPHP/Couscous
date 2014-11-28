@@ -2,8 +2,8 @@
 
 namespace Couscous\Step\Markdown;
 
-use Couscous\Model\HtmlFile;
-use Couscous\Model\MarkdownFile;
+use Couscous\Model\File\HtmlFile;
+use Couscous\Model\File\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Mni\FrontYAML\Parser;
@@ -29,13 +29,12 @@ class RenderMarkdown implements StepInterface
     public function __invoke(Repository $repository, OutputInterface $output)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Model\MarkdownFile');
+        $markdownFiles = $repository->findFilesByType('Couscous\Model\File\MarkdownFile');
 
         foreach ($markdownFiles as $markdownFile) {
             $htmlFile = $this->renderFile($markdownFile);
 
-            $repository->removeFile($markdownFile);
-            $repository->addFile($htmlFile);
+            $repository->replaceFile($markdownFile, $htmlFile);
         }
     }
 
@@ -43,12 +42,9 @@ class RenderMarkdown implements StepInterface
     {
         $document = $this->markdownParser->parse($file->getContent());
 
-        $yaml      = $document->getYAML();
-        $variables = is_array($yaml) ? $yaml : array();
-
         $filename = $this->replaceExtension($file->relativeFilename);
 
-        return new HtmlFile($filename, $document->getContent(), $variables);
+        return new HtmlFile($filename, $document->getContent(), $file);
     }
 
     private function replaceExtension($filename)

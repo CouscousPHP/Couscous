@@ -3,7 +3,6 @@
 namespace Couscous\Step\Template;
 
 use Couscous\Model\Repository;
-use Couscous\Model\Template;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -29,7 +28,7 @@ class InitTemplate implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        $templateUrl = $repository->config->templateUrl;
+        $templateUrl = $repository->metadata['template.url'];
 
         if ($templateUrl !== null) {
             $this->templateFromGitUrl($repository, $templateUrl, $output);
@@ -40,8 +39,9 @@ class InitTemplate implements StepInterface
 
     private function templateFromDirectory(Repository $repository)
     {
-        if (!is_null($repository->config->directory)) {
-            $templateDirectory = $repository->sourceDirectory . '/' . $repository->config->directory;
+        if (! is_null($repository->metadata['template.directory'])) {
+            $templateDirectory = $repository->sourceDirectory . '/'
+                . $repository->metadata['template.directory'];
 
             if (!$this->filesystem->exists($templateDirectory)) {
                 throw new \RuntimeException(sprintf(
@@ -62,7 +62,7 @@ class InitTemplate implements StepInterface
 
         $repository->watchlist->watchDirectory($templateDirectory);
 
-        $repository->template = new Template($templateDirectory);
+        $repository->metadata['template.directory'] = $templateDirectory;
     }
 
     private function templateFromGitUrl(Repository $repository, $gitUrl, OutputInterface $output)
@@ -77,7 +77,7 @@ class InitTemplate implements StepInterface
             throw new \RuntimeException(implode(PHP_EOL, $gitOutput));
         }
 
-        $repository->template = new Template($templateDirectory);
+        $repository->metadata['template.directory'] = $templateDirectory;
     }
 
     private function createTempDirectory($prefix)

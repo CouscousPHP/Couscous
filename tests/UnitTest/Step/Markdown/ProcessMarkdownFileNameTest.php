@@ -2,8 +2,8 @@
 
 namespace Couscous\Tests\UnitTest\Step\Markdown;
 
-use Couscous\Model\LazyFile;
-use Couscous\Model\MarkdownFile;
+use Couscous\Model\File\LazyFile;
+use Couscous\Model\File\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step\Markdown\ProcessMarkdownFileName;
 use Symfony\Component\Console\Output\NullOutput;

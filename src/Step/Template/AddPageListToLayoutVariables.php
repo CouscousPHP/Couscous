@@ -2,7 +2,7 @@
 
 namespace Couscous\Step\Template;
 
-use Couscous\Model\HtmlFile;
+use Couscous\Model\File\HtmlFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,12 +16,8 @@ class AddPageListToLayoutVariables implements StepInterface
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        if (! $repository->template) {
-            return;
-        }
-
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $repository->findFilesByType('Couscous\Model\HtmlFile');
+        $htmlFiles = $repository->findFilesByType('Couscous\Model\File\HtmlFile');
 
         $pageList = array();
         $pageTree = array();
@@ -45,8 +41,8 @@ class AddPageListToLayoutVariables implements StepInterface
         natsort($pageList);
         $this->sortRecursively($pageTree);
 
-        $repository->template->layoutVariables['pageList'] = $pageList;
-        $repository->template->layoutVariables['pageTree'] = $pageTree;
+        $repository->metadata['pageList'] = $pageList;
+        $repository->metadata['pageTree'] = $pageTree;
     }
 
     private function setValue(array &$array, array $path, $value)

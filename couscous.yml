@@ -1,4 +1,5 @@
-directory: website
+template:
+  directory: website
 
 exclude:
   - vendor
@@ -13,5 +14,4 @@ before:
 after:
   - rm website/couscous.phar
 
-template:
-    baseUrl: http://couscous.io
+baseUrl: http://couscous.io

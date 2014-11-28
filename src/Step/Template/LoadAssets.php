@@ -2,7 +2,7 @@
 
 namespace Couscous\Step\Template;
 
-use Couscous\Model\LazyFile;
+use Couscous\Model\File\LazyFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -31,13 +31,13 @@ class LoadAssets implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        if (! $repository->template) {
+        if (! $repository->metadata['template.directory']) {
             return;
         }
 
         $files = new Finder();
         $files->files()
-            ->in($repository->template->directory)
+            ->in($repository->metadata['template.directory'])
             ->ignoreDotFiles(true)
             ->notName('*.twig');
 

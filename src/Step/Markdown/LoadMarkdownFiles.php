@@ -2,7 +2,7 @@
 
 namespace Couscous\Step\Markdown;
 
-use Couscous\Model\MarkdownFile;
+use Couscous\Model\File\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;

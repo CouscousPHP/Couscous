@@ -27,14 +27,9 @@ class Repository extends \stdClass
     public $targetDirectory;
 
     /**
-     * @var Config
+     * @var Metadata
      */
-    public $config;
-
-    /**
-     * @var Template|null
-     */
-    public $template;
+    public $metadata;
 
     /**
      * If true then we are in "preview" mode and we are regenerating the website.
@@ -56,13 +51,14 @@ class Repository extends \stdClass
      *
      * @var File[]
      */
-    protected $files = array();
+    protected $files = [];
 
     public function __construct($sourceDirectory, $targetDirectory)
     {
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
         $this->watchlist       = new WatchList();
+        $this->metadata        = new Metadata();
     }
 
     public function addFile(File $file)
@@ -73,6 +69,12 @@ class Repository extends \stdClass
     public function removeFile(File $file)
     {
         unset($this->files[$file->relativeFilename]);
+    }
+
+    public function replaceFile(File $oldFile, File $newFile)
+    {
+        $this->removeFile($oldFile);
+        $this->addFile($newFile);
     }
 
     /**
@@ -89,6 +91,13 @@ class Repository extends \stdClass
      */
     public function findFilesByType($class)
     {
+        if (! class_exists($class)) {
+            throw new \InvalidArgumentException(sprintf(
+                "The class %s doesn't exist",
+                $class
+            ));
+        }
+
         return array_filter($this->files, function (File $file) use ($class) {
             return $file instanceof $class;
         });
@@ -101,13 +110,13 @@ class Repository extends \stdClass
      */
     public function sourceFiles()
     {
-        $excludedDirectories = $this->config ? $this->config->exclude : array();
+        $excludedDirectories = $this->metadata['exclude'] ? $this->metadata['exclude'] : [];
 
         $finder = new Finder();
         $finder->files()
             ->in($this->sourceDirectory)
             ->ignoreDotFiles(true)
-            ->exclude(array_merge($excludedDirectories, array('.couscous')));
+            ->exclude(array_merge($excludedDirectories, ['.couscous']));
 
         return $finder;
     }
