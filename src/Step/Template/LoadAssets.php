@@ -2,7 +2,7 @@
 
 namespace Couscous\Step\Template;
 
-use Couscous\Model\LazyFile;
+use Couscous\Model\File\LazyFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;

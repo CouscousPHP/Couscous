@@ -2,7 +2,7 @@
 
 namespace Couscous\Step\Markdown;
 
-use Couscous\Model\MarkdownFile;
+use Couscous\Model\File\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +17,7 @@ class ProcessMarkdownFileName implements StepInterface
     public function __invoke(Repository $repository, OutputInterface $output)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Model\MarkdownFile');
+        $markdownFiles = $repository->findFilesByType('Couscous\Model\File\MarkdownFile');
 
         foreach ($markdownFiles as $markdownFile) {
             $repository->removeFile($markdownFile);

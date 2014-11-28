@@ -2,8 +2,8 @@
 
 namespace Couscous\Step\Markdown;
 
-use Couscous\Model\HtmlFile;
-use Couscous\Model\MarkdownFile;
+use Couscous\Model\File\HtmlFile;
+use Couscous\Model\File\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Mni\FrontYAML\Parser;
@@ -29,7 +29,7 @@ class RenderMarkdown implements StepInterface
     public function __invoke(Repository $repository, OutputInterface $output)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Model\MarkdownFile');
+        $markdownFiles = $repository->findFilesByType('Couscous\Model\File\MarkdownFile');
 
         foreach ($markdownFiles as $markdownFile) {
             $htmlFile = $this->renderFile($markdownFile);

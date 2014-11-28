@@ -2,7 +2,7 @@
 
 namespace Couscous\Tests\UnitTest\Step\Template;
 
-use Couscous\Model\HtmlFile;
+use Couscous\Model\File\HtmlFile;
 use Couscous\Model\Repository;
 use Couscous\Step\Template\AddPageListToLayoutVariables;
 use Couscous\Tests\UnitTest\Mock\MockRepository;

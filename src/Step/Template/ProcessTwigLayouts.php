@@ -2,7 +2,7 @@
 
 namespace Couscous\Step\Template;
 
-use Couscous\Model\HtmlFile;
+use Couscous\Model\File\HtmlFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -29,7 +29,7 @@ class ProcessTwigLayouts implements StepInterface
         $twig = $this->createTwig($repository->metadata['template.directory']);
 
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $repository->findFilesByType('Couscous\Model\HtmlFile');
+        $htmlFiles = $repository->findFilesByType('Couscous\Model\File\HtmlFile');
 
         foreach ($htmlFiles as $file) {
             $fileMetadata = $file->getMetadata();

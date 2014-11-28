@@ -1,6 +1,9 @@
 <?php
 
-namespace Couscous\Model;
+namespace Couscous\Model\File;
+
+use Couscous\Model\File;
+use Couscous\Model\Metadata;
 
 /**
  * Generic implementation that reads a file lazily.

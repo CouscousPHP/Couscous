@@ -91,6 +91,13 @@ class Repository extends \stdClass
      */
     public function findFilesByType($class)
     {
+        if (! class_exists($class)) {
+            throw new \InvalidArgumentException(sprintf(
+                "The class %s doesn't exist",
+                $class
+            ));
+        }
+
         return array_filter($this->files, function (File $file) use ($class) {
             return $file instanceof $class;
         });
