@@ -32,11 +32,6 @@ class Repository extends \stdClass
     public $metadata;
 
     /**
-     * @var Template|null
-     */
-    public $template;
-
-    /**
      * If true then we are in "preview" mode and we are regenerating the website.
      *
      * Use this to prevent doing anything costly twice so that the regeneration is faster,

@@ -22,11 +22,11 @@ class ProcessTwigLayouts implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        if (! $repository->template) {
+        if (! $repository->metadata['template.directory']) {
             return;
         }
 
-        $twig = $this->createTwig($repository->template->directory);
+        $twig = $this->createTwig($repository->metadata['template.directory']);
 
         /** @var HtmlFile[] $htmlFiles */
         $htmlFiles = $repository->findFilesByType('Couscous\Model\HtmlFile');

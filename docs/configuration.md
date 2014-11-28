@@ -7,8 +7,11 @@ That configuration file is optional.
 Reference:
 
 ```yaml
-# Name of the directory containing the website template (default is "website")
-directory: website
+template:
+    # Name of the directory containing the website template (default is "website")
+    directory: website
+    # Or if you are using a remote template, you can set the Git URL
+    url: https://github.com/CouscousPHP/Template-Default.git
 
 # List of directories to exclude from the processing (default contains "vendor" and "website")
 # Paths are relative to the repository root

@@ -15,17 +15,17 @@ class InitTemplateTest extends \PHPUnit_Framework_TestCase
         $repository = new MockRepository();
         $step->__invoke($repository, new NullOutput());
 
-        $this->assertEquals('/website', $repository->template->directory);
+        $this->assertEquals('/website', $repository->metadata['template.directory']);
     }
 
     public function testCustomDirectory()
     {
         $step       = new InitTemplate($this->createFilesystem());
         $repository = new MockRepository();
-        $repository->metadata['directory'] = 'foo';
+        $repository->metadata['template.directory'] = 'foo';
         $step->__invoke($repository, new NullOutput());
 
-        $this->assertEquals('/foo', $repository->template->directory);
+        $this->assertEquals('/foo', $repository->metadata['template.directory']);
     }
 
     /**

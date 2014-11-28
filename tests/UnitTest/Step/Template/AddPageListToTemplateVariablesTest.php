@@ -4,7 +4,6 @@ namespace Couscous\Tests\UnitTest\Step\Template;
 
 use Couscous\Model\HtmlFile;
 use Couscous\Model\Repository;
-use Couscous\Model\Template;
 use Couscous\Step\Template\AddPageListToLayoutVariables;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
@@ -72,8 +71,6 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
 
     private function invokeStep(Repository $repository, $files)
     {
-        $repository->template = new Template('', '');
-
         foreach ($files as $file) {
             $repository->addFile($file);
         }
