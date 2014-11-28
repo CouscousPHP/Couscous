@@ -24,6 +24,6 @@ class LazyFile extends File
 
     public function getMetadata()
     {
-        return array();
+        return new Metadata();
     }
 }

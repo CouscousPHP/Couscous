@@ -33,10 +33,10 @@ class ParseMarkdownFrontMatter implements StepInterface
         foreach ($markdownFiles as $file) {
             $document = $this->markdownParser->parse($file->getContent());
 
-            $metadata = $document->getYAML();
+            $metadataValues = $document->getYAML();
 
-            if (is_array($metadata)) {
-                $file->setMetadata($metadata);
+            if (is_array($metadataValues)) {
+                $file->getMetadata()->setMany($metadataValues);
             }
         }
     }

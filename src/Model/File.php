@@ -28,7 +28,7 @@ abstract class File
      *
      * Array keys are metadata names, array values are metadata values.
      *
-     * @return array
+     * @return Metadata
      */
     public abstract function getMetadata();
 }
