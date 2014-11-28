@@ -23,7 +23,6 @@ $container = $factory->createContainer();
 
 $application = new Application('Couscous', '1.0-dev');
 
-$application->add($container->get('Couscous\Command\InitCommand'));
 $application->add($container->get('Couscous\Command\GenerateCommand'));
 $application->add($container->get('Couscous\Command\PreviewCommand'));
 $application->add($container->get('Couscous\Command\DeployCommand'));

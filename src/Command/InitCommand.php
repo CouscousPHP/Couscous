@@ -9,6 +9,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Initialize the directory for Couscous.
  *
+ * TODO This command is outdated, it needs to be updated.
+ *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
 class InitCommand extends Command
