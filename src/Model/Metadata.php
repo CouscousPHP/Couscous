@@ -3,7 +3,18 @@
 namespace Couscous\Model;
 
 /**
- * Metadata.
+ * Contains metadata, accessible through array access:
+ *
+ *     $metadata['foo'] = 'test';
+ *     echo $metadata['foo'];
+ *
+ *     $metadata['foo'] = ['bar' => 'hello'];
+ *     echo $metadata['foo']['bar'];
+ *     // Or also
+ *     echo $metadata['foo.bar'];
+ *
+ *     // Non-existing keys just return null when using the `.` notation
+ *     echo $metadata['this.is.an.unknown.key'];
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
@@ -12,30 +23,37 @@ class Metadata implements \ArrayAccess
     /**
      * @var array
      */
-    private $metadata = [];
+    private $values = [];
+
+    public function __construct(array $values = [])
+    {
+        $this->values = $values;
+    }
 
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->metadata);
+        $keys = explode('.', $offset);
+
+        return $this->recursiveExist($keys, $this->values);
     }
 
     public function offsetGet($offset)
     {
-        if (! isset($this->metadata[$offset])) {
-            return null;
-        }
+        $keys = explode('.', $offset);
 
-        return $this->metadata[$offset];
+        return $this->recursiveGet($keys, $this->values);
     }
 
     public function offsetSet($offset, $value)
     {
-        $this->metadata[$offset] = $value;
+        $keys = explode('.', $offset);
+
+        $this->recursiveSet($keys, $this->values, $value);
     }
 
     public function offsetUnset($offset)
     {
-        unset($this->metadata[$offset]);
+        $this[$offset] = null;
     }
 
     /**
@@ -45,7 +63,7 @@ class Metadata implements \ArrayAccess
      */
     public function setMany(array $metadata)
     {
-        $this->metadata = array_merge($this->metadata, $metadata);
+        $this->values = array_merge($this->values, $metadata);
     }
 
     /**
@@ -53,6 +71,64 @@ class Metadata implements \ArrayAccess
      */
     public function toArray()
     {
-        return $this->metadata;
+        return $this->values;
+    }
+
+    private function recursiveGet($keys, $values)
+    {
+        $key = array_shift($keys);
+
+        if (! is_array($values)) {
+            return null;
+        }
+
+        if (! isset($values[$key])) {
+            return null;
+        }
+
+        if (empty($keys)) {
+            return $values[$key];
+        }
+
+        return $this->recursiveGet($keys, $values[$key]);
+    }
+
+    private function recursiveExist($keys, $values)
+    {
+        $key = array_shift($keys);
+
+        if (! is_array($values)) {
+            return false;
+        }
+
+        if (! isset($values[$key])) {
+            return false;
+        }
+
+        if (empty($keys)) {
+            return true;
+        }
+
+        return $this->recursiveExist($keys, $values[$key]);
+    }
+
+    private function recursiveSet($keys, &$values, $value)
+    {
+        $key = array_shift($keys);
+
+        if (! is_array($values)) {
+            $values = [];
+        }
+
+        if (empty($keys)) {
+            $values[$key] = $value;
+            return;
+        }
+
+        if (! isset($values[$key])) {
+            $values[$key] = [];
+        }
+
+        $this->recursiveSet($keys, $values[$key], $value);
     }
 }
