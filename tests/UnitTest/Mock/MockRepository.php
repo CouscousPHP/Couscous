@@ -2,7 +2,7 @@
 
 namespace Couscous\Tests\UnitTest\Mock;
 
-use Couscous\Model\RepositoryMetadata;
+use Couscous\Model\Metadata;
 use Couscous\Model\Repository;
 
 class MockRepository extends Repository
@@ -11,7 +11,7 @@ class MockRepository extends Repository
     {
         parent::__construct('', '');
 
-        $this->metadata    = new RepositoryMetadata();
+        $this->metadata    = new Metadata();
         $this->watchlist = new MockWatchList();
     }
 }

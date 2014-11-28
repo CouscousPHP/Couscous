@@ -27,7 +27,7 @@ class Repository extends \stdClass
     public $targetDirectory;
 
     /**
-     * @var RepositoryMetadata
+     * @var Metadata
      */
     public $metadata;
 
@@ -63,7 +63,7 @@ class Repository extends \stdClass
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
         $this->watchlist       = new WatchList();
-        $this->metadata        = new RepositoryMetadata();
+        $this->metadata        = new Metadata();
     }
 
     public function addFile(File $file)
@@ -108,7 +108,7 @@ class Repository extends \stdClass
      */
     public function sourceFiles()
     {
-        $excludedDirectories = $this->metadata ? $this->metadata->exclude : [];
+        $excludedDirectories = $this->metadata['exclude'] ? $this->metadata['exclude'] : [];
 
         $finder = new Finder();
         $finder->files()

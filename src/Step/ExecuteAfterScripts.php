@@ -14,7 +14,7 @@ class ExecuteAfterScripts implements StepInterface
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        foreach ($repository->metadata->after as $script) {
+        foreach ($repository->metadata['after'] as $script) {
             $this->executeScript($output, $repository->sourceDirectory, $script);
         }
     }

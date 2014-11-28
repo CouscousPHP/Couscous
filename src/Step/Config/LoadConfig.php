@@ -2,7 +2,6 @@
 
 namespace Couscous\Step\Config;
 
-use Couscous\Model\RepositoryMetadata;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -41,16 +40,13 @@ class LoadConfig implements StepInterface
 
         if (! $this->filesystem->exists($filename)) {
             $output->writeln("<comment>No couscous.yml configuration file found, using default config</comment>");
-
-            // Default empty config
-            $repository->metadata = new RepositoryMetadata();
             return;
         }
 
         $metadata = $this->parseYamlFile($filename);
+        $metadata = $this->validateConfig($metadata);
 
-        $repository->metadata = RepositoryMetadata::fromArray($metadata);
-
+        $repository->metadata->setMany($metadata);
         $repository->watchlist->watchFile($filename);
     }
 
@@ -67,5 +63,30 @@ class LoadConfig implements StepInterface
         }
 
         return $metadata;
+    }
+
+    private function validateConfig($values)
+    {
+        if (array_key_exists('exclude', $values)) {
+            $values['exclude'] = (array) $values['exclude'];
+        }
+        if (array_key_exists('directory', $values)) {
+            $values['directory'] = trim($values['directory']);
+        }
+        if (array_key_exists('before', $values)) {
+            $values['before'] = (array) $values['before'];
+        }
+        if (array_key_exists('after', $values)) {
+            $values['after'] = (array) $values['after'];
+        }
+        if (array_key_exists('templateUrl', $values)) {
+            $values['templateUrl'] = (string) $values['templateUrl'];
+        }
+        if (array_key_exists('baseUrl', $values)) {
+            // Trim any trailing "/" in the base url
+            $values['baseUrl'] = rtrim(trim($values['baseUrl']), '/');
+        }
+
+        return $values;
     }
 }

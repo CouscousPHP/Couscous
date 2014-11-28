@@ -40,7 +40,7 @@ class ProcessTwigLayouts implements StepInterface
             $context = array_merge(
                 $repository->metadata->toArray(),
                 $fileMetadata,
-                array('content' => $file->content)
+                ['content' => $file->content]
             );
 
             try {

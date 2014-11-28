@@ -18,6 +18,6 @@ class OverrideBaseUrl implements StepInterface
             return;
         }
 
-        $repository->metadata->templateVariables['baseUrl'] = $repository->overrideBaseUrl;
+        $repository->metadata['baseUrl'] = $repository->overrideBaseUrl;
     }
 }

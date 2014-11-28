@@ -29,7 +29,7 @@ class InitTemplate implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        $templateUrl = $repository->metadata->templateUrl;
+        $templateUrl = $repository->metadata['templateUrl'];
 
         if ($templateUrl !== null) {
             $this->templateFromGitUrl($repository, $templateUrl, $output);
@@ -40,8 +40,8 @@ class InitTemplate implements StepInterface
 
     private function templateFromDirectory(Repository $repository)
     {
-        if (!is_null($repository->metadata->directory)) {
-            $templateDirectory = $repository->sourceDirectory . '/' . $repository->metadata->directory;
+        if (! is_null($repository->metadata['directory'])) {
+            $templateDirectory = $repository->sourceDirectory . '/' . $repository->metadata['directory'];
 
             if (!$this->filesystem->exists($templateDirectory)) {
                 throw new \RuntimeException(sprintf(
