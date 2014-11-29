@@ -52,35 +52,64 @@
     </div>
 
     
+    <section id="templates" class="portfolio bg-light-gray">
         <div class="container">
-            <section>
-                <h1>Google Code Prettify</h1>
-<p>Direct port of svn into git from <a href="http://google-code-prettify.googlecode.com/svn/trunk/">http://google-code-prettify.googlecode.com/svn/trunk/</a></p>
-<h2>Install</h2>
-<p>via <a href="http://twitter.github.com/bower/">Bower</a></p>
-<pre><code>bower install google-code-prettify</code></pre>
-<p>or <a href="http://yeoman.io/">Yeoman</a></p>
-<pre><code>yeoman install google-code-prettify</code></pre>
-<h2>Usage</h2>
-<p>The prettify script is AMD compatible and can be used modularly. Here is an example of it using RequireJS:</p>
-<pre><code class="language-javascript">    define(['jquery', 'prettify'], function($, prettify){
-        var code = null;
-        $('pre').addClass('prettyprint').each(function(idx, el){
-                code = el.firstChild;
-                code.innerHTML = prettify.prettyPrintOne(code.innerHTML);
-            })
-        );
-    });</code></pre>
-<p>Or it may just be used in a global context like the following:</p>
-<pre><code class="language-javascript">    (function(){
-        $('pre').addClass('prettyprint');
-        prettyPrint();
-    })();</code></pre>
-<p>More information can be found in the original <a href="http://google-code-prettify.googlecode.com/svn/trunk/README.html">README.html</a></p>
-            </section>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Templates</h2>
+                    <h3 class="section-subheading text-muted">
+                        Here is a growing list of Couscous templates you can use for your website.
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="https://github.com/CouscousPHP/Template-Default" class="portfolio-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="https://raw.githubusercontent.com/CouscousPHP/Template-Default/master/screenshot.png" class="img-responsive">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Default template</h4>
+                        <p class="text-muted">The default Couscous template.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="https://github.com/CouscousPHP/Template-Basic" class="portfolio-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="https://raw.githubusercontent.com/CouscousPHP/Template-Basic/master/screenshot.png" class="img-responsive">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Basic template</h4>
+                        <p class="text-muted">A basic template to get you started to write your own.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="https://github.com/CouscousPHP/Couscous" class="portfolio-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="img/portfolio/pr.png" class="img-responsive">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Add your own</h4>
+                        <p class="text-muted">Send a pull request to add your own to the list.</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-    
+
 
     
         <script src="http://couscous.io/bower_components/jquery/jquery.min.js"></script>
