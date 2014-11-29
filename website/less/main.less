@@ -89,11 +89,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 // Global Section Styles
-
-section, header {
-  margin-bottom: 100px;
-}
 section {
+  padding: 100px 0;
   h2.section-heading {
 	font-size: 40px;
 	margin-top: 0;
@@ -108,10 +105,15 @@ section {
 	margin-bottom: 75px;
   }
 }
-
+section:first-child {
+  padding-top: 0;
+}
 @media(min-width:768px) {
-  section, header {
-    margin-bottom: 150px;
+  section {
+    padding: 120px 0;
+  }
+  section:first-child {
+    padding-top: 20px;
   }
 }
 
