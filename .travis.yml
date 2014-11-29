@@ -8,6 +8,19 @@ php:
 
 before_script:
   - composer install --no-progress
+  - npm install -g less
+  - npm install -g less-plugin-clean-css
 
 script:
   - phpunit
+
+after_success:
+  - php bin/couscous generate
+  - sh bin/deploy.sh
+
+env:
+  global:
+  - GIT_NAME: CouscousPHP Auto Deploy
+  - GIT_EMAIL: test@couscousphp.io
+  - GH_REF: github.com/lombartec/Couscous
+  - secure: vpbd+T1eTHwlXaQHPeuTReQ34CgyyI+ZR8ZswE3eBxK2jkLa653r3J7RTfUVC5X73bT12PT2I+SrGpDcROCGDx/b0CnKNsn7fpcvSHxlWEm0neRp7N1NYwpVbzjwVlLSrCqKCQf3VsmuXAZAim+JxHMGV4+pnW73Z0pnsJWS22U=
