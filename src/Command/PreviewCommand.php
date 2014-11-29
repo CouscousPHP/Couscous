@@ -101,8 +101,7 @@ class PreviewCommand extends Command
     ) {
         $repository = new Repository($sourceDirectory, $targetDirectory);
 
-        // Override baseUrl since we are running it ourselves
-        $repository->overrideBaseUrl = '';
+        $repository->metadata['preview'] = true;
 
         $repository->regenerate = $regenerate;
 

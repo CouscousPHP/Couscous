@@ -8,7 +8,7 @@ return array(
         'Couscous\Step\ClearTargetDirectory',
         'Couscous\Step\Config\SetDefaultConfig',
         'Couscous\Step\Config\LoadConfig',
-        'Couscous\Step\OverrideBaseUrl',
+        'Couscous\Step\Config\OverrideBaseUrlForPreview',
         'Couscous\Step\ExecuteBeforeScripts',
         'Couscous\Step\Template\UseDefaultTemplate',
         'Couscous\Step\Template\InitTemplate',
