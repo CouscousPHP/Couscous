@@ -7,7 +7,7 @@ exclude:
   - tests
 
 before:
-  - bin/compile
+  - php bin/compile
   - cp bin/couscous.phar website/
   - lessc --clean-css website/less/main.less website/css/all.min.css
 
