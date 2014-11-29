@@ -14,7 +14,13 @@ class ExecuteBeforeScripts implements StepInterface
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        foreach ($repository->metadata['before'] as $script) {
+        $scripts = $repository->metadata['before'];
+
+        if (empty($scripts)) {
+            return;
+        }
+
+        foreach ($scripts as $script) {
             $this->executeScript($output, $repository->sourceDirectory, $script);
         }
     }
