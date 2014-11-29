@@ -33,4 +33,9 @@ return array(
     'Couscous\Generator' => DI\object()
         ->constructorParameter('steps', DI\link('steps')),
 
+    'Mni\FrontYAML\Parser' => DI\object()
+        ->constructorParameter('markdownParser', DI\link('Mni\FrontYAML\Markdown\MarkdownParser')),
+    'Mni\FrontYAML\Markdown\MarkdownParser' => DI\object('Mni\FrontYAML\Bridge\Parsedown\ParsedownParser')
+        ->constructor(DI\link('ParsedownExtra')),
+
 );
