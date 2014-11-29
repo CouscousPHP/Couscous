@@ -57,8 +57,11 @@
 <p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
 <p>That configuration file is optional.</p>
 <p>Reference:</p>
-<pre><code class="language-yaml"># Name of the directory containing the website template (default is "website")
-directory: website
+<pre><code class="language-yaml">template:
+    # Name of the directory containing the website template (default is "website")
+    directory: website
+    # Or if you are using a remote template, you can set the Git URL
+    url: https://github.com/CouscousPHP/Template-Default.git
 
 # List of directories to exclude from the processing (default contains "vendor" and "website")
 # Paths are relative to the repository root
@@ -75,14 +78,14 @@ before:
 after:
     - rm website/couscous.phar
 
-# Any variable you put in "template" is available in the Twig layouts
-template:
+# Any variable you put in this file is also available in the Twig layouts:
+title: Hello!
 
-    title: Hello!
-
-    # Base URL of the published website (no "/" at the end!)
-    # You are advised to set and use this variable to write your links in the HTML layouts
-    baseUrl: http://username.github.io/your-project</code></pre>
+# Base URL of the published website (no "/" at the end!)
+# You are advised to set and use this variable to write your links in the HTML layouts
+baseUrl: http://username.github.io/your-project</code></pre>
+<p><strong>Note:</strong> any variable you put in the <code>couscous.yml</code> is available in templates.
+You can use this to define the website's title for example, or any global variable.</p>
             </section>
         </div>
 
