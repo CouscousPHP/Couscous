@@ -7,21 +7,11 @@ Couscous generates a [GitHub pages](http://pages.github.com/) website from your 
 [![Build Status](https://travis-ci.org/CouscousPHP/Couscous.svg?branch=master)](https://travis-ci.org/CouscousPHP/Couscous)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/?branch=master)
 
-Read more about Couscous and its documentation on [the website](http://couscous.io/). This README is targeted at developers.
-
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/CouscousPHP/Couscous)
 
-## Why?
+**Everything is documented on [couscous.io](http://couscous.io/).**
 
-Couscous is different from other static websites generators like [Sculpin](https://sculpin.io/), [Phrozn](http://phrozn.info/) or [Gumdropp](http://gumdropapp.com/). They are generic static websites generator, sometimes targeted for blogs, and using them to put documentation online is clunky. They also all require a specific directory layout which is incompatible with how we usually store documentation alongside our code.
-
-Couscous lets you get started with *no requirements* and a single command. And deploy without prior configuration with one command too.
-
-So if you want to put a blog online, use Sculpin! If you want documentation, use Couscous!
-
-## Usage
-
-Everything is documented on [the website](http://couscous.io/).
+What follows is the documentation for contributors.
 
 ## How Couscous works?
 
