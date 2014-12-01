@@ -11,7 +11,7 @@
 
     <link href="http://couscous.io/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://couscous.io/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://couscous.io/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://couscous.io/css/prettify.tomorrow-night-eighties.css" rel="stylesheet">
     <link href="http://couscous.io/css/all.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -52,15 +52,63 @@
     </div>
 
     
-        <div class="container">
-            <section>
-                <h1>Getting started</h1>
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                    <ul class="nav nav-pills nav-stacked">
+                                                    <li class="active">
+                                <a href="http://couscous.io/docs/getting-started.html">
+                                    Get started
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/">
+                                    Index
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/configuration.html">
+                                    Configuration
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/templates.html">
+                                    Templates
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/faq.html">
+                                    FAQ
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/changelog.html">
+                                    Change log
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/contributing.html">
+                                    Contributing
+                                </a>
+                            </li>
+                                            </ul>
+
+                </nav>
+
+                <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Getting started</h1>
 <h2>Requirements</h2>
-<p>Couscous requires PHP 5.4 or above.</p>
+<p>Couscous requires PHP 5.4 or above on your machine.</p>
 <h2>Installation</h2>
+<h3>Composer</h3>
 <p>If you have already <a href="http://akrabat.com/php/global-installation-of-php-tools-with-composer/">set up a global install of Composer</a> just run:</p>
 <pre><code>$ composer global require couscous/couscous</code></pre>
 <p>You can also add Couscous as a dependency for a project with <code>composer require couscous/couscous</code>.</p>
+<p>Be aware that in order for Couscous to be awesome it will install a good amount of other dependencies.
+If you rather have it self-contained, use the <strong>Phar</strong> method just below.</p>
+<h3>Phar</h3>
 <p>Alternatively, you can download <a href="http://couscous.io/couscous.phar">couscous.phar</a>:</p>
 <pre><code class="language-bash">$ curl -OS http://couscous.io/couscous.phar</code></pre>
 <p>If you want to run <code>couscous</code> instead of <code>php couscous.phar</code>, move it to <code>/usr/local/bin</code>:</p>
@@ -69,7 +117,7 @@ $ sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 <h2>Preview</h2>
 <p>Let's not waste time and run:</p>
 <pre><code class="language-bash">$ couscous preview</code></pre>
-<p>Couscous will take every <code>*.md</code> file it finds in your repository and convert it to HTML files, keeping the same directory structure (<code>README.md</code> files will be renamed to <code>index.html</code>). You can then visit <a href="http://localhost:8000/"><a href="http://localhost:8000/">http://localhost:8000/</a></a> to preview the result!</p>
+<p>Couscous will take every <code>*.md</code> file it finds in your current directory and convert it to HTML files, keeping the same directory structure (<code>README.md</code> files will be renamed to <code>index.html</code>). You can then visit <a href="http://localhost:8000/"><a href="http://localhost:8000/">http://localhost:8000/</a></a> to preview the result!</p>
 <p>Be assured that this command will not modify your repository.</p>
 <h2>Deploy</h2>
 <p>Happy with the result? Here is how to deploy:</p>
@@ -78,8 +126,10 @@ $ sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 <p>The website is now online: <a href="http://your-username.github.io/your-project/"><a href="http://your-username.github.io/your-project/">http://your-username.github.io/your-project/</a></a>.</p>
 <p>The <code>deploy</code> command will not change anything in your current branch (e.g. master branch). It will only affect the <code>gh-pages</code> branch.</p>
 <h2>Customizing the template</h2>
-<p>Couscous provides a default template, but you can of course come up with your own. Writing templates is really simple, and it is all explained in the <a href="templates.html">templates documentation</a>.</p>
-            </section>
+<p>Couscous provides a default template (and a <a href="http://couscous.io/templates.html">few others to choose from</a>), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the <a href="templates.html">templates documentation</a>.</p>
+                </section>
+
+            </div>
         </div>
 
     

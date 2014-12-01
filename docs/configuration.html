@@ -11,7 +11,7 @@
 
     <link href="http://couscous.io/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://couscous.io/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://couscous.io/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://couscous.io/css/prettify.tomorrow-night-eighties.css" rel="stylesheet">
     <link href="http://couscous.io/css/all.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -52,9 +52,53 @@
     </div>
 
     
-        <div class="container">
-            <section>
-                <h1>Configuration with couscous.yml</h1>
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                    <ul class="nav nav-pills nav-stacked">
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/getting-started.html">
+                                    Get started
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/">
+                                    Index
+                                </a>
+                            </li>
+                                                    <li class="active">
+                                <a href="http://couscous.io/docs/configuration.html">
+                                    Configuration
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/templates.html">
+                                    Templates
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/faq.html">
+                                    FAQ
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/changelog.html">
+                                    Change log
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/contributing.html">
+                                    Contributing
+                                </a>
+                            </li>
+                                            </ul>
+
+                </nav>
+
+                <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Configuration with couscous.yml</h1>
 <p>You can define options in a <code>couscous.yml</code> file at the root of your repository.</p>
 <p>That configuration file is optional.</p>
 <p>Reference:</p>
@@ -71,13 +115,13 @@ exclude:
     - website
     - some/dir
 
-# Scripts to execute before generating the website
-before:
-    - cp bin/couscous.phar website/
-
-# Scripts to execute after generating the website
-after:
-    - rm website/couscous.phar
+scripts:
+    # Scripts to execute before generating the website
+    before:
+        - cp bin/couscous.phar website/
+    # Scripts to execute after generating the website
+    after:
+        - rm website/couscous.phar
 
 # Any variable you put in this file is also available in the Twig layouts:
 title: Hello!
@@ -87,7 +131,9 @@ title: Hello!
 baseUrl: http://username.github.io/your-project</code></pre>
 <p><strong>Note:</strong> any variable you put in the <code>couscous.yml</code> is available in templates.
 You can use this to define the website's title for example, or any global variable.</p>
-            </section>
+                </section>
+
+            </div>
         </div>
 
     

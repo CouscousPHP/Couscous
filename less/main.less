@@ -4,6 +4,7 @@
 @import "home-header";
 @import "timeline";
 @import "portfolio";
+@import "sidebar";
 
 // Global Components
 
@@ -105,7 +106,7 @@ section {
 	margin-bottom: 75px;
   }
 }
-section:first-child {
+section.documentation {
   padding-top: 0;
 }
 @media(min-width:768px) {
@@ -141,58 +142,6 @@ section:first-child {
 aside.clients {
   img {
 	margin: 50px auto;
-  }
-}
-
-// Contact Section
-
-section#contact {
-  background-color: @gray-darkest;
-  background-image: url('../img/map-image.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  .section-heading {
-	color: white;
-  }
-  .form-group {
-	margin-bottom: 25px;
-	input,
-	textarea {
-	  padding: 20px;
-	}
-	input.form-control {
-	  height: auto;
-	}
-	textarea.form-control {
-	  height: 236px;
-	}
-  }
-  .form-control:focus {
-	border-color: @brand-primary;
-	box-shadow: none;
-  }
-  ::-webkit-input-placeholder {
-	.heading-font;
-	font-weight: 700;
-	color: @placeholder-text;
-  }
-  :-moz-placeholder { /* Firefox 18- */
-	.heading-font;
-	font-weight: 700;
-	color: @placeholder-text;
-  }
-  ::-moz-placeholder {  /* Firefox 19+ */
-	.heading-font;
-	font-weight: 700;
-	color: @placeholder-text;
-  }
-  :-ms-input-placeholder {
-	.heading-font;
-	font-weight: 700;
-	color: @placeholder-text;
-  }
-  .text-danger {
-	color: @brand-danger;
   }
 }
 
@@ -273,6 +222,13 @@ body {
 }
 
 pre.prettyprint {
-  padding: 10px;
+  margin: 15px 0;
+  padding: 15px;
   border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.documentation h2 {
+  margin-top: 30px;
+  margin-bottom: 20px;
 }

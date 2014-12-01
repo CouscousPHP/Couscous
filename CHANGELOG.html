@@ -11,7 +11,7 @@
 
     <link href="http://couscous.io/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://couscous.io/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://couscous.io/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://couscous.io/css/prettify.tomorrow-night-eighties.css" rel="stylesheet">
     <link href="http://couscous.io/css/all.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -52,9 +52,53 @@
     </div>
 
     
-        <div class="container">
-            <section>
-                <h1>Changelog</h1>
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                    <ul class="nav nav-pills nav-stacked">
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/getting-started.html">
+                                    Get started
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/">
+                                    Index
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/configuration.html">
+                                    Configuration
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/templates.html">
+                                    Templates
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/faq.html">
+                                    FAQ
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/changelog.html">
+                                    Change log
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/contributing.html">
+                                    Contributing
+                                </a>
+                            </li>
+                                            </ul>
+
+                </nav>
+
+                <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Changelog</h1>
 <h2>1.0.0</h2>
 <p>BC breaking changes:</p>
 <ul>
@@ -64,9 +108,14 @@
 <li>the config option <code>templateVariables.baseUrl</code> is now <code>baseUrl</code></li>
 <li>the config option <code>templateUrl</code> is now <code>template.url</code></li>
 <li>the config option <code>directory</code> is now <code>template.directory</code></li>
+<li>the config options <code>before</code> and <code>after</code> are now <code>scripts.before</code> and <code>scripts.after</code></li>
 </ul>
 <p>Major new features:</p>
 <ul>
+<li>Couscous now provides a default template and 2 other alternative templates</li>
+<li>Documentation overhaul</li>
+<li>Simpler commands</li>
+<li>Markdown Extra support</li>
 <li><a href="https://github.com/CouscousPHP/Couscous/pull/10">#10</a> automatically install Bower dependencies if a <code>bower.json</code> file is in <code>website/public/</code></li>
 </ul>
 <p>Minor new features:</p>
@@ -78,7 +127,9 @@
 <ul>
 <li><a href="https://github.com/CouscousPHP/Couscous/issues/7">#7</a>, <a href="https://github.com/CouscousPHP/Couscous/issues/12">#12</a> The preview command now detects any file change (to regenerate the website)</li>
 </ul>
-            </section>
+                </section>
+
+            </div>
         </div>
 
     

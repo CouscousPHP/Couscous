@@ -11,7 +11,7 @@
 
     <link href="http://couscous.io/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://couscous.io/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://couscous.io/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://couscous.io/css/prettify.tomorrow-night-eighties.css" rel="stylesheet">
     <link href="http://couscous.io/css/all.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -52,29 +52,70 @@
     </div>
 
     
-        <div class="container">
-            <section>
-                <h1>Templates</h1>
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                    <ul class="nav nav-pills nav-stacked">
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/getting-started.html">
+                                    Get started
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/">
+                                    Index
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/configuration.html">
+                                    Configuration
+                                </a>
+                            </li>
+                                                    <li class="active">
+                                <a href="http://couscous.io/docs/templates.html">
+                                    Templates
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/faq.html">
+                                    FAQ
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/changelog.html">
+                                    Change log
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/contributing.html">
+                                    Contributing
+                                </a>
+                            </li>
+                                            </ul>
+
+                </nav>
+
+                <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Templates</h1>
 <h2>Remote templates</h2>
-<p>A "remote template" is a template that is hosted separately in a git repository.
-It allows many project to reuse the same template.</p>
-<p>To write a remote template, just write a normal template inside a directory (so read below).
-Then publish that directory on GitHub (for example).</p>
-<p>Layout example:</p>
-<pre><code>my-template/
-    style.css
-    default.twig
-    README.md # explain how to install your template</code></pre>
-<p>Here are some examples of templates:</p>
-<ul>
-<li><a href="https://github.com/myclabs/couscous-template">MyCLabs template</a></li>
-</ul>
-<h2>Local templates</h2>
-<p>Templates contain Twig layouts and assets (javascripts, css…). They should be inside <code>website</code> directory (or whatever you named it).</p>
-<p>The default Twig layout that is used for rendering the pages is named <code>default.twig</code>.</p>
+<p>A <strong>remote template</strong> is a template that is hosted separately in a git repository.
+It allows many projects to reuse the same template.</p>
+<p>To write a remote template, just write a normal template inside a directory (read below for understanding how).
+Then publish that directory online (for example on GitHub).</p>
+<p>You can find some examples of templates <a href="http://couscous.io/templates.html">here</a>.
+The <a href="https://github.com/CouscousPHP/Template-Basic">Basic</a> template is a good way to start.</p>
+<p><em>ProTip:</em> To preview your template, you can use <code>couscous preview</code> (Couscous will use your template's Readme). In order to tell Couscous that the template is in the root of the repository (and not in a <code>website/</code> subdirectory), use the following configuration:</p>
+<pre><code class="language-yaml">template:
+    directory: .</code></pre>
+<h2>Embedded templates</h2>
+<p>Templates contain Twig layouts and assets (javascripts, css…). They should be stored inside a <code>website/</code> directory (or <a href="configuration.html">whatever you configured</a>) in your project.</p>
+<h3>Default layout</h3>
+<p>The default Twig layout that is used for rendering the pages should be named <code>default.twig</code>.</p>
 <p>Example of a <code>default.twig</code>:</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
+&lt;html&gt;
     &lt;head&gt;
         &lt;title&gt;My project!&lt;/title&gt;
     &lt;/head&gt;
@@ -86,6 +127,8 @@ Then publish that directory on GitHub (for example).</p>
         {% endblock %}
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
+<p>The only variable you can use by default is <code>content</code>. This variable contains the content of the Markdown file rendered to HTML.</p>
+<h3>Additional layouts</h3>
 <p>If, for example, you want your home page to have a different layout, you can write a <code>home.twig</code>
 that overrides <code>default.twig</code>:</p>
 <pre><code class="language-html">{% extends "default.twig" %}
@@ -95,7 +138,7 @@ that overrides <code>default.twig</code>:</p>
 
     {{ content|raw }}
 {% endblock %}</code></pre>
-<p>You can set your <code>README.md</code> (i.e. your home page) to use that layout using YAML Front matter in the Markdown file:</p>
+<p>You can set your <code>README.md</code> (i.e. your home page) to use that layout using <a href="http://jekyllrb.com/docs/frontmatter/">YAML front matter</a> in the Markdown file:</p>
 <pre><code class="language-markdown">---
 layout: home
 ---
@@ -104,17 +147,38 @@ This is my documentation.
 ## Subtitle
 
 This is a *sub-chapter*.</code></pre>
-<p><strong>Good to know: any variable you put in the YAML Front matter is accessible in the view,</strong>
-just like with <code>couscous.yml</code> (and you can override values from <code>couscous.yml</code>).</p>
-<p>Example:</p>
+<h3>Variables</h3>
+<p>Variables can be defined in:</p>
+<ul>
+<li><code>couscous.yml</code></li>
+<li>YAML front matter (at the top of Markdown files)</li>
+</ul>
+<p>Those variables are accessible in the Twig layouts, for example:</p>
+<pre><code class="language-yaml"># couscous.yml
+title: "This is the website title!"</code></pre>
 <pre><code class="language-markdown">---
-layout: home
-myVar: true
-myOtherVar: "Some string"
+category: "Star Wars"
 ---
 This is my documentation.</code></pre>
-<h2>Links</h2>
-<p>To ensure all your links are working correctly, you should define a <code>baseUrl</code> in <code>configuration.yml</code>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;{{ title }}&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        {% block content %}
+
+            &lt;h1&gt;Category: {{ category }}&lt;/h1&gt;
+
+            {{ content|raw }}
+
+        {% endblock %}
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>You can even override <code>couscous.yml</code> variables from the Markdown files's front matter (e.g. overriding the page title).</p>
+<p>Have a look at the <a href="https://github.com/CouscousPHP/Template-Light">Light template</a>: it uses variables to build a sidebar menu.</p>
+<h3>Links</h3>
+<p>To ensure all your links are working correctly, you should define a <code>baseUrl</code> variable in <code>couscous.yml</code>
 (see <a href="configuration.html">the configuration documentation</a>).</p>
 <p>Then you can use it in the layouts:</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
@@ -134,14 +198,16 @@ This is my documentation.</code></pre>
         {% endblock %}
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-<p>All your Markdown links should be rewritten and work. However, make sure you write relative links.
-A good rule of thumb is: if it works on GitHub.com, it will work with Couscous.</p>
+<p>All your Markdown links will be rewritten by Couscous to work. However, make sure you write relative links.
+A good rule of thumb is: <strong>if it works on GitHub.com, it will work with Couscous</strong>.</p>
 <h2>Bower</h2>
 <p>If a <code>bower.json</code> file is present in the <code>website/</code> directory, dependencies will be
 installed automatically.</p>
 <p>You don't need to have Bower installed on your machine, Couscous internally uses
 <a href="http://bowerphp.org/">BowerPHP</a>.</p>
-            </section>
+                </section>
+
+            </div>
         </div>
 
     

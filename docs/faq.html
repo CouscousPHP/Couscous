@@ -11,7 +11,7 @@
 
     <link href="http://couscous.io/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://couscous.io/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://couscous.io/bower_components/google-code-prettify/src/prettify.css" rel="stylesheet">
+    <link href="http://couscous.io/css/prettify.tomorrow-night-eighties.css" rel="stylesheet">
     <link href="http://couscous.io/css/all.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -52,16 +52,69 @@
     </div>
 
     
-        <div class="container">
-            <section>
-                <h1>Frequently asked questions</h1>
-<h3>Does Couscous supports GitHub fenced code blocks in Markdown?</h3>
-<p>Yes!</p>
-<h3>Do links works between pages?</h3>
-<p>Yes, they are supposed to work just like they work on GitHub.com.</p>
-<h3>Why is it named Couscous?</h3>
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                    <ul class="nav nav-pills nav-stacked">
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/getting-started.html">
+                                    Get started
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/">
+                                    Index
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/configuration.html">
+                                    Configuration
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/templates.html">
+                                    Templates
+                                </a>
+                            </li>
+                                                    <li class="active">
+                                <a href="http://couscous.io/docs/faq.html">
+                                    FAQ
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/changelog.html">
+                                    Change log
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/contributing.html">
+                                    Contributing
+                                </a>
+                            </li>
+                                            </ul>
+
+                </nav>
+
+                <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Frequently asked questions</h1>
+<h4>Does Couscous supports GitHub fenced code blocks in Markdown?</h4>
+<p>Yes.</p>
+<h4>Do links works between pages?</h4>
+<p>Yes, they work just like on GitHub.com.</p>
+<p>Links in Markdown are rewritten to link to HTML pages: a link to <code>changelog.md</code> will be rewritten to <code>changelog.html</code>.</p>
+<h4>Can I use it for a blog?</h4>
+<p>Probably not yet, but you are welcome to try. <a href="http://php-di.org/news/">PHP-DI's website</a> has a pseudo-blog where the article list is written manually: it's possible, but not (yet) super easy.</p>
+<h4>Can I deploy the website to something else than GitHub Pages?</h4>
+<p>It is planned! In the meantime, you can simply use <code>couscous generate</code> and upload the files to your webserver manually.</p>
+<h4>Why not build Couscous on top of Sculpin?</h4>
+<p>I tried.</p>
+<h4>Why is it named Couscous?</h4>
 <p>Because Couscous is good, and so is this.</p>
-            </section>
+                </section>
+
+            </div>
         </div>
 
     
