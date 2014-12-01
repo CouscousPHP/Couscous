@@ -2,9 +2,11 @@
 
 ## Requirements
 
-Couscous requires PHP 5.4 or above.
+Couscous requires PHP 5.4 or above on your machine.
 
 ## Installation
+
+### Composer
 
 If you have already [set up a global install of Composer](http://akrabat.com/php/global-installation-of-php-tools-with-composer/) just run:
 
@@ -13,6 +15,11 @@ $ composer global require couscous/couscous
 ```
 
 You can also add Couscous as a dependency for a project with `composer require couscous/couscous`.
+
+Be aware that in order for Couscous to be awesome it will install a good amount of other dependencies.
+If you rather have it self-contained, use the **Phar** method just below.
+
+### Phar
 
 Alternatively, you can download [couscous.phar](http://couscous.io/couscous.phar):
 
@@ -35,7 +42,7 @@ Let's not waste time and run:
 $ couscous preview
 ```
 
-Couscous will take every `*.md` file it finds in your repository and convert it to HTML files, keeping the same directory structure (`README.md` files will be renamed to `index.html`). You can then visit [http://localhost:8000/](http://localhost:8000/) to preview the result!
+Couscous will take every `*.md` file it finds in your current directory and convert it to HTML files, keeping the same directory structure (`README.md` files will be renamed to `index.html`). You can then visit [http://localhost:8000/](http://localhost:8000/) to preview the result!
 
 Be assured that this command will not modify your repository.
 
@@ -55,4 +62,4 @@ The `deploy` command will not change anything in your current branch (e.g. maste
 
 ## Customizing the template
 
-Couscous provides a default template, but you can of course come up with your own. Writing templates is really simple, and it is all explained in the [templates documentation](templates.md).
+Couscous provides a default template (and a [few others to choose from](http://couscous.io/templates.html)), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the [templates documentation](templates.md).
