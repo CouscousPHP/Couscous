@@ -13,6 +13,10 @@ BC breaking changes:
 
 Major new features:
 
+- Couscous now provides a default template and 2 other alternative templates
+- Documentation overhaul
+- Simpler commands
+- Markdown Extra support
 - [#10](https://github.com/CouscousPHP/Couscous/pull/10) automatically install Bower dependencies if a `bower.json` file is in `website/public/`
 
 Minor new features:
