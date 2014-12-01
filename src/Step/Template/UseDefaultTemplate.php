@@ -14,7 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class UseDefaultTemplate implements StepInterface
 {
-    const DEFAULT_TEMPLATE_URL = 'https://github.com/CouscousPHP/Template-Default.git';
+    const DEFAULT_TEMPLATE_URL = 'https://github.com/CouscousPHP/Template-Light.git';
 
     /**
      * @var Filesystem
