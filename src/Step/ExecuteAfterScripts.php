@@ -14,7 +14,7 @@ class ExecuteAfterScripts implements StepInterface
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        $scripts = $repository->metadata['after'];
+        $scripts = $repository->metadata['scripts.after'];
 
         if (empty($scripts)) {
             return;

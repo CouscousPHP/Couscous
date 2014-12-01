@@ -1,41 +1,41 @@
 template:
-  directory: website
+    directory: website
 
 exclude:
-  - vendor
-  - bin
-  - tests
+    - vendor
+    - bin
+    - tests
 
-before:
-  - bin/compile
-  - cp bin/couscous.phar website/
-  - lessc --clean-css website/less/main.less website/css/all.min.css
-
-after:
-  - rm website/couscous.phar
+scripts:
+    before:
+        - bin/compile
+        - cp bin/couscous.phar website/
+        - lessc --clean-css website/less/main.less website/css/all.min.css
+    after:
+        - rm website/couscous.phar
 
 baseUrl: http://couscous.io
 
 menu:
-  items:
-    getting-started:
-      text: Get started
-      relativeUrl: docs/getting-started.html
-    documentation:
-      text: Index
-      relativeUrl: docs/
-    configuration:
-      text: Configuration
-      relativeUrl: docs/configuration.html
-    templates:
-      text: Templates
-      relativeUrl: docs/templates.html
-    faq:
-      text: FAQ
-      relativeUrl: docs/faq.html
-    changelog:
-      text: Change log
-      relativeUrl: changelog.html
-    contributing:
-      text: Contributing
-      relativeUrl: contributing.html
+    items:
+        getting-started:
+            text: Get started
+            relativeUrl: docs/getting-started.html
+        documentation:
+            text: Index
+            relativeUrl: docs/
+        configuration:
+            text: Configuration
+            relativeUrl: docs/configuration.html
+        templates:
+            text: Templates
+            relativeUrl: docs/templates.html
+        faq:
+            text: FAQ
+            relativeUrl: docs/faq.html
+        changelog:
+            text: Change log
+            relativeUrl: changelog.html
+        contributing:
+            text: Contributing
+            relativeUrl: contributing.html

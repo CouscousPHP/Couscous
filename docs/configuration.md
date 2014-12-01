@@ -23,13 +23,13 @@ exclude:
     - website
     - some/dir
 
-# Scripts to execute before generating the website
-before:
-    - cp bin/couscous.phar website/
-
-# Scripts to execute after generating the website
-after:
-    - rm website/couscous.phar
+scripts:
+    # Scripts to execute before generating the website
+    before:
+        - cp bin/couscous.phar website/
+    # Scripts to execute after generating the website
+    after:
+        - rm website/couscous.phar
 
 # Any variable you put in this file is also available in the Twig layouts:
 title: Hello!

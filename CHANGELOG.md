@@ -10,6 +10,7 @@ BC breaking changes:
 - the config option `templateVariables.baseUrl` is now `baseUrl`
 - the config option `templateUrl` is now `template.url`
 - the config option `directory` is now `template.directory`
+- the config options `before` and `after` are now `scripts.before` and `scripts.after`
 
 Major new features:
 
