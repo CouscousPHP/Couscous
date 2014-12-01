@@ -1,3 +1,6 @@
+---
+current_menu: getting-started
+---
 # Getting started
 
 ## Requirements

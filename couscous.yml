@@ -15,3 +15,27 @@ after:
   - rm website/couscous.phar
 
 baseUrl: http://couscous.io
+
+menu:
+  items:
+    getting-started:
+      text: Get started
+      relativeUrl: docs/getting-started.html
+    documentation:
+      text: Index
+      relativeUrl: docs/
+    configuration:
+      text: Configuration
+      relativeUrl: docs/configuration.html
+    templates:
+      text: Templates
+      relativeUrl: docs/templates.html
+    faq:
+      text: FAQ
+      relativeUrl: docs/faq.html
+    changelog:
+      text: Change log
+      relativeUrl: changelog.html
+    contributing:
+      text: Contributing
+      relativeUrl: contributing.html

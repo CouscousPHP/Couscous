@@ -1,3 +1,6 @@
+---
+current_menu: configuration
+---
 # Configuration with couscous.yml
 
 You can define options in a `couscous.yml` file at the root of your repository.

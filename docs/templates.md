@@ -1,3 +1,6 @@
+---
+current_menu: templates
+---
 # Templates
 
 

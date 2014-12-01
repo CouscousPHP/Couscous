@@ -1,3 +1,6 @@
+---
+current_menu: faq
+---
 # Frequently asked questions
 
 ### Does Couscous supports GitHub fenced code blocks in Markdown?
