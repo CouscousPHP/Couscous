@@ -37,6 +37,8 @@ $ chmod +x couscous.phar
 $ sudo mv couscous.phar /usr/local/bin/couscous
 ```
 
+Please note that you need to have the `phar` extension installed to use this method. It should be installed by default on most OSes.
+
 ## Preview
 
 Let's not waste time and run:
