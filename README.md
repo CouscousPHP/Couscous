@@ -62,6 +62,8 @@ class PutCouscousInBold implements StepInterface
 
 Couscous uses [PHP-DI](http://php-di.org/) for wiring everything together with dependency injection.
 
+The full list of steps is configured in [`src/config.php`](src/config.php).
+
 ### Website deployment
 
 Couscous deploys by cloning (in a temp directory) the current repository, checking out the `gh-pages` branch, generating the website inside it, committing and pushing.
