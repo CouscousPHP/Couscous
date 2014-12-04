@@ -120,6 +120,7 @@ $ sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 <pre><code class="language-bash">$ couscous preview</code></pre>
 <p>Couscous will take every <code>*.md</code> file it finds in your current directory and convert it to HTML files, keeping the same directory structure (<code>README.md</code> files will be renamed to <code>index.html</code>). You can then visit <a href="http://localhost:8000/"><a href="http://localhost:8000/">http://localhost:8000/</a></a> to preview the result!</p>
 <p>Be assured that this command will not modify your repository.</p>
+<p>Liking what you see? The default template comes with a header and an optional left menu (which is hidden if it is not configured). You can configure all that <a href="configuration.html">by creating a <code>couscous.yml</code></a> and checking out all the options <a href="https://github.com/CouscousPHP/Template-Light">on the template's homepage</a>.</p>
 <h2>Deploy</h2>
 <p>Happy with the result? Here is how to deploy:</p>
 <pre><code class="language-bash">$ couscous deploy</code></pre>
@@ -127,7 +128,7 @@ $ sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 <p>The website is now online: <a href="http://your-username.github.io/your-project/"><a href="http://your-username.github.io/your-project/">http://your-username.github.io/your-project/</a></a>.</p>
 <p>The <code>deploy</code> command will not change anything in your current branch (e.g. master branch). It will only affect the <code>gh-pages</code> branch.</p>
 <h2>Customizing the template</h2>
-<p>Couscous provides a default template (and a <a href="http://couscous.io/templates.html">few others to choose from</a>), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the <a href="templates.html">templates documentation</a>.</p>
+<p>Couscous provides <a href="https://github.com/CouscousPHP/Template-Light">a default template</a> (and a <a href="http://couscous.io/templates.html">few others to choose from</a>), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the <a href="templates.html">templates documentation</a>.</p>
                 </section>
 
             </div>
