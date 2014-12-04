@@ -51,6 +51,8 @@ Couscous will take every `*.md` file it finds in your current directory and conv
 
 Be assured that this command will not modify your repository.
 
+Liking what you see? The default template comes with a header and an optional left menu (which is hidden if it is not configured). You can configure all that [by creating a `couscous.yml`](configuration.md) and checking out all the options [on the template's homepage](https://github.com/CouscousPHP/Template-Light).
+
 ## Deploy
 
 Happy with the result? Here is how to deploy:
@@ -67,4 +69,4 @@ The `deploy` command will not change anything in your current branch (e.g. maste
 
 ## Customizing the template
 
-Couscous provides a default template (and a [few others to choose from](http://couscous.io/templates.html)), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the [templates documentation](templates.md).
+Couscous provides [a default template](https://github.com/CouscousPHP/Template-Light) (and a [few others to choose from](http://couscous.io/templates.html)), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the [templates documentation](templates.md).
