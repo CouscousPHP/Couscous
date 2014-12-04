@@ -37,7 +37,8 @@ $builder->buildFromIterator(
     Finder::create()
         ->files()
         ->name('*.php')
-        ->exclude('Tests')
+        ->name('*.pem*')
+        ->exclude(['Tests', 'tests', 'phpunit'])
         ->in($couscousDir . '/vendor')
         ->getIterator(),
     $couscousDir
