@@ -110,6 +110,19 @@
 </ul>
 <p>One may ask you to <a href="http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html">squash your commits</a> too. This is used to "clean" your pull request before merging it (we don't want commits such as <code>fix tests</code>, <code>fix 2</code>, <code>fix 3</code>, etc.).</p>
 <p>When creating your pull request on GitHub, please write a description which gives the context and/or explains why you are creating it.</p>
+<h2>Requirements</h2>
+<p>To be able to preview Couscous own website, you will need the following tools installed:</p>
+<ul>
+<li>
+<p>Less compiler:</p>
+<pre><code>$ npm install -g less</code></pre>
+</li>
+<li>
+<p>Phar generation enabled in <code>php.ini</code>:</p>
+<pre><code>phar.readonly = Off</code></pre>
+</li>
+</ul>
+<p>Then you can run <code>bin/couscous preview</code>.</p>
 <h2>Building the phar</h2>
 <p>To generate the phar yourself, you need to allow Phar generation in your <code>php.ini</code> (<a href="http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly"><code>phar.readonly = Off</code></a>).</p>
 <p>The procedure is then quite simple, check out the repository and:</p>
