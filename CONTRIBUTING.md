@@ -14,6 +14,24 @@ One may ask you to [squash your commits](http://gitready.com/advanced/2009/02/10
 
 When creating your pull request on GitHub, please write a description which gives the context and/or explains why you are creating it.
 
+## Requirements
+
+To be able to preview Couscous own website, you will need the following tools installed:
+
+- Less compiler:
+
+    ```
+    $ npm install -g less
+    ```
+
+- Phar generation enabled in `php.ini`:
+
+    ```
+    phar.readonly = Off
+    ```
+
+Then you can run `bin/couscous preview`.
+
 ## Building the phar
 
 To generate the phar yourself, you need to allow Phar generation in your `php.ini` ([`phar.readonly = Off`](http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly)).
