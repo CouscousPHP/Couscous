@@ -18,4 +18,4 @@ before_script:
 script:
 - phpunit
 after_success:
-- sh bin/deploy.sh
+- bin/couscous travis-auto-deploy
