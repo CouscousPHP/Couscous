@@ -74,6 +74,16 @@ In the future, Couscous will support several deployment strategies.
 
 See the [CONTRIBUTING](CONTRIBUTING.md) file.
 
+## Requirements to deploy Couscous own documentation (testing purpose)
+
+To be able to deploy Couscous own documentation, here are some requirements:
+
+- Less compiler:
+
+    ```
+    $ npm install -g less
+    ```
+
 ## License
 
 Couscous is released under the MIT License.
