@@ -1,21 +1,19 @@
 <?php
 
-namespace Couscous\Step;
+namespace Couscous\Step\Scripts;
 
 use Couscous\Model\Repository;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Execute the scripts that were set in "before" in the configuration.
+ * Base class.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ExecuteBeforeScripts implements StepInterface
+abstract class ExecuteScripts
 {
-    public function __invoke(Repository $repository, OutputInterface $output)
+    protected function executeScripts($scripts, Repository $repository, OutputInterface $output)
     {
-        $scripts = $repository->metadata['scripts.before'];
-
         if (empty($scripts)) {
             return;
         }

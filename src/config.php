@@ -9,7 +9,7 @@ return array(
         'Couscous\Step\Config\SetDefaultConfig',
         'Couscous\Step\Config\LoadConfig',
         'Couscous\Step\Config\OverrideBaseUrlForPreview',
-        'Couscous\Step\ExecuteBeforeScripts',
+        'Couscous\Step\Scripts\ExecuteBeforeScripts',
         'Couscous\Step\Template\UseDefaultTemplate',
         'Couscous\Step\Template\InitTemplate',
         'Couscous\Step\Assets\RunBowerInstall',
@@ -22,7 +22,7 @@ return array(
         'Couscous\Step\Template\AddPageListToLayoutVariables',
         'Couscous\Step\Template\ProcessTwigLayouts',
         'Couscous\Step\WriteFiles',
-        'Couscous\Step\ExecuteAfterScripts',
+        'Couscous\Step\Scripts\ExecuteAfterScripts',
     ),
     'steps' => DI\factory(function (ContainerInterface $c) {
         return array_map(function ($class) use ($c) {
