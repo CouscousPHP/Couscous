@@ -6,6 +6,7 @@ Couscous generates a [GitHub pages](http://pages.github.com/) website from your 
 
 [![Build Status](https://travis-ci.org/CouscousPHP/Couscous.svg?branch=master)](https://travis-ci.org/CouscousPHP/Couscous)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/?branch=master)
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/CouscousPHP/Couscous)
 
