@@ -24,6 +24,10 @@ class Generator
      */
     private $steps;
 
+    /**
+     * @param Filesystem      $filesystem
+     * @param StepInterface[] $steps
+     */
     public function __construct(Filesystem $filesystem, array $steps)
     {
         $this->filesystem = $filesystem;
