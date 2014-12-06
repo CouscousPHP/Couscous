@@ -28,20 +28,30 @@ class UseDefaultTemplate implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        if ($repository->metadata['template.url'] !== null) {
-            // Use a remote template
-            return;
-        }
-        if (! is_null($repository->metadata['template.directory'])) {
-            // Customized the template directory: we shouldn't silently override that
-            return;
-        }
-        $templateDirectory = $repository->sourceDirectory . '/' . InitTemplate::DEFAULT_TEMPLATE_DIRECTORY;
-        if ($this->filesystem->exists($templateDirectory)) {
-            // The repository contains a template
+        if ($this->useRemoteTemplate($repository)
+            || $this->hasCustomTemplateDirectory($repository)
+            || $this->hasTemplateDirectory($repository)
+        ) {
             return;
         }
 
         $repository->metadata['template.url'] = self::DEFAULT_TEMPLATE_URL;
+    }
+
+    private function useRemoteTemplate(Repository $repository)
+    {
+        return $repository->metadata['template.url'] !== null;
+    }
+
+    private function hasCustomTemplateDirectory(Repository $repository)
+    {
+        return $repository->metadata['template.directory'] !== null;
+    }
+
+    private function hasTemplateDirectory(Repository $repository)
+    {
+        $templateDirectory = $repository->sourceDirectory . '/' . InitTemplate::DEFAULT_TEMPLATE_DIRECTORY;
+
+        return $this->filesystem->exists($templateDirectory);
     }
 }

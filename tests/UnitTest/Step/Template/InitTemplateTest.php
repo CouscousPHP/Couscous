@@ -7,6 +7,9 @@ use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * @covers \Couscous\Step\Template\InitTemplate
+ */
 class InitTemplateTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefaultDirectory()

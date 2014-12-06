@@ -8,19 +8,21 @@ use Couscous\Step\Template\AddPageListToLayoutVariables;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
 
+/**
+ * @covers \Couscous\Step\Template\AddPageListToLayoutVariables
+ */
 class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
 {
     private function files()
     {
-        $files = array(
+        return [
             new HtmlFile('index.html', ''),
             new HtmlFile('docs/index.html', ''),
             new HtmlFile('docs/foo.html', ''),
             new HtmlFile('docs/subdirectory/bar.html', ''),
             new HtmlFile('docs/sub/sub/foo.html', ''),
             new HtmlFile('weird.path-test [foo]/bar.html', ''),
-        );
-        return $files;
+        ];
     }
 
     public function testPageList()
@@ -29,14 +31,14 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
 
         $this->invokeStep($repository, $this->files());
 
-        $expected = array(
+        $expected = [
             'index.html',
             'docs/index.html',
             'docs/foo.html',
             'docs/subdirectory/bar.html',
             'docs/sub/sub/foo.html',
             'weird.path-test [foo]/bar.html',
-        );
+        ];
 
         $this->assertEquals($expected, $repository->metadata['pageList']);
     }
@@ -47,24 +49,24 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
 
         $this->invokeStep($repository, $this->files());
 
-        $expected = array(
-            'docs' => array(
+        $expected = [
+            'docs' => [
                 'foo.html' => 'foo.html',
                 'index.html' => 'index.html',
-                'subdirectory' => array(
+                'subdirectory' => [
                     'bar.html' => 'bar.html',
-                ),
-                'sub' => array(
-                    'sub' => array(
+                ],
+                'sub' => [
+                    'sub' => [
                         'foo.html' => 'foo.html',
-                    ),
-                ),
-            ),
+                    ],
+                ],
+            ],
             'index.html' => 'index.html',
-            'weird.path-test [foo]' => array(
+            'weird.path-test [foo]' => [
                 'bar.html' => 'bar.html',
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expected, $repository->metadata['pageTree']);
     }
