@@ -19,6 +19,17 @@ class FetchRemoteTemplate implements StepInterface
      */
     private $filesystem;
 
+    /**
+     * Temporarily save the template directory if we are in preview
+     * to avoid cloning the repository every time.
+     *
+     * In theory we shouldn't store state in this object because it's a service
+     * but we need extensive change to avoid that.
+     *
+     * @var string
+     */
+    private $templateDirectory;
+
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
@@ -26,28 +37,38 @@ class FetchRemoteTemplate implements StepInterface
 
     public function __invoke(Repository $repository, OutputInterface $output)
     {
+        // In preview we avoid cloning the repository every time
+        if ($repository->regenerate && $this->templateDirectory) {
+            $repository->metadata['template.directory'] = $this->templateDirectory;
+
+            return;
+        }
+
         $templateUrl = $repository->metadata['template.url'];
 
         if ($templateUrl === null) {
             return;
         }
 
-        $this->fetchGitTemplate($repository, $templateUrl, $output);
+        $directory = $this->fetchGitTemplate($templateUrl, $output);
+
+        $this->templateDirectory = $directory;
+        $repository->metadata['template.directory'] = $directory;
     }
 
-    private function fetchGitTemplate(Repository $repository, $gitUrl, OutputInterface $output)
+    private function fetchGitTemplate($gitUrl, OutputInterface $output)
     {
         $output->writeln("Fetching template from <info>$gitUrl</info>");
 
-        $templateDirectory = $this->createTempDirectory('couscous_template_');
+        $directory = $this->createTempDirectory('couscous_template_');
 
-        $command = "git clone $gitUrl $templateDirectory 2>&1";
+        $command = "git clone $gitUrl $directory 2>&1";
         exec($command, $gitOutput, $returnValue);
         if ($returnValue !== 0) {
             throw new \RuntimeException(implode(PHP_EOL, $gitOutput));
         }
 
-        $repository->metadata['template.directory'] = $templateDirectory;
+        return $directory;
     }
 
     private function createTempDirectory($prefix)
