@@ -73,7 +73,7 @@ In the future, Couscous will support several deployment strategies.
 
 ## Contributing
 
-See the [CONTRIBUTING](CONTRIBUTING.md) file.
+See the [CONTRIBUTING](contributing.md) file.
 
 ## License
 
