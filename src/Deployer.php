@@ -26,26 +26,33 @@ class Deployer
 
     /**
      * @param Repository      $repository
+     * @param CommandRunner   $command_runner
      * @param OutputInterface $output
      * @param string          $repositoryUrl Repository in which to deploy the files.
      * @param string          $branch        Git branch in which to deploy the files.
      */
-    public function deploy(Repository $repository, OutputInterface $output, $repositoryUrl, $branch)
+    public function deploy(
+        Repository $repository,
+        CommandRunner $command_runner,
+        OutputInterface $output,
+        $repositoryUrl,
+        $branch
+    )
     {
         $output->writeln("<comment>Deploying the website</comment>");
 
         $directory    = $repository->targetDirectory;
         $tmpDirectory = $this->createTempDirectory();
 
-        $this->cloneRepository($output, $repositoryUrl, $tmpDirectory);
+        $this->cloneRepository($command_runner, $output, $repositoryUrl, $tmpDirectory);
 
-        $this->checkoutBranch($output, $branch, $tmpDirectory);
+        $this->checkoutBranch($command_runner, $output, $branch, $tmpDirectory);
 
         $this->copyGeneratedFiles($output, $directory, $tmpDirectory);
 
-        $this->commitChanges($output, $tmpDirectory);
+        $this->commitChanges($command_runner, $output, $tmpDirectory);
 
-        $this->pushBranch($output, $branch, $tmpDirectory);
+        $this->pushBranch($command_runner, $output, $branch, $tmpDirectory);
 
         $this->deleteTempDirectory($tmpDirectory);
     }
@@ -60,29 +67,29 @@ class Deployer
         return $tempFile;
     }
 
-    private function cloneRepository(OutputInterface $output, $repositoryUrl, $tmpDirectory)
-    {
+    private function cloneRepository(
+        CommandRunner $command_runner,
+        OutputInterface $output,
+        $repositoryUrl,
+        $tmpDirectory
+    ) {
         $output->writeln("Cloning <info>$repositoryUrl</info> in <info>$tmpDirectory</info>");
 
-        exec("git clone $repositoryUrl $tmpDirectory 2>&1", $cmdOutput, $returnValue);
-        if ($returnValue !== 0) {
-            throw new \RuntimeException(implode(PHP_EOL, $cmdOutput));
-        }
+        $command_runner->run("git clone $repositoryUrl $tmpDirectory");
     }
 
-    private function checkoutBranch(OutputInterface $output, $branch, $tmpDirectory)
+    private function checkoutBranch(CommandRunner $command_runner, OutputInterface $output, $branch, $tmpDirectory)
     {
         $output->writeln("Checking out branch <info>$branch</info>");
 
-        exec("cd '$tmpDirectory' && git checkout -b $branch origin/$branch 2>&1", $cmdOutput, $returnValue);
-
-        if ($returnValue !== 0) {
+        try {
+            $command_runner->run("cd '$tmpDirectory' && git checkout -b $branch origin/$branch");
+        } catch (CommandException $e) {
             // The branch doesn't exist yet, so we create it
-            exec("cd '$tmpDirectory' && git checkout -b $branch 2>&1", $cmdOutput, $returnValue);
-            if ($returnValue !== 0) {
-                throw new \RuntimeException(
-                    "Unable to create the branch '$branch'" . PHP_EOL . implode(PHP_EOL, $cmdOutput)
-                );
+            try {
+                $command_runner->run("cd '$tmpDirectory' && git checkout -b $branch");
+            } catch (CommandException $e) {
+                throw new \RuntimeException("Unable to create the branch '$branch'" . PHP_EOL . $e->getMessage());
             }
         }
     }
@@ -100,25 +107,19 @@ class Deployer
         $this->filesystem->mirror($directory, $tmpDirectory);
     }
 
-    private function commitChanges(OutputInterface $output, $tmpDirectory)
+    private function commitChanges(CommandRunner $command_runner, OutputInterface $output, $tmpDirectory)
     {
         $output->writeln('Committing changes');
 
         $message = 'Website generation with Couscous';
-        exec("cd '$tmpDirectory' && git add --all . && git commit -m '$message'", $cmdOutput, $returnValue);
-        if ($returnValue !== 0) {
-            throw new \RuntimeException(implode(PHP_EOL, $cmdOutput));
-        }
+        $command_runner->run("cd '$tmpDirectory' && git add --all . && git commit -m '$message'");
     }
 
-    private function pushBranch(OutputInterface $output, $branch, $tmpDirectory)
+    private function pushBranch(CommandRunner $command_runner, OutputInterface $output, $branch, $tmpDirectory)
     {
         $output->writeln("Pushing <info>$branch</info> (GitHub may ask you to login)");
 
-        exec("cd '$tmpDirectory' && git push origin $branch", $cmdOutput, $returnValue);
-        if ($returnValue !== 0) {
-            throw new \RuntimeException(implode(PHP_EOL, $cmdOutput));
-        }
+        $command_runner->run("cd '$tmpDirectory' && git push origin $branch");
     }
 
     private function deleteTempDirectory($dir)
