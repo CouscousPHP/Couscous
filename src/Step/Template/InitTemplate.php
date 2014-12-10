@@ -25,12 +25,12 @@ class InitTemplate implements StepInterface
     /**
      * @var CommandRunner
      */
-    private $command_runner;
+    private $commandRunner;
 
     public function __construct(Filesystem $filesystem, CommandRunner $commandRunner)
     {
         $this->filesystem       = $filesystem;
-        $this->command_runner   = $commandRunner;
+        $this->commandRunner    = $commandRunner;
     }
 
     public function __invoke(Repository $repository, OutputInterface $output)
@@ -78,7 +78,7 @@ class InitTemplate implements StepInterface
 
         $templateDirectory = $this->createTempDirectory('couscous_template_');
 
-        $this->command_runner->run("git clone $gitUrl $templateDirectory");
+        $this->commandRunner->run("git clone $gitUrl $templateDirectory");
 
         $repository->metadata['template.directory'] = $templateDirectory;
     }

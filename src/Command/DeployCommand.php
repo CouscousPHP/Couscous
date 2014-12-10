@@ -2,7 +2,6 @@
 
 namespace Couscous\Command;
 
-use Couscous\CommandRunner;
 use Couscous\Generator;
 use Couscous\Model\Repository;
 use Couscous\Deployer;
@@ -83,9 +82,7 @@ class DeployCommand extends Command
 
         $output->writeln('');
 
-        $command_runner = new CommandRunner();
-
         // Deploy it
-        $this->deployer->deploy($repository, $command_runner, $output, $repositoryUrl, $targetBranch);
+        $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
     }
 }

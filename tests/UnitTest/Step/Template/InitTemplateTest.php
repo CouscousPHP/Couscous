@@ -57,10 +57,10 @@ class InitTemplateTest extends \PHPUnit_Framework_TestCase
      */
     private function createCommandRunner()
     {
-        $command_runner = $this->getMock('Couscous\CommandRunner');
-        $command_runner->expects($this->any())
+        $commandRunner = $this->getMock('Couscous\CommandRunner');
+        $commandRunner->expects($this->any())
             ->method('run')
             ->willReturn(true);
-        return $command_runner;
+        return $commandRunner;
     }
 }

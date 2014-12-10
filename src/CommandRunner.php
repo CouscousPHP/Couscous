@@ -20,12 +20,12 @@ class CommandRunner
      */
     public function run($command)
     {
-        exec($command . ' 2>&1', $command_output, $return_value);
+        exec($command . ' 2>&1', $commandOutput, $returnValue);
 
-        if ($return_value !== 0) {
-            throw new CommandException(implode(PHP_EOL, $command_output));
+        if ($returnValue !== 0) {
+            throw new CommandException(implode(PHP_EOL, $commandOutput));
         }
 
-        return $command_output;
+        return $commandOutput;
     }
 }

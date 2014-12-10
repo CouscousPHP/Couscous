@@ -2,7 +2,6 @@
 
 namespace Couscous\Tests\FunctionalTest;
 
-use Couscous\CommandException;
 use Couscous\CommandRunner;
 
 /**
@@ -13,11 +12,11 @@ class CommandRunnerTest extends \PHPUnit_Framework_TestCase
     /**
      * @var CommandRunner
      */
-    private $command_runner;
+    private $commandRunner;
 
     public function setUp()
     {
-        $this->command_runner = new CommandRunner();
+        $this->commandRunner = new CommandRunner();
     }
 
     /**
@@ -28,7 +27,7 @@ class CommandRunnerTest extends \PHPUnit_Framework_TestCase
         $command    = 'echo Couscous';
         $expected   = 'Couscous';
 
-        $output = $this->command_runner->run($command);
+        $output = $this->commandRunner->run($command);
 
         $this->assertEquals($expected, $output[0]);
     }
@@ -41,6 +40,6 @@ class CommandRunnerTest extends \PHPUnit_Framework_TestCase
     {
         $command = 'command that produces an error';
 
-        $this->command_runner->run($command);
+        $this->commandRunner->run($command);
     }
 }
