@@ -2,6 +2,7 @@
 
 namespace Couscous\Step\Template;
 
+use Couscous\CommandRunner;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,9 +22,15 @@ class InitTemplate implements StepInterface
      */
     private $filesystem;
 
-    public function __construct(Filesystem $filesystem)
+    /**
+     * @var CommandRunner
+     */
+    private $commandRunner;
+
+    public function __construct(Filesystem $filesystem, CommandRunner $commandRunner)
     {
-        $this->filesystem = $filesystem;
+        $this->filesystem       = $filesystem;
+        $this->commandRunner    = $commandRunner;
     }
 
     public function __invoke(Repository $repository, OutputInterface $output)
@@ -71,11 +78,7 @@ class InitTemplate implements StepInterface
 
         $templateDirectory = $this->createTempDirectory('couscous_template_');
 
-        $command = "git clone $gitUrl $templateDirectory 2>&1";
-        exec($command, $gitOutput, $returnValue);
-        if ($returnValue !== 0) {
-            throw new \RuntimeException(implode(PHP_EOL, $gitOutput));
-        }
+        $this->commandRunner->run("git clone $gitUrl $templateDirectory");
 
         $repository->metadata['template.directory'] = $templateDirectory;
     }

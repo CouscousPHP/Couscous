@@ -19,9 +19,15 @@ class Deployer
      */
     private $filesystem;
 
-    public function __construct(Filesystem $filesystem)
+    /**
+     * @var CommandRunner
+     */
+    private $commandRunner;
+
+    public function __construct(Filesystem $filesystem, CommandRunner $commandRunner)
     {
-        $this->filesystem = $filesystem;
+        $this->filesystem       = $filesystem;
+        $this->commandRunner    = $commandRunner;
     }
 
     /**
@@ -64,25 +70,21 @@ class Deployer
     {
         $output->writeln("Cloning <info>$repositoryUrl</info> in <info>$tmpDirectory</info>");
 
-        exec("git clone $repositoryUrl $tmpDirectory 2>&1", $cmdOutput, $returnValue);
-        if ($returnValue !== 0) {
-            throw new \RuntimeException(implode(PHP_EOL, $cmdOutput));
-        }
+        $this->commandRunner->run("git clone $repositoryUrl $tmpDirectory");
     }
 
     private function checkoutBranch(OutputInterface $output, $branch, $tmpDirectory)
     {
         $output->writeln("Checking out branch <info>$branch</info>");
 
-        exec("cd '$tmpDirectory' && git checkout -b $branch origin/$branch 2>&1", $cmdOutput, $returnValue);
-
-        if ($returnValue !== 0) {
+        try {
+            $this->commandRunner->run("cd '$tmpDirectory' && git checkout -b $branch origin/$branch");
+        } catch (CommandException $e) {
             // The branch doesn't exist yet, so we create it
-            exec("cd '$tmpDirectory' && git checkout -b $branch 2>&1", $cmdOutput, $returnValue);
-            if ($returnValue !== 0) {
-                throw new \RuntimeException(
-                    "Unable to create the branch '$branch'" . PHP_EOL . implode(PHP_EOL, $cmdOutput)
-                );
+            try {
+                $this->commandRunner->run("cd '$tmpDirectory' && git checkout -b $branch");
+            } catch (CommandException $e) {
+                throw new \RuntimeException("Unable to create the branch '$branch'" . PHP_EOL . $e->getMessage());
             }
         }
     }
@@ -105,20 +107,14 @@ class Deployer
         $output->writeln('Committing changes');
 
         $message = 'Website generation with Couscous';
-        exec("cd '$tmpDirectory' && git add --all . && git commit -m '$message'", $cmdOutput, $returnValue);
-        if ($returnValue !== 0) {
-            throw new \RuntimeException(implode(PHP_EOL, $cmdOutput));
-        }
+        $this->commandRunner->run("cd '$tmpDirectory' && git add --all . && git commit -m '$message'");
     }
 
     private function pushBranch(OutputInterface $output, $branch, $tmpDirectory)
     {
         $output->writeln("Pushing <info>$branch</info> (GitHub may ask you to login)");
 
-        exec("cd '$tmpDirectory' && git push origin $branch", $cmdOutput, $returnValue);
-        if ($returnValue !== 0) {
-            throw new \RuntimeException(implode(PHP_EOL, $cmdOutput));
-        }
+        $this->commandRunner->run("cd '$tmpDirectory' && git push origin $branch");
     }
 
     private function deleteTempDirectory($dir)

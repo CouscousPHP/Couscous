@@ -2,6 +2,8 @@
 
 namespace Couscous\Step\Scripts;
 
+use Couscous\CommandException;
+use Couscous\CommandRunner;
 use Couscous\Model\Repository;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -12,6 +14,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class ExecuteScripts
 {
+    /**
+     * @var CommandRunner
+     */
+    private $commandRunner;
+
+    public function __construct(CommandRunner $commandRunner)
+    {
+        $this->commandRunner = $commandRunner;
+    }
+
     protected function executeScripts($scripts, Repository $repository, OutputInterface $output)
     {
         if (empty($scripts)) {
@@ -29,11 +41,11 @@ abstract class ExecuteScripts
 
         $output->writeln("Executing <info>$script</info>");
 
-        exec($script, $scriptOutput, $returnValue);
-
-        if ($returnValue !== 0) {
+        try {
+            $this->commandRunner->run($script);
+        } catch (CommandException $e) {
             throw new \RuntimeException(
-                "Error while running '$script':" . PHP_EOL . implode(PHP_EOL, $scriptOutput)
+                "Error while running '$script':" . PHP_EOL . $e->getMessage()
             );
         }
     }
