@@ -9,7 +9,7 @@
 use Couscous\ContainerFactory;
 use Symfony\Component\Console\Application;
 
-if (!version_compare(phpversion(), '5.4', '>=')) {
+if (version_compare(phpversion(), '5.4', '<')) {
     die('You must use PHP >= 5.4 in order to use Couscous. Please upgrade your PHP version.');
 }
 
