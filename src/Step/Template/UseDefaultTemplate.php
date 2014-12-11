@@ -50,7 +50,7 @@ class UseDefaultTemplate implements StepInterface
 
     private function hasTemplateDirectory(Repository $repository)
     {
-        $templateDirectory = $repository->sourceDirectory . '/' . InitTemplate::DEFAULT_TEMPLATE_DIRECTORY;
+        $templateDirectory = $repository->sourceDirectory . '/' . ValidateTemplateDirectory::DEFAULT_TEMPLATE_DIRECTORY;
 
         return $this->filesystem->exists($templateDirectory);
     }
