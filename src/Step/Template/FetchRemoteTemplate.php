@@ -2,6 +2,7 @@
 
 namespace Couscous\Step\Template;
 
+use Couscous\CommandRunner;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,6 +21,11 @@ class FetchRemoteTemplate implements StepInterface
     private $filesystem;
 
     /**
+     * @var CommandRunner
+     */
+    private $commandRunner;
+
+    /**
      * Temporarily save the template directory if we are in preview
      * to avoid cloning the repository every time.
      *
@@ -30,9 +36,10 @@ class FetchRemoteTemplate implements StepInterface
      */
     private $templateDirectory;
 
-    public function __construct(Filesystem $filesystem)
+    public function __construct(Filesystem $filesystem, CommandRunner $commandRunner)
     {
         $this->filesystem = $filesystem;
+        $this->commandRunner = $commandRunner;
     }
 
     public function __invoke(Repository $repository, OutputInterface $output)
@@ -62,11 +69,7 @@ class FetchRemoteTemplate implements StepInterface
 
         $directory = $this->createTempDirectory('couscous_template_');
 
-        $command = "git clone $gitUrl $directory 2>&1";
-        exec($command, $gitOutput, $returnValue);
-        if ($returnValue !== 0) {
-            throw new \RuntimeException(implode(PHP_EOL, $gitOutput));
-        }
+        $this->commandRunner->run("git clone $gitUrl $directory 2>&1");
 
         return $directory;
     }
