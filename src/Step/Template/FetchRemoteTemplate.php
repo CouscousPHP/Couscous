@@ -69,7 +69,7 @@ class FetchRemoteTemplate implements StepInterface
 
         $directory = $this->createTempDirectory('couscous_template_');
 
-        $this->commandRunner->run("git clone $gitUrl $directory 2>&1");
+        $this->commandRunner->run("git clone $gitUrl $directory");
 
         return $directory;
     }
