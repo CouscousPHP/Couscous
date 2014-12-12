@@ -4,7 +4,7 @@ use Interop\Container\ContainerInterface;
 
 return array(
 
-    'steps.classes' => array(
+    'steps' => array(
         'Couscous\Module\Core\Step\ClearTargetDirectory',
         'Couscous\Module\Config\Step\SetDefaultConfig',
         'Couscous\Module\Config\Step\LoadConfig',
@@ -25,14 +25,15 @@ return array(
         'Couscous\Module\Core\Step\WriteFiles',
         'Couscous\Module\Scripts\Step\ExecuteAfterScripts',
     ),
-    'steps' => DI\factory(function (ContainerInterface $c) {
-        return array_map(function ($class) use ($c) {
-            return $c->get($class);
-        }, $c->get('steps.classes'));
-    }),
 
     'Couscous\Generator' => DI\object()
-        ->constructorParameter('steps', DI\link('steps')),
+        ->constructorParameter('steps', DI\link('steps.instances')),
+
+    'steps.instances' => DI\factory(function (ContainerInterface $c) {
+        return array_map(function ($class) use ($c) {
+            return $c->get($class);
+        }, $c->get('steps'));
+    }),
 
     'Mni\FrontYAML\Parser' => DI\object()
         ->constructorParameter('markdownParser', DI\link('Mni\FrontYAML\Markdown\MarkdownParser')),
