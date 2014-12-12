@@ -1,8 +1,8 @@
 <?php
 
-namespace Couscous\Step\Markdown;
+namespace Couscous\Module\Markdown\Step;
 
-use Couscous\Model\File\MarkdownFile;
+use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +21,7 @@ class ProcessMarkdownLinks implements StepInterface
     public function __invoke(Repository $repository, OutputInterface $output)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Model\File\MarkdownFile');
+        $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
 
         foreach ($markdownFiles as $file) {
             $file->content = preg_replace(

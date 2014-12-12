@@ -1,11 +1,11 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Step\Markdown;
+namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Model\File\LazyFile;
-use Couscous\Model\File\MarkdownFile;
+use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
-use Couscous\Step\Markdown\ProcessMarkdownFileName;
+use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**

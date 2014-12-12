@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Model\File;
+namespace Couscous\Module\Markdown\Model;
 
 use Couscous\Model\File;
 use Couscous\Model\Metadata;
