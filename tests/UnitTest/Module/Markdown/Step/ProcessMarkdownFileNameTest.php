@@ -2,7 +2,7 @@
 
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
-use Couscous\Model\File\LazyFile;
+use Couscous\Model\LazyFile;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
