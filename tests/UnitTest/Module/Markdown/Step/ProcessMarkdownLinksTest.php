@@ -8,7 +8,7 @@ use Couscous\Module\Markdown\Step\ProcessMarkdownLinks;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**
- * @covers \Couscous\Step\Markdown\ProcessMarkdownLinks
+ * @covers \Couscous\Module\Markdown\Step\ProcessMarkdownLinks
  */
 class ProcessMarkdownLinksTest extends \PHPUnit_Framework_TestCase
 {

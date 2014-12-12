@@ -9,7 +9,7 @@ use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**
- * @covers \Couscous\Step\Markdown\ProcessMarkdownFileName
+ * @covers \Couscous\Module\Markdown\Step\ProcessMarkdownFileName
  */
 class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
 {
