@@ -1,11 +1,11 @@
 <?php
 
-namespace Couscous\Tests\FunctionalTest;
+namespace Couscous\Tests\FunctionalTest\CommandRunner;
 
 use Couscous\CommandRunner\CommandRunner;
 
 /**
- * @covers Couscous\CommandRunner
+ * @covers Couscous\CommandRunner\CommandRunner
  */
 class CommandRunnerTest extends \PHPUnit_Framework_TestCase
 {
