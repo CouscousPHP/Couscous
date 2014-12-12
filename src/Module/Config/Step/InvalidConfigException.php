@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Step\Config;
+namespace Couscous\Module\Config\Step;
 
 /**
  * Invalid configuration.

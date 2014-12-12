@@ -1,22 +1,26 @@
 <?php
 
-namespace Couscous\Step\Config;
+namespace Couscous\Module\Config\Step;
 
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Override the baseUrl if we are in preview.
+ * Set the default config.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class OverrideBaseUrlForPreview implements StepInterface
+class SetDefaultConfig implements StepInterface
 {
+    private $defaultConfig = [
+        'exclude' => [
+            'vendor', 'website'
+        ],
+    ];
+
     public function __invoke(Repository $repository, OutputInterface $output)
     {
-        if ($repository->metadata['preview'] === true) {
-            $repository->metadata['baseUrl'] = '';
-        }
+        $repository->metadata->setMany($this->defaultConfig);
     }
 }

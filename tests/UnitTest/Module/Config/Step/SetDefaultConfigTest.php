@@ -1,13 +1,13 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Step\Config;
+namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
-use Couscous\Step\Config\SetDefaultConfig;
+use Couscous\Module\Config\Step\SetDefaultConfig;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**
- * @covers \Couscous\Step\Config\SetDefaultConfig
+ * @covers \Couscous\Module\Config\Step\SetDefaultConfig
  */
 class SetDefaultConfigTest extends \PHPUnit_Framework_TestCase
 {

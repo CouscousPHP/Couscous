@@ -1,13 +1,13 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Step\Config;
+namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
-use Couscous\Step\Config\OverrideBaseUrlForPreview;
+use Couscous\Module\Config\Step\OverrideBaseUrlForPreview;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**
- * @covers \Couscous\Step\Config\OverrideBaseUrlForPreview
+ * @covers \Couscous\Module\Config\Step\OverrideBaseUrlForPreview
  */
 class OverrideBaseUrlForPreviewTest extends \PHPUnit_Framework_TestCase
 {

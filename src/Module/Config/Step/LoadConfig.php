@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Step\Config;
+namespace Couscous\Module\Config\Step;
 
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
@@ -59,7 +59,7 @@ class LoadConfig implements StepInterface
         }
 
         if (! is_array($metadata)) {
-            return array();
+            return [];
         }
 
         return $metadata;

@@ -6,9 +6,9 @@ return array(
 
     'steps.classes' => array(
         'Couscous\Step\ClearTargetDirectory',
-        'Couscous\Step\Config\SetDefaultConfig',
-        'Couscous\Step\Config\LoadConfig',
-        'Couscous\Step\Config\OverrideBaseUrlForPreview',
+        'Couscous\Module\Config\Step\SetDefaultConfig',
+        'Couscous\Module\Config\Step\LoadConfig',
+        'Couscous\Module\Config\Step\OverrideBaseUrlForPreview',
         'Couscous\Module\Scripts\Step\ExecuteBeforeScripts',
         'Couscous\Module\Template\Step\UseDefaultTemplate',
         'Couscous\Module\Template\Step\FetchRemoteTemplate',
