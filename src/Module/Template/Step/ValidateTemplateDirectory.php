@@ -3,7 +3,7 @@
 namespace Couscous\Module\Template\Step;
 
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
+use Couscous\Step;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ValidateTemplateDirectory implements StepInterface
+class ValidateTemplateDirectory implements \Couscous\Step
 {
     const DEFAULT_TEMPLATE_DIRECTORY = 'website';
 

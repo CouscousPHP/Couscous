@@ -4,7 +4,7 @@ namespace Couscous\Module\Markdown\Step;
 
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
+use Couscous\Step;
 use Mni\FrontYAML\Parser;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ParseMarkdownFrontMatter implements StepInterface
+class ParseMarkdownFrontMatter implements \Couscous\Step
 {
     /**
      * @var Parser

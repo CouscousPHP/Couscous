@@ -4,7 +4,7 @@ namespace Couscous\Module\Template\Step;
 
 use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
+use Couscous\Step;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -16,7 +16,7 @@ use Twig_Loader_Array;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ProcessTwigLayouts implements StepInterface
+class ProcessTwigLayouts implements \Couscous\Step
 {
     const DEFAULT_LAYOUT_NAME = 'default.twig';
 

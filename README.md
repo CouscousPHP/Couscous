@@ -23,7 +23,7 @@ Couscous was designed to be as simple as possible. By embracing simplicity, it b
 The website generation is composed of a list of **steps** to process the `Repository` model object:
 
 ```php
-interface StepInterface
+interface Step
 {
     /**
      * Process the given repository.
@@ -47,7 +47,7 @@ Steps are very granular, thus extremely easy to write and test. For example:
 For example, here is a step that would preprocess Markdown files to put the word "Couscous" in bold:
 
 ```php
-class PutCouscousInBold implements StepInterface
+class PutCouscousInBold implements \Couscous\Step
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {

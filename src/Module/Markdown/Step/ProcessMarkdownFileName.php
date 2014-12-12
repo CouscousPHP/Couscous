@@ -4,7 +4,7 @@ namespace Couscous\Module\Markdown\Step;
 
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
+use Couscous\Step;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ProcessMarkdownFileName implements StepInterface
+class ProcessMarkdownFileName implements \Couscous\Step
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {

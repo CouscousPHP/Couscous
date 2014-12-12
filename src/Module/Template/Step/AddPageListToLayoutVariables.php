@@ -4,7 +4,7 @@ namespace Couscous\Module\Template\Step;
 
 use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
+use Couscous\Step;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class AddPageListToLayoutVariables implements StepInterface
+class AddPageListToLayoutVariables implements \Couscous\Step
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {

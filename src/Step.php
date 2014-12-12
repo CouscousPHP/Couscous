@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Step;
+namespace Couscous;
 
 use Couscous\Model\Repository;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-interface StepInterface
+interface Step
 {
     /**
      * Process the given repository.

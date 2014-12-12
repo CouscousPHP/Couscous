@@ -3,7 +3,7 @@
 namespace Couscous\Module\Config\Step;
 
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
+use Couscous\Step;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -14,7 +14,7 @@ use Symfony\Component\Yaml\Parser;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class LoadConfig implements StepInterface
+class LoadConfig implements Step
 {
     const FILENAME = 'couscous.yml';
 

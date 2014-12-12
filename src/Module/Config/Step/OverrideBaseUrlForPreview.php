@@ -3,7 +3,7 @@
 namespace Couscous\Module\Config\Step;
 
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
+use Couscous\Step;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class OverrideBaseUrlForPreview implements StepInterface
+class OverrideBaseUrlForPreview implements \Couscous\Step
 {
     public function __invoke(Repository $repository, OutputInterface $output)
     {

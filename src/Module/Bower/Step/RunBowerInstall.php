@@ -4,7 +4,7 @@ namespace Couscous\Module\Bower\Step;
 
 use Bowerphp\Command\InstallCommand;
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
+use Couscous\Step;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -14,7 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class RunBowerInstall implements StepInterface
+class RunBowerInstall implements \Couscous\Step
 {
     /**
      * @var Filesystem
