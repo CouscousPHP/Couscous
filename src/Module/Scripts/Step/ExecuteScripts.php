@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Step\Scripts;
+namespace Couscous\Module\Scripts\Step;
 
 use Couscous\CommandException;
 use Couscous\CommandRunner;

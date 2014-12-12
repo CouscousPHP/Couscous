@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Step\Scripts;
+namespace Couscous\Module\Scripts\Step;
 
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;

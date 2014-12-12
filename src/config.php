@@ -9,7 +9,7 @@ return array(
         'Couscous\Step\Config\SetDefaultConfig',
         'Couscous\Step\Config\LoadConfig',
         'Couscous\Step\Config\OverrideBaseUrlForPreview',
-        'Couscous\Step\Scripts\ExecuteBeforeScripts',
+        'Couscous\Module\Scripts\Step\ExecuteBeforeScripts',
         'Couscous\Step\Template\UseDefaultTemplate',
         'Couscous\Step\Template\FetchRemoteTemplate',
         'Couscous\Step\Template\ValidateTemplateDirectory',
@@ -23,7 +23,7 @@ return array(
         'Couscous\Step\Template\AddPageListToLayoutVariables',
         'Couscous\Step\Template\ProcessTwigLayouts',
         'Couscous\Step\WriteFiles',
-        'Couscous\Step\Scripts\ExecuteAfterScripts',
+        'Couscous\Module\Scripts\Step\ExecuteAfterScripts',
     ),
     'steps' => DI\factory(function (ContainerInterface $c) {
         return array_map(function ($class) use ($c) {
