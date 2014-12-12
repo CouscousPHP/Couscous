@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Markdown\Step;
 
-use Couscous\Model\File\HtmlFile;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;

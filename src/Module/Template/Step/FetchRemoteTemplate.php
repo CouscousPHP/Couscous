@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Step\Template;
+namespace Couscous\Module\Template\Step;
 
 use Couscous\CommandRunner;
 use Couscous\Model\Repository;

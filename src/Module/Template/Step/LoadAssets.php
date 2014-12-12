@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Step\Template;
+namespace Couscous\Module\Template\Step;
 
 use Couscous\Model\File\LazyFile;
 use Couscous\Model\Repository;

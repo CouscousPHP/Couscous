@@ -1,14 +1,14 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Step\Template;
+namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
-use Couscous\Step\Template\UseDefaultTemplate;
+use Couscous\Module\Template\Step\UseDefaultTemplate;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * @covers \Couscous\Step\Template\UseDefaultTemplate
+ * @covers \Couscous\Module\Template\Step\UseDefaultTemplate
  */
 class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
 {

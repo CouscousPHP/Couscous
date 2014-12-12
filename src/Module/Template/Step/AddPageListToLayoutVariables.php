@@ -1,8 +1,8 @@
 <?php
 
-namespace Couscous\Step\Template;
+namespace Couscous\Module\Template\Step;
 
-use Couscous\Model\File\HtmlFile;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,10 +17,10 @@ class AddPageListToLayoutVariables implements StepInterface
     public function __invoke(Repository $repository, OutputInterface $output)
     {
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $repository->findFilesByType('Couscous\Model\File\HtmlFile');
+        $htmlFiles = $repository->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
 
-        $pageList = array();
-        $pageTree = array();
+        $pageList = [];
+        $pageTree = [];
 
         foreach ($htmlFiles as $file) {
             $pageList[] = $file->relativeFilename;
@@ -29,7 +29,7 @@ class AddPageListToLayoutVariables implements StepInterface
             $filename = basename($file->relativeFilename);
 
             if ($path === '.') {
-                $path = array();
+                $path = [];
             } else {
                 $path = explode(DIRECTORY_SEPARATOR, $path);
             }
@@ -55,7 +55,7 @@ class AddPageListToLayoutVariables implements StepInterface
         $dir = array_shift($path);
 
         if (! array_key_exists($dir, $array)) {
-            $array[$dir] = array();
+            $array[$dir] = [];
         }
 
         $this->setValue($array[$dir], $path, $value);

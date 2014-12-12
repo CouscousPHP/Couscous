@@ -1,15 +1,15 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Step\Template;
+namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
-use Couscous\Model\File\HtmlFile;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Repository;
-use Couscous\Step\Template\AddPageListToLayoutVariables;
+use Couscous\Module\Template\Step\AddPageListToLayoutVariables;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**
- * @covers \Couscous\Step\Template\AddPageListToLayoutVariables
+ * @covers \Couscous\Module\Template\Step\AddPageListToLayoutVariables
  */
 class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Step\Template;
+namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
-use Couscous\Step\Template\FetchRemoteTemplate;
+use Couscous\Module\Template\Step\FetchRemoteTemplate;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**
- * @covers \Couscous\Step\Template\FetchRemoteTemplate
+ * @covers \Couscous\Module\Template\Step\FetchRemoteTemplate
  */
 class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
 {

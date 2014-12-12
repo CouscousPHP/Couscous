@@ -1,14 +1,14 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Step\Template;
+namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
-use Couscous\Step\Template\ValidateTemplateDirectory;
+use Couscous\Module\Template\Step\ValidateTemplateDirectory;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * @covers \Couscous\Step\Template\ValidateTemplateDirectory
+ * @covers \Couscous\Module\Template\Step\ValidateTemplateDirectory
  */
 class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
 {

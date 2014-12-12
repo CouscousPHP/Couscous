@@ -1,8 +1,8 @@
 <?php
 
-namespace Couscous\Step\Template;
+namespace Couscous\Module\Template\Step;
 
-use Couscous\Model\File\HtmlFile;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Repository;
 use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -29,7 +29,7 @@ class ProcessTwigLayouts implements StepInterface
         $twig = $this->createTwig($repository->metadata['template.directory']);
 
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $repository->findFilesByType('Couscous\Model\File\HtmlFile');
+        $htmlFiles = $repository->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
 
         foreach ($htmlFiles as $file) {
             $fileMetadata = $file->getMetadata();
@@ -60,10 +60,10 @@ class ProcessTwigLayouts implements StepInterface
     {
         $loader = $this->createLoader($templateDirectory);
 
-        return new Twig_Environment($loader, array(
+        return new Twig_Environment($loader, [
             'cache' => false,
             'auto_reload' => true,
-        ));
+        ]);
     }
 
     /**
@@ -81,7 +81,7 @@ class ProcessTwigLayouts implements StepInterface
             ->in($templateDirectory)
             ->name('*.twig');
 
-        $layouts = array();
+        $layouts = [];
         foreach ($finder as $file) {
             /** @var SplFileInfo $file */
             $name = $file->getFilename();
