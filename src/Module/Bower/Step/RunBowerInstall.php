@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Step\Assets;
+namespace Couscous\Module\Bower\Step;
 
 use Bowerphp\Command\InstallCommand;
 use Couscous\Model\Repository;
@@ -45,7 +45,7 @@ class RunBowerInstall implements StepInterface
         chdir($repository->metadata['template.directory']);
 
         $command = new InstallCommand();
-        $command->run(new ArrayInput(array()), $output);
+        $command->run(new ArrayInput([]), $output);
 
         chdir($workingDir);
     }

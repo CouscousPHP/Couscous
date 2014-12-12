@@ -13,7 +13,7 @@ return array(
         'Couscous\Step\Template\UseDefaultTemplate',
         'Couscous\Step\Template\FetchRemoteTemplate',
         'Couscous\Step\Template\ValidateTemplateDirectory',
-        'Couscous\Step\Assets\RunBowerInstall',
+        'Couscous\Module\Bower\Step\RunBowerInstall',
         'Couscous\Step\Template\LoadAssets',
         'Couscous\Module\Markdown\Step\LoadMarkdownFiles',
         'Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter',
