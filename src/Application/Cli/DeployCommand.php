@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Command;
+namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
 use Couscous\Model\Repository;

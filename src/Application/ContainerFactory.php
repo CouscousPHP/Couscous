@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous;
+namespace Couscous\Application;
 
 use DI\ContainerBuilder;
 use Interop\Container\ContainerInterface;

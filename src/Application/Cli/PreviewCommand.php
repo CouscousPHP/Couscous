@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Command;
+namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
 use Couscous\Model\Repository;
@@ -112,7 +112,7 @@ class PreviewCommand extends Command
 
     private function startWebServer(InputInterface $input, OutputInterface $output, $targetDirectory)
     {
-        $builder = new ProcessBuilder(array(PHP_BINARY, '-S', $input->getArgument('address')));
+        $builder = new ProcessBuilder([PHP_BINARY, '-S', $input->getArgument('address')]);
         $builder->setWorkingDirectory($targetDirectory);
         $builder->setTimeout(null);
 

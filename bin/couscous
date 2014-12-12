@@ -6,7 +6,7 @@
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
 
-use Couscous\ContainerFactory;
+use Couscous\Application\ContainerFactory;
 use Symfony\Component\Console\Application;
 
 if (version_compare(phpversion(), '5.4', '<')) {
@@ -27,9 +27,9 @@ $container = $factory->createContainer();
 
 $application = new Application('Couscous', '1.0-dev');
 
-$application->add($container->get('Couscous\Command\GenerateCommand'));
-$application->add($container->get('Couscous\Command\PreviewCommand'));
-$application->add($container->get('Couscous\Command\DeployCommand'));
-$application->add($container->get('Couscous\Command\ClearCommand'));
+$application->add($container->get('Couscous\Application\Cli\GenerateCommand'));
+$application->add($container->get('Couscous\Application\Cli\PreviewCommand'));
+$application->add($container->get('Couscous\Application\Cli\DeployCommand'));
+$application->add($container->get('Couscous\Application\Cli\ClearCommand'));
 
 $application->run();

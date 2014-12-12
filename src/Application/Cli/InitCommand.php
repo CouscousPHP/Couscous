@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Command;
+namespace Couscous\Application\Cli;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
