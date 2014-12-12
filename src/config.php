@@ -5,7 +5,7 @@ use Interop\Container\ContainerInterface;
 return array(
 
     'steps.classes' => array(
-        'Couscous\Step\ClearTargetDirectory',
+        'Couscous\Module\Core\Step\ClearTargetDirectory',
         'Couscous\Module\Config\Step\SetDefaultConfig',
         'Couscous\Module\Config\Step\LoadConfig',
         'Couscous\Module\Config\Step\OverrideBaseUrlForPreview',
@@ -22,7 +22,7 @@ return array(
         'Couscous\Module\Markdown\Step\RenderMarkdown',
         'Couscous\Module\Template\Step\AddPageListToLayoutVariables',
         'Couscous\Module\Template\Step\ProcessTwigLayouts',
-        'Couscous\Step\WriteFiles',
+        'Couscous\Module\Core\Step\WriteFiles',
         'Couscous\Module\Scripts\Step\ExecuteAfterScripts',
     ),
     'steps' => DI\factory(function (ContainerInterface $c) {

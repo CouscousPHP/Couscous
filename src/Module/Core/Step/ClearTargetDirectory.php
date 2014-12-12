@@ -1,8 +1,9 @@
 <?php
 
-namespace Couscous\Step;
+namespace Couscous\Module\Core\Step;
 
 use Couscous\Model\Repository;
+use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
