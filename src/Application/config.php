@@ -1,10 +1,11 @@
 <?php
 
 use Interop\Container\ContainerInterface;
+use Symfony\Component\Console\Application;
 
-return array(
+return [
 
-    'steps' => array(
+    'steps' => [
         'Couscous\Module\Core\Step\ClearTargetDirectory',
         'Couscous\Module\Config\Step\SetDefaultConfig',
         'Couscous\Module\Config\Step\LoadConfig',
@@ -24,7 +25,7 @@ return array(
         'Couscous\Module\Template\Step\ProcessTwigLayouts',
         'Couscous\Module\Core\Step\WriteFiles',
         'Couscous\Module\Scripts\Step\ExecuteAfterScripts',
-    ),
+    ],
 
     'Couscous\Generator' => DI\object()
         ->constructorParameter('steps', DI\link('steps.instances')),
@@ -35,9 +36,20 @@ return array(
         }, $c->get('steps'));
     }),
 
+    'application' => DI\factory(function (ContainerInterface $c) {
+        $application = new Application('Couscous', '1.0-dev');
+
+        $application->add($c->get('Couscous\Application\Cli\GenerateCommand'));
+        $application->add($c->get('Couscous\Application\Cli\PreviewCommand'));
+        $application->add($c->get('Couscous\Application\Cli\DeployCommand'));
+        $application->add($c->get('Couscous\Application\Cli\ClearCommand'));
+
+        return $application;
+    }),
+
     'Mni\FrontYAML\Parser' => DI\object()
         ->constructorParameter('markdownParser', DI\link('Mni\FrontYAML\Markdown\MarkdownParser')),
     'Mni\FrontYAML\Markdown\MarkdownParser' => DI\object('Mni\FrontYAML\Bridge\Parsedown\ParsedownParser')
         ->constructor(DI\link('ParsedownExtra')),
 
-);
+];

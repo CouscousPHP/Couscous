@@ -25,11 +25,6 @@ if (isset($include)) {
 $factory = new ContainerFactory();
 $container = $factory->createContainer();
 
-$application = new Application('Couscous', '1.0-dev');
-
-$application->add($container->get('Couscous\Application\Cli\GenerateCommand'));
-$application->add($container->get('Couscous\Application\Cli\PreviewCommand'));
-$application->add($container->get('Couscous\Application\Cli\DeployCommand'));
-$application->add($container->get('Couscous\Application\Cli\ClearCommand'));
-
+/** @var Application $application */
+$application = $container->get('application');
 $application->run();
