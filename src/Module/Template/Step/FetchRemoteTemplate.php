@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Template\Step;
 
-use Couscous\CommandRunner;
+use Couscous\CommandRunner\CommandRunner;
 use Couscous\Model\Repository;
 use Couscous\Step;
 use Symfony\Component\Console\Output\OutputInterface;

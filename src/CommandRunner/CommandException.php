@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous;
+namespace Couscous\CommandRunner;
 
 /**
  * Occurs when a CLI command returns an error.

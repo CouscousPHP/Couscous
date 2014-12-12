@@ -2,8 +2,8 @@
 
 namespace Couscous\Module\Scripts\Step;
 
-use Couscous\CommandException;
-use Couscous\CommandRunner;
+use Couscous\CommandRunner\CommandException;
+use Couscous\CommandRunner\CommandRunner;
 use Couscous\Model\Repository;
 use Symfony\Component\Console\Output\OutputInterface;
 

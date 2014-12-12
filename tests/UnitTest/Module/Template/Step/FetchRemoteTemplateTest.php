@@ -17,7 +17,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_skip_if_no_template_url()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner');
+        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
 
         $step = new FetchRemoteTemplate($filesystem, $commandRunner);
 
@@ -37,7 +37,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_clone_and_set_the_template_directory()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner');
+        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
 
         $step = new FetchRemoteTemplate($filesystem, $commandRunner);
 
@@ -59,7 +59,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_not_clone_twice_if_regenerating()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner');
+        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
 
         $step = new FetchRemoteTemplate($filesystem, $commandRunner);
 

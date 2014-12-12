@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous;
+namespace Couscous\CommandRunner;
 
 /**
  * Run CLI commands.

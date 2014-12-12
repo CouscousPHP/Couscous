@@ -2,7 +2,7 @@
 
 namespace Couscous\Tests\FunctionalTest;
 
-use Couscous\CommandRunner;
+use Couscous\CommandRunner\CommandRunner;
 
 /**
  * @covers Couscous\CommandRunner
@@ -34,7 +34,7 @@ class CommandRunnerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Couscous\CommandException
+     * @expectedException \Couscous\CommandRunner\CommandException
      */
     public function failure_executing_command_throws_runtime_exception()
     {
