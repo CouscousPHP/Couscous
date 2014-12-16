@@ -3,8 +3,8 @@
 namespace Couscous\Tests\UnitTest\Model;
 
 use Couscous\Model\File;
-use Couscous\Model\File\HtmlFile;
-use Couscous\Model\File\MarkdownFile;
+use Couscous\Module\Template\Model\HtmlFile;
+use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 
 /**
@@ -67,10 +67,10 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $repository->addFile($file1);
         $repository->addFile($file2);
 
-        $markdownFiles = $repository->findFilesByType('Couscous\Model\File\MarkdownFile');
+        $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
         $this->assertSame(['file1' => $file1], $markdownFiles);
 
-        $htmlFiles = $repository->findFilesByType('Couscous\Model\File\HtmlFile');
+        $htmlFiles = $repository->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
         $this->assertSame(['file2' => $file2], $htmlFiles);
     }
 

@@ -44,7 +44,7 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
 
     private function createStep(Repository $repository, OutputInterface $output)
     {
-        $step = $this->getMockForAbstractClass('Couscous\Step\StepInterface');
+        $step = $this->getMockForAbstractClass('Couscous\Step');
 
         $step->expects($this->once())
             ->method('__invoke')

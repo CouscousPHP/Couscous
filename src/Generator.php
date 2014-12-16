@@ -3,7 +3,6 @@
 namespace Couscous;
 
 use Couscous\Model\Repository;
-use Couscous\Step\StepInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -20,13 +19,13 @@ class Generator
     private $filesystem;
 
     /**
-     * @var StepInterface[]
+     * @var Step[]
      */
     private $steps;
 
     /**
      * @param Filesystem      $filesystem
-     * @param StepInterface[] $steps
+     * @param Step[] $steps
      */
     public function __construct(Filesystem $filesystem, array $steps)
     {
