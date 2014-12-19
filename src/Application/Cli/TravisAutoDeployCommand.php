@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Command;
+namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
 use Couscous\Model\Repository;
@@ -101,17 +101,14 @@ class TravisAutoDeployCommand extends Command
         shell_exec('git config user.name ${GIT_NAME}');
         shell_exec('git config user.email ${GIT_EMAIL}');
 
-        $isAlreadyDeployed = (bool) getenv('TRAVIS_DEPLOYED');
-        if (!$isAlreadyDeployed) {
+        // getting current php version to only deploy once
+        if (version_compare(phpversion(), '5.5', '>') && version_compare(phpversion(), '5.6', '<')) {
             // Generate the website
             $this->generator->generate($repository, $output);
 
             $output->writeln('');
             // Deploy it
             $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
-
-            // setting env variable to disallow new deployment
-            shell_exec('EXPORT TRAVIS_DEPLOYED=true');
             exit(1);
         }
 
