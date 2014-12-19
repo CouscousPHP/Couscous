@@ -87,12 +87,12 @@ class TravisAutoDeployCommand extends Command
         // verify some env variables
         $travisBranch = getenv('TRAVIS_BRANCH');
 
-        if ($travisBranch != 'master') {
+        if ($travisBranch !== 'master') {
             $output->writeln('<notice>[NOT DEPLOYED] Deploying Couscous only for master branch</notice>');
             exit(0);
         }
 
-        $isPullRequest = (bool) getenv('TRAVIS_PULL_REQUEST');
+        $isPullRequest = getenv('TRAVIS_PULL_REQUEST') === 'true' ? true : false;
 
         if ($isPullRequest) {
             $output->writeln('<notice>[NOT DEPLOYED] Not deploying Couscous for pull requests</notice>');
@@ -109,7 +109,7 @@ class TravisAutoDeployCommand extends Command
         shell_exec('git config user.email ${GIT_EMAIL}');
 
         // getting current php version to only deploy once
-        $currentPhpVersion = shell_exec('phpenv global');
+        $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
         if ($input->getOption('php-version') == $currentPhpVersion) {
             // Generate the website
             $this->generator->generate($repository, $output);

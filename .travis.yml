@@ -6,7 +6,7 @@ php:
   - hhvm
 env:
   global:
-  - GIT_NAME: Couscous auto deploy
+  - GIT_NAME: "'Couscous auto deploy'"
   - GIT_EMAIL: couscous@couscous.io
   - GH_REF: github.com/CouscousPHP/Couscous
   - secure: ePuwi73FIpzkIuk0XkbxiYb5M+HzTIKJy/tXBa5gWhSWq6FlI1fysDGvDcExnKyNH0z9sud0sNPBbi5O5z/rjqupoxoBLuFHfLG3NnLrvjQ2SAmrsIBWtsU737Vo5klbfJp3oJ0hrQCIlczwkfK5j+HbQmGUoS5w81pr3kPxfnc=
