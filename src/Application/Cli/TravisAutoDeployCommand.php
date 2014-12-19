@@ -105,8 +105,8 @@ class TravisAutoDeployCommand extends Command
 
         // set git user data
         $output->writeln('<info>Setting up git user</info>');
-        shell_exec('git config user.name ${GIT_NAME}');
-        shell_exec('git config user.email ${GIT_EMAIL}');
+        shell_exec('git config user.name "${GIT_NAME}"');
+        shell_exec('git config user.email "${GIT_EMAIL}"');
 
         // getting current php version to only deploy once
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
