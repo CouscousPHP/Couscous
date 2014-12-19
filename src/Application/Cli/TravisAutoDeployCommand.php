@@ -89,14 +89,14 @@ class TravisAutoDeployCommand extends Command
 
         if ($travisBranch != 'master') {
             $output->writeln('<notice>[NOT DEPLOYED] Deploying Couscous only for master branch</notice>');
-            exit(1);
+            exit(0);
         }
 
         $isPullRequest = (bool) getenv('TRAVIS_PULL_REQUEST');
 
         if ($isPullRequest) {
             $output->writeln('<notice>[NOT DEPLOYED] Not deploying Couscous for pull requests</notice>');
-            exit(1);
+            exit(0);
         }
 
         // creating out directory
@@ -117,10 +117,10 @@ class TravisAutoDeployCommand extends Command
             $output->writeln('');
             // Deploy it
             $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
-            exit(1);
+            exit(0);
         }
 
         $output->writeln('<notice>This version of the documentation is already deployed</notice>');
-        exit(1);
+        exit(0);
     }
 }
