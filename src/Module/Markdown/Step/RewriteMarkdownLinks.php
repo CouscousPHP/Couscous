@@ -8,11 +8,11 @@ use Couscous\Step;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Processes links to *.md (markdown) files.
+ * Rewrites links from *.md to *.html.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ProcessMarkdownLinks implements Step
+class RewriteMarkdownLinks implements Step
 {
     // OMG regexes...
     const MARKDOWN_LINK_REGEX = '#\[([^\]]+)\]\(([^\)]+)\.md\)#';

@@ -4,13 +4,13 @@ namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
-use Couscous\Module\Markdown\Step\ProcessMarkdownLinks;
+use Couscous\Module\Markdown\Step\RewriteMarkdownLinks;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**
- * @covers \Couscous\Module\Markdown\Step\ProcessMarkdownLinks
+ * @covers \Couscous\Module\Markdown\Step\RewriteMarkdownLinks
  */
-class ProcessMarkdownLinksTest extends \PHPUnit_Framework_TestCase
+class RewriteMarkdownLinksTest extends \PHPUnit_Framework_TestCase
 {
     public function testReplaceLinks()
     {
@@ -30,7 +30,7 @@ MARKDOWN;
         $repository = new Repository('foo', 'bar');
         $repository->addFile($file);
 
-        $step = new ProcessMarkdownLinks();
+        $step = new RewriteMarkdownLinks();
         $step->__invoke($repository, new NullOutput());
 
         $this->assertEquals($expected, $file->content);
