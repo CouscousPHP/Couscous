@@ -58,6 +58,13 @@ class TravisAutoDeployCommand extends Command
                 getcwd()
             )
             ->addOption(
+                'php-version',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Specify for which php version you want to deploy documentation, mainly to avoid multiple deploys',
+                '5.4'
+            )
+            ->addOption(
                 'branch',
                 null,
                 InputOption::VALUE_REQUIRED,
@@ -102,7 +109,8 @@ class TravisAutoDeployCommand extends Command
         shell_exec('git config user.email ${GIT_EMAIL}');
 
         // getting current php version to only deploy once
-        if (version_compare(phpversion(), '5.5', '>') && version_compare(phpversion(), '5.6', '<')) {
+        $currentPhpVersion = shell_exec('phpenv global');
+        if ($input->getOption('php-version') == $currentPhpVersion) {
             // Generate the website
             $this->generator->generate($repository, $output);
 
