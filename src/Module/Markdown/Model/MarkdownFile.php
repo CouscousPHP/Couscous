@@ -33,6 +33,9 @@ class MarkdownFile extends File
         return $this->content;
     }
 
+    /**
+     * @return Metadata
+     */
     public function getMetadata()
     {
         return $this->metadata;

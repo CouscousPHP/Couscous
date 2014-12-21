@@ -20,6 +20,7 @@ return [
         'Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter',
         'Couscous\Module\Markdown\Step\ProcessMarkdownFileName',
         'Couscous\Module\Markdown\Step\RewriteMarkdownLinks',
+        'Couscous\Module\Markdown\Step\ExtractTableOfContents',
         'Couscous\Module\Markdown\Step\RenderMarkdown',
         'Couscous\Module\Template\Step\AddPageListToLayoutVariables',
         'Couscous\Module\Template\Step\ProcessTwigLayouts',

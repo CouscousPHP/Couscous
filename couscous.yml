@@ -5,6 +5,7 @@ exclude:
     - vendor
     - bin
     - tests
+    - website
 
 scripts:
     before:
