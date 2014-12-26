@@ -157,5 +157,4 @@ A good rule of thumb is: **if it works on GitHub.com, it will work with Couscous
 If a `bower.json` file is present in the `website/` directory, dependencies will be
 installed automatically.
 
-You don't need to have Bower installed on your machine, Couscous internally uses
-[BowerPHP](http://bowerphp.org/).
+In that case, you need [to have Bower installed](http://bower.io/). If you don't have a `bower.json`, you don't need to install Bower.
