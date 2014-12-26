@@ -30,6 +30,9 @@ menu:
         templates:
             text: Templates
             relativeUrl: docs/templates.html
+        metadata:
+            text: Metadata
+            relativeUrl: docs/metadata.html
         faq:
             text: FAQ
             relativeUrl: docs/faq.html
