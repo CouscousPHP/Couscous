@@ -26,8 +26,7 @@
         "erusev/parsedown-extra": "~0.2.0",
         "phine/phar": "~1.0",
         "mnapoli/front-yaml": "~1.0",
-        "mnapoli/php-di": "~4.4",
-        "beelab/bowerphp": "1.0.x-dev"
+        "mnapoli/php-di": "~4.4"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3"

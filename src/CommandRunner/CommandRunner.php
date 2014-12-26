@@ -16,16 +16,18 @@ class CommandRunner
      *
      * @param string $command The command to be executed.
      *
-     * @return mixed
+     * @return string Output of the command.
      */
     public function run($command)
     {
-        exec($command . ' 2>&1', $commandOutput, $returnValue);
+        exec($command . ' 2>&1', $output, $returnValue);
+
+        $output = implode(PHP_EOL, $output);
 
         if ($returnValue !== 0) {
-            throw new CommandException(implode(PHP_EOL, $commandOutput));
+            throw new CommandException($output);
         }
 
-        return $commandOutput;
+        return $output;
     }
 }

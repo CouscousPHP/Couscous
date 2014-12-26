@@ -16,7 +16,13 @@ When creating your pull request on GitHub, please write a description which give
 
 ## Requirements
 
-To be able to preview Couscous own website, you will need the following tools installed:
+To be able to preview Couscous own website on your machine, you will need the following tools installed:
+
+- Bower:
+
+    ```
+    $ npm install -g bower
+    ```
 
 - Less compiler:
 

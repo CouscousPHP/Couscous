@@ -29,7 +29,7 @@ class CommandRunnerTest extends \PHPUnit_Framework_TestCase
 
         $output = $this->commandRunner->run($command);
 
-        $this->assertEquals($expected, $output[0]);
+        $this->assertEquals($expected, $output);
     }
 
     /**
