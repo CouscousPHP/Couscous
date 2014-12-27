@@ -104,8 +104,4 @@ after_success:
   - vendor/bin/couscous travis-auto-deploy --php-version=5.5
 ```
 
-Be also aware that `travis-auto-deploy` will only deploy the website for pushes on the `master` branch. You can customize the branch using the `--branch` option:
-
-```yaml
-  - vendor/bin/couscous travis-auto-deploy --branch=foo
-```
+Be also aware that `travis-auto-deploy` will only deploy the website for pushes on the `master` branch.
