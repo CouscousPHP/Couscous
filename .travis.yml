@@ -10,9 +10,9 @@ env:
   - GIT_EMAIL: couscous@couscous.io
   - GH_REF: github.com/CouscousPHP/Couscous
   - secure: ePuwi73FIpzkIuk0XkbxiYb5M+HzTIKJy/tXBa5gWhSWq6FlI1fysDGvDcExnKyNH0z9sud0sNPBbi5O5z/rjqupoxoBLuFHfLG3NnLrvjQ2SAmrsIBWtsU737Vo5klbfJp3oJ0hrQCIlczwkfK5j+HbQmGUoS5w81pr3kPxfnc=
-  - secure: ngrwdyb4flSusMm28wXUgykkw7ctC2lltXcHyinR2wFrLgWi1XGFzc80Uf267j+aZENAc7OZgWrqFQJN7so4Y4i0RYIV1ue2ktb44EI3ng21HkxAYqSFODXKUD4jSwXzQpPXYZwAmAKCTvWMyyrei0dnf3RmJHNn9yM72H6YAOA=
 before_script:
   - composer install --no-progress
+  - npm install -g bower
   - npm install -g less
   - npm install -g less-plugin-clean-css
 script:
