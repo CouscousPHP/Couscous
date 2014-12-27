@@ -12,4 +12,4 @@ This is the documentation root. Here are some articles to help you:
 - [FAQ](faq.md)
 - [Contributing](../CONTRIBUTING.md)
 - [Change log](../CHANGELOG.html)
-- [Travis Automatic Deploy](travis.md)
+- [Automatic deployment using Travis CI](travis.md)
