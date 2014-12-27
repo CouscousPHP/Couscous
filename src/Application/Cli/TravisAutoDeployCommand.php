@@ -88,14 +88,14 @@ class TravisAutoDeployCommand extends Command
         $travisBranch = getenv('TRAVIS_BRANCH');
 
         if ($travisBranch !== 'master') {
-            $output->writeln('<notice>[NOT DEPLOYED] Deploying Couscous only for master branch</notice>');
+            $output->writeln('<comment>[NOT DEPLOYED] Deploying Couscous only for master branch</comment>');
             exit(0);
         }
 
         $isPullRequest = getenv('TRAVIS_PULL_REQUEST') === 'true' ? true : false;
 
         if ($isPullRequest) {
-            $output->writeln('<notice>[NOT DEPLOYED] Not deploying Couscous for pull requests</notice>');
+            $output->writeln('<comment>[NOT DEPLOYED] Not deploying Couscous for pull requests</comment>');
             exit(0);
         }
 
@@ -120,7 +120,7 @@ class TravisAutoDeployCommand extends Command
             exit(0);
         }
 
-        $output->writeln('<notice>This version of the documentation is already deployed</notice>');
+        $output->writeln('<comment>This version of the documentation is already deployed</comment>');
         exit(0);
     }
 }
