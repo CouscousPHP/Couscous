@@ -109,20 +109,30 @@
 <p>or <a href="http://yeoman.io/">Yeoman</a></p>
 <pre><code>yeoman install google-code-prettify</code></pre>
 <h2>Usage</h2>
-<p>The prettify script is AMD compatible and can be used modularly. Here is an example of it using RequireJS:</p>
-<pre><code class="language-javascript">    define(['jquery', 'prettify'], function($, prettify){
-        var code = null;
-        $('pre').addClass('prettyprint').each(function(idx, el){
-                code = el.firstChild;
-                code.innerHTML = prettify.prettyPrintOne(code.innerHTML);
-            })
-        );
-    });</code></pre>
+<p>The prettify script is AMD compatible and can be used modularly. Here is an example of it in an AMD module:</p>
+<pre><code class="language-javascript">define(['jquery', 'prettify'], function($, prettify){
+    var code = null;
+    $('pre').addClass('prettyprint').each(function(idx, el){
+            code = el.firstChild;
+            code.innerHTML = prettify.prettyPrintOne(code.innerHTML);
+        })
+    );
+});</code></pre>
+<p>This version of google-code-prettify defines an anonymous module, which is more flexible.  To allow your AMD loader to find google-code-prettify with a more convenient name, map a path to it as follows:</p>
+<pre><code class="language-js">// using RequireJS
+require.config({
+    prettify: 'bower_components/google-code-prettify/prettify'
+});
+
+// using curl.js
+curl.config({
+    prettify: 'bower_components/google-code-prettify/prettify'
+});</code></pre>
 <p>Or it may just be used in a global context like the following:</p>
-<pre><code class="language-javascript">    (function(){
-        $('pre').addClass('prettyprint');
-        prettyPrint();
-    })();</code></pre>
+<pre><code class="language-javascript">(function(){
+    $('pre').addClass('prettyprint');
+    prettyPrint();
+})();</code></pre>
 <p>More information can be found in the original <a href="http://google-code-prettify.googlecode.com/svn/trunk/README.html">README.html</a></p>
                 </section>
 

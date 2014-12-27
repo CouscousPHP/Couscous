@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Couscous! Put your documentation in a website!</title>
+    <meta name="description" content="Couscous! Put your documentation in a website!">
+
+    <link href="http://couscous.io/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://couscous.io/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://couscous.io/css/prettify.tomorrow-night-eighties.css" rel="stylesheet">
+    <link href="http://couscous.io/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Google webmasters verification -->
+    <meta name="google-site-verification" content="bjh41nmytWyBkuM8373PL1j6upqoiAQXSb19vMGJZDY" />
+
+</head>
+
+<body class="">
+
+    <div id="menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="http://couscous.io/" class="navbar-brand">Couscous</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://couscous.io/">Home</a></li>
+                    <li><a href="http://couscous.io/docs/getting-started.html">Get started</a></li>
+                    <li><a href="http://couscous.io/templates.html">Templates</a></li>
+                    <li><a href="http://couscous.io/docs/">Documentation</a></li>
+                    <li>
+                        <a href="https://github.com/CouscousPHP/Couscous">
+                            <i class="fa fa-github"></i> GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                    <ul class="nav nav-pills nav-stacked">
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/getting-started.html">
+                                    Get started
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/">
+                                    Index
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/configuration.html">
+                                    Configuration
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/templates.html">
+                                    Templates
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/faq.html">
+                                    FAQ
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/changelog.html">
+                                    Change log
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/contributing.html">
+                                    Contributing
+                                </a>
+                            </li>
+                                            </ul>
+
+                </nav>
+
+                <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Contributing to Font Awesome</h1>
+<p>Looking to contribute something to Font Awesome? <strong>Here's how you can help.</strong></p>
+<h2>Reporting issues</h2>
+<p>We only accept issues that are icon requests, bug reports, or feature requests. Bugs must be isolated and reproducible problems that we can fix within the Font Awesome core. Please read the following guidelines to ensure you are the paragon of bug reporting.</p>
+<ol>
+<li><strong>Search for existing issues.</strong> We get a lot of duplicate issues, and you'd help us out a lot by first checking if someone else has reported the same issue. Moreover, the issue may have already been resolved with a fix available.</li>
+<li><strong>Create an isolated and reproducible test case.</strong> Be sure the problem exists in Font Awesome's code with a <a href="http://css-tricks.com/reduced-test-cases/">reduced test case</a> that should be included in each bug report.</li>
+<li><strong>Include a live example.</strong> Make use of jsFiddle, jsBin, or Codepen to share your isolated test cases.</li>
+<li><strong>Share as much information as possible.</strong> Include operating system and version, browser and version, version of Font Awesome, etc. where appropriate. Also include steps to reproduce the bug.</li>
+</ol>
+<h2>Key branches</h2>
+<ul>
+<li><code>master</code> is the latest, deployed version (not to be used for pull requests)</li>
+<li><code>gh-pages</code> is the hosted docs (not to be used for pull requests)</li>
+<li><code>*-wip</code> branches are the official work in progress branches for the next releases. All pull requests should be submitted against the appropriate branch</li>
+</ul>
+<h2>Notes on the repo</h2>
+<p>As of v3.2.0, Font Awesome's CSS, LESS, SCSS, and documentation are all powered by Jekyll templates and built before each commit and release.</p>
+<ul>
+<li><code>_config.yml</code> - much of the site is driven off variables from this file, including Font Awesome and Bootstrap versions</li>
+<li><code>src/</code> - All edits to documentation, LESS, SCSS, and CSS should be made to files and templates in this directory</li>
+<li><code>src/icons.yml</code> - all LESS, SCSS, and CSS icon definitions are driven off this single file</li>
+</ul>
+<h2>Pull requests</h2>
+<ul>
+<li>Submit all pull requests against the appropriate <code>*-wip</code> branch for easier merging</li>
+<li>Any changes to the docs must be made to the Liquid templates in the <code>src</code> directory</li>
+<li>CSS changes must be done in .less and .scss files first, never the compiled files</li>
+<li>If modifying the .less and .scss files, always recompile and commit the compiled files</li>
+<li>Try not to pollute your pull request with unintended changes--keep them simple and small</li>
+<li>Try to share which browsers your code has been tested in before submitting a pull request</li>
+</ul>
+<h2>Coding standards: HTML</h2>
+<ul>
+<li>Two spaces for indentation, never tabs</li>
+<li>Double quotes only, never single quotes</li>
+<li>Always use proper indentation</li>
+<li>Use tags and elements appropriate for an HTML5 doctype (e.g., self-closing tags)</li>
+</ul>
+<h2>Coding standards: CSS</h2>
+<ul>
+<li>Adhere to the <a href="http://markdotto.com/2011/11/29/css-property-order/">Recess CSS property order</a></li>
+<li>Multiple-line approach (one property and value per line)</li>
+<li>Always a space after a property's colon (.e.g, <code>display: block;</code> and not <code>display:block;</code>)</li>
+<li>End all lines with a semi-colon</li>
+<li>For multiple, comma-separated selectors, place each selector on it's own line</li>
+<li>Attribute selectors, like <code>input[type="text"]</code> should always wrap the attribute's value in double quotes, for consistency and safety (see this <a href="http://mathiasbynens.be/notes/unquoted-attribute-values">blog post on unquoted attribute values</a> that can lead to XSS attacks)</li>
+</ul>
+<h2>License</h2>
+<p>By contributing your code, you agree to license your contribution under the terms of the MIT License:</p>
+<ul>
+<li><a href="http://opensource.org/licenses/mit-license.html">http://opensource.org/licenses/mit-license.html</a></li>
+</ul>
+<h2>Thanks</h2>
+<p>Thanks to Bootstrap for their wonderful CONTRIBUTING.MD doc. It was modified to create this one.</p>
+                </section>
+
+            </div>
+        </div>
+
+    
+
+    
+        <script src="http://couscous.io/bower_components/jquery/jquery.min.js"></script>
+        <script src="http://couscous.io/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://couscous.io/bower_components/google-code-prettify/src/prettify.js"></script>
+
+        <script>
+            $(function() {
+                $("section h1").wrap('<div class="page-header" />');
+                $("pre").addClass('prettyprint');
+                prettyPrint();
+            });
+        </script>
+
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u=(("https:" == document.location.protocol) ? "https" : "http") + "://mnapoli.piwikpro.com/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', 2]);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+                g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+        <!-- End Piwik Code -->
+
+    
+</body>
+</html>
