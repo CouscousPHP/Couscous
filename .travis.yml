@@ -15,6 +15,8 @@ before_script:
   - npm install -g bower
   - npm install -g less
   - npm install -g less-plugin-clean-css
+  - echo $TRAVIS_BRANCH
+  - echo $TRAVIS_PULL_REQUEST
 script:
   - phpunit
 after_success:
