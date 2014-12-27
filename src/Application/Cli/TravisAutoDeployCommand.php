@@ -92,7 +92,7 @@ class TravisAutoDeployCommand extends Command
             exit(0);
         }
 
-        $isPullRequest = getenv('TRAVIS_PULL_REQUEST') === 'true' ? true : false;
+        $isPullRequest = (int) getenv('TRAVIS_PULL_REQUEST') > 0 ? true : false;
 
         if ($isPullRequest) {
             $output->writeln('<comment>[NOT DEPLOYED] Not deploying Couscous for pull requests</comment>');
