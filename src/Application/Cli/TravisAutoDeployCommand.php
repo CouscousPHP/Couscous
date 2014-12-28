@@ -89,14 +89,14 @@ class TravisAutoDeployCommand extends Command
 
         if ($travisBranch !== 'master') {
             $output->writeln('<comment>[NOT DEPLOYED] Deploying Couscous only for master branch</comment>');
-            exit(0);
+            return;
         }
 
         $isPullRequest = (int) getenv('TRAVIS_PULL_REQUEST') > 0 ? true : false;
 
         if ($isPullRequest) {
             $output->writeln('<comment>[NOT DEPLOYED] Not deploying Couscous for pull requests</comment>');
-            exit(0);
+            return;
         }
 
         // creating out directory
@@ -110,17 +110,17 @@ class TravisAutoDeployCommand extends Command
 
         // getting current php version to only deploy once
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
-        if ($input->getOption('php-version') == $currentPhpVersion) {
-            // Generate the website
-            $this->generator->generate($repository, $output);
-
-            $output->writeln('');
-            // Deploy it
-            $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
-            exit(0);
+        if ($input->getOption('php-version') != $currentPhpVersion) {
+            $output->writeln('<comment>This version of the documentation is already deployed</comment>');
+            return;
         }
 
-        $output->writeln('<comment>This version of the documentation is already deployed</comment>');
-        exit(0);
+        // Generate the website
+        $this->generator->generate($repository, $output);
+
+        $output->writeln('');
+
+        // Deploy it
+        $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
     }
 }
