@@ -39,5 +39,4 @@ title: Hello!
 baseUrl: http://username.github.io/your-project
 ```
 
-**Note:** any variable you put in the `couscous.yml` is available in templates.
-You can use this to define the website's title for example, or any global variable.
+**Note:** any variable you put in `couscous.yml` is called **Metadata**. You can use these variables in templates for example. Learn more about this in the [Metadata documentation](metadata.md).
