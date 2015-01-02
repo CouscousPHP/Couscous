@@ -5,16 +5,15 @@ namespace Couscous\Module\Markdown\Step;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Processes the name of Markdown files.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ProcessMarkdownFileName implements \Couscous\Step
+class ProcessMarkdownFileName implements Step
 {
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Repository $repository)
     {
         /** @var MarkdownFile[] $markdownFiles */
         $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');

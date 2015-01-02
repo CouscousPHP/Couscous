@@ -119,7 +119,7 @@ class PreviewCommand extends Command
         $process = $builder->getProcess();
         $process->start();
 
-        $output->writeln(sprintf("Server running on <info>%s</info>", $input->getArgument('address')));
+        $output->writeln(sprintf("Server running on <comment>%s</comment>", $input->getArgument('address')));
     }
 
     private function isSupported()

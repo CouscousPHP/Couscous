@@ -5,7 +5,6 @@ namespace Couscous\Module\Markdown\Step;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Rewrites links from *.md to *.html.
@@ -18,7 +17,7 @@ class RewriteMarkdownLinks implements Step
     const MARKDOWN_LINK_REGEX = '#\[([^\]]+)\]\(([^\)]+)\.md\)#';
     const REGEX_REPLACEMENT   = '[$1]($2.html)';
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Repository $repository)
     {
         /** @var MarkdownFile[] $markdownFiles */
         $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');

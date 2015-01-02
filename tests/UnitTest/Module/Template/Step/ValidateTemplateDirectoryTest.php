@@ -4,7 +4,6 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\ValidateTemplateDirectory;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -20,7 +19,7 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
         $step = new ValidateTemplateDirectory($this->createFilesystem());
         $repository = new MockRepository();
         $repository->sourceDirectory = '/foo';
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertEquals('/foo/website', $repository->metadata['template.directory']);
     }
@@ -34,7 +33,7 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
         $repository = new MockRepository();
         $repository->sourceDirectory = '/foo';
         $repository->metadata['template.directory'] = 'bar';
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertEquals('/foo/bar', $repository->metadata['template.directory']);
     }
@@ -48,7 +47,7 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
         $repository = new MockRepository();
         $repository->sourceDirectory = '/foo';
         $repository->metadata['template.directory'] = '/hello/world';
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertEquals('/hello/world', $repository->metadata['template.directory']);
     }
@@ -64,7 +63,7 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
         $repository = new MockRepository();
         $repository->sourceDirectory = '/foo';
         $repository->metadata['template.directory'] = 'bar';
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
     }
 
     /**
@@ -78,7 +77,7 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
         $repository = new MockRepository();
         $repository->sourceDirectory = '/foo';
         $repository->metadata['template.directory'] = '/hello/world';
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
     }
 
     /**
@@ -91,7 +90,7 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
         $step = new ValidateTemplateDirectory($this->createFilesystem(false));
         $repository = new MockRepository();
         $repository->sourceDirectory = '/foo';
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
     }
 
     /**

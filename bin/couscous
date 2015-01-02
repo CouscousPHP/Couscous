@@ -8,6 +8,7 @@
 
 use Couscous\Application\ContainerFactory;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 if (version_compare(phpversion(), '5.4', '<')) {
     die('You must use PHP >= 5.4 in order to use Couscous. Please upgrade your PHP version.');
@@ -22,8 +23,16 @@ if (isset($include)) {
     require_once __DIR__ . '/../../../autoload.php';
 }
 
+$output = new ConsoleOutput();
+
 $factory = new ContainerFactory();
 $container = $factory->createContainer();
+
+// Set the logger
+$logger = $container->make('Symfony\Component\Console\Logger\ConsoleLogger', [
+    'output' => $output,
+]);
+$container->set('Psr\Log\LoggerInterface', $logger);
 
 /** @var Application $application */
 $application = $container->get('application');

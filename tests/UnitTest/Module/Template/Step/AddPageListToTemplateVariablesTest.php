@@ -6,7 +6,6 @@ use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Repository;
 use Couscous\Module\Template\Step\AddPageListToLayoutVariables;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
-use Symfony\Component\Console\Output\NullOutput;
 
 /**
  * @covers \Couscous\Module\Template\Step\AddPageListToLayoutVariables
@@ -78,6 +77,6 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
         }
 
         $step = new AddPageListToLayoutVariables();
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
     }
 }

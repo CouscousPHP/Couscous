@@ -6,7 +6,6 @@ use Couscous\Model\LazyFile;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
-use Symfony\Component\Console\Output\NullOutput;
 
 /**
  * @covers \Couscous\Module\Markdown\Step\ProcessMarkdownFileName
@@ -35,7 +34,7 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
         $repository->addFile($file);
 
         $step = new ProcessMarkdownFileName();
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $files = $repository->getFiles();
 
@@ -54,7 +53,7 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
         $repository->addFile($file);
 
         $step = new ProcessMarkdownFileName();
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $files = $repository->getFiles();
 

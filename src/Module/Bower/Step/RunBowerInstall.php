@@ -5,7 +5,7 @@ namespace Couscous\Module\Bower\Step;
 use Couscous\CommandRunner\CommandRunner;
 use Couscous\Model\Repository;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -25,19 +25,28 @@ class RunBowerInstall implements Step
      */
     private $commandRunner;
 
-    public function __construct(Filesystem $filesystem, CommandRunner $commandRunner)
-    {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(
+        Filesystem $filesystem,
+        CommandRunner $commandRunner,
+        LoggerInterface $logger
+    ) {
         $this->filesystem = $filesystem;
         $this->commandRunner = $commandRunner;
+        $this->logger = $logger;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Repository $repository)
     {
-        if ($repository->regenerate || !$this->hasBowerJson($repository)) {
+        if ($repository->regenerate || ! $this->hasBowerJson($repository)) {
             return;
         }
 
-        $output->writeln('Executing <info>bower install</info>');
+        $this->logger->notice('Executing "bower install"');
 
         $result = $this->commandRunner->run(sprintf(
             'cd "%s" && bower install',
@@ -45,7 +54,7 @@ class RunBowerInstall implements Step
         ));
 
         if ($result) {
-            $output->writeln($result);
+            $this->logger->info($result);
         }
     }
 

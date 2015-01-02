@@ -4,7 +4,6 @@ namespace Couscous\Module\Config\Step;
 
 use Couscous\Model\Repository;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Set the default config.
@@ -19,7 +18,7 @@ class SetDefaultConfig implements Step
         ],
     ];
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Repository $repository)
     {
         $repository->metadata->setMany($this->defaultConfig);
     }

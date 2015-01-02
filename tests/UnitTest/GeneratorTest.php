@@ -6,7 +6,6 @@ use Couscous\Generator;
 use Couscous\Model\Repository;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -21,17 +20,16 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     {
         $filesystem = $this->createFileSystem();
         $repository = new MockRepository();
-        $output = new NullOutput();
 
         $steps = [
-            $this->createStep($repository, $output),
-            $this->createStep($repository, $output),
-            $this->createStep($repository, $output),
+            $this->createStep($repository),
+            $this->createStep($repository),
+            $this->createStep($repository),
         ];
 
         $generator = new Generator($filesystem, $steps);
 
-        $generator->generate($repository, $output);
+        $generator->generate($repository, new NullOutput());
     }
 
     /**
@@ -42,13 +40,13 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
         return $this->getMock('Symfony\Component\Filesystem\Filesystem');
     }
 
-    private function createStep(Repository $repository, OutputInterface $output)
+    private function createStep(Repository $repository)
     {
         $step = $this->getMockForAbstractClass('Couscous\Step');
 
         $step->expects($this->once())
             ->method('__invoke')
-            ->with($repository, $output);
+            ->with($repository);
 
         return $step;
     }

@@ -4,7 +4,6 @@ namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\OverrideBaseUrlForPreview;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
-use Symfony\Component\Console\Output\NullOutput;
 
 /**
  * @covers \Couscous\Module\Config\Step\OverrideBaseUrlForPreview
@@ -21,7 +20,7 @@ class OverrideBaseUrlForPreviewTest extends \PHPUnit_Framework_TestCase
         $repository->metadata['preview'] = true;
 
         $step = new OverrideBaseUrlForPreview();
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertEquals('', $repository->metadata['baseUrl']);
     }
@@ -36,7 +35,7 @@ class OverrideBaseUrlForPreviewTest extends \PHPUnit_Framework_TestCase
         $repository->metadata['preview'] = false;
 
         $step = new OverrideBaseUrlForPreview();
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertEquals('foo', $repository->metadata['baseUrl']);
     }

@@ -4,7 +4,6 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\UseDefaultTemplate;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -20,7 +19,7 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
         $step = new UseDefaultTemplate($this->createFilesystem());
 
         $repository = new MockRepository();
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertEquals(UseDefaultTemplate::DEFAULT_TEMPLATE_URL, $repository->metadata['template.url']);
     }
@@ -33,7 +32,7 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
         $step = new UseDefaultTemplate($this->createFilesystem(true));
 
         $repository = new MockRepository();
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertNull($repository->metadata['template.url']);
     }
@@ -48,7 +47,7 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
         $repository = new MockRepository();
         $repository->metadata['template.directory'] = 'foo';
 
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertNull($repository->metadata['template.url']);
     }
@@ -63,7 +62,7 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
         $repository = new MockRepository();
         $repository->metadata['template.url'] = 'foo';
 
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         // Assert URL isn't overridden
         $this->assertEquals('foo', $repository->metadata['template.url']);
