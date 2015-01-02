@@ -28,10 +28,9 @@ interface Step
     /**
      * Process the given repository.
      *
-     * @param Repository      $repository
-     * @param OutputInterface $output     Output for the user.
+     * @param Repository $repository
      */
-    public function __invoke(Repository $repository, OutputInterface $output);
+    public function __invoke(Repository $repository);
 }
 ```
 
@@ -49,7 +48,7 @@ For example, here is a step that would preprocess Markdown files to put the word
 ```php
 class PutCouscousInBold implements \Couscous\Step
 {
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Repository $repository)
     {
         /** @var MarkdownFile[] $markdownFiles */
         $markdownFiles = $repository->findFilesByType('Couscous\Model\MarkdownFile');
