@@ -2,8 +2,8 @@
 
 namespace Couscous\Application;
 
+use DI\Container;
 use DI\ContainerBuilder;
-use Interop\Container\ContainerInterface;
 
 /**
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
@@ -11,7 +11,7 @@ use Interop\Container\ContainerInterface;
 class ContainerFactory
 {
     /**
-     * @return ContainerInterface
+     * @return Container
      */
     public function createContainer()
     {

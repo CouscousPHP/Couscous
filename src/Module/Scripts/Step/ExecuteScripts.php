@@ -5,7 +5,7 @@ namespace Couscous\Module\Scripts\Step;
 use Couscous\CommandRunner\CommandException;
 use Couscous\CommandRunner\CommandRunner;
 use Couscous\Model\Repository;
-use Symfony\Component\Console\Output\OutputInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Base class.
@@ -19,27 +19,33 @@ abstract class ExecuteScripts
      */
     private $commandRunner;
 
-    public function __construct(CommandRunner $commandRunner)
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(CommandRunner $commandRunner, LoggerInterface $logger)
     {
         $this->commandRunner = $commandRunner;
+        $this->logger        = $logger;
     }
 
-    protected function executeScripts($scripts, Repository $repository, OutputInterface $output)
+    protected function executeScripts($scripts, Repository $repository)
     {
         if (empty($scripts)) {
             return;
         }
 
         foreach ($scripts as $script) {
-            $this->executeScript($output, $repository->sourceDirectory, $script);
+            $this->executeScript($repository->sourceDirectory, $script);
         }
     }
 
-    private function executeScript(OutputInterface $output, $sourceDirectory, $script)
+    private function executeScript($sourceDirectory, $script)
     {
         $script = 'cd "' . $sourceDirectory . '" && ' . $script;
 
-        $output->writeln("Executing <info>$script</info>");
+        $this->logger->notice('Executing {script}', ['script' => $script]);
 
         try {
             $this->commandRunner->run($script);

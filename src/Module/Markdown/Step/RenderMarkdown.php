@@ -7,14 +7,13 @@ use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step;
 use Mni\FrontYAML\Parser;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Turns Markdown to HTML.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class RenderMarkdown implements \Couscous\Step
+class RenderMarkdown implements Step
 {
     /**
      * @var Parser
@@ -26,7 +25,7 @@ class RenderMarkdown implements \Couscous\Step
         $this->markdownParser = $markdownParser;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Repository $repository)
     {
         /** @var MarkdownFile[] $markdownFiles */
         $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');

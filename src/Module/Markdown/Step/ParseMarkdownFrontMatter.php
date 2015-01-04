@@ -6,14 +6,13 @@ use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Step;
 use Mni\FrontYAML\Parser;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Parse Markdown front matter to load file metadata.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ParseMarkdownFrontMatter implements \Couscous\Step
+class ParseMarkdownFrontMatter implements Step
 {
     /**
      * @var Parser
@@ -25,7 +24,7 @@ class ParseMarkdownFrontMatter implements \Couscous\Step
         $this->markdownParser = $markdownParser;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Repository $repository)
     {
         /** @var MarkdownFile[] $markdownFiles */
         $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');

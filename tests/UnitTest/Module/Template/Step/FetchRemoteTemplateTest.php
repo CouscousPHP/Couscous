@@ -4,7 +4,7 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\FetchRemoteTemplate;
 use Couscous\Tests\UnitTest\Mock\MockRepository;
-use Symfony\Component\Console\Output\NullOutput;
+use Psr\Log\NullLogger;
 
 /**
  * @covers \Couscous\Module\Template\Step\FetchRemoteTemplate
@@ -19,14 +19,14 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
         $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner);
+        $step = new FetchRemoteTemplate($filesystem, $commandRunner, new NullLogger());
 
         $repository = new MockRepository();
 
         $commandRunner->expects($this->never())
             ->method('run');
 
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertNull($repository->metadata['template.directory']);
     }
@@ -39,7 +39,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
         $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner);
+        $step = new FetchRemoteTemplate($filesystem, $commandRunner, new NullLogger());
 
         $repository = new MockRepository();
         $repository->metadata['template.url'] = 'git://foo';
@@ -48,7 +48,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
             ->method('run')
             ->with($this->matches('git clone git://foo %s'));
 
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertNotNull($repository->metadata['template.directory']);
     }
@@ -61,7 +61,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
         $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner);
+        $step = new FetchRemoteTemplate($filesystem, $commandRunner, new NullLogger());
 
         $commandRunner->expects($this->once())
             ->method('run')
@@ -70,14 +70,14 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
         // Calling once
         $repository = new MockRepository();
         $repository->metadata['template.url'] = 'git://foo';
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
         $this->assertNotNull($repository->metadata['template.directory']);
 
         // Calling twice
         $repository = new MockRepository();
         $repository->regenerate = true;
         $repository->metadata['template.url'] = 'git://foo';
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
         $this->assertNotNull($repository->metadata['template.directory']);
     }
 }

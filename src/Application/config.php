@@ -1,7 +1,9 @@
 <?php
 
 use Interop\Container\ContainerInterface;
+use Psr\Log\LogLevel;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\OutputInterface;
 
 return [
 
@@ -37,7 +39,7 @@ return [
     }),
 
     'application' => DI\factory(function (ContainerInterface $c) {
-        $application = new Application('Couscous', '1.0-dev');
+        $application = new Application('Couscous');
 
         $application->add($c->get('Couscous\Application\Cli\GenerateCommand'));
         $application->add($c->get('Couscous\Application\Cli\PreviewCommand'));
@@ -51,5 +53,18 @@ return [
         ->constructorParameter('markdownParser', DI\link('Mni\FrontYAML\Markdown\MarkdownParser')),
     'Mni\FrontYAML\Markdown\MarkdownParser' => DI\object('Mni\FrontYAML\Bridge\Parsedown\ParsedownParser')
         ->constructor(DI\link('ParsedownExtra')),
+
+    'Symfony\Component\Console\Logger\ConsoleLogger' => DI\object()
+        ->constructorParameter('verbosityLevelMap', [
+            // Custom verbosity map
+            LogLevel::EMERGENCY => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::ALERT => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::CRITICAL => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::ERROR => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::WARNING => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::NOTICE => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::INFO => OutputInterface::VERBOSITY_VERBOSE,
+            LogLevel::DEBUG => OutputInterface::VERBOSITY_VERY_VERBOSE,
+        ]),
 
 ];

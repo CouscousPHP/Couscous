@@ -5,7 +5,6 @@ namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Module\Markdown\Step\RewriteMarkdownLinks;
-use Symfony\Component\Console\Output\NullOutput;
 
 /**
  * @covers \Couscous\Module\Markdown\Step\RewriteMarkdownLinks
@@ -31,7 +30,7 @@ MARKDOWN;
         $repository->addFile($file);
 
         $step = new RewriteMarkdownLinks();
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($repository);
 
         $this->assertEquals($expected, $file->content);
     }
