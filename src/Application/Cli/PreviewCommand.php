@@ -3,7 +3,7 @@
 namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -99,15 +99,15 @@ class PreviewCommand extends Command
         $targetDirectory,
         $regenerate = false
     ) {
-        $repository = new Repository($sourceDirectory, $targetDirectory);
+        $project = new Project($sourceDirectory, $targetDirectory);
 
-        $repository->metadata['preview'] = true;
+        $project->metadata['preview'] = true;
 
-        $repository->regenerate = $regenerate;
+        $project->regenerate = $regenerate;
 
-        $this->generator->generate($repository, $output);
+        $this->generator->generate($project, $output);
 
-        return $repository->watchlist;
+        return $project->watchlist;
     }
 
     private function startWebServer(InputInterface $input, OutputInterface $output, $targetDirectory)

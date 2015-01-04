@@ -3,7 +3,7 @@
 namespace Couscous\Module\Markdown\Step;
 
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Mni\FrontYAML\Parser;
 
@@ -24,10 +24,10 @@ class ParseMarkdownFrontMatter implements Step
         $this->markdownParser = $markdownParser;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
 
         foreach ($markdownFiles as $file) {
             $document = $this->markdownParser->parse($file->getContent());

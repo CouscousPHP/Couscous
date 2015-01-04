@@ -3,7 +3,7 @@
 namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\SetDefaultConfig;
-use Couscous\Tests\UnitTest\Mock\MockRepository;
+use Couscous\Tests\UnitTest\Mock\MockProject;
 
 /**
  * @covers \Couscous\Module\Config\Step\SetDefaultConfig
@@ -15,11 +15,11 @@ class SetDefaultConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_set_default_config()
     {
-        $repository = new MockRepository();
+        $project = new MockProject();
 
         $step = new SetDefaultConfig();
-        $step->__invoke($repository);
+        $step->__invoke($project);
 
-        $this->assertEquals(['vendor', 'website'], $repository->metadata['exclude']);
+        $this->assertEquals(['vendor', 'website'], $project->metadata['exclude']);
     }
 }

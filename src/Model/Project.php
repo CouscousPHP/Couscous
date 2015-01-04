@@ -6,14 +6,11 @@ use Couscous\Model\WatchList\WatchList;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Repository containing files.
- *
- * Extends stdClass so that properties can be added by processors at will.
- * TODO should not extend stdClass anymore! It has been replaced by the metadata property...
+ * Project containing files.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class Repository extends \stdClass
+class Project
 {
     /**
      * Directory containing the sources files to process.

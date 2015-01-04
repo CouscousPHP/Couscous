@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Config\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 
 /**
@@ -18,8 +18,8 @@ class SetDefaultConfig implements Step
         ],
     ];
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        $repository->metadata->setMany($this->defaultConfig);
+        $project->metadata->setMany($this->defaultConfig);
     }
 }

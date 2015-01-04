@@ -3,7 +3,7 @@
 namespace Couscous\Module\Template\Step;
 
 use Couscous\Module\Template\Model\HtmlFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 
 /**
@@ -13,10 +13,10 @@ use Couscous\Step;
  */
 class AddPageListToLayoutVariables implements Step
 {
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $repository->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
 
         $pageList = [];
         $pageTree = [];
@@ -40,8 +40,8 @@ class AddPageListToLayoutVariables implements Step
         natsort($pageList);
         $this->sortRecursively($pageTree);
 
-        $repository->metadata['pageList'] = $pageList;
-        $repository->metadata['pageTree'] = $pageTree;
+        $project->metadata['pageList'] = $pageList;
+        $project->metadata['pageTree'] = $pageTree;
     }
 
     private function setValue(array &$array, array $path, $value)

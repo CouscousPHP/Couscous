@@ -3,7 +3,7 @@
 namespace Couscous\Module\Template\Step;
 
 use Couscous\CommandRunner\CommandRunner;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -51,16 +51,16 @@ class FetchRemoteTemplate implements Step
         $this->logger        = $logger;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
         // In preview we avoid cloning the repository every time
-        if ($repository->regenerate && $this->templateDirectory) {
-            $repository->metadata['template.directory'] = $this->templateDirectory;
+        if ($project->regenerate && $this->templateDirectory) {
+            $project->metadata['template.directory'] = $this->templateDirectory;
 
             return;
         }
 
-        $templateUrl = $repository->metadata['template.url'];
+        $templateUrl = $project->metadata['template.url'];
 
         if ($templateUrl === null) {
             return;
@@ -69,7 +69,7 @@ class FetchRemoteTemplate implements Step
         $directory = $this->fetchGitTemplate($templateUrl);
 
         $this->templateDirectory = $directory;
-        $repository->metadata['template.directory'] = $directory;
+        $project->metadata['template.directory'] = $directory;
     }
 
     private function fetchGitTemplate($gitUrl)

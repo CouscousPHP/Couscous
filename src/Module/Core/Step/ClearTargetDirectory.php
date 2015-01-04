@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Core\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -24,10 +24,10 @@ class ClearTargetDirectory implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
         $files = new Finder();
-        $files->in($repository->targetDirectory);
+        $files->in($project->targetDirectory);
 
         $this->filesystem->remove($files);
     }

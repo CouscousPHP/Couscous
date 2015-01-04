@@ -20,17 +20,17 @@ Couscous was designed to be as simple as possible. By embracing simplicity, it b
 
 ### Website generation
 
-The website generation is composed of a list of **steps** to process the `Repository` model object:
+The website generation is composed of a list of **steps** to process the `Project` model object:
 
 ```php
 interface Step
 {
     /**
-     * Process the given repository.
+     * Process the given project.
      *
-     * @param Repository $repository
+     * @param Project $project
      */
-    public function __invoke(Repository $repository);
+    public function __invoke(Project $project);
 }
 ```
 
@@ -48,10 +48,10 @@ For example, here is a step that would preprocess Markdown files to put the word
 ```php
 class PutCouscousInBold implements \Couscous\Step
 {
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType('Couscous\Model\MarkdownFile');
 
         foreach ($markdownFiles as $file) {
             $file->content = str_replace('Couscous', '**Couscous**', $file->content);

@@ -3,7 +3,7 @@
 namespace Couscous\Module\Markdown\Step;
 
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 
 /**
@@ -17,10 +17,10 @@ class RewriteMarkdownLinks implements Step
     const MARKDOWN_LINK_REGEX = '#\[([^\]]+)\]\(([^\)]+)\.md\)#';
     const REGEX_REPLACEMENT   = '[$1]($2.html)';
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
 
         foreach ($markdownFiles as $file) {
             $file->content = preg_replace(

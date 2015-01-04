@@ -4,7 +4,7 @@ namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Model\LazyFile;
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
 
 /**
@@ -29,14 +29,14 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
 
     public function testNonMarkdownFileNotRenamed()
     {
-        $file       = new LazyFile('foo.txt', 'foo.txt');
-        $repository = new Repository('foo', 'bar');
-        $repository->addFile($file);
+        $file    = new LazyFile('foo.txt', 'foo.txt');
+        $project = new Project('foo', 'bar');
+        $project->addFile($file);
 
         $step = new ProcessMarkdownFileName();
-        $step->__invoke($repository);
+        $step->__invoke($project);
 
-        $files = $repository->getFiles();
+        $files = $project->getFiles();
 
         $this->assertCount(1, $files);
         /** @var MarkdownFile $newFile */
@@ -48,14 +48,14 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
 
     private function assertFileRenamed($expected, $filename)
     {
-        $file       = new MarkdownFile($filename, '');
-        $repository = new Repository('foo', 'bar');
-        $repository->addFile($file);
+        $file    = new MarkdownFile($filename, '');
+        $project = new Project('foo', 'bar');
+        $project->addFile($file);
 
         $step = new ProcessMarkdownFileName();
-        $step->__invoke($repository);
+        $step->__invoke($project);
 
-        $files = $repository->getFiles();
+        $files = $project->getFiles();
 
         $this->assertCount(1, $files);
         /** @var MarkdownFile $newFile */

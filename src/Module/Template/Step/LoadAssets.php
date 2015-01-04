@@ -3,7 +3,7 @@
 namespace Couscous\Module\Template\Step;
 
 use Couscous\Model\LazyFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -28,23 +28,23 @@ class LoadAssets implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        if (! $repository->metadata['template.directory']) {
+        if (! $project->metadata['template.directory']) {
             return;
         }
 
         $files = new Finder();
         $files->files()
-            ->in($repository->metadata['template.directory'])
+            ->in($project->metadata['template.directory'])
             ->ignoreDotFiles(true)
             ->notName('*.twig');
 
-        $repository->watchlist->watchFiles($files);
+        $project->watchlist->watchFiles($files);
 
         foreach ($files as $file) {
             /** @var SplFileInfo $file */
-            $repository->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
+            $project->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
         }
     }
 }

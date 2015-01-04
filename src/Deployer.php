@@ -4,7 +4,7 @@ namespace Couscous;
 
 use Couscous\CommandRunner\CommandException;
 use Couscous\CommandRunner\CommandRunner;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -33,16 +33,16 @@ class Deployer
     }
 
     /**
-     * @param Repository      $repository
+     * @param Project         $project
      * @param OutputInterface $output
      * @param string          $repositoryUrl Repository in which to deploy the files.
      * @param string          $branch        Git branch in which to deploy the files.
      */
-    public function deploy(Repository $repository, OutputInterface $output, $repositoryUrl, $branch)
+    public function deploy(Project $project, OutputInterface $output, $repositoryUrl, $branch)
     {
         $output->writeln("<comment>Deploying the website</comment>");
 
-        $directory    = $repository->targetDirectory;
+        $directory    = $project->targetDirectory;
         $tmpDirectory = $this->createTempDirectory();
 
         $this->cloneRepository($output, $repositoryUrl, $tmpDirectory);

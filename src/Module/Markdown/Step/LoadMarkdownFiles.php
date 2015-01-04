@@ -3,7 +3,7 @@
 namespace Couscous\Module\Markdown\Step;
 
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -14,18 +14,18 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class LoadMarkdownFiles implements Step
 {
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        $files = $repository->sourceFiles();
+        $files = $project->sourceFiles();
         $files->name('*.md');
 
         foreach ($files as $file) {
             /** @var SplFileInfo $file */
             $content = file_get_contents($file->getPathname());
 
-            $repository->addFile(new MarkdownFile($file->getRelativePathname(), $content));
+            $project->addFile(new MarkdownFile($file->getRelativePathname(), $content));
         }
 
-        $repository->watchlist->watchFiles($files);
+        $project->watchlist->watchFiles($files);
     }
 }

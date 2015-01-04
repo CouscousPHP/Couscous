@@ -3,7 +3,7 @@
 namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\UseDefaultTemplate;
-use Couscous\Tests\UnitTest\Mock\MockRepository;
+use Couscous\Tests\UnitTest\Mock\MockProject;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -18,10 +18,10 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
     {
         $step = new UseDefaultTemplate($this->createFilesystem());
 
-        $repository = new MockRepository();
-        $step->__invoke($repository);
+        $project = new MockProject();
+        $step->__invoke($project);
 
-        $this->assertEquals(UseDefaultTemplate::DEFAULT_TEMPLATE_URL, $repository->metadata['template.url']);
+        $this->assertEquals(UseDefaultTemplate::DEFAULT_TEMPLATE_URL, $project->metadata['template.url']);
     }
 
     /**
@@ -31,10 +31,10 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
     {
         $step = new UseDefaultTemplate($this->createFilesystem(true));
 
-        $repository = new MockRepository();
-        $step->__invoke($repository);
+        $project = new MockProject();
+        $step->__invoke($project);
 
-        $this->assertNull($repository->metadata['template.url']);
+        $this->assertNull($project->metadata['template.url']);
     }
 
     /**
@@ -44,12 +44,12 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
     {
         $step = new UseDefaultTemplate($this->createFilesystem());
 
-        $repository = new MockRepository();
-        $repository->metadata['template.directory'] = 'foo';
+        $project = new MockProject();
+        $project->metadata['template.directory'] = 'foo';
 
-        $step->__invoke($repository);
+        $step->__invoke($project);
 
-        $this->assertNull($repository->metadata['template.url']);
+        $this->assertNull($project->metadata['template.url']);
     }
 
     /**
@@ -59,13 +59,13 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
     {
         $step = new UseDefaultTemplate($this->createFilesystem());
 
-        $repository = new MockRepository();
-        $repository->metadata['template.url'] = 'foo';
+        $project = new MockProject();
+        $project->metadata['template.url'] = 'foo';
 
-        $step->__invoke($repository);
+        $step->__invoke($project);
 
         // Assert URL isn't overridden
-        $this->assertEquals('foo', $repository->metadata['template.url']);
+        $this->assertEquals('foo', $project->metadata['template.url']);
     }
 
     /**
