@@ -3,7 +3,7 @@
 namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Deployer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -75,14 +75,14 @@ class DeployCommand extends Command
         $repositoryUrl   = trim(shell_exec('git config --get remote.origin.url'));
         $targetBranch    = $input->getOption('branch');
 
-        $repository = new Repository($sourceDirectory, getcwd() . '/.couscous/generated');
+        $project = new Project($sourceDirectory, getcwd() . '/.couscous/generated');
 
         // Generate the website
-        $this->generator->generate($repository, $output);
+        $this->generator->generate($project, $output);
 
         $output->writeln('');
 
         // Deploy it
-        $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
+        $this->deployer->deploy($project, $output, $repositoryUrl, $targetBranch);
     }
 }

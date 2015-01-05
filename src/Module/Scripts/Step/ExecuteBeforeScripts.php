@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Scripts\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 
 /**
@@ -12,10 +12,10 @@ use Couscous\Step;
  */
 class ExecuteBeforeScripts extends ExecuteScripts implements Step
 {
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        $scripts = $repository->metadata['scripts.before'];
+        $scripts = $project->metadata['scripts.before'];
 
-        $this->executeScripts($scripts, $repository);
+        $this->executeScripts($scripts, $project);
     }
 }

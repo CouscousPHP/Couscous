@@ -3,7 +3,7 @@
 namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -51,8 +51,8 @@ class GenerateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $repository = new Repository($input->getArgument('source'), $input->getOption('target'));
+        $project = new Project($input->getArgument('source'), $input->getOption('target'));
 
-        $this->generator->generate($repository, $output);
+        $this->generator->generate($project, $output);
     }
 }

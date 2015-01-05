@@ -3,7 +3,7 @@
 namespace Couscous\Module\Markdown\Step;
 
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 
 /**
@@ -13,18 +13,18 @@ use Couscous\Step;
  */
 class ProcessMarkdownFileName implements Step
 {
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
 
         foreach ($markdownFiles as $markdownFile) {
-            $repository->removeFile($markdownFile);
+            $project->removeFile($markdownFile);
 
             $this->renameFileExtension($markdownFile);
             $this->renameReadme($markdownFile);
 
-            $repository->addFile($markdownFile);
+            $project->addFile($markdownFile);
         }
     }
 

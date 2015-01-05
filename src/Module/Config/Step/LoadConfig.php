@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Config\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Parser;
 
 /**
- * Loads the Couscous config for the repository.
+ * Loads the Couscous config for the project.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
@@ -40,9 +40,9 @@ class LoadConfig implements Step
         $this->logger     = $logger;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        $filename = $repository->sourceDirectory . '/' . self::FILENAME;
+        $filename = $project->sourceDirectory . '/' . self::FILENAME;
 
         if (! $this->filesystem->exists($filename)) {
             $this->logger->notice('No couscous.yml configuration file found, using default config');
@@ -52,8 +52,8 @@ class LoadConfig implements Step
         $metadata = $this->parseYamlFile($filename);
         $metadata = $this->validateConfig($metadata);
 
-        $repository->metadata->setMany($metadata);
-        $repository->watchlist->watchFile($filename);
+        $project->metadata->setMany($metadata);
+        $project->watchlist->watchFile($filename);
     }
 
     private function parseYamlFile($filename)

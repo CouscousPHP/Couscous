@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Config\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 
 /**
  * Override the baseUrl if we are in preview.
@@ -11,10 +11,10 @@ use Couscous\Model\Repository;
  */
 class OverrideBaseUrlForPreview implements \Couscous\Step
 {
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        if ($repository->metadata['preview'] === true) {
-            $repository->metadata['baseUrl'] = '';
+        if ($project->metadata['preview'] === true) {
+            $project->metadata['baseUrl'] = '';
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Module\Markdown\Step\RewriteMarkdownLinks;
 
 /**
@@ -25,12 +25,12 @@ This is a [link](doc/some-other.file.html), can you handle it (even with these p
 Please leave [this](doc/test.html) and [this link](test.md.txt) alone.
 MARKDOWN;
 
-        $file = new MarkdownFile('foo', $markdown);
-        $repository = new Repository('foo', 'bar');
-        $repository->addFile($file);
+        $file    = new MarkdownFile('foo', $markdown);
+        $project = new Project('foo', 'bar');
+        $project->addFile($file);
 
         $step = new RewriteMarkdownLinks();
-        $step->__invoke($repository);
+        $step->__invoke($project);
 
         $this->assertEquals($expected, $file->content);
     }

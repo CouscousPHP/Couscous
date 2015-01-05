@@ -5,36 +5,36 @@ namespace Couscous\Tests\UnitTest\Model;
 use Couscous\Model\File;
 use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 
 /**
- * @covers \Couscous\Model\Repository
+ * @covers \Couscous\Model\Project
  */
-class RepositoryTest extends \PHPUnit_Framework_TestCase
+class ProjectTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
     public function it_should_contain_files()
     {
-        $repository = new Repository('source', 'target');
+        $project = new Project('source', 'target');
 
         $file1 = $this->createFile('file1');
         $file2 = $this->createFile('file2');
 
-        $repository->addFile($file1);
-        $repository->addFile($file2);
+        $project->addFile($file1);
+        $project->addFile($file2);
         $expected = [
             'file1' => $file1,
             'file2' => $file2,
         ];
-        $this->assertSame($expected, $repository->getFiles());
+        $this->assertSame($expected, $project->getFiles());
 
-        $repository->removeFile($file1);
-        $this->assertSame(['file2' => $file2], $repository->getFiles());
+        $project->removeFile($file1);
+        $this->assertSame(['file2' => $file2], $project->getFiles());
 
-        $repository->removeFile($file2);
-        $this->assertSame([], $repository->getFiles());
+        $project->removeFile($file2);
+        $this->assertSame([], $project->getFiles());
     }
 
     /**
@@ -42,16 +42,16 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function replace_should_replace_files()
     {
-        $repository = new Repository('source', 'target');
+        $project = new Project('source', 'target');
 
         $file1 = $this->createFile('file1');
         $file2 = $this->createFile('file2');
 
-        $repository->addFile($file1);
-        $this->assertSame(['file1' => $file1], $repository->getFiles());
+        $project->addFile($file1);
+        $this->assertSame(['file1' => $file1], $project->getFiles());
 
-        $repository->replaceFile($file1, $file2);;
-        $this->assertSame(['file2' => $file2], $repository->getFiles());
+        $project->replaceFile($file1, $file2);;
+        $this->assertSame(['file2' => $file2], $project->getFiles());
     }
 
     /**
@@ -59,18 +59,18 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_return_files_by_type()
     {
-        $repository = new Repository('source', 'target');
+        $project = new Project('source', 'target');
 
         $file1 = new MarkdownFile('file1', 'Hello');
         $file2 = new HtmlFile('file2', 'Hello');
 
-        $repository->addFile($file1);
-        $repository->addFile($file2);
+        $project->addFile($file1);
+        $project->addFile($file2);
 
-        $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
         $this->assertSame(['file1' => $file1], $markdownFiles);
 
-        $htmlFiles = $repository->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
         $this->assertSame(['file2' => $file2], $htmlFiles);
     }
 

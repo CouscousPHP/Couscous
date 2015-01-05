@@ -3,9 +3,9 @@
 namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Model\HtmlFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Module\Template\Step\AddPageListToLayoutVariables;
-use Couscous\Tests\UnitTest\Mock\MockRepository;
+use Couscous\Tests\UnitTest\Mock\MockProject;
 
 /**
  * @covers \Couscous\Module\Template\Step\AddPageListToLayoutVariables
@@ -26,9 +26,9 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
 
     public function testPageList()
     {
-        $repository = new MockRepository();
+        $project = new MockProject();
 
-        $this->invokeStep($repository, $this->files());
+        $this->invokeStep($project, $this->files());
 
         $expected = [
             'index.html',
@@ -39,14 +39,14 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             'weird.path-test [foo]/bar.html',
         ];
 
-        $this->assertEquals($expected, $repository->metadata['pageList']);
+        $this->assertEquals($expected, $project->metadata['pageList']);
     }
 
     public function testPageTree()
     {
-        $repository = new MockRepository();
+        $project = new MockProject();
 
-        $this->invokeStep($repository, $this->files());
+        $this->invokeStep($project, $this->files());
 
         $expected = [
             'docs' => [
@@ -67,16 +67,16 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $repository->metadata['pageTree']);
+        $this->assertEquals($expected, $project->metadata['pageTree']);
     }
 
-    private function invokeStep(Repository $repository, $files)
+    private function invokeStep(Project $project, $files)
     {
         foreach ($files as $file) {
-            $repository->addFile($file);
+            $project->addFile($file);
         }
 
         $step = new AddPageListToLayoutVariables();
-        $step->__invoke($repository);
+        $step->__invoke($project);
     }
 }

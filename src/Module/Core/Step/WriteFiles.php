@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Core\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -30,10 +30,10 @@ class WriteFiles implements Step
         $this->logger     = $logger;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        foreach ($repository->getFiles() as $file) {
-            $targetFilename = $repository->targetDirectory . '/' . $file->relativeFilename;
+        foreach ($project->getFiles() as $file) {
+            $targetFilename = $project->targetDirectory . '/' . $file->relativeFilename;
 
             if ($this->filesystem->exists($targetFilename)) {
                 $this->logger->info(

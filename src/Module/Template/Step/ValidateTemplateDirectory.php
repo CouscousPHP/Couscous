@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Template\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -25,23 +25,23 @@ class ValidateTemplateDirectory implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        $directory = $repository->metadata['template.directory'];
+        $directory = $project->metadata['template.directory'];
 
         if ($directory === null) {
-            $directory = $repository->sourceDirectory . '/' . self::DEFAULT_TEMPLATE_DIRECTORY;
+            $directory = $project->sourceDirectory . '/' . self::DEFAULT_TEMPLATE_DIRECTORY;
         }
 
         if (! $this->filesystem->isAbsolutePath($directory)) {
-            $directory = $repository->sourceDirectory . '/' . $directory;
+            $directory = $project->sourceDirectory . '/' . $directory;
         }
 
         $this->assertDirectoryExist($directory);
 
-        $repository->watchlist->watchDirectory($directory);
+        $project->watchlist->watchDirectory($directory);
 
-        $repository->metadata['template.directory'] = $directory;
+        $project->metadata['template.directory'] = $directory;
     }
 
     private function assertDirectoryExist($directory)

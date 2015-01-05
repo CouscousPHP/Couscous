@@ -3,7 +3,7 @@
 namespace Couscous\Module\Template\Step;
 
 use Couscous\Module\Template\Model\HtmlFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -19,16 +19,16 @@ class ProcessTwigLayouts implements Step
 {
     const DEFAULT_LAYOUT_NAME = 'default.twig';
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        if (! $repository->metadata['template.directory']) {
+        if (! $project->metadata['template.directory']) {
             return;
         }
 
-        $twig = $this->createTwig($repository->metadata['template.directory']);
+        $twig = $this->createTwig($project->metadata['template.directory']);
 
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $repository->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
 
         foreach ($htmlFiles as $file) {
             $fileMetadata = $file->getMetadata();
@@ -37,7 +37,7 @@ class ProcessTwigLayouts implements Step
                 : self::DEFAULT_LAYOUT_NAME;
 
             $context = array_merge(
-                $repository->metadata->toArray(),
+                $project->metadata->toArray(),
                 $fileMetadata->toArray(),
                 ['content' => $file->content]
             );

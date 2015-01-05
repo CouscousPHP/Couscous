@@ -2,7 +2,7 @@
 
 namespace Couscous;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 
 /**
  * Generation step.
@@ -12,9 +12,9 @@ use Couscous\Model\Repository;
 interface Step
 {
     /**
-     * Process the given repository.
+     * Process the given project.
      *
-     * @param Repository $repository
+     * @param Project $project
      */
-    public function __invoke(Repository $repository);
+    public function __invoke(Project $project);
 }

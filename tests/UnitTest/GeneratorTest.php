@@ -3,8 +3,8 @@
 namespace Couscous\Tests\UnitTest;
 
 use Couscous\Generator;
-use Couscous\Model\Repository;
-use Couscous\Tests\UnitTest\Mock\MockRepository;
+use Couscous\Model\Project;
+use Couscous\Tests\UnitTest\Mock\MockProject;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -19,17 +19,17 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
     public function it_should_invoke_every_step()
     {
         $filesystem = $this->createFileSystem();
-        $repository = new MockRepository();
+        $project = new MockProject();
 
         $steps = [
-            $this->createStep($repository),
-            $this->createStep($repository),
-            $this->createStep($repository),
+            $this->createStep($project),
+            $this->createStep($project),
+            $this->createStep($project),
         ];
 
         $generator = new Generator($filesystem, $steps);
 
-        $generator->generate($repository, new NullOutput());
+        $generator->generate($project, new NullOutput());
     }
 
     /**
@@ -40,13 +40,13 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
         return $this->getMock('Symfony\Component\Filesystem\Filesystem');
     }
 
-    private function createStep(Repository $repository)
+    private function createStep(Project $project)
     {
         $step = $this->getMockForAbstractClass('Couscous\Step');
 
         $step->expects($this->once())
             ->method('__invoke')
-            ->with($repository);
+            ->with($project);
 
         return $step;
     }

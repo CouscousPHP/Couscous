@@ -3,7 +3,7 @@
 namespace Couscous\Model;
 
 /**
- * Represents a file of the repository.
+ * Represents a file of the project.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */

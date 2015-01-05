@@ -4,7 +4,7 @@ namespace Couscous\Module\Scripts\Step;
 
 use Couscous\CommandRunner\CommandException;
 use Couscous\CommandRunner\CommandRunner;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -30,14 +30,14 @@ abstract class ExecuteScripts
         $this->logger        = $logger;
     }
 
-    protected function executeScripts($scripts, Repository $repository)
+    protected function executeScripts($scripts, Project $project)
     {
         if (empty($scripts)) {
             return;
         }
 
         foreach ($scripts as $script) {
-            $this->executeScript($repository->sourceDirectory, $script);
+            $this->executeScript($project->sourceDirectory, $script);
         }
     }
 

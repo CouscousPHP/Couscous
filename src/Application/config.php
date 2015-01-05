@@ -7,36 +7,30 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 return [
 
-    'steps' => [
-        'Couscous\Module\Core\Step\ClearTargetDirectory',
-        'Couscous\Module\Config\Step\SetDefaultConfig',
-        'Couscous\Module\Config\Step\LoadConfig',
-        'Couscous\Module\Config\Step\OverrideBaseUrlForPreview',
-        'Couscous\Module\Scripts\Step\ExecuteBeforeScripts',
-        'Couscous\Module\Template\Step\UseDefaultTemplate',
-        'Couscous\Module\Template\Step\FetchRemoteTemplate',
-        'Couscous\Module\Template\Step\ValidateTemplateDirectory',
-        'Couscous\Module\Bower\Step\RunBowerInstall',
-        'Couscous\Module\Template\Step\LoadAssets',
-        'Couscous\Module\Markdown\Step\LoadMarkdownFiles',
-        'Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter',
-        'Couscous\Module\Markdown\Step\ProcessMarkdownFileName',
-        'Couscous\Module\Markdown\Step\RewriteMarkdownLinks',
-        'Couscous\Module\Markdown\Step\RenderMarkdown',
-        'Couscous\Module\Template\Step\AddPageListToLayoutVariables',
-        'Couscous\Module\Template\Step\ProcessTwigLayouts',
-        'Couscous\Module\Core\Step\WriteFiles',
-        'Couscous\Module\Scripts\Step\ExecuteAfterScripts',
+    // Generation steps are added by modules
+    'steps.init' => [
+    ],
+    'steps.before' => [
+    ],
+    'steps.preprocessing' => [
+    ],
+    'steps.postprocessing' => [
+    ],
+    'steps.after' => [
     ],
 
-    'Couscous\Generator' => DI\object()
-        ->constructorParameter('steps', DI\link('steps.instances')),
-
-    'steps.instances' => DI\factory(function (ContainerInterface $c) {
-        return array_map(function ($class) use ($c) {
-            return $c->get($class);
-        }, $c->get('steps'));
+    'steps' => DI\factory(function (ContainerInterface $c) {
+        return array_merge(
+            $c->get('steps.init'),
+            $c->get('steps.before'),
+            $c->get('steps.preprocessing'),
+            $c->get('steps.postprocessing'),
+            $c->get('steps.after')
+        );
     }),
+
+    'Couscous\Generator' => DI\object()
+        ->constructorParameter('steps', DI\link('steps')),
 
     'application' => DI\factory(function (ContainerInterface $c) {
         $application = new Application('Couscous');
@@ -48,11 +42,6 @@ return [
 
         return $application;
     }),
-
-    'Mni\FrontYAML\Parser' => DI\object()
-        ->constructorParameter('markdownParser', DI\link('Mni\FrontYAML\Markdown\MarkdownParser')),
-    'Mni\FrontYAML\Markdown\MarkdownParser' => DI\object('Mni\FrontYAML\Bridge\Parsedown\ParsedownParser')
-        ->constructor(DI\link('ParsedownExtra')),
 
     'Symfony\Component\Console\Logger\ConsoleLogger' => DI\object()
         ->constructorParameter('verbosityLevelMap', [

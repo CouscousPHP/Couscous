@@ -3,7 +3,7 @@
 namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\ValidateTemplateDirectory;
-use Couscous\Tests\UnitTest\Mock\MockRepository;
+use Couscous\Tests\UnitTest\Mock\MockProject;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -17,11 +17,11 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
     public function it_should_use_the_default_directory_if_no_directory_is_set()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
-        $repository = new MockRepository();
-        $repository->sourceDirectory = '/foo';
-        $step->__invoke($repository);
+        $project = new MockProject();
+        $project->sourceDirectory = '/foo';
+        $step->__invoke($project);
 
-        $this->assertEquals('/foo/website', $repository->metadata['template.directory']);
+        $this->assertEquals('/foo/website', $project->metadata['template.directory']);
     }
 
     /**
@@ -30,12 +30,12 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
     public function it_should_complete_a_relative_path()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
-        $repository = new MockRepository();
-        $repository->sourceDirectory = '/foo';
-        $repository->metadata['template.directory'] = 'bar';
-        $step->__invoke($repository);
+        $project = new MockProject();
+        $project->sourceDirectory = '/foo';
+        $project->metadata['template.directory'] = 'bar';
+        $step->__invoke($project);
 
-        $this->assertEquals('/foo/bar', $repository->metadata['template.directory']);
+        $this->assertEquals('/foo/bar', $project->metadata['template.directory']);
     }
 
     /**
@@ -44,12 +44,12 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
     public function it_should_not_change_an_absolute_path()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
-        $repository = new MockRepository();
-        $repository->sourceDirectory = '/foo';
-        $repository->metadata['template.directory'] = '/hello/world';
-        $step->__invoke($repository);
+        $project = new MockProject();
+        $project->sourceDirectory = '/foo';
+        $project->metadata['template.directory'] = '/hello/world';
+        $step->__invoke($project);
 
-        $this->assertEquals('/hello/world', $repository->metadata['template.directory']);
+        $this->assertEquals('/hello/world', $project->metadata['template.directory']);
     }
 
     /**
@@ -60,10 +60,10 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
     public function it_should_error_with_an_invalid_relative_path()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem(false));
-        $repository = new MockRepository();
-        $repository->sourceDirectory = '/foo';
-        $repository->metadata['template.directory'] = 'bar';
-        $step->__invoke($repository);
+        $project = new MockProject();
+        $project->sourceDirectory = '/foo';
+        $project->metadata['template.directory'] = 'bar';
+        $step->__invoke($project);
     }
 
     /**
@@ -74,10 +74,10 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
     public function it_should_error_with_an_invalid_absolute_path()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem(false));
-        $repository = new MockRepository();
-        $repository->sourceDirectory = '/foo';
-        $repository->metadata['template.directory'] = '/hello/world';
-        $step->__invoke($repository);
+        $project = new MockProject();
+        $project->sourceDirectory = '/foo';
+        $project->metadata['template.directory'] = '/hello/world';
+        $step->__invoke($project);
     }
 
     /**
@@ -88,9 +88,9 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
     public function it_should_error_with_an_invalid_default_path()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem(false));
-        $repository = new MockRepository();
-        $repository->sourceDirectory = '/foo';
-        $step->__invoke($repository);
+        $project = new MockProject();
+        $project->sourceDirectory = '/foo';
+        $step->__invoke($project);
     }
 
     /**

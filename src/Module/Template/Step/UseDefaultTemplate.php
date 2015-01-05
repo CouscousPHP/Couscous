@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Template\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -25,31 +25,31 @@ class UseDefaultTemplate implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        if ($this->useRemoteTemplate($repository)
-            || $this->hasCustomTemplateDirectory($repository)
-            || $this->hasTemplateDirectory($repository)
+        if ($this->useRemoteTemplate($project)
+            || $this->hasCustomTemplateDirectory($project)
+            || $this->hasTemplateDirectory($project)
         ) {
             return;
         }
 
-        $repository->metadata['template.url'] = self::DEFAULT_TEMPLATE_URL;
+        $project->metadata['template.url'] = self::DEFAULT_TEMPLATE_URL;
     }
 
-    private function useRemoteTemplate(Repository $repository)
+    private function useRemoteTemplate(Project $project)
     {
-        return $repository->metadata['template.url'] !== null;
+        return $project->metadata['template.url'] !== null;
     }
 
-    private function hasCustomTemplateDirectory(Repository $repository)
+    private function hasCustomTemplateDirectory(Project $project)
     {
-        return $repository->metadata['template.directory'] !== null;
+        return $project->metadata['template.directory'] !== null;
     }
 
-    private function hasTemplateDirectory(Repository $repository)
+    private function hasTemplateDirectory(Project $project)
     {
-        $templateDirectory = $repository->sourceDirectory . '/' . ValidateTemplateDirectory::DEFAULT_TEMPLATE_DIRECTORY;
+        $templateDirectory = $project->sourceDirectory . '/' . ValidateTemplateDirectory::DEFAULT_TEMPLATE_DIRECTORY;
 
         return $this->filesystem->exists($templateDirectory);
     }

@@ -19,6 +19,12 @@ class ContainerFactory
 
         $builder->addDefinitions(__DIR__ . '/config.php');
 
+        $moduleConfigs = glob(__DIR__ . '/../Module/*/config.php');
+
+        foreach ($moduleConfigs as $moduleConfig) {
+            $builder->addDefinitions($moduleConfig);
+        }
+
         return $builder->build();
     }
 }

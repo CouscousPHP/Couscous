@@ -3,7 +3,7 @@
 namespace Couscous\Module\Bower\Step;
 
 use Couscous\CommandRunner\CommandRunner;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -40,9 +40,9 @@ class RunBowerInstall implements Step
         $this->logger = $logger;
     }
 
-    public function __invoke(Repository $repository)
+    public function __invoke(Project $project)
     {
-        if ($repository->regenerate || ! $this->hasBowerJson($repository)) {
+        if ($project->regenerate || ! $this->hasBowerJson($project)) {
             return;
         }
 
@@ -50,7 +50,7 @@ class RunBowerInstall implements Step
 
         $result = $this->commandRunner->run(sprintf(
             'cd "%s" && bower install',
-            $repository->metadata['template.directory']
+            $project->metadata['template.directory']
         ));
 
         if ($result) {
@@ -58,13 +58,13 @@ class RunBowerInstall implements Step
         }
     }
 
-    private function hasBowerJson(Repository $repository)
+    private function hasBowerJson(Project $project)
     {
-        if (! $repository->metadata['template.directory']) {
+        if (! $project->metadata['template.directory']) {
             return false;
         }
 
-        $filename = $repository->metadata['template.directory'] . '/bower.json';
+        $filename = $project->metadata['template.directory'] . '/bower.json';
 
         return $this->filesystem->exists($filename);
     }
