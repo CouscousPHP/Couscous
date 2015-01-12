@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Generate and deploy the website after successful Travis build.
@@ -29,16 +28,10 @@ class TravisAutoDeployCommand extends Command
      */
     private $deployer;
 
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem)
+    public function __construct(Generator $generator, Deployer $deployer)
     {
         $this->generator  = $generator;
         $this->deployer   = $deployer;
-        $this->filesystem = $filesystem;
 
         parent::__construct();
     }
@@ -98,10 +91,6 @@ class TravisAutoDeployCommand extends Command
             $output->writeln('<comment>[NOT DEPLOYED] Not deploying Couscous for pull requests</comment>');
             return;
         }
-
-        // creating out directory
-        $output->writeln('<info>Creating "out" directory</info>');
-        mkdir('out');
 
         // set git user data
         $output->writeln('<info>Setting up git user</info>');

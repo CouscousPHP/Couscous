@@ -8,11 +8,10 @@ exclude:
 
 scripts:
     before:
-        - bin/compile
-        - cp bin/couscous.phar website/
         - lessc --clean-css website/less/main.less website/css/all.min.css
     after:
         - rm website/couscous.phar
+        - bin/couscous deploy-binaries
 
 baseUrl: http://couscous.io
 
