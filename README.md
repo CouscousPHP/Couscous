@@ -62,7 +62,7 @@ class PutCouscousInBold implements \Couscous\Step
 
 Couscous uses [PHP-DI](http://php-di.org/) for wiring everything together with dependency injection.
 
-The full list of steps is configured in [`src/config.php`](src/config.php).
+The full list of steps is configured in [`src/Application/config.php`](src/Application/config.php).
 
 ### Website deployment
 
