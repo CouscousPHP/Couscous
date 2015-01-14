@@ -25,7 +25,7 @@
         "erusev/parsedown": "~1.4",
         "erusev/parsedown-extra": "~0.5.1",
         "phine/phar": "~1.0",
-        "mnapoli/front-yaml": "~1.0",
+        "mnapoli/front-yaml": "~1.4",
         "mnapoli/php-di": "5.0.x-dev@dev",
         "psr/log": "~1.0"
     },
