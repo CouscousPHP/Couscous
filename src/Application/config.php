@@ -39,6 +39,7 @@ return [
         $application->add($c->get('Couscous\Application\Cli\PreviewCommand'));
         $application->add($c->get('Couscous\Application\Cli\DeployCommand'));
         $application->add($c->get('Couscous\Application\Cli\ClearCommand'));
+        $application->add($c->get('Couscous\Application\Cli\TravisAutoDeployCommand'));
 
         return $application;
     }),

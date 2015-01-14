@@ -8,8 +8,6 @@ exclude:
 
 scripts:
     before:
-        - bin/compile
-        - cp bin/couscous.phar website/
         - lessc --clean-css website/less/main.less website/css/all.min.css
     after:
         - rm website/couscous.phar
@@ -33,6 +31,9 @@ menu:
         metadata:
             text: Metadata
             relativeUrl: docs/metadata.html
+        travis:
+            text: Travis integration
+            relativeUrl: docs/travis.html
         faq:
             text: FAQ
             relativeUrl: docs/faq.html
