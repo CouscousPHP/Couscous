@@ -8,3 +8,17 @@ before_script:
   - composer install --no-progress
 script:
   - phpunit
+
+before_deploy:
+  - bin/compile
+
+deploy:
+  provider: releases
+  api_key:
+    secure: T3klw1Ab/XfByZikAWSTbH72VmzKbJupqRaH6LIloOB40bMj6JzG3YOX4XLlNaH1RBPQveNZn4BoyoRh1MpyZ6ldRtIkqXsXvCDx9bqrLl7F7DcwsRUIIduQFZ45eArN92CKsUSmbkowaMABGg2QA/Vb/zY1zJjCoMZgJwDw4ik=
+  skip_cleanup: true
+  file: bin/couscous.phar
+  on:
+    tags: true
+    all_branches: true
+    repo: wysow/Couscous

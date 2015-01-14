@@ -92,11 +92,28 @@
         <script src="{{ baseUrl }}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="{{ baseUrl }}/bower_components/google-code-prettify/src/prettify.js"></script>
 
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                GetLatestReleaseInfo();
+            });
+
+            function GetLatestReleaseInfo() {
+                $.getJSON("https://api.github.com/repos/wysow/Couscous/releases").done(function (json) {
+                    var release = json[0];
+                    var asset = release.assets[0];
+                    var downloadURL = "https://github.com/wysow/Couscous/releases/download/" + release.tag_name + "/" + asset.name;
+                    var downloadText = "curl -OSL " + downloadURL + "\nphp couscous.phar preview";
+                    $("#couscous-download").text(downloadText);
+                    $("pre").addClass('prettyprint');
+                    prettyPrint();
+                });
+            }
+        </script>
+
         <script>
             $(function() {
                 $("section h1").wrap('<div class="page-header" />');
-                $("pre").addClass('prettyprint');
-                prettyPrint();
             });
         </script>
 
