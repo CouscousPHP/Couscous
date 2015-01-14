@@ -1,22 +1,19 @@
 language: php
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - hhvm
+- 5.4
+- 5.5
+- 5.6
+- hhvm
 before_script:
-  - composer install --no-progress
+- composer install --no-progress
 script:
-  - phpunit
-
+- phpunit
 before_deploy:
-  - bin/compile
-
+- bin/compile
 deploy:
   provider: releases
   api-key:
-    secure: T3klw1Ab/XfByZikAWSTbH72VmzKbJupqRaH6LIloOB40bMj6JzG3YOX4XLlNaH1RBPQveNZn4BoyoRh1MpyZ6ldRtIkqXsXvCDx9bqrLl7F7DcwsRUIIduQFZ45eArN92CKsUSmbkowaMABGg2QA/Vb/zY1zJjCoMZgJwDw4ik=
-  skip_cleanup: true
+    secure: LF/0EQiZvFz7n4qlubzk1ygv1X0SLv3Zws/zWm/IZBVgD2l4A9ztgQXCMb2Uj1jpinedIjMXodpJtlc2+hAO3b5EyV0ZRNqMyyDeqqcCfZ4oG/FSc/pf01zSxynKtFzmg/cBpYw0oXKgBrV1ec3lUZ9Qml8cEqZrTCOpJ1PKmF4=
   file: bin/couscous.phar
   on:
     tags: true
