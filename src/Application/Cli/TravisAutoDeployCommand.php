@@ -3,8 +3,8 @@
 namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
-use Couscous\Model\Repository;
 use Couscous\Deployer;
+use Couscous\Model\Project;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -75,7 +75,7 @@ class TravisAutoDeployCommand extends Command
         $repositoryUrl   = sprintf('https://%s@%s', getenv('GH_TOKEN'), getenv('GH_REF'));
         $targetBranch    = $input->getOption('branch');
 
-        $repository = new Repository($sourceDirectory, getcwd() . '/.couscous/generated');
+        $repository = new Project($sourceDirectory, getcwd() . '/.couscous/generated');
 
         // verify some env variables
         $travisBranch = getenv('TRAVIS_BRANCH');
