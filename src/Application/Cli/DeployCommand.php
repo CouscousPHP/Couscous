@@ -2,6 +2,7 @@
 
 namespace Couscous\Application\Cli;
 
+use Couscous\CommandRunner\Git;
 use Couscous\Generator;
 use Couscous\Model\Project;
 use Couscous\Deployer;
@@ -34,11 +35,17 @@ class DeployCommand extends Command
      */
     private $filesystem;
 
-    public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem)
+    /**
+     * @var Git
+     */
+    private $git;
+
+    public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem, Git $git)
     {
         $this->generator  = $generator;
         $this->deployer   = $deployer;
         $this->filesystem = $filesystem;
+        $this->git        = $git;
 
         parent::__construct();
     }
@@ -48,6 +55,12 @@ class DeployCommand extends Command
      */
     protected function configure()
     {
+        try {
+            $remoteUrl = $this->git->getRemoteUrl();
+        } catch (\Exception $e) {
+            $remoteUrl = null;
+        }
+
         $this
             ->setName('deploy')
             ->setDescription('Generate and deploy the website')
@@ -62,7 +75,7 @@ class DeployCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Target repository in which to deploy the website.',
-                trim(shell_exec('git config --get remote.origin.url'))
+                $remoteUrl
             )
             ->addOption(
                 'branch',

@@ -2,6 +2,7 @@
 
 namespace Couscous\Application\Cli;
 
+use Couscous\CommandRunner\CommandRunner;
 use Couscous\Generator;
 use Couscous\Deployer;
 use Couscous\Model\Project;
@@ -28,10 +29,16 @@ class TravisAutoDeployCommand extends Command
      */
     private $deployer;
 
-    public function __construct(Generator $generator, Deployer $deployer)
+    /**
+     * @var CommandRunner
+     */
+    private $commandRunner;
+
+    public function __construct(Generator $generator, Deployer $deployer, CommandRunner $commandRunner)
     {
-        $this->generator  = $generator;
-        $this->deployer   = $deployer;
+        $this->generator     = $generator;
+        $this->deployer      = $deployer;
+        $this->commandRunner = $commandRunner;
 
         parent::__construct();
     }
@@ -94,8 +101,8 @@ class TravisAutoDeployCommand extends Command
 
         // set git user data
         $output->writeln('<info>Setting up git user</info>');
-        shell_exec('git config --global user.name "${GIT_NAME}"');
-        shell_exec('git config --global user.email "${GIT_EMAIL}"');
+        $this->commandRunner->run('git config --global user.name "${GIT_NAME}"');
+        $this->commandRunner->run('git config --global user.email "${GIT_EMAIL}"');
 
         // getting current php version to only deploy once
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');

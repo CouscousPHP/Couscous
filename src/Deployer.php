@@ -3,7 +3,7 @@
 namespace Couscous;
 
 use Couscous\CommandRunner\CommandException;
-use Couscous\CommandRunner\CommandRunner;
+use Couscous\CommandRunner\Git;
 use Couscous\Model\Project;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -22,14 +22,14 @@ class Deployer
     private $filesystem;
 
     /**
-     * @var CommandRunner
+     * @var Git
      */
-    private $commandRunner;
+    private $git;
 
-    public function __construct(Filesystem $filesystem, CommandRunner $commandRunner)
+    public function __construct(Filesystem $filesystem, Git $git)
     {
-        $this->filesystem       = $filesystem;
-        $this->commandRunner    = $commandRunner;
+        $this->filesystem = $filesystem;
+        $this->git        = $git;
     }
 
     /**
@@ -72,7 +72,7 @@ class Deployer
     {
         $output->writeln("Cloning <info>$repositoryUrl</info> in <info>$tmpDirectory</info>");
 
-        $this->commandRunner->run("git clone $repositoryUrl $tmpDirectory");
+        $this->git->cloneRepository($repositoryUrl, $tmpDirectory);
     }
 
     private function checkoutBranch(OutputInterface $output, $branch, $tmpDirectory)
@@ -80,11 +80,11 @@ class Deployer
         $output->writeln("Checking out branch <info>$branch</info>");
 
         try {
-            $this->commandRunner->run("cd '$tmpDirectory' && git checkout -b $branch origin/$branch");
+            $this->git->checkoutOriginBranch($tmpDirectory, $branch);
         } catch (CommandException $e) {
             // The branch doesn't exist yet, so we create it
             try {
-                $this->commandRunner->run("cd '$tmpDirectory' && git checkout -b $branch");
+                $this->git->createBranch($tmpDirectory, $branch);
             } catch (CommandException $e) {
                 throw new \RuntimeException("Unable to create the branch '$branch'" . PHP_EOL . $e->getMessage());
             }
@@ -108,15 +108,14 @@ class Deployer
     {
         $output->writeln('Committing changes');
 
-        $message = 'Website generation with Couscous';
-        $this->commandRunner->run("cd '$tmpDirectory' && git add --all . && git commit -m '$message'");
+        $this->git->commitAllChanges($tmpDirectory, 'Website generation with Couscous');
     }
 
     private function pushBranch(OutputInterface $output, $branch, $tmpDirectory)
     {
         $output->writeln("Pushing <info>$branch</info> (GitHub may ask you to login)");
 
-        $this->commandRunner->run("cd '$tmpDirectory' && git push origin $branch");
+        $this->git->push($tmpDirectory, $branch);
     }
 
     private function deleteTempDirectory($dir)

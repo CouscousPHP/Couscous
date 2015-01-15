@@ -2,7 +2,7 @@
 
 namespace Couscous\Module\Template\Step;
 
-use Couscous\CommandRunner\CommandRunner;
+use Couscous\CommandRunner\Git;
 use Couscous\Model\Project;
 use Couscous\Step;
 use Psr\Log\LoggerInterface;
@@ -21,14 +21,14 @@ class FetchRemoteTemplate implements Step
     private $filesystem;
 
     /**
-     * @var CommandRunner
-     */
-    private $commandRunner;
-
-    /**
      * @var LoggerInterface
      */
     private $logger;
+
+    /**
+     * @var Git
+     */
+    private $git;
 
     /**
      * Temporarily save the template directory if we are in preview
@@ -41,14 +41,11 @@ class FetchRemoteTemplate implements Step
      */
     private $templateDirectory;
 
-    public function __construct(
-        Filesystem $filesystem,
-        CommandRunner $commandRunner,
-        LoggerInterface $logger
-    ) {
-        $this->filesystem    = $filesystem;
-        $this->commandRunner = $commandRunner;
-        $this->logger        = $logger;
+    public function __construct(Filesystem $filesystem, LoggerInterface $logger, Git $git)
+    {
+        $this->filesystem = $filesystem;
+        $this->logger     = $logger;
+        $this->git        = $git;
     }
 
     public function __invoke(Project $project)
@@ -78,7 +75,7 @@ class FetchRemoteTemplate implements Step
 
         $directory = $this->createTempDirectory('couscous_template_');
 
-        $this->commandRunner->run("git clone $gitUrl $directory");
+        $this->git->cloneRepository($gitUrl, $directory);
 
         return $directory;
     }

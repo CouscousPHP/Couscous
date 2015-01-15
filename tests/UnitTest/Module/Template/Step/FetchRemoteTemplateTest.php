@@ -17,14 +17,14 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_skip_if_no_template_url()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
+        $git = $this->getMock('Couscous\CommandRunner\Git', array(), array(), '', false);
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner, new NullLogger());
+        $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
         $project = new MockProject();
 
-        $commandRunner->expects($this->never())
-            ->method('run');
+        $git->expects($this->never())
+            ->method($this->anything());
 
         $step->__invoke($project);
 
@@ -37,16 +37,16 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_clone_and_set_the_template_directory()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
+        $git = $this->getMock('Couscous\CommandRunner\Git', array(), array(), '', false);
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner, new NullLogger());
+        $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
         $project = new MockProject();
         $project->metadata['template.url'] = 'git://foo';
 
-        $commandRunner->expects($this->once())
-            ->method('run')
-            ->with($this->matches('git clone git://foo %s'));
+        $git->expects($this->once())
+            ->method('cloneRepository')
+            ->with('git://foo');
 
         $step->__invoke($project);
 
@@ -59,13 +59,13 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_not_clone_twice_if_regenerating()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
+        $git = $this->getMock('Couscous\CommandRunner\Git', array(), array(), '', false);
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner, new NullLogger());
+        $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
-        $commandRunner->expects($this->once())
-            ->method('run')
-            ->with($this->matches('git clone git://foo %s'));
+        $git->expects($this->once())
+            ->method('cloneRepository')
+            ->with('git://foo');
 
         // Calling once
         $project = new MockProject();
