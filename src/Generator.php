@@ -44,7 +44,7 @@ class Generator
         $this->filesystem->mkdir($project->targetDirectory);
 
         foreach ($this->steps as $step) {
-            $step->__invoke($project, $output);
+            $step->__invoke($project);
         }
     }
 }
