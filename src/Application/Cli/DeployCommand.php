@@ -92,7 +92,7 @@ class DeployCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sourceDirectory = $input->getArgument('source');
-        $repositoryUrl   = $input->getArgument('repository');
+        $repositoryUrl   = $input->getOption('repository');
         $targetBranch    = $input->getOption('branch');
 
         $project = new Project($sourceDirectory, getcwd() . '/.couscous/generated');
