@@ -9,8 +9,6 @@ exclude:
 scripts:
     before:
         - lessc --clean-css website/less/main.less website/css/all.min.css
-    after:
-        - rm website/couscous.phar
 
 baseUrl: http://couscous.io
 
