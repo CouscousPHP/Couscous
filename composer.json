@@ -22,7 +22,6 @@
         "symfony/process": "~2.4",
         "symfony/yaml": "~2.4",
         "twig/twig": "~1.0",
-        "erusev/parsedown": "~1.4",
         "erusev/parsedown-extra": "~0.7",
         "phine/phar": "~1.0",
         "mnapoli/front-yaml": "~1.4",
