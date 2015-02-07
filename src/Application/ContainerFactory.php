@@ -4,6 +4,8 @@ namespace Couscous\Application;
 
 use DI\Container;
 use DI\ContainerBuilder;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
@@ -19,10 +21,15 @@ class ContainerFactory
 
         $builder->addDefinitions(__DIR__ . '/config.php');
 
-        $moduleConfigs = glob(__DIR__ . '/../Module/*/config.php');
+        $moduleConfigs = new Finder();
+        $moduleConfigs->files()
+            ->in(__DIR__ . '/../Module')
+            ->path('/.+/')
+            ->name('config.php');
 
         foreach ($moduleConfigs as $moduleConfig) {
-            $builder->addDefinitions($moduleConfig);
+            /** @var SplFileInfo $moduleConfig */
+            $builder->addDefinitions($moduleConfig->getPathname());
         }
 
         return $builder->build();
