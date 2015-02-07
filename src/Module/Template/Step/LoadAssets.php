@@ -37,7 +37,6 @@ class LoadAssets implements Step
         $files = new Finder();
         $files->files()
             ->in($project->metadata['template.directory'])
-            ->ignoreDotFiles(true)
             ->notName('*.twig');
 
         $project->watchlist->watchFiles($files);
