@@ -21,6 +21,9 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
+    <link rel="icon" type="image/png" href="logo/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="logo/favicon-16x16.png" sizes="16x16" />
+
     <!-- Google webmasters verification -->
     <meta name="google-site-verification" content="bjh41nmytWyBkuM8373PL1j6upqoiAQXSb19vMGJZDY" />
 
@@ -79,6 +82,16 @@
                                                     <li class="active">
                                 <a href="http://couscous.io/docs/templates.html">
                                     Templates
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/metadata.html">
+                                    Metadata
+                                </a>
+                            </li>
+                                                    <li class="">
+                                <a href="http://couscous.io/docs/travis.html">
+                                    Travis integration
                                 </a>
                             </li>
                                                     <li class="">
@@ -150,8 +163,8 @@ This is my documentation.
 ## Subtitle
 
 This is a *sub-chapter*.</code></pre>
-<h3>Variables</h3>
-<p>Variables can be defined in:</p>
+<h3>Variables (aka Metadata)</h3>
+<p>Custom variables, called <a href="metadata.html"><strong>Metadata</strong></a>, can be defined in:</p>
 <ul>
 <li><code>couscous.yml</code></li>
 <li>YAML front matter (at the top of Markdown files)</li>
@@ -178,8 +191,7 @@ This is my documentation.</code></pre>
         {% endblock %}
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-<p>You can even override <code>couscous.yml</code> variables from the Markdown files's front matter (e.g. overriding the page title).</p>
-<p>Have a look at the <a href="https://github.com/CouscousPHP/Template-Light">Light template</a>: it uses variables to build a sidebar menu.</p>
+<p>To learn more, read the whole <a href="metadata.html">Metadata documentation</a>.</p>
 <h3>Links</h3>
 <p>To ensure all your links are working correctly, you should define a <code>baseUrl</code> variable in <code>couscous.yml</code>
 (see <a href="configuration.html">the configuration documentation</a>).</p>
@@ -215,7 +227,7 @@ installed automatically.</p>
     
 
     
-        <script src="http://couscous.io/bower_components/jquery/jquery.min.js"></script>
+        <script src="http://couscous.io/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="http://couscous.io/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="http://couscous.io/bower_components/google-code-prettify/src/prettify.js"></script>
 

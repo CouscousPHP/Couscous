@@ -21,6 +21,9 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
+    <link rel="icon" type="image/png" href="logo/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="logo/favicon-16x16.png" sizes="16x16" />
+
     <!-- Google webmasters verification -->
     <meta name="google-site-verification" content="bjh41nmytWyBkuM8373PL1j6upqoiAQXSb19vMGJZDY" />
 
@@ -82,6 +85,16 @@
                                 </a>
                             </li>
                                                     <li class="">
+                                <a href="http://couscous.io/docs/metadata.html">
+                                    Metadata
+                                </a>
+                            </li>
+                                                    <li class="active">
+                                <a href="http://couscous.io/docs/travis.html">
+                                    Travis integration
+                                </a>
+                            </li>
+                                                    <li class="">
                                 <a href="http://couscous.io/docs/faq.html">
                                     FAQ
                                 </a>
@@ -101,41 +114,82 @@
                 </nav>
 
                 <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Automatic deployment on Travis CI</h1>
+                    <h1>Automatic deployment using Travis CI</h1>
 <p>Tired of deploying manually with <code>couscous deploy</code>? You can set up Travis so that it will deploy automatically for you <strong>on each push to <code>master</code></strong>.</p>
+<p>To set this up, please follow all the steps below.</p>
+<h2>1. Create a <strong>GitHub token</strong></h2>
+<p>In order to push to your repository from Travis, you need to authorize Travis. You do so by creating a <strong>GitHub token</strong> and then <strong>encrypting</strong> it to store it in <code>.travis.yml</code>.</p>
 <ul>
+<li>from your GitHub account, go in <a href="https://github.com/settings/applications"><em>Settings &gt; Applications</em></a></li>
+<li>create a new <strong>Personal Access Token</strong> and give it the <code>public_repo</code> permission (if the repository is public)</li>
 <li>
-<p>generate and encrypt a <strong>personal access token</strong></p>
-<ul>
-<li>generate the token from your GitHub account: <em>Settings > Applications > Personal Access Token</em> (giving it public_repo permission should be enough if the repository is public)</li>
-<li>install <a href="http://blog.travis-ci.com/2013-01-14-new-client/">Travis command line tool</a>: <code>$gem install travis</code></li>
-<li><code>$travis login</code> in the repository directory</li>
-<li>encrypt the token for storing it in <code>.travis.yml</code>: <code>travis encrypt GH_TOKEN=YOUR_TOKEN_HERE --add</code> (the --add flag will automatically write the encrypted string to your .travis.yml file)</li>
-<li>your <code>.travis.yml</code> should now contain a new <code>secure: ...</code> line: all good</li>
-</ul>
+<p>install the <a href="http://blog.travis-ci.com/2013-01-14-new-client/">Travis command line tool</a></p>
+<p><code>gem install travis</code></p>
+</li>
+<li>run <code>travis login</code> in the repository directory</li>
+<li>
+<p>encrypt the token:</p>
+<p><code>travis encrypt GH_TOKEN=YOUR_TOKEN_HERE --add</code></p>
+<p>The <code>--add</code> flag will automatically write the encrypted string to your .travis.yml file.</p>
 </li>
 <li>
-<p>install Couscous as a dependency of your documentation:</p>
+<p>your <code>.travis.yml</code> should now contain a new <code>secure</code> line looking like this:</p>
+<pre><code class="language-yaml">env:
+  global:
+    - secure: aeuwi73FIpzkIuk0XkbxiYb5M+HzTIKJy/eiBa5gWhSWq6FlI1fysDGvDcExnKyNH0z9sud0sNPBbi5O5z/uiqupoxoBLuFHfLG3NnLrvjQ2SAmrsIBWtsU737Vo5klbfJp2oJ0hrQCIlczwkfK5j+HbQmGUoS5w81pr3kPxnst=</code></pre>
+</li>
+</ul>
+<h2>2. Install Couscous</h2>
+<p>Couscous must be installed to be used in Travis. If you have been using the Phar, you should install Couscous using Composer instead:</p>
 <pre><code>$ composer require couscous/couscous</code></pre>
-</li>
-<li>
-<p>update your <code>.travis.yml</code> config file like so:</p>
-<ul>
-<li>if you have tests:</li>
-</ul>
-<pre><code>...
-
-after_success:
-    - ./vendor/bin/couscous travis-auto-deploy --php-version=5.4 # choose php version accordingly to your travis configuration (default: 5.4)</code></pre>
-<ul>
-<li>if you don't have tests:</li>
-</ul>
-<pre><code>...
-
+<p>This will update your <code>composer.json</code>.</p>
+<h2>3. Update <code>.travis.yml</code></h2>
+<p>Here is an example of what your <code>.travis.yml</code> might look like. This assumes <strong>you use Travis to run PHPUnit tests</strong>. If not, look at the next section.</p>
+<pre><code class="language-yml">language: php
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+env:
+  global:
+    - GIT_NAME: "'Couscous auto deploy'"
+    - GIT_EMAIL: couscous@couscous.io
+    - GH_REF: github.com/CouscousPHP/Couscous
+    - secure: ...
+before_script:
+  - composer install --no-progress
 script:
-    - ./vendor/bin/couscous travis-auto-deploy --php-version=5.4 # choose php version accordingly to your travis configuration (default: 5.4)</code></pre>
-</li>
+  - phpunit
+after_success:
+  - vendor/bin/couscous travis-auto-deploy</code></pre>
+<p>As you can see above, you need to set up:</p>
+<ul>
+<li><code>GIT_NAME</code> and <code>GIT_EMAIL</code></li>
+<li><code>GH_REF</code> is the GitHUb repository URL</li>
+<li><code>composer install</code> is necessary to install Couscous</li>
+<li><code>vendor/bin/couscous travis-auto-deploy</code></li>
 </ul>
+<h3>Without PHPUnit</h3>
+<p>If you use Travis only to update the website, then use <code>script:</code> instead of <code>after_success</code>:</p>
+<pre><code class="language-yml">language: php
+php:
+  - 5.4
+env:
+  ...
+before_script:
+  - composer install --no-progress
+script:
+  - vendor/bin/couscous travis-auto-deploy</code></pre>
+<h3>Options</h3>
+<p>If you run your tests against multiple PHP versions, you want to deploy the website only once (i.e. not for all PHP versions). To do this, <code>travis-auto-deploy</code> will deploy only when the PHP version is <strong>5.4</strong>.</p>
+<p>You can customize this using the <code>--php-version</code> option:</p>
+<pre><code class="language-yaml">language: php
+php:
+  - 5.5
+...
+after_success:
+  - vendor/bin/couscous travis-auto-deploy --php-version=5.5</code></pre>
+<p>Be also aware that <code>travis-auto-deploy</code> will only deploy the website for pushes on the <code>master</code> branch.</p>
                 </section>
 
             </div>
@@ -144,7 +198,7 @@ script:
     
 
     
-        <script src="http://couscous.io/bower_components/jquery/jquery.min.js"></script>
+        <script src="http://couscous.io/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="http://couscous.io/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="http://couscous.io/bower_components/google-code-prettify/src/prettify.js"></script>
 

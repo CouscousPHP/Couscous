@@ -69,7 +69,7 @@
                                     Get started
                                 </a>
                             </li>
-                                                    <li class="active">
+                                                    <li class="">
                                 <a href="http://couscous.io/docs/">
                                     Index
                                 </a>
@@ -84,7 +84,7 @@
                                     Templates
                                 </a>
                             </li>
-                                                    <li class="">
+                                                    <li class="active">
                                 <a href="http://couscous.io/docs/metadata.html">
                                     Metadata
                                 </a>
@@ -114,18 +114,35 @@
                 </nav>
 
                 <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Documentation</h1>
-<p>This is the documentation root. Here are some articles to help you:</p>
+                    <h1>Metadata</h1>
+<p>In Couscous, there are 2 kinds of data:</p>
 <ul>
-<li><a href="getting-started.html">Getting started</a></li>
-<li><a href="configuration.html">Configuration using <code>couscous.yml</code></a></li>
-<li><a href="templates.html">Writing templates</a></li>
-<li><a href="metadata.html">Metadata</a></li>
-<li><a href="faq.html">FAQ</a></li>
-<li><a href="../CONTRIBUTING.html">Contributing</a></li>
-<li><a href="../CHANGELOG.html">Change log</a></li>
-<li><a href="travis.html">Automatic deployment using Travis CI</a></li>
+<li><strong>file content</strong> (e.g. Markdown, HTML, …)</li>
+<li><strong>metadata</strong>, which is simply an array of variables</li>
 </ul>
+<p>Metadata can contain any kind of value and can be attached to:</p>
+<ul>
+<li>the whole project</li>
+<li>a specific file</li>
+</ul>
+<p>Metadata is used by Couscous to customize the generation process and by templates to customize their content.</p>
+<h2>Defining metadata</h2>
+<p><strong>Project</strong> metadata is defined in <code>couscous.yml</code>. For example:</p>
+<pre><code class="language-yaml">template:
+    directory: website
+title: The website title!</code></pre>
+<p><strong>File</strong> metadata is defined using YAML front matter (at the top of Markdown files):</p>
+<pre><code class="language-markdown">---
+category: "Star Wars"
+---
+This is my documentation.</code></pre>
+<p>However, Couscous will also define both <strong>project and file metadata</strong> while generating the website. For example, when parsing Markdown files, it will define the <code>content</code> variable (to contain the generated HTML content for the current file).</p>
+<h2>Metadata reference</h2>
+<p>Here is a list of <strong>all metadata variables automatically defined by Couscous</strong>:</p>
+<ul>
+<li><code>content</code>: contains the generated HTML content of the current file (Markdown turned to HTML)</li>
+</ul>
+<p>Remember everything you defined in <code>couscous.yml</code> or in YAML front matter is also available.</p>
                 </section>
 
             </div>
