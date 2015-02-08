@@ -11,5 +11,5 @@ This is the documentation root. Here are some articles to help you:
 - [Metadata](metadata.md)
 - [Automatic deployment using Travis CI](travis.md)
 - [FAQ](faq.md)
-- [Change log](../CHANGELOG.html)
+- [Change log](../CHANGELOG.md)
 - [Contributing](../CONTRIBUTING.md)
