@@ -15,12 +15,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $couscousDir = realpath(__DIR__ . '/..');
 
 // Delete existing phar
-if (file_exists(__DIR__ . '/couscous.phar')) {
-    unlink(__DIR__ . '/couscous.phar');
+if (file_exists(__DIR__ . '/generated/couscous.phar')) {
+    unlink(__DIR__ . '/generated/couscous.phar');
 }
 
 // Create a new Phar in the same directory
-$builder = Builder::create(__DIR__ . '/couscous.phar');
+$builder = Builder::create(__DIR__ . '/generated/couscous.phar');
 
 // Add the source files
 $builder->buildFromIterator(
@@ -57,4 +57,5 @@ $builder->setStub(
         ->getStub()
 );
 
-chmod(__DIR__ . '/couscous.phar', 0755);
+chmod(__DIR__ . '/generated/couscous.phar', 0755);
+shell_exec('mv '. __DIR__ . '/generated/couscous.phar ' . __DIR__ . '/generated/couscous');

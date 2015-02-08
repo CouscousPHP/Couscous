@@ -14,7 +14,7 @@ deploy:
   provider: releases
   api-key:
     secure: LF/0EQiZvFz7n4qlubzk1ygv1X0SLv3Zws/zWm/IZBVgD2l4A9ztgQXCMb2Uj1jpinedIjMXodpJtlc2+hAO3b5EyV0ZRNqMyyDeqqcCfZ4oG/FSc/pf01zSxynKtFzmg/cBpYw0oXKgBrV1ec3lUZ9Qml8cEqZrTCOpJ1PKmF4=
-  file: bin/couscous.phar
+  file: bin/generated/couscous
   on:
     tags: true
     all_branches: true
