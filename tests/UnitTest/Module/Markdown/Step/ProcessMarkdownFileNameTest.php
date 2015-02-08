@@ -17,6 +17,11 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
         $this->assertFileRenamed('test.html', 'test.md');
     }
 
+    public function testRenameUppercase()
+    {
+        $this->assertFileRenamed('contributing.html', 'CONTRIBUTING.md');
+    }
+
     public function testRenameReadme()
     {
         $this->assertFileRenamed('index.html', 'README.md');

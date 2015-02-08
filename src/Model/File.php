@@ -17,6 +17,29 @@ abstract class File
     }
 
     /**
+     * Returns the basename of the file.
+     *
+     * @return string
+     */
+    public function getBasename()
+    {
+        return basename($this->relativeFilename);
+    }
+
+    /**
+     * Returns the directory of the file.
+     *
+     * @return string
+     */
+    public function getDirectory()
+    {
+        $directory = dirname($this->relativeFilename);
+        $directory = ($directory === '.') ? '' : $directory . '/';
+
+        return $directory;
+    }
+
+    /**
      * Returns the content of the file.
      *
      * @return string
