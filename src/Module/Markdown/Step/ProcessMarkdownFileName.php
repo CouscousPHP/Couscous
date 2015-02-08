@@ -23,6 +23,7 @@ class ProcessMarkdownFileName implements Step
 
             $this->renameFileExtension($markdownFile);
             $this->renameReadme($markdownFile);
+            $this->renameUppercase($markdownFile);
 
             $project->addFile($markdownFile);
         }
@@ -35,20 +36,27 @@ class ProcessMarkdownFileName implements Step
 
     private function renameReadme(MarkdownFile $file)
     {
-        $filename = basename($file->relativeFilename);
-
-        if ($filename === 'README.html') {
-            $path = dirname($file->relativeFilename);
-            $path = ($path === '.') ? '' : $path . '/';
-
-            $file->relativeFilename = $path . 'index.html';
+        if ($file->getBasename() !== 'README.html') {
+            return;
         }
+
+        $file->relativeFilename = $file->getDirectory().'index.html';
+    }
+
+    private function renameUppercase(MarkdownFile $file)
+    {
+        $basename = $file->getBasename();
+        if (!preg_match('/^[A-Z0-9_-]+\.html$/', $basename)) {
+            return;
+        }
+
+        $file->relativeFilename = $file->getDirectory().strtolower($basename);
     }
 
     private function replaceExtension($filename)
     {
         $filename = substr($filename, 0, strrpos($filename, '.'));
 
-        return $filename . '.html';
+        return $filename.'.html';
     }
 }
