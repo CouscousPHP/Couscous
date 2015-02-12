@@ -23,7 +23,7 @@ class ProcessMarkdownFileName implements Step
 
             $this->renameFileExtension($markdownFile);
             $this->renameReadme($markdownFile);
-            $this->renameUppercase($markdownFile);
+            $this->renameFilename($markdownFile);
 
             $project->addFile($markdownFile);
         }
@@ -43,10 +43,10 @@ class ProcessMarkdownFileName implements Step
         $file->relativeFilename = $file->getDirectory().'index.html';
     }
 
-    private function renameUppercase(MarkdownFile $file)
+    private function renameFilename(MarkdownFile $file)
     {
         $basename = $file->getBasename();
-        if (!preg_match('/^[A-Z0-9_-]+\.html$/', $basename)) {
+        if (!preg_match('/[A-Z]/', $basename)) {
             return;
         }
 
