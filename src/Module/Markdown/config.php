@@ -8,6 +8,7 @@ return [
         DI\link('Couscous\Module\Markdown\Step\ProcessMarkdownFileName'),
         DI\link('Couscous\Module\Markdown\Step\RewriteMarkdownLinks'),
         DI\link('Couscous\Module\Markdown\Step\RenderMarkdown'),
+        DI\link('Couscous\Module\Markdown\Step\CreateHeadingIds'),
     ]),
 
     'Mni\FrontYAML\Parser' => DI\object()
