@@ -21,6 +21,9 @@ Here is a FILE.md.
 [LICENSE.md](LICENSE.md)
 [Documentation](doc/README.md)
 [How to contribute](CONTRIBUTING.md)
+[Anchor link](doc/FILENAME.md#something-else)
+[My file](doc/MyFile.md)
+[Some other messy file](this-is/SOME-OTHER_messy.FILE.md)
 
 Please leave [this](doc/test.html) and [this link](test.md.txt) alone.
 MARKDOWN;
@@ -33,6 +36,9 @@ Here is a FILE.md.
 [LICENSE.md](license.html)
 [Documentation](doc/index.html)
 [How to contribute](contributing.html)
+[Anchor link](doc/filename.html#something-else)
+[My file](doc/myfile.html)
+[Some other messy file](this-is/some-other_messy.file.html)
 
 Please leave [this](doc/test.html) and [this link](test.md.txt) alone.
 MARKDOWN;

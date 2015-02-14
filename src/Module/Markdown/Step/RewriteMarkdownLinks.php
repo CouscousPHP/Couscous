@@ -14,9 +14,7 @@ use Couscous\Step;
 class RewriteMarkdownLinks implements Step
 {
     // OMG regexes...
-    const MARKDOWN_LINK_REGEX  = '#\[([^\]]+)\]\(([^\)]+)\.md\)#';
-    const REGEX_REPLACEMENT    = '[$1]($2.html)';
-    const UPPERCASE_LINK_REGEX = '#\[(?:[^\]]+)\]\((.+[\/])?([A-Z0-9_-]+\.md)\)#';
+    const MARKDOWN_LINK_REGEX  = '/\[(?:[^\]]+)\]\((.+\/)?([A-Za-z0-9_.-]+\.md)([^.].+)?\)/';
 
     public function __invoke(Project $project)
     {
@@ -24,16 +22,15 @@ class RewriteMarkdownLinks implements Step
         $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
 
         foreach ($markdownFiles as $file) {
-            $content = preg_replace_callback(
-                self::UPPERCASE_LINK_REGEX,
-                array($this, 'replaceUppercase'),
-                $file->content
-            );
-            $file->content = preg_replace(self::MARKDOWN_LINK_REGEX, self::REGEX_REPLACEMENT, $content);
+            $pattern  = self::MARKDOWN_LINK_REGEX;
+            $callback = array($this, 'replaceFilename');
+            $subject  = $file->content;
+
+            $file->content = preg_replace_callback($pattern, $callback, $subject);
         }
     }
 
-    private function replaceUppercase(array $matches)
+    private function replaceFilename(array $matches)
     {
         $filename = strtolower($matches[2]);
         $filename = str_replace('.md', '.html', $filename);
@@ -41,6 +38,9 @@ class RewriteMarkdownLinks implements Step
             $filename = 'index.html';
         }
 
-        return str_replace($matches[2].')', $filename.')', $matches[0]);
+        $pattern = '/\((.+)?\b'.$matches[2].'\b(.+)?\)/';
+        $replacement = '($1'.$filename.'$2)';
+
+        return preg_replace($pattern, $replacement, $matches[0]);
     }
 }

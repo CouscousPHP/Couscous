@@ -32,6 +32,11 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
         $this->assertFileRenamed('foo/index.html', 'foo/README.md');
     }
 
+    public function testRenameReadmeMessyFilename()
+    {
+        $this->assertFileRenamed('some-other_complicated.file.html', 'SOME-OTHER_complicated.FILE.md');
+    }
+
     public function testNonMarkdownFileNotRenamed()
     {
         $file    = new LazyFile('foo.txt', 'foo.txt');
