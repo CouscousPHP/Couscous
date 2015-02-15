@@ -1,10 +1,30 @@
 language: php
 php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - hhvm
+- 5.4
+- 5.5
+- 5.6
+- hhvm
+env:
+  global:
+  - GIT_NAME: "'Couscous auto deploy'"
+  - GIT_EMAIL: couscous@couscous.io
+  - GH_REF: github.com/CouscousPHP/Couscous
+  - secure: LF/0EQiZvFz7n4qlubzk1ygv1X0SLv3Zws/zWm/IZBVgD2l4A9ztgQXCMb2Uj1jpinedIjMXodpJtlc2+hAO3b5EyV0ZRNqMyyDeqqcCfZ4oG/FSc/pf01zSxynKtFzmg/cBpYw0oXKgBrV1ec3lUZ9Qml8cEqZrTCOpJ1PKmF4=
 before_script:
-  - composer install --no-progress
+- composer install --no-progress
 script:
-  - phpunit
+- phpunit
+before_deploy:
+- bin/compile
+deploy:
+  provider: releases
+  api-key:
+    secure: LF/0EQiZvFz7n4qlubzk1ygv1X0SLv3Zws/zWm/IZBVgD2l4A9ztgQXCMb2Uj1jpinedIjMXodpJtlc2+hAO3b5EyV0ZRNqMyyDeqqcCfZ4oG/FSc/pf01zSxynKtFzmg/cBpYw0oXKgBrV1ec3lUZ9Qml8cEqZrTCOpJ1PKmF4=
+  file: bin/generated/couscous
+  on:
+    tags: true
+    all_branches: true
+    repo: wysow/Couscous
+    php: 5.4
+after_deploy:
+  - bin/couscous travis-auto-deploy --phar-only

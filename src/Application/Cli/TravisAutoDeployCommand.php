@@ -70,6 +70,12 @@ class TravisAutoDeployCommand extends Command
                 InputOption::VALUE_REQUIRED,
                 'Target branch in which to deploy the website.',
                 'gh-pages'
+            )
+            ->addOption(
+                'phar-only',
+                null,
+                InputOption::VALUE_NONE,
+                'If set only deploy new phar file'
             );
     }
 
@@ -83,6 +89,18 @@ class TravisAutoDeployCommand extends Command
         $targetBranch    = $input->getOption('branch');
 
         $repository = new Project($sourceDirectory, getcwd() . '/.couscous/generated');
+
+        // set git user data
+        $output->writeln('<info>Setting up git user</info>');
+        $this->commandRunner->run('git config --global user.name "${GIT_NAME}"');
+        $this->commandRunner->run('git config --global user.email "${GIT_EMAIL}"');
+
+        if ($input->getOption('phar-only') && is_file(getcwd() . '/bin/generated/couscous')) {
+            shell_exec('cp bin/generated/couscous website');
+            $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
+            shell_exec('rm website/couscous');
+            return;
+        }
 
         // verify some env variables
         $travisBranch = getenv('TRAVIS_BRANCH');
@@ -98,11 +116,6 @@ class TravisAutoDeployCommand extends Command
             $output->writeln('<comment>[NOT DEPLOYED] Not deploying Couscous for pull requests</comment>');
             return;
         }
-
-        // set git user data
-        $output->writeln('<info>Setting up git user</info>');
-        $this->commandRunner->run('git config --global user.name "${GIT_NAME}"');
-        $this->commandRunner->run('git config --global user.email "${GIT_EMAIL}"');
 
         // getting current php version to only deploy once
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');

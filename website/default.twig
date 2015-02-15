@@ -92,11 +92,15 @@
         <script src="{{ baseUrl }}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="{{ baseUrl }}/bower_components/google-code-prettify/src/prettify.js"></script>
 
+
+        <script type="text/javascript">
+            $("pre").addClass('prettyprint');
+            prettyPrint();
+        </script>
+
         <script>
             $(function() {
                 $("section h1").wrap('<div class="page-header" />');
-                $("pre").addClass('prettyprint');
-                prettyPrint();
             });
         </script>
 

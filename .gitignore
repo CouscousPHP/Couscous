@@ -3,6 +3,7 @@
 /composer.lock
 /.couscous/
 /bin/couscous.phar
+/bin/generated/couscous
 /tests/FunctionalTest/generated/
 /theme/
 /Vagrantfile
