@@ -4,6 +4,7 @@ namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
 use Couscous\Model\Project;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -74,10 +75,10 @@ class PreviewCommand extends Command
 
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
 
-        $this->startWebServer($input, $output, $targetDirectory);
+        $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
 
         // Watch for changes
-        while (true) {
+        while ($serverProcess->isRunning()) {
             $files = $watchlist->getChangedFiles();
             if (count($files) > 0) {
                 $output->writeln('');
@@ -90,7 +91,7 @@ class PreviewCommand extends Command
             sleep(1);
         }
 
-        return 0;
+        throw new RuntimeException('The HTTP server has stopped');
     }
 
     private function generateWebsite(
@@ -120,6 +121,8 @@ class PreviewCommand extends Command
         $process->start();
 
         $output->writeln(sprintf("Server running on <comment>%s</comment>", $input->getArgument('address')));
+
+        return $process;
     }
 
     private function isSupported()
