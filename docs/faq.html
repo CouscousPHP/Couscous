@@ -119,7 +119,13 @@
 <p>Yes.</p>
 <h4>Do links works between pages?</h4>
 <p>Yes, they work just like on GitHub.com.</p>
-<p>Links in Markdown are rewritten to link to HTML pages: a link to <code>changelog.md</code> will be rewritten to <code>changelog.html</code>.</p>
+<p>Links in Markdown are rewritten to link to HTML pages:</p>
+<ul>
+<li>A link to <code>something.md</code> will be rewritten to <code>something.html</code>;</li>
+<li>A link to <code>Something-Else.md</code> will be rewritten to <code>something-else.html</code>;</li>
+<li>A link to <code>CONTRIBUTING.md</code> will be rewritten to <code>contributing.html</code>;</li>
+<li>A link to <code>README.md</code> will be rewritten to <code>index.html</code>.</li>
+</ul>
 <h4>Can I use it for a blog?</h4>
 <p>Probably not yet, but you are welcome to try. <a href="http://php-di.org/news/">PHP-DI's website</a> has a pseudo-blog where the article list is written manually: it's possible, but not (yet) super easy.</p>
 <h4>Can I deploy the website to something else than GitHub Pages?</h4>
