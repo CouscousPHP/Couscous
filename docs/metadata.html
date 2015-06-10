@@ -114,7 +114,7 @@
                 </nav>
 
                 <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Metadata</h1>
+                    <h1 id="metadata">Metadata</h1>
 <p>In Couscous, there are 2 kinds of data:</p>
 <ul>
 <li><strong>file content</strong> (e.g. Markdown, HTML, …)</li>
@@ -126,7 +126,7 @@
 <li>a specific file</li>
 </ul>
 <p>Metadata is used by Couscous to customize the generation process and by templates to customize their content.</p>
-<h2>Defining metadata</h2>
+<h2 id="defining-metadata">Defining metadata</h2>
 <p><strong>Project</strong> metadata is defined in <code>couscous.yml</code>. For example:</p>
 <pre><code class="language-yaml">template:
     directory: website
@@ -137,7 +137,7 @@ category: "Star Wars"
 ---
 This is my documentation.</code></pre>
 <p>However, Couscous will also define both <strong>project and file metadata</strong> while generating the website. For example, when parsing Markdown files, it will define the <code>content</code> variable (to contain the generated HTML content for the current file).</p>
-<h2>Metadata reference</h2>
+<h2 id="metadata-reference">Metadata reference</h2>
 <p>Here is a list of <strong>all metadata variables automatically defined by Couscous</strong>:</p>
 <ul>
 <li><code>content</code>: contains the generated HTML content of the current file (Markdown turned to HTML)</li>

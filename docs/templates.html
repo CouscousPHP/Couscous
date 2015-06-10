@@ -114,8 +114,8 @@
                 </nav>
 
                 <section class="documentation col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Templates</h1>
-<h2>Remote templates</h2>
+                    <h1 id="templates">Templates</h1>
+<h2 id="remote-templates">Remote templates</h2>
 <p>A <strong>remote template</strong> is a template that is hosted separately in a git repository.
 It allows many projects to reuse the same template.</p>
 <p>To write a remote template, just write a normal template inside a directory (read below for understanding how).
@@ -125,9 +125,9 @@ The <a href="https://github.com/CouscousPHP/Template-Basic">Basic</a> template i
 <p><em>ProTip:</em> To preview your template, you can use <code>couscous preview</code> (Couscous will use your template's Readme). In order to tell Couscous that the template is in the root of the repository (and not in a <code>website/</code> subdirectory), use the following configuration:</p>
 <pre><code class="language-yaml">template:
     directory: .</code></pre>
-<h2>Embedded templates</h2>
+<h2 id="embedded-templates">Embedded templates</h2>
 <p>Templates contain Twig layouts and assets (javascripts, css…). They should be stored inside a <code>website/</code> directory (or <a href="configuration.html">whatever you configured</a>) in your project.</p>
-<h3>Default layout</h3>
+<h3 id="default-layout">Default layout</h3>
 <p>The default Twig layout that is used for rendering the pages should be named <code>default.twig</code>.</p>
 <p>Example of a <code>default.twig</code>:</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
@@ -144,7 +144,7 @@ The <a href="https://github.com/CouscousPHP/Template-Basic">Basic</a> template i
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p>The only variable you can use by default is <code>content</code>. This variable contains the content of the Markdown file rendered to HTML.</p>
-<h3>Additional layouts</h3>
+<h3 id="additional-layouts">Additional layouts</h3>
 <p>If, for example, you want your home page to have a different layout, you can write a <code>home.twig</code>
 that overrides <code>default.twig</code>:</p>
 <pre><code class="language-html">{% extends "default.twig" %}
@@ -163,7 +163,7 @@ This is my documentation.
 ## Subtitle
 
 This is a *sub-chapter*.</code></pre>
-<h3>Variables (aka Metadata)</h3>
+<h3 id="variables-aka-metadata">Variables (aka Metadata)</h3>
 <p>Custom variables, called <a href="metadata.html"><strong>Metadata</strong></a>, can be defined in:</p>
 <ul>
 <li><code>couscous.yml</code></li>
@@ -192,7 +192,7 @@ This is my documentation.</code></pre>
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p>To learn more, read the whole <a href="metadata.html">Metadata documentation</a>.</p>
-<h3>Links</h3>
+<h3 id="links">Links</h3>
 <p>To ensure all your links are working correctly, you should define a <code>baseUrl</code> variable in <code>couscous.yml</code>
 (see <a href="configuration.html">the configuration documentation</a>).</p>
 <p>Then you can use it in the layouts:</p>
@@ -215,7 +215,7 @@ This is my documentation.</code></pre>
 &lt;/html&gt;</code></pre>
 <p>All your Markdown links will be rewritten by Couscous to work. However, make sure you write relative links.
 A good rule of thumb is: <strong>if it works on GitHub.com, it will work with Couscous</strong>.</p>
-<h2>Bower</h2>
+<h2 id="bower">Bower</h2>
 <p>If a <code>bower.json</code> file is present in the <code>website/</code> directory, dependencies will be
 installed automatically.</p>
 <p>In that case, you need <a href="http://bower.io/">to have Bower installed</a>. If you don't have a <code>bower.json</code>, you don't need to install Bower.</p>
