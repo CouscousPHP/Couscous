@@ -39,7 +39,7 @@ class RewriteMarkdownLinks implements Step
         }
 
         $pattern = '/\((.+)?\b'.$matches[2].'\b(.+)?\)/';
-        $replacement = '($1'.$filename.'$2)';
+        $replacement = '(${1}'.$filename.'${2})';
 
         return preg_replace($pattern, $replacement, $matches[0]);
     }

@@ -24,6 +24,7 @@ Here is a FILE.md.
 [Anchor link](doc/FILENAME.md#something-else)
 [My file](doc/MyFile.md)
 [Some other messy file](this-is/SOME-OTHER_messy.FILE.md)
+[A link starting with a number](5.0.md)
 
 Please leave [this](doc/test.html) and [this link](test.md.txt) alone.
 MARKDOWN;
@@ -39,6 +40,7 @@ Here is a FILE.md.
 [Anchor link](doc/filename.html#something-else)
 [My file](doc/myfile.html)
 [Some other messy file](this-is/some-other_messy.file.html)
+[A link starting with a number](5.0.html)
 
 Please leave [this](doc/test.html) and [this link](test.md.txt) alone.
 MARKDOWN;
