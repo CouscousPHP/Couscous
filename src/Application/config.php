@@ -2,7 +2,6 @@
 
 use Interop\Container\ContainerInterface;
 use Psr\Log\LogLevel;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\OutputInterface;
 
 return [
@@ -19,7 +18,7 @@ return [
     'steps.after' => [
     ],
 
-    'steps' => DI\factory(function (ContainerInterface $c) {
+    'steps' => function (ContainerInterface $c) {
         return array_merge(
             $c->get('steps.init'),
             $c->get('steps.before'),
@@ -27,23 +26,18 @@ return [
             $c->get('steps.postprocessing'),
             $c->get('steps.after')
         );
-    }),
+    },
 
     'Couscous\Generator' => DI\object()
-        ->constructorParameter('steps', DI\link('steps')),
+        ->constructorParameter('steps', DI\get('steps')),
 
-    'application' => DI\factory(function (ContainerInterface $c) {
-        $application = new Application('Couscous');
-
-        $application->add($c->get('Couscous\Application\Cli\GenerateCommand'));
-        $application->add($c->get('Couscous\Application\Cli\PreviewCommand'));
-        $application->add($c->get('Couscous\Application\Cli\DeployCommand'));
-        $application->add($c->get('Couscous\Application\Cli\ClearCommand'));
-        $application->add($c->get('Couscous\Application\Cli\TravisAutoDeployCommand'));
-        $application->add($c->get('Couscous\Application\Cli\InitTemplateCommand'));
-
-        return $application;
-    }),
+    'application' => DI\object('Symfony\Component\Console\Application')
+        ->method('add', DI\get('Couscous\Application\Cli\GenerateCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\PreviewCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\DeployCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\ClearCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\TravisAutoDeployCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\InitTemplateCommand')),
 
     'Symfony\Component\Console\Logger\ConsoleLogger' => DI\object()
         ->constructorParameter('verbosityLevelMap', [
