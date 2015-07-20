@@ -57,6 +57,6 @@ class Git
 
     private function run($directory, $command)
     {
-        $this->commandRunner->run("cd '$directory' && $command");
+        $this->commandRunner->run("cd \"$directory\" && $command");
     }
 }
