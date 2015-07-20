@@ -1,12 +1,26 @@
 language: php
 sudo: false
+
+env:
+    - COMPOSER_OPTIONS="--prefer-source"
+
 php:
     - 5.4
     - 5.5
     - 5.6
     - 7.0
     - hhvm
+
+matrix:
+    include:
+        - php: 5.4
+          env: COMPOSER_OPTIONS="--prefer-lowest"
+
+install:
+    - composer update --no-interaction ${COMPOSER_OPTIONS}
+
 before_script:
     - composer install --no-progress
+
 script:
     - phpunit
