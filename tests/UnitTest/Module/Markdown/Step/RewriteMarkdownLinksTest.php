@@ -54,4 +54,50 @@ MARKDOWN;
 
         $this->assertEquals($expected, $file->content);
     }
+
+    /**
+     * @link https://github.com/CouscousPHP/Couscous/issues/112
+     * @link https://github.com/PHP-DI/PHP-DI/issues/281
+     */
+    public function testReplacesMultipleLinksPerLine()
+    {
+        $markdown = <<<MARKDOWN
+This is a [link](doc/some-file.md) and [another one](doc/some-other-file.md)
+MARKDOWN;
+
+        $expected = <<<MARKDOWN
+This is a [link](doc/some-file.html) and [another one](doc/some-other-file.html)
+MARKDOWN;
+
+        $file    = new MarkdownFile('foo', $markdown);
+        $project = new Project('foo', 'bar');
+        $project->addFile($file);
+
+        $step = new RewriteMarkdownLinks();
+        $step->__invoke($project);
+
+        $this->assertEquals($expected, $file->content);
+    }
+
+    public function testPreservesQueryString()
+    {
+        $markdown = <<<MARKDOWN
+This is a [link](doc/some-file.md#header)
+This is a [link](doc/some-file.md?search=foo)
+MARKDOWN;
+
+        $expected = <<<MARKDOWN
+This is a [link](doc/some-file.html#header)
+This is a [link](doc/some-file.html?search=foo)
+MARKDOWN;
+
+        $file    = new MarkdownFile('foo', $markdown);
+        $project = new Project('foo', 'bar');
+        $project->addFile($file);
+
+        $step = new RewriteMarkdownLinks();
+        $step->__invoke($project);
+
+        $this->assertEquals($expected, $file->content);
+    }
 }

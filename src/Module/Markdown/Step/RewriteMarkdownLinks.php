@@ -13,8 +13,11 @@ use Couscous\Step;
  */
 class RewriteMarkdownLinks implements Step
 {
-    // OMG regexes...
-    const MARKDOWN_LINK_REGEX  = '/\[(?:[^\]]+)\]\((.+\/)?([A-Za-z0-9_.-]+\.md)([^.].+)?\)/';
+    /**
+     * OMG regexes...
+     * @link https://regex101.com/
+     */
+    const MARKDOWN_LINK_REGEX  = '/\[(?:[^\]]+)\]\(([^\)]+\/)?([A-Za-z0-9_\.\-]+\.md)([^.\)][^\)]*)?\)/';
 
     public function __invoke(Project $project)
     {
@@ -23,7 +26,7 @@ class RewriteMarkdownLinks implements Step
 
         foreach ($markdownFiles as $file) {
             $pattern  = self::MARKDOWN_LINK_REGEX;
-            $callback = array($this, 'replaceFilename');
+            $callback = [$this, 'replaceFilename'];
             $subject  = $file->content;
 
             $file->content = preg_replace_callback($pattern, $callback, $subject);
