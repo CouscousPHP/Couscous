@@ -40,3 +40,11 @@ baseUrl: http://username.github.io/your-project
 ```
 
 **Note:** any variable you put in `couscous.yml` is called **Metadata**. You can use these variables in templates for example. Learn more about this in the [Metadata documentation](metadata.md).
+
+## Using a Domain Name with Github Pages and Couscous
+
+To use a CNAME for your Couscous-generated documentation so that your docs point to `docs.yourdomain.com` or something similar, first create the CNAME file and point your DNS to `yourname.github.io`, as detailed in the [Github documentation](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/).
+
+To deploy the CNAME file to your `gh-pages` branch automatically with Couscous, simply put the CNAME file in the `website` directory (or whatever template directory you configured) in `couscous.yml`.
+
+Note that this will only work if the you're using embedded templates (versus remote templates). If you're using remote templates, you'll need to copy the remote templates to your repository and configure your `couscous.yml` file to use the embedded template instead.
