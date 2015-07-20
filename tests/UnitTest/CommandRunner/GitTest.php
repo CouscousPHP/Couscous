@@ -44,7 +44,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function checkout_origin_branch_should_run_git_checkout()
     {
-        $this->expectCommandIsRun("cd "directory" && git checkout -b branch origin/branch");
+        $this->expectCommandIsRun("cd \"directory\" && git checkout -b branch origin/branch");
 
         $this->git->checkoutOriginBranch('directory', 'branch');
     }
@@ -54,7 +54,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function create_branch_should_run_git_checkout()
     {
-        $this->expectCommandIsRun("cd "directory" && git checkout -b branch");
+        $this->expectCommandIsRun("cd \"directory\" && git checkout -b branch");
 
         $this->git->createBranch('directory', 'branch');
     }
@@ -64,7 +64,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function commit_should_run_git_add_and_commit()
     {
-        $this->expectCommandIsRun("cd "directory" && git add --all . && git commit -m 'message'");
+        $this->expectCommandIsRun("cd \"directory\" && git add --all . && git commit -m 'message'");
 
         $this->git->commitAllChanges('directory', 'message');
     }
@@ -74,7 +74,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function push_should_run_git_push()
     {
-        $this->expectCommandIsRun("cd "directory" && git push my-remote branch");
+        $this->expectCommandIsRun("cd \"directory\" && git push my-remote branch");
 
         $this->git->push('directory', 'branch', 'my-remote');
     }
