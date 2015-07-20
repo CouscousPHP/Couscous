@@ -53,14 +53,13 @@ Be assured that this command will not modify your repository.
 
 Liking what you see? The default template comes with a header and an optional left menu (which is hidden if it is not configured). You can configure all that [by creating a `couscous.yml`](configuration.md) and checking out all the options [on the template's homepage](https://github.com/CouscousPHP/Template-Light).
 
-#### Specify an Address
+#### Specify an address
 
-While the default `couscous deploy` address will work on most installations, there may be times where you need to specify the preview IP address (for example if using VM or container tools like Vagrant or Docker). To specify an address, in this example `0.0.0.0:8000`, use:
+While `couscous preview` will work on most installations, there may be times where you need to specify the IP address the server should listen to (for example if using a VM, Vagrant or Docker). To specify the IP address, in this example `0.0.0.0:8000`, use:
 
 ```
 couscous preview 0.0.0.0:8000
 ```
-
 
 ## Deploy
 
@@ -76,7 +75,7 @@ The website is now online: [http://your-username.github.io/your-project/](http:/
 
 The `deploy` command will not change anything in your current branch (e.g. master branch). It will only affect the `gh-pages` branch.
 
-#### Deploying to a branch other than `gh-pages`
+### Deploying to a custom branch
 
 If you wish to have Couscous generate and deploy pages to a branch other than `gh-pages`, use the `--branch` option. For example:
 
