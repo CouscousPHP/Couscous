@@ -3,8 +3,9 @@
 return [
 
     'steps.after' => DI\add([
-        DI\get('Couscous\Module\Core\Step\ClearTargetDirectory'),
-        DI\get('Couscous\Module\Core\Step\WriteFiles'),
+        DI\link('Couscous\Module\Core\Step\AddImages'),
+        DI\link('Couscous\Module\Core\Step\ClearTargetDirectory'),
+        DI\link('Couscous\Module\Core\Step\WriteFiles'),
     ]),
 
 ];

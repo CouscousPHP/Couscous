@@ -41,4 +41,12 @@ class GenerationTest extends BaseFunctionalTest
     {
         $this->assertGeneratedWebsite('page-list');
     }
+
+    /**
+     * Test that the images referenced by documentation are copied.
+     */
+    public function testDocumentationImages()
+    {
+        $this->assertGeneratedWebsite('images');
+    }
 }
