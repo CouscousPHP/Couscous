@@ -80,7 +80,7 @@ The `deploy` command will not change anything in your current branch (e.g. maste
 If you wish to have Couscous generate and deploy pages to a branch other than `gh-pages`, use the `--branch` option. For example:
 
 ```
-couscous.phar deploy --branch master
+$ couscous deploy --branch master
 ```
 
 ## Customizing the template
