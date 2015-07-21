@@ -58,7 +58,7 @@ Liking what you see? The default template comes with a header and an optional le
 While `couscous preview` will work on most installations, there may be times where you need to specify the IP address the server should listen to (for example if using a VM, Vagrant or Docker). To specify the IP address, in this example `0.0.0.0:8000`, use:
 
 ```
-couscous preview 0.0.0.0:8000
+$ couscous preview 0.0.0.0:8000
 ```
 
 ## Deploy
