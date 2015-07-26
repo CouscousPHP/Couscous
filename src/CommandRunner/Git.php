@@ -36,7 +36,7 @@ class Git
 
     public function commitAllChanges($directory, $message)
     {
-        $this->run($directory, "git add --all . && git commit -m '$message'");
+        $this->run($directory, "git add --all . && git commit -m \"$message\"");
     }
 
     public function push($directory, $branch, $remote = 'origin')
