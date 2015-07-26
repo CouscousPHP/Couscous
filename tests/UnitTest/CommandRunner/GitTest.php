@@ -64,7 +64,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function commit_should_run_git_add_and_commit()
     {
-        $this->expectCommandIsRun("cd \"directory\" && git add --all . && git commit -m 'message'");
+        $this->expectCommandIsRun("cd \"directory\" && git add --all . && git commit -m \"message\"");
 
         $this->git->commitAllChanges('directory', 'message');
     }
