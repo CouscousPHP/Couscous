@@ -100,11 +100,6 @@
                                 </a>
                             </li>
                                                     <li class="">
-                                <a href="http://couscous.io/changelog.html">
-                                    Change log
-                                </a>
-                            </li>
-                                                    <li class="">
                                 <a href="http://couscous.io/contributing.html">
                                     Contributing
                                 </a>
@@ -139,7 +134,7 @@ $ sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 <p>Liking what you see? The default template comes with a header and an optional left menu (which is hidden if it is not configured). You can configure all that <a href="configuration.html">by creating a <code>couscous.yml</code></a> and checking out all the options <a href="https://github.com/CouscousPHP/Template-Light">on the template's homepage</a>.</p>
 <h4 id="specify-an-address">Specify an address</h4>
 <p>While <code>couscous preview</code> will work on most installations, there may be times where you need to specify the IP address the server should listen to (for example if using a VM, Vagrant or Docker). To specify the IP address, in this example <code>0.0.0.0:8000</code>, use:</p>
-<pre><code>couscous preview 0.0.0.0:8000</code></pre>
+<pre><code>$ couscous preview 0.0.0.0:8000</code></pre>
 <h2 id="deploy">Deploy</h2>
 <p>Happy with the result? Here is how to deploy:</p>
 <pre><code class="language-bash">$ couscous deploy</code></pre>
@@ -148,7 +143,7 @@ $ sudo mv couscous.phar /usr/local/bin/couscous</code></pre>
 <p>The <code>deploy</code> command will not change anything in your current branch (e.g. master branch). It will only affect the <code>gh-pages</code> branch.</p>
 <h3 id="deploying-to-a-custom-branch">Deploying to a custom branch</h3>
 <p>If you wish to have Couscous generate and deploy pages to a branch other than <code>gh-pages</code>, use the <code>--branch</code> option. For example:</p>
-<pre><code>couscous.phar deploy --branch master</code></pre>
+<pre><code>$ couscous deploy --branch master</code></pre>
 <h2 id="customizing-the-template">Customizing the template</h2>
 <p>Couscous provides <a href="https://github.com/CouscousPHP/Template-Light">a default template</a> (and a <a href="http://couscous.io/templates.html">few others to choose from</a>), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the <a href="templates.html">templates documentation</a>.</p>
                 </section>
