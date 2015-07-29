@@ -1,8 +1,6 @@
 language: php
-sudo: false
 
-env:
-    - COMPOSER_OPTIONS="--prefer-source"
+sudo: false
 
 php:
     - 5.4
@@ -14,13 +12,11 @@ php:
 matrix:
     include:
         - php: 5.4
-          env: COMPOSER_OPTIONS="--prefer-lowest"
-
-install:
-    - composer update --no-interaction ${COMPOSER_OPTIONS}
+          env: dependencies=lowest
 
 before_script:
-    - composer install --no-progress
+    - composer install -n
+    - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-stable -n; fi;
 
 script:
-    - phpunit
+    - vendor/bin/phpunit
