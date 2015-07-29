@@ -41,5 +41,6 @@ However, Couscous will also define both **project and file metadata** while gene
 Here is a list of **all metadata variables automatically defined by Couscous**:
 
 - `content`: contains the generated HTML content of the current file (Markdown turned to HTML)
+- `currentFile`: contains the relative name of the current file (e.g. the name of the Markdown file before it is turned to a HTML file)
 
 Remember everything you defined in `couscous.yml` or in YAML front matter is also available.
