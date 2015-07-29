@@ -35,6 +35,6 @@ class HtmlFile extends File
 
     public function getMetadata()
     {
-        return $this->wrappedFile ? $this->wrappedFile->getMetadata() : new Metadata();
+        return $this->wrappedFile ? $this->wrappedFile->getMetadata() : parent::getMetadata();
     }
 }

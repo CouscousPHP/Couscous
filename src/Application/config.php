@@ -6,27 +6,39 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 return [
 
-    // Generation steps are added by modules
-    'steps.init' => [
-    ],
-    'steps.before' => [
-    ],
-    'steps.preprocessing' => [
-    ],
-    'steps.postprocessing' => [
-    ],
-    'steps.after' => [
-    ],
+    'steps' => [
+        DI\get('Couscous\Module\Config\Step\SetDefaultConfig'),
+        DI\get('Couscous\Module\Config\Step\LoadConfig'),
+        DI\get('Couscous\Module\Config\Step\OverrideBaseUrlForPreview'),
 
-    'steps' => function (ContainerInterface $c) {
-        return array_merge(
-            $c->get('steps.init'),
-            $c->get('steps.before'),
-            $c->get('steps.preprocessing'),
-            $c->get('steps.postprocessing'),
-            $c->get('steps.after')
-        );
-    },
+        DI\get('Couscous\Module\Scripts\Step\ExecuteBeforeScripts'),
+
+        DI\get('Couscous\Module\Template\Step\UseDefaultTemplate'),
+        DI\get('Couscous\Module\Template\Step\FetchRemoteTemplate'),
+        DI\get('Couscous\Module\Template\Step\ValidateTemplateDirectory'),
+
+        DI\get('Couscous\Module\Bower\Step\RunBowerInstall'),
+
+        DI\get('Couscous\Module\Markdown\Step\LoadMarkdownFiles'),
+        DI\get('Couscous\Module\Template\Step\LoadAssets'),
+        DI\get('Couscous\Module\Core\Step\AddImages'),
+
+        DI\get('Couscous\Module\Core\Step\AddFileNameToMetadata'),
+
+        DI\get('Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter'),
+        DI\get('Couscous\Module\Markdown\Step\ProcessMarkdownFileName'),
+        DI\get('Couscous\Module\Markdown\Step\RewriteMarkdownLinks'),
+        DI\get('Couscous\Module\Markdown\Step\RenderMarkdown'),
+        DI\get('Couscous\Module\Markdown\Step\CreateHeadingIds'),
+
+        DI\get('Couscous\Module\Template\Step\AddPageListToLayoutVariables'),
+        DI\get('Couscous\Module\Template\Step\ProcessTwigLayouts'),
+
+        DI\get('Couscous\Module\Core\Step\ClearTargetDirectory'),
+        DI\get('Couscous\Module\Core\Step\WriteFiles'),
+
+        DI\get('Couscous\Module\Scripts\Step\ExecuteAfterScripts'),
+    ],
 
     'Couscous\Generator' => DI\object()
         ->constructorParameter('steps', DI\get('steps')),
