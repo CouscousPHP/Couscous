@@ -64,9 +64,10 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
     public function assertGenerationError($fixtureName, $expectedMessage)
     {
         list($output, $return) = $this->generate($fixtureName);
+        $output = implode(PHP_EOL, $output);
 
-        $this->assertNotEquals(0, $return, 'Failed asserting that the generation failed');
-        $this->assertContains($expectedMessage, implode(PHP_EOL, $output));
+        $this->assertNotEquals(0, $return, 'Failed asserting that the generation failed: ' . $output);
+        $this->assertContains($expectedMessage, $output);
     }
 
     private function createCommand($fixtureName)
