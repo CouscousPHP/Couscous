@@ -11,9 +11,15 @@ abstract class File
 {
     public $relativeFilename;
 
+    /**
+     * @var Metadata
+     */
+    private $metadata;
+
     public function __construct($relativeFilename)
     {
         $this->relativeFilename = $relativeFilename;
+        $this->metadata = new Metadata();
     }
 
     /**
@@ -53,5 +59,8 @@ abstract class File
      *
      * @return Metadata
      */
-    public abstract function getMetadata();
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
 }

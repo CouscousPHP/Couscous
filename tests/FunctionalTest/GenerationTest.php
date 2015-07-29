@@ -49,4 +49,12 @@ class GenerationTest extends BaseFunctionalTest
     {
         $this->assertGeneratedWebsite('images');
     }
+
+    /**
+     * Test that the currentFile variable is available.
+     */
+    public function testCurrentFileVariable()
+    {
+        $this->assertGeneratedWebsite('current-file');
+    }
 }
