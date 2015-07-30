@@ -23,7 +23,7 @@ class AddFileNameToMetadataTest extends \PHPUnit_Framework_TestCase
         $step->__invoke($project);
 
         $files = $project->getFiles();
-        $file = $files[0];
+        $file = current($files);
 
         $this->assertEquals('foo/bar/index.html', $file->getMetadata()['currentFile']);
     }
