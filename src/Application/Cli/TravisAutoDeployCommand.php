@@ -3,8 +3,8 @@
 namespace Couscous\Application\Cli;
 
 use Couscous\CommandRunner\CommandRunner;
-use Couscous\Generator;
 use Couscous\Deployer;
+use Couscous\Generator;
 use Couscous\Model\Project;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -36,8 +36,8 @@ class TravisAutoDeployCommand extends Command
 
     public function __construct(Generator $generator, Deployer $deployer, CommandRunner $commandRunner)
     {
-        $this->generator     = $generator;
-        $this->deployer      = $deployer;
+        $this->generator = $generator;
+        $this->deployer = $deployer;
         $this->commandRunner = $commandRunner;
 
         parent::__construct();
@@ -79,16 +79,17 @@ class TravisAutoDeployCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sourceDirectory = $input->getArgument('source');
-        $repositoryUrl   = sprintf('https://%s@%s', getenv('GH_TOKEN'), getenv('GH_REF'));
-        $targetBranch    = $input->getOption('branch');
+        $repositoryUrl = sprintf('https://%s@%s', getenv('GH_TOKEN'), getenv('GH_REF'));
+        $targetBranch = $input->getOption('branch');
 
-        $repository = new Project($sourceDirectory, getcwd() . '/.couscous/generated');
+        $repository = new Project($sourceDirectory, getcwd().'/.couscous/generated');
 
         // verify some env variables
         $travisBranch = getenv('TRAVIS_BRANCH');
 
         if ($travisBranch !== 'master') {
             $output->writeln('<comment>[NOT DEPLOYED] Deploying Couscous only for master branch</comment>');
+
             return;
         }
 
@@ -96,6 +97,7 @@ class TravisAutoDeployCommand extends Command
 
         if ($isPullRequest) {
             $output->writeln('<comment>[NOT DEPLOYED] Not deploying Couscous for pull requests</comment>');
+
             return;
         }
 
@@ -108,6 +110,7 @@ class TravisAutoDeployCommand extends Command
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
         if ($input->getOption('php-version') != $currentPhpVersion) {
             $output->writeln('<comment>This version of the documentation is already deployed</comment>');
+
             return;
         }
 

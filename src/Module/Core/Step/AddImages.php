@@ -7,7 +7,7 @@ use Couscous\Model\Project;
 use Couscous\Step;
 
 /**
- * Add images to the project
+ * Add images to the project.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
@@ -24,8 +24,7 @@ class AddImages implements Step
         $files
             ->name('*.gif')
             ->name('*.png')
-            ->name('*.jpg')
-        ;
+            ->name('*.jpg');
 
         $project->watchlist->watchFiles($files);
 

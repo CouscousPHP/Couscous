@@ -2,8 +2,8 @@
 
 namespace Couscous\Module\Markdown\Step;
 
-use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Project;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Step;
 
 /**
@@ -16,7 +16,7 @@ class CreateHeadingIds implements Step
     /**
      * @var array
      */
-    private $ids = array();
+    private $ids = [];
 
     /**
      * @param Project $project
@@ -33,7 +33,7 @@ class CreateHeadingIds implements Step
 
     private function reset()
     {
-        $this->ids = array();
+        $this->ids = [];
     }
 
     private function render($content)
@@ -42,7 +42,7 @@ class CreateHeadingIds implements Step
 
         return preg_replace_callback(
             '/<(h[0-6])>([^<]+)/',
-            array($this, 'addAttributeId'),
+            [$this, 'addAttributeId'],
             $content
         );
     }

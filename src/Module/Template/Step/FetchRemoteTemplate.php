@@ -44,8 +44,8 @@ class FetchRemoteTemplate implements Step
     public function __construct(Filesystem $filesystem, LoggerInterface $logger, Git $git)
     {
         $this->filesystem = $filesystem;
-        $this->logger     = $logger;
-        $this->git        = $git;
+        $this->logger = $logger;
+        $this->git = $git;
     }
 
     public function __invoke(Project $project)

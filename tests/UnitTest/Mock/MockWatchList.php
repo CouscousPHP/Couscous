@@ -21,6 +21,6 @@ class MockWatchList extends WatchList
 
     public function getChangedFiles()
     {
-        return array();
+        return [];
     }
 }

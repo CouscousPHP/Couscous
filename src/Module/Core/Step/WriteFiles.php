@@ -27,13 +27,13 @@ class WriteFiles implements Step
     public function __construct(Filesystem $filesystem, LoggerInterface $logger)
     {
         $this->filesystem = $filesystem;
-        $this->logger     = $logger;
+        $this->logger = $logger;
     }
 
     public function __invoke(Project $project)
     {
         foreach ($project->getFiles() as $file) {
-            $targetFilename = $project->targetDirectory . '/' . $file->relativeFilename;
+            $targetFilename = $project->targetDirectory.'/'.$file->relativeFilename;
 
             if ($this->filesystem->exists($targetFilename)) {
                 $this->logger->info(

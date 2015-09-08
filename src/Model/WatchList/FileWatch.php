@@ -18,19 +18,19 @@ class FileWatch implements WatchInterface
     public function __construct($filename)
     {
         $this->filename = $filename;
-        $this->time     = time();
+        $this->time = time();
     }
 
     public function getChangedFiles()
     {
-        if (! file_exists($this->filename)) {
-            return array();
+        if (!file_exists($this->filename)) {
+            return [];
         }
 
         if (filemtime($this->filename) > $this->time) {
-            return array($this->filename);
+            return [$this->filename];
         }
 
-        return array();
+        return [];
     }
 }

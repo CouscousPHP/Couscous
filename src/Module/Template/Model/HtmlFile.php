@@ -3,7 +3,6 @@
 namespace Couscous\Module\Template\Model;
 
 use Couscous\Model\File;
-use Couscous\Model\Metadata;
 
 /**
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
@@ -24,7 +23,7 @@ class HtmlFile extends File
     {
         parent::__construct($relativeFilename);
 
-        $this->content     = $content;
+        $this->content = $content;
         $this->wrappedFile = $wrappedFile;
     }
 

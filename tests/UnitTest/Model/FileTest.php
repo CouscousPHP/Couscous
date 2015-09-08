@@ -15,7 +15,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function it_should_have_metadata()
     {
         /** @var File $file */
-        $file = $this->getMock('Couscous\Model\File', array('getContent'), array('test.md'));
+        $file = $this->getMock('Couscous\Model\File', ['getContent'], ['test.md']);
 
         $file->getMetadata()['foo'] = 'test';
         $this->assertEquals('test', $file->getMetadata()['foo']);

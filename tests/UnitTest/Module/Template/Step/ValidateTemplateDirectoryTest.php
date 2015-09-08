@@ -102,6 +102,7 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
         $filesystem->expects($this->any())
             ->method('exists')
             ->willReturn($existsShouldReturn);
+
         return $filesystem;
     }
 }
