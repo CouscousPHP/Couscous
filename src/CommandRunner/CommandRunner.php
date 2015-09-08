@@ -12,15 +12,16 @@ class CommandRunner
     /**
      * Runs a command.
      *
-     * @throws CommandException When the command exit code is not zero.
      *
      * @param string $command The command to be executed.
+     *
+     * @throws CommandException When the command exit code is not zero.
      *
      * @return string Output of the command.
      */
     public function run($command)
     {
-        exec($command . ' 2>&1', $output, $returnValue);
+        exec($command.' 2>&1', $output, $returnValue);
 
         $output = implode(PHP_EOL, $output);
 

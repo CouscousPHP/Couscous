@@ -14,7 +14,7 @@ class InvalidConfigException extends \Exception
         return new self(sprintf(
             'The YAML configuration file %s contains invalid YAML%s',
             $file,
-            $previous ? ': ' . $previous->getMessage() : ''
+            $previous ? ': '.$previous->getMessage() : ''
         ), 0, $previous);
     }
 }

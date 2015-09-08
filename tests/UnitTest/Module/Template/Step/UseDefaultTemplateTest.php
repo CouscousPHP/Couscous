@@ -77,6 +77,7 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
         $filesystem->expects($this->any())
             ->method('exists')
             ->willReturn($return);
+
         return $filesystem;
     }
 }

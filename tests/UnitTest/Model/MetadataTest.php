@@ -3,7 +3,6 @@
 namespace Couscous\Tests\UnitTest\Model;
 
 use Couscous\Model\Metadata;
-use PHPUnit_Framework_TestCase;
 
 /**
  * @covers Couscous\Model\Metadata

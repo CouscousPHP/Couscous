@@ -2,8 +2,8 @@
 
 namespace Couscous\Module\Markdown\Step;
 
-use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Project;
+use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Step;
 use Symfony\Component\Finder\SplFileInfo;
 

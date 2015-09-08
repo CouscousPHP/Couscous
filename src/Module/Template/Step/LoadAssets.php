@@ -30,7 +30,7 @@ class LoadAssets implements Step
 
     public function __invoke(Project $project)
     {
-        if (! $project->metadata['template.directory']) {
+        if (!$project->metadata['template.directory']) {
             return;
         }
 

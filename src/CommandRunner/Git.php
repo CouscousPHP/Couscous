@@ -46,6 +46,7 @@ class Git
 
     /**
      * @param string $remote Remote name
+     *
      * @return string The git URL
      */
     public function getRemoteUrl($remote = 'origin')

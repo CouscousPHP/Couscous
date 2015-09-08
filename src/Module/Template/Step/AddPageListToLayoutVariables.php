@@ -2,8 +2,8 @@
 
 namespace Couscous\Module\Template\Step;
 
-use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Project;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Step;
 
 /**
@@ -24,7 +24,7 @@ class AddPageListToLayoutVariables implements Step
         foreach ($htmlFiles as $file) {
             $pageList[] = $file->relativeFilename;
 
-            $path     = dirname($file->relativeFilename);
+            $path = dirname($file->relativeFilename);
             $filename = basename($file->relativeFilename);
 
             if ($path === '.') {
@@ -48,12 +48,13 @@ class AddPageListToLayoutVariables implements Step
     {
         if (empty($path)) {
             $array[$value] = $value;
+
             return;
         }
 
         $dir = array_shift($path);
 
-        if (! array_key_exists($dir, $array)) {
+        if (!array_key_exists($dir, $array)) {
             $array[$dir] = [];
         }
 
