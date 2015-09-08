@@ -13,8 +13,14 @@ use Couscous\Step;
  */
 class ProcessMarkdownFileName implements Step
 {
+
+    private $project;
+
     public function __invoke(Project $project)
     {
+
+        $this->project = $project;
+
         /** @var MarkdownFile[] $markdownFiles */
         $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
 
@@ -36,7 +42,13 @@ class ProcessMarkdownFileName implements Step
 
     private function renameReadme(MarkdownFile $file)
     {
-        if ($file->getBasename() !== 'README.html') {
+
+        if(
+          !empty($this->project->metadata['index']) &&
+          $file->getBasename() !== $this->replaceExtension(basename($this->project->metadata['index'])))
+        {
+          return;
+        } else if(empty($this->project->metadata['index']) && $file->getBasename() !== 'README.html') {
             return;
         }
 
