@@ -1,10 +1,10 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
+namespace Couscous\tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Model\LazyFile;
-use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Project;
+use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
 
 /**
@@ -39,7 +39,7 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
 
     public function testNonMarkdownFileNotRenamed()
     {
-        $file    = new LazyFile('foo.txt', 'foo.txt');
+        $file = new LazyFile('foo.txt', 'foo.txt');
         $project = new Project('foo', 'bar');
         $project->addFile($file);
 
@@ -58,7 +58,7 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
 
     private function assertFileRenamed($expected, $filename)
     {
-        $file    = new MarkdownFile($filename, '');
+        $file = new MarkdownFile($filename, '');
         $project = new Project('foo', 'bar');
         $project->addFile($file);
 

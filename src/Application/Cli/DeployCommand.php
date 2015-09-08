@@ -3,9 +3,9 @@
 namespace Couscous\Application\Cli;
 
 use Couscous\CommandRunner\Git;
+use Couscous\Deployer;
 use Couscous\Generator;
 use Couscous\Model\Project;
-use Couscous\Deployer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -42,10 +42,10 @@ class DeployCommand extends Command
 
     public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem, Git $git)
     {
-        $this->generator  = $generator;
-        $this->deployer   = $deployer;
+        $this->generator = $generator;
+        $this->deployer = $deployer;
         $this->filesystem = $filesystem;
-        $this->git        = $git;
+        $this->git = $git;
 
         parent::__construct();
     }
@@ -92,10 +92,10 @@ class DeployCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sourceDirectory = $input->getArgument('source');
-        $repositoryUrl   = $input->getOption('repository');
-        $targetBranch    = $input->getOption('branch');
+        $repositoryUrl = $input->getOption('repository');
+        $targetBranch = $input->getOption('branch');
 
-        $project = new Project($sourceDirectory, getcwd() . '/.couscous/generated');
+        $project = new Project($sourceDirectory, getcwd().'/.couscous/generated');
 
         // Generate the website
         $this->generator->generate($project, $output);

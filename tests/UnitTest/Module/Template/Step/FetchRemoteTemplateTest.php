@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Module\Template\Step;
+namespace Couscous\tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\FetchRemoteTemplate;
 use Couscous\Tests\UnitTest\Mock\MockProject;
@@ -17,7 +17,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_skip_if_no_template_url()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $git = $this->getMock('Couscous\CommandRunner\Git', array(), array(), '', false);
+        $git = $this->getMock('Couscous\CommandRunner\Git', [], [], '', false);
 
         $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
@@ -37,7 +37,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_clone_and_set_the_template_directory()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $git = $this->getMock('Couscous\CommandRunner\Git', array(), array(), '', false);
+        $git = $this->getMock('Couscous\CommandRunner\Git', [], [], '', false);
 
         $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
@@ -59,7 +59,7 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_not_clone_twice_if_regenerating()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $git = $this->getMock('Couscous\CommandRunner\Git', array(), array(), '', false);
+        $git = $this->getMock('Couscous\CommandRunner\Git', [], [], '', false);
 
         $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 

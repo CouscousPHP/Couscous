@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Mock;
+namespace Couscous\tests\UnitTest\Mock;
 
 use Couscous\Model\Metadata;
 use Couscous\Model\Project;
@@ -11,7 +11,7 @@ class MockProject extends Project
     {
         parent::__construct('', '');
 
-        $this->metadata  = new Metadata();
+        $this->metadata = new Metadata();
         $this->watchlist = new MockWatchList();
     }
 }

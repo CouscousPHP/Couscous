@@ -30,11 +30,11 @@ class ValidateTemplateDirectory implements Step
         $directory = $project->metadata['template.directory'];
 
         if ($directory === null) {
-            $directory = $project->sourceDirectory . '/' . self::DEFAULT_TEMPLATE_DIRECTORY;
+            $directory = $project->sourceDirectory.'/'.self::DEFAULT_TEMPLATE_DIRECTORY;
         }
 
-        if (! $this->filesystem->isAbsolutePath($directory)) {
-            $directory = $project->sourceDirectory . '/' . $directory;
+        if (!$this->filesystem->isAbsolutePath($directory)) {
+            $directory = $project->sourceDirectory.'/'.$directory;
         }
 
         $this->assertDirectoryExist($directory);
@@ -46,7 +46,7 @@ class ValidateTemplateDirectory implements Step
 
     private function assertDirectoryExist($directory)
     {
-        if (! $this->filesystem->exists($directory)) {
+        if (!$this->filesystem->exists($directory)) {
             throw new \RuntimeException(sprintf(
                 "The template directory '%s' doesn't exist",
                 $directory

@@ -1,11 +1,11 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Model;
+namespace Couscous\tests\UnitTest\Model;
 
 use Couscous\Model\File;
-use Couscous\Module\Template\Model\HtmlFile;
-use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Project;
+use Couscous\Module\Markdown\Model\MarkdownFile;
+use Couscous\Module\Template\Model\HtmlFile;
 
 /**
  * @covers \Couscous\Model\Project
@@ -50,7 +50,7 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
         $project->addFile($file1);
         $this->assertSame(['file1' => $file1], $project->getFiles());
 
-        $project->replaceFile($file1, $file2);;
+        $project->replaceFile($file1, $file2);
         $this->assertSame(['file2' => $file2], $project->getFiles());
     }
 

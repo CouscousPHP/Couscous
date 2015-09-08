@@ -1,9 +1,9 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Module\Template\Step;
+namespace Couscous\tests\UnitTest\Module\Template\Step;
 
-use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Project;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Module\Template\Step\AddPageListToLayoutVariables;
 use Couscous\Tests\UnitTest\Mock\MockProject;
 
@@ -50,8 +50,8 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
 
         $expected = [
             'docs' => [
-                'foo.html' => 'foo.html',
-                'index.html' => 'index.html',
+                'foo.html'     => 'foo.html',
+                'index.html'   => 'index.html',
                 'subdirectory' => [
                     'bar.html' => 'bar.html',
                 ],
@@ -61,7 +61,7 @@ class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
                     ],
                 ],
             ],
-            'index.html' => 'index.html',
+            'index.html'            => 'index.html',
             'weird.path-test [foo]' => [
                 'bar.html' => 'bar.html',
             ],

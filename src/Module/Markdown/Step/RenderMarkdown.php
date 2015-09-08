@@ -2,9 +2,9 @@
 
 namespace Couscous\Module\Markdown\Step;
 
-use Couscous\Module\Template\Model\HtmlFile;
-use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Project;
+use Couscous\Module\Markdown\Model\MarkdownFile;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Step;
 use Mni\FrontYAML\Parser;
 
@@ -50,6 +50,6 @@ class RenderMarkdown implements Step
     {
         $filename = substr($filename, 0, strrpos($filename, '.'));
 
-        return $filename . '.html';
+        return $filename.'.html';
     }
 }

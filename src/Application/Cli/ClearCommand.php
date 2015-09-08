@@ -37,13 +37,13 @@ class ClearCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dir = getcwd() . '/.couscous';
+        $dir = getcwd().'/.couscous';
 
         if (file_exists($dir)) {
             $output->writeln("<comment>Deleting folder $dir</comment>");
             $this->filesystem->remove($dir);
         } else {
-            $output->writeln("<comment>Nothing to clear</comment>");
+            $output->writeln('<comment>Nothing to clear</comment>');
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\FunctionalTest;
+namespace Couscous\tests\FunctionalTest;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -14,7 +14,7 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->generatedDirectory = __DIR__ . '/generated';
+        $this->generatedDirectory = __DIR__.'/generated';
     }
 
     public function tearDown()
@@ -30,15 +30,15 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(0, $return, implode(PHP_EOL, $output));
 
-        $fixtureDir  = __DIR__ . '/Fixture/' . $fixtureName;
-        $expectedDir = $fixtureDir . '/expected';
+        $fixtureDir = __DIR__.'/Fixture/'.$fixtureName;
+        $expectedDir = $fixtureDir.'/expected';
 
         // Check against expected files
         $finder = new Finder();
         $finder->files()->in($expectedDir);
         foreach ($finder as $file) {
-            /** @var SplFileInfo $file */
-            $generatedFile = $this->generatedDirectory . '/' . $file->getRelativePathname();
+            /* @var SplFileInfo $file */
+            $generatedFile = $this->generatedDirectory.'/'.$file->getRelativePathname();
             $this->assertFileExists($generatedFile, 'The file was not generated');
             $this->assertFileEquals(
                 $file->getPathname(),
@@ -51,8 +51,8 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
         $finder = new Finder();
         $finder->files()->in($this->generatedDirectory);
         foreach ($finder as $file) {
-            /** @var SplFileInfo $file */
-            $expectedFile = $expectedDir . '/' . $file->getRelativePathname();
+            /* @var SplFileInfo $file */
+            $expectedFile = $expectedDir.'/'.$file->getRelativePathname();
             $message = sprintf(
                 "The file %s was generated but wasn't expected",
                 $file->getRelativePathname()
@@ -66,15 +66,15 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
         list($output, $return) = $this->generate($fixtureName);
         $output = implode(PHP_EOL, $output);
 
-        $this->assertNotEquals(0, $return, 'Failed asserting that the generation failed: ' . $output);
+        $this->assertNotEquals(0, $return, 'Failed asserting that the generation failed: '.$output);
         $this->assertContains($expectedMessage, $output);
     }
 
     private function createCommand($fixtureName)
     {
-        $bin             = realpath(__DIR__ . '/../../bin/couscous');
-        $fixtureName     = __DIR__ . '/Fixture/' . $fixtureName . '/source';
-        $targetDirectory = __DIR__ . '/generated';
+        $bin = realpath(__DIR__.'/../../bin/couscous');
+        $fixtureName = __DIR__.'/Fixture/'.$fixtureName.'/source';
+        $targetDirectory = __DIR__.'/generated';
 
         return sprintf(
             '%s generate -v --target="%s" %s 2>&1',
@@ -92,7 +92,7 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
 
         exec($command, $output, $return);
 
-        return array($output, $return);
+        return [$output, $return];
     }
 
     private function clearGeneratedDirectory()

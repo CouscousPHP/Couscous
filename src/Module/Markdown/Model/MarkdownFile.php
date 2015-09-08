@@ -3,7 +3,6 @@
 namespace Couscous\Module\Markdown\Model;
 
 use Couscous\Model\File;
-use Couscous\Model\Metadata;
 
 /**
  * @author Matthieu Napoli <matthieu@mnapoli.fr>

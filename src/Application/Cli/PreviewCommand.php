@@ -56,7 +56,7 @@ class PreviewCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Target directory in which to generate the files.',
-                getcwd() . '/.couscous/generated'
+                getcwd().'/.couscous/generated'
             );
     }
 
@@ -65,8 +65,9 @@ class PreviewCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (! $this->isSupported()) {
+        if (!$this->isSupported()) {
             $output->writeln('<error>PHP 5.4 or above is required to run the internal webserver</error>');
+
             return 1;
         }
 
@@ -120,7 +121,7 @@ class PreviewCommand extends Command
         $process = $builder->getProcess();
         $process->start();
 
-        $output->writeln(sprintf("Server running on <comment>%s</comment>", $input->getArgument('address')));
+        $output->writeln(sprintf('Server running on <comment>%s</comment>', $input->getArgument('address')));
 
         return $process;
     }
@@ -130,6 +131,7 @@ class PreviewCommand extends Command
         if (version_compare(phpversion(), '5.4.0', '<')) {
             return false;
         }
+
         return true;
     }
 
@@ -142,7 +144,7 @@ class PreviewCommand extends Command
         $str = implode(', ', $files);
 
         if (strlen($str) > 60) {
-            $str = substr($str, 0, 60) . '…';
+            $str = substr($str, 0, 60).'…';
         }
 
         return $str;

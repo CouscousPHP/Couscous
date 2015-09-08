@@ -2,8 +2,8 @@
 
 namespace Couscous\Module\Template\Step;
 
-use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Model\Project;
+use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Step;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -21,7 +21,7 @@ class ProcessTwigLayouts implements Step
 
     public function __invoke(Project $project)
     {
-        if (! $project->metadata['template.directory']) {
+        if (!$project->metadata['template.directory']) {
             return;
         }
 
@@ -33,7 +33,7 @@ class ProcessTwigLayouts implements Step
         foreach ($htmlFiles as $file) {
             $fileMetadata = $file->getMetadata();
             $layout = isset($fileMetadata['layout'])
-                ? $fileMetadata['layout'] . '.twig'
+                ? $fileMetadata['layout'].'.twig'
                 : self::DEFAULT_LAYOUT_NAME;
 
             $context = array_merge(
@@ -60,17 +60,18 @@ class ProcessTwigLayouts implements Step
         $loader = $this->createLoader($templateDirectory);
 
         return new Twig_Environment($loader, [
-            'cache' => false,
+            'cache'       => false,
             'auto_reload' => true,
         ]);
     }
 
     /**
-     * We have to use a Twig_Loader_Array because of #12
+     * We have to use a Twig_Loader_Array because of #12.
      *
      * @link https://github.com/CouscousPHP/Couscous/issues/12
      *
      * @param string $templateDirectory
+     *
      * @return Twig_Loader_Array
      */
     private function createLoader($templateDirectory)
@@ -82,7 +83,7 @@ class ProcessTwigLayouts implements Step
 
         $layouts = [];
         foreach ($finder as $file) {
-            /** @var SplFileInfo $file */
+            /* @var SplFileInfo $file */
             $name = $file->getFilename();
             $layouts[$name] = $file->getContents();
         }

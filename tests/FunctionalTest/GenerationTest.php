@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\FunctionalTest;
+namespace Couscous\tests\FunctionalTest;
 
 class GenerationTest extends BaseFunctionalTest
 {
@@ -27,7 +27,7 @@ class GenerationTest extends BaseFunctionalTest
     /**
      * Test metadata defined:
      *     - in FrontYAML inside Markdown files
-     *     - in couscous.yml
+     *     - in couscous.yml.
      */
     public function testMetadata()
     {

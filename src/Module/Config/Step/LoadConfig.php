@@ -37,15 +37,16 @@ class LoadConfig implements Step
     {
         $this->filesystem = $filesystem;
         $this->yamlParser = $yamlParser;
-        $this->logger     = $logger;
+        $this->logger = $logger;
     }
 
     public function __invoke(Project $project)
     {
-        $filename = $project->sourceDirectory . '/' . self::FILENAME;
+        $filename = $project->sourceDirectory.'/'.self::FILENAME;
 
-        if (! $this->filesystem->exists($filename)) {
+        if (!$this->filesystem->exists($filename)) {
             $this->logger->notice('No couscous.yml configuration file found, using default config');
+
             return;
         }
 
@@ -64,7 +65,7 @@ class LoadConfig implements Step
             throw InvalidConfigException::invalidYaml(self::FILENAME, $e);
         }
 
-        if (! is_array($metadata)) {
+        if (!is_array($metadata)) {
             return [];
         }
 

@@ -24,19 +24,19 @@ class Generator
     private $steps;
 
     /**
-     * @param Filesystem      $filesystem
-     * @param Step[] $steps
+     * @param Filesystem $filesystem
+     * @param Step[]     $steps
      */
     public function __construct(Filesystem $filesystem, array $steps)
     {
         $this->filesystem = $filesystem;
-        $this->steps      = $steps;
+        $this->steps = $steps;
     }
 
     public function generate(Project $project, OutputInterface $output)
     {
         $output->writeln(sprintf(
-            "<comment>Generating %s to %s</comment>",
+            '<comment>Generating %s to %s</comment>',
             $project->sourceDirectory,
             $project->targetDirectory
         ));

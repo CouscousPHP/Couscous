@@ -19,16 +19,16 @@ class ContainerFactory
     {
         $builder = new ContainerBuilder();
 
-        $builder->addDefinitions(__DIR__ . '/config.php');
+        $builder->addDefinitions(__DIR__.'/config.php');
 
         $moduleConfigs = new Finder();
         $moduleConfigs->files()
-            ->in(__DIR__ . '/../Module')
+            ->in(__DIR__.'/../Module')
             ->path('/.+/')
             ->name('config.php');
 
         foreach ($moduleConfigs as $moduleConfig) {
-            /** @var SplFileInfo $moduleConfig */
+            /* @var SplFileInfo $moduleConfig */
             $builder->addDefinitions($moduleConfig->getPathname());
         }
 

@@ -1,9 +1,8 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Model;
+namespace Couscous\tests\UnitTest\Model;
 
 use Couscous\Model\Metadata;
-use PHPUnit_Framework_TestCase;
 
 /**
  * @covers Couscous\Model\Metadata
