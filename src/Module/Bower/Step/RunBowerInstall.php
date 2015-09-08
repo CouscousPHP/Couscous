@@ -42,7 +42,7 @@ class RunBowerInstall implements Step
 
     public function __invoke(Project $project)
     {
-        if ($project->regenerate || ! $this->hasBowerJson($project)) {
+        if ($project->regenerate || !$this->hasBowerJson($project)) {
             return;
         }
 
@@ -60,11 +60,11 @@ class RunBowerInstall implements Step
 
     private function hasBowerJson(Project $project)
     {
-        if (! $project->metadata['template.directory']) {
+        if (!$project->metadata['template.directory']) {
             return false;
         }
 
-        $filename = $project->metadata['template.directory'] . '/bower.json';
+        $filename = $project->metadata['template.directory'].'/bower.json';
 
         return $this->filesystem->exists($filename);
     }

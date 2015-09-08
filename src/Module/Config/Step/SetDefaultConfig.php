@@ -14,7 +14,7 @@ class SetDefaultConfig implements Step
 {
     private $defaultConfig = [
         'exclude' => [
-            'vendor', 'website'
+            'vendor', 'website',
         ],
     ];
 

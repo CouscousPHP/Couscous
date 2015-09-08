@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Module\Template\Step;
+namespace Couscous\tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\ValidateTemplateDirectory;
 use Couscous\Tests\UnitTest\Mock\MockProject;
@@ -102,6 +102,7 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
         $filesystem->expects($this->any())
             ->method('exists')
             ->willReturn($existsShouldReturn);
+
         return $filesystem;
     }
 }

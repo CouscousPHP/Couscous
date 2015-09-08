@@ -14,12 +14,14 @@ class Project
 {
     /**
      * Directory containing the sources files to process.
+     *
      * @var string
      */
     public $sourceDirectory;
 
     /**
      * Directory in which to generate the website.
+     *
      * @var string
      */
     public $targetDirectory;
@@ -55,8 +57,8 @@ class Project
     {
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
-        $this->watchlist       = new WatchList();
-        $this->metadata        = new Metadata();
+        $this->watchlist = new WatchList();
+        $this->metadata = new Metadata();
     }
 
     public function addFile(File $file)
@@ -85,11 +87,12 @@ class Project
 
     /**
      * @param string $class
+     *
      * @return File[] Instances of $class
      */
     public function findFilesByType($class)
     {
-        if (! class_exists($class)) {
+        if (!class_exists($class)) {
             throw new \InvalidArgumentException(sprintf(
                 "The class %s doesn't exist",
                 $class

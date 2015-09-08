@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Mock;
+namespace Couscous\tests\UnitTest\Mock;
 
 use Couscous\Model\WatchList\WatchList;
 use Symfony\Component\Finder\Finder;
@@ -21,6 +21,6 @@ class MockWatchList extends WatchList
 
     public function getChangedFiles()
     {
-        return array();
+        return [];
     }
 }

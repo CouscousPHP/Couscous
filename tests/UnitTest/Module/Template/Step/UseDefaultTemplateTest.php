@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Module\Template\Step;
+namespace Couscous\tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\UseDefaultTemplate;
 use Couscous\Tests\UnitTest\Mock\MockProject;
@@ -77,6 +77,7 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
         $filesystem->expects($this->any())
             ->method('exists')
             ->willReturn($return);
+
         return $filesystem;
     }
 }

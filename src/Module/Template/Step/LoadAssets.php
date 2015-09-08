@@ -30,7 +30,7 @@ class LoadAssets implements Step
 
     public function __invoke(Project $project)
     {
-        if (! $project->metadata['template.directory']) {
+        if (!$project->metadata['template.directory']) {
             return;
         }
 
@@ -43,7 +43,7 @@ class LoadAssets implements Step
         $project->watchlist->watchFiles($files);
 
         foreach ($files as $file) {
-            /** @var SplFileInfo $file */
+            /* @var SplFileInfo $file */
             $project->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
         }
     }

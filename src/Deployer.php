@@ -29,7 +29,7 @@ class Deployer
     public function __construct(Filesystem $filesystem, Git $git)
     {
         $this->filesystem = $filesystem;
-        $this->git        = $git;
+        $this->git = $git;
     }
 
     /**
@@ -40,9 +40,9 @@ class Deployer
      */
     public function deploy(Project $project, OutputInterface $output, $repositoryUrl, $branch)
     {
-        $output->writeln("<comment>Deploying the website</comment>");
+        $output->writeln('<comment>Deploying the website</comment>');
 
-        $directory    = $project->targetDirectory;
+        $directory = $project->targetDirectory;
         $tmpDirectory = $this->createTempDirectory();
 
         $this->cloneRepository($output, $repositoryUrl, $tmpDirectory);
@@ -86,7 +86,7 @@ class Deployer
             try {
                 $this->git->createBranch($tmpDirectory, $branch);
             } catch (CommandException $e) {
-                throw new \RuntimeException("Unable to create the branch '$branch'" . PHP_EOL . $e->getMessage());
+                throw new \RuntimeException("Unable to create the branch '$branch'".PHP_EOL.$e->getMessage());
             }
         }
     }

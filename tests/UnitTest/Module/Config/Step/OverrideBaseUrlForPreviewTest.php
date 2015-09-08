@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Module\Config\Step;
+namespace Couscous\tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\OverrideBaseUrlForPreview;
 use Couscous\Tests\UnitTest\Mock\MockProject;

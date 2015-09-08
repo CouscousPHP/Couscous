@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest;
+namespace Couscous\tests\UnitTest;
 
 use Couscous\Generator;
 use Couscous\Model\Project;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\FunctionalTest;
+namespace Couscous\tests\FunctionalTest;
 
 class ErrorsTest extends BaseFunctionalTest
 {
