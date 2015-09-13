@@ -11,7 +11,7 @@ class MockProject extends Project
     {
         parent::__construct('', '');
 
-        $this->metadata  = new Metadata();
+        $this->metadata = new Metadata();
         $this->watchlist = new MockWatchList();
     }
 }

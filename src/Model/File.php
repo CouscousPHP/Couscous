@@ -40,7 +40,7 @@ abstract class File
     public function getDirectory()
     {
         $directory = dirname($this->relativeFilename);
-        $directory = ($directory === '.') ? '' : $directory . '/';
+        $directory = ($directory === '.') ? '' : $directory.'/';
 
         return $directory;
     }
@@ -50,7 +50,7 @@ abstract class File
      *
      * @return string
      */
-    public abstract function getContent();
+    abstract public function getContent();
 
     /**
      * Returns an indexed array of metadata.

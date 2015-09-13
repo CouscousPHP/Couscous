@@ -49,7 +49,7 @@ class UseDefaultTemplate implements Step
 
     private function hasTemplateDirectory(Project $project)
     {
-        $templateDirectory = $project->sourceDirectory . '/' . ValidateTemplateDirectory::DEFAULT_TEMPLATE_DIRECTORY;
+        $templateDirectory = $project->sourceDirectory.'/'.ValidateTemplateDirectory::DEFAULT_TEMPLATE_DIRECTORY;
 
         return $this->filesystem->exists($templateDirectory);
     }

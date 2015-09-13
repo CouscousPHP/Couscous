@@ -27,7 +27,7 @@ abstract class ExecuteScripts
     public function __construct(CommandRunner $commandRunner, LoggerInterface $logger)
     {
         $this->commandRunner = $commandRunner;
-        $this->logger        = $logger;
+        $this->logger = $logger;
     }
 
     protected function executeScripts($scripts, Project $project)
@@ -43,7 +43,7 @@ abstract class ExecuteScripts
 
     private function executeScript($sourceDirectory, $script)
     {
-        $script = 'cd "' . $sourceDirectory . '" && ' . $script;
+        $script = 'cd "'.$sourceDirectory.'" && '.$script;
 
         $this->logger->notice('Executing {script}', ['script' => $script]);
 
@@ -51,7 +51,7 @@ abstract class ExecuteScripts
             $this->commandRunner->run($script);
         } catch (CommandException $e) {
             throw new \RuntimeException(
-                "Error while running '$script':" . PHP_EOL . $e->getMessage()
+                "Error while running '$script':".PHP_EOL.$e->getMessage()
             );
         }
     }

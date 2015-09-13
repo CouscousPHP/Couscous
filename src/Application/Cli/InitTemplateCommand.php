@@ -12,8 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Ross J. Hagan <rossjhagan@gmail.com>
  */
-class InitTemplateCommand extends Command {
-
+class InitTemplateCommand extends Command
+{
     protected function configure()
     {
         $this
@@ -35,28 +35,28 @@ class InitTemplateCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $fileExtension = '.twig';
 
-        $fileExtension  = '.twig';
+        $dirName = $input->getArgument('directory');
+        $directory = getcwd().'/'.$dirName.'/';
+        $templateName = $input->getArgument('template_name').$fileExtension;
 
-        $dirName        = $input->getArgument('directory');
-        $directory      = getcwd() . '/' . $dirName . '/';
-        $templateName   = $input->getArgument('template_name') . $fileExtension;
+        $fileLocation = $directory.$templateName;
+        $fileExists = file_exists($fileLocation);
 
-        $fileLocation   = $directory . $templateName;
-        $fileExists     = file_exists($fileLocation);
-
-        if (! file_exists(getcwd() . '/' . $dirName)) {
+        if (!file_exists(getcwd().'/'.$dirName)) {
             $output->writeln('<comment>Creating directory.</comment>');
-            mkdir(getcwd() . '/' . $dirName);
+            mkdir(getcwd().'/'.$dirName);
         }
 
         if ($fileExists) {
-            $output->writeln('<error>That template exists at ' . $fileLocation . ', so nothing has been changed.</error>');
+            $output->writeln('<error>That template exists at '.$fileLocation.', so nothing has been changed.</error>');
             $output->writeln('<error>Try another name!</error>');
+
             return;
         }
 
-        if (! $fileExists) {
+        if (!$fileExists) {
             $output->writeln('<comment>Initialising template.</comment>');
             $template = <<<HTML
 <!DOCTYPE html>
@@ -87,7 +87,5 @@ class InitTemplateCommand extends Command {
 HTML;
             file_put_contents($fileLocation, $template);
         }
-
     }
-
 }

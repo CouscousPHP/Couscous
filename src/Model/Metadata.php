@@ -3,7 +3,7 @@
 namespace Couscous\Model;
 
 /**
- * Contains metadata, accessible through array access:
+ * Contains metadata, accessible through array access:.
  *
  *     $metadata['foo'] = 'test';
  *     echo $metadata['foo'];
@@ -78,12 +78,12 @@ class Metadata implements \ArrayAccess
     {
         $key = array_shift($keys);
 
-        if (! is_array($values)) {
-            return null;
+        if (!is_array($values)) {
+            return;
         }
 
-        if (! isset($values[$key])) {
-            return null;
+        if (!isset($values[$key])) {
+            return;
         }
 
         if (empty($keys)) {
@@ -97,11 +97,11 @@ class Metadata implements \ArrayAccess
     {
         $key = array_shift($keys);
 
-        if (! is_array($values)) {
+        if (!is_array($values)) {
             return false;
         }
 
-        if (! isset($values[$key])) {
+        if (!isset($values[$key])) {
             return false;
         }
 
@@ -116,16 +116,17 @@ class Metadata implements \ArrayAccess
     {
         $key = array_shift($keys);
 
-        if (! is_array($values)) {
+        if (!is_array($values)) {
             $values = [];
         }
 
         if (empty($keys)) {
             $values[$key] = $value;
+
             return;
         }
 
-        if (! isset($values[$key])) {
+        if (!isset($values[$key])) {
             $values[$key] = [];
         }
 

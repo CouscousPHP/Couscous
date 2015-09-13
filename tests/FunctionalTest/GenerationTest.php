@@ -27,7 +27,7 @@ class GenerationTest extends BaseFunctionalTest
     /**
      * Test metadata defined:
      *     - in FrontYAML inside Markdown files
-     *     - in couscous.yml
+     *     - in couscous.yml.
      */
     public function testMetadata()
     {

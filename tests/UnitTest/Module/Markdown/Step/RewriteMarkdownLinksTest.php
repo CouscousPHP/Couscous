@@ -2,8 +2,8 @@
 
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
-use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Project;
+use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Markdown\Step\RewriteMarkdownLinks;
 
 /**
@@ -45,7 +45,7 @@ Here is a FILE.md.
 Please leave [this](doc/test.html) and [this link](test.md.txt) alone.
 MARKDOWN;
 
-        $file    = new MarkdownFile('foo', $markdown);
+        $file = new MarkdownFile('foo', $markdown);
         $project = new Project('foo', 'bar');
         $project->addFile($file);
 
@@ -69,7 +69,7 @@ MARKDOWN;
 This is a [link](doc/some-file.html) and [another one](doc/some-other-file.html)
 MARKDOWN;
 
-        $file    = new MarkdownFile('foo', $markdown);
+        $file = new MarkdownFile('foo', $markdown);
         $project = new Project('foo', 'bar');
         $project->addFile($file);
 
@@ -91,7 +91,7 @@ This is a [link](doc/some-file.html#header)
 This is a [link](doc/some-file.html?search=foo)
 MARKDOWN;
 
-        $file    = new MarkdownFile('foo', $markdown);
+        $file = new MarkdownFile('foo', $markdown);
         $project = new Project('foo', 'bar');
         $project->addFile($file);
 
