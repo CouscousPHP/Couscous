@@ -50,3 +50,14 @@ $ bin/compile
 ```
 
 The phar is generated as `bin/couscous.phar`.
+
+## Releasing a new version
+
+Instructions for maintainers:
+
+```
+$ composer update
+$ bin/compile
+$ cp bin/couscous.phar website/
+$ bin/couscous deploy
+```
