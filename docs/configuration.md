@@ -15,6 +15,8 @@ template:
     directory: website
     # Or if you are using a remote template, you can set the Git URL
     url: https://github.com/CouscousPHP/Template-Light.git
+    # Name of the index file (default is "README.md")
+    index: index.md
 
 # List of directories to exclude from the processing (default contains "vendor" and "website")
 # Paths are relative to the repository root
