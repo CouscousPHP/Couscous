@@ -22,7 +22,7 @@ class ProcessMarkdownFileName implements Step
             $project->removeFile($markdownFile);
 
             $this->renameFileExtension($markdownFile);
-            $this->renameReadme($markdownFile);
+            $this->renameReadme($markdownFile, $project);
             $this->renameFilename($markdownFile);
 
             $project->addFile($markdownFile);
@@ -34,9 +34,11 @@ class ProcessMarkdownFileName implements Step
         $file->relativeFilename = $this->replaceExtension($file->relativeFilename);
     }
 
-    private function renameReadme(MarkdownFile $file)
+    private function renameReadme(MarkdownFile $file, Project $project)
     {
-        if ($file->getBasename() !== 'README.html') {
+        $indexFile = empty($project->metadata['template']['index']) ? 'README.md' : $project->metadata['template']['index'];
+        $indexFile = $this->replaceExtension(basename($indexFile));
+        if ($file->getBasename() !== $indexFile) {
             return;
         }
 

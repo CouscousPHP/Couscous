@@ -3,6 +3,7 @@
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Model\LazyFile;
+use Couscous\Model\Metadata;
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
@@ -25,6 +26,12 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
     public function testRenameReadme()
     {
         $this->assertFileRenamed('index.html', 'README.md');
+    }
+
+    public function testRenameIndexFile()
+    {
+        $this->assertFileRenamed('foo/index.html', 'foo/index.md', true);
+        $this->assertFileRenamed('readme.html', 'README.md', true);
     }
 
     public function testRenameReadmeInSubDirectory()
@@ -56,11 +63,16 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($newFile, $file);
     }
 
-    private function assertFileRenamed($expected, $filename)
+    private function assertFileRenamed($expected, $filename, $meta = false)
     {
         $file = new MarkdownFile($filename, '');
         $project = new Project('foo', 'bar');
         $project->addFile($file);
+
+        if ($meta) {
+            $project->metadata = new Metadata();
+            $project->metadata->setMany(['template' => ['index' => 'foo/index.md']]);
+        }
 
         $step = new ProcessMarkdownFileName();
         $step->__invoke($project);
