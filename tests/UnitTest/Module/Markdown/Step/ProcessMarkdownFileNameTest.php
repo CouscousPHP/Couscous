@@ -3,8 +3,8 @@
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Model\LazyFile;
-use Couscous\Model\Project;
 use Couscous\Model\Metadata;
+use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
 
@@ -69,9 +69,9 @@ class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
         $project = new Project('foo', 'bar');
         $project->addFile($file);
 
-        if($meta) {
-          $project->metadata = new Metadata();
-          $project->metadata->setMany(['index' => 'foo/index.md']);
+        if ($meta) {
+            $project->metadata = new Metadata();
+            $project->metadata->setMany(['template' => ['index' => 'foo/index.md']]);
         }
 
         $step = new ProcessMarkdownFileName();
