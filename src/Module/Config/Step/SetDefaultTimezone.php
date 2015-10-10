@@ -23,7 +23,7 @@ class SetDefaultTimezone implements Step
 
     private function timezoneNotSet()
     {
-        return ! ini_get('date.timezone');
+        return !ini_get('date.timezone');
     }
 
 
