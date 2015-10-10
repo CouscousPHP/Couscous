@@ -25,6 +25,4 @@ class SetDefaultTimezone implements Step
     {
         return !ini_get('date.timezone');
     }
-
-
 }
