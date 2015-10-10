@@ -9,6 +9,7 @@ return [
         DI\get('Couscous\Module\Config\Step\SetDefaultConfig'),
         DI\get('Couscous\Module\Config\Step\LoadConfig'),
         DI\get('Couscous\Module\Config\Step\OverrideBaseUrlForPreview'),
+        DI\get('Couscous\Module\Config\Step\SetDefaultTimezone'),
 
         DI\get('Couscous\Module\Scripts\Step\ExecuteBeforeScripts'),
 
