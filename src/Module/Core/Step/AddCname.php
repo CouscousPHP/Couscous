@@ -32,8 +32,8 @@ class AddCname implements Step
 
     public function __invoke(Project $project)
     {
-        if( isset($project->metadata['cname']) ){
-            $this->filesystem->dumpFile( $project->targetDirectory.'/'.'CNAME', $project->metadata['cname'] );
+        if(isset($project->metadata['cname'])){
+            $this->filesystem->dumpFile( $project->targetDirectory.'/'.'CNAME', $project->metadata['cname']);
             $this->logger->notice('Writing metadata CNAME');
         }
     }
