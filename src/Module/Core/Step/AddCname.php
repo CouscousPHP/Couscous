@@ -4,37 +4,21 @@ namespace Couscous\Module\Core\Step;
 
 use Couscous\Model\Project;
 use Couscous\Step;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Filesystem\Filesystem;
+use Couscous\Module\Template\Model\CnameFile;
 
 /**
- * Writes the generated files to disk.
+ * Adds the CNAME file to project
  *
- * @author Matthieu Napoli <matthieu@mnapoli.fr>
+ * @author Leonardo Ruhland <leoruhland@gmail.com>
  */
+
 class AddCname implements Step
 {
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(Filesystem $filesystem, LoggerInterface $logger)
-    {
-        $this->filesystem = $filesystem;
-        $this->logger = $logger;
-    }
 
     public function __invoke(Project $project)
     {
         if (isset($project->metadata['cname'])) {
-            $this->filesystem->dumpFile($project->targetDirectory.'/'.'CNAME', $project->metadata['cname']);
-            $this->logger->notice('Writing metadata CNAME');
+            $project->addFile(new CnameFile('CNAME', $project->metadata['cname']));
         }
     }
 }
