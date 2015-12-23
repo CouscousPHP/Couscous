@@ -21,6 +21,7 @@ return [
         DI\get('Couscous\Module\Markdown\Step\LoadMarkdownFiles'),
         DI\get('Couscous\Module\Template\Step\LoadAssets'),
         DI\get('Couscous\Module\Core\Step\AddImages'),
+        DI\get('Couscous\Module\Core\Step\AddCname'),
 
         DI\get('Couscous\Module\Core\Step\AddFileNameToMetadata'),
 
@@ -35,7 +36,6 @@ return [
 
         DI\get('Couscous\Module\Core\Step\ClearTargetDirectory'),
         DI\get('Couscous\Module\Core\Step\WriteFiles'),
-        DI\get('Couscous\Module\Core\Step\AddCname'),
 
         DI\get('Couscous\Module\Scripts\Step\ExecuteAfterScripts'),
     ],
