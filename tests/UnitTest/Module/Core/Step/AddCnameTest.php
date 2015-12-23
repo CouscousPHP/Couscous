@@ -5,6 +5,7 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 use Couscous\Model\Metadata;
 use Couscous\Model\Project;
 use Couscous\Module\Core\Step\AddCname;
+
 /**
  * @covers \Couscous\Model\Project
  */
