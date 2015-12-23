@@ -1,10 +1,10 @@
 <?php
+
 namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
-use Couscous\Model\File;
-use Couscous\Module\Core\Step\AddCname;
 use Couscous\Model\Metadata;
 use Couscous\Model\Project;
+use Couscous\Module\Core\Step\AddCname;
 /**
  * @covers \Couscous\Model\Project
  */
