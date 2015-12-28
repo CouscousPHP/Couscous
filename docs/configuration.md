@@ -33,6 +33,9 @@ scripts:
     after:
         - rm website/couscous.phar
 
+# Set a target branch for deploying your couscous project
+branch: gh-pages
+
 # Any variable you put in this file is also available in the Twig layouts:
 title: Hello!
 
