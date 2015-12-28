@@ -10,6 +10,7 @@ scripts:
     before:
         - lessc --clean-css website/less/main.less website/css/all.min.css
 
+branch: gh-pages
 baseUrl: http://couscous.io
 
 menu:
