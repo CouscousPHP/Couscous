@@ -57,4 +57,12 @@ class GenerationTest extends BaseFunctionalTest
     {
         $this->assertGeneratedWebsite('current-file');
     }
+
+    /**
+     * Test the CNAME file generation.
+     */
+    public function testCname()
+    {
+        $this->assertGeneratedWebsite('cname');
+    }
 }

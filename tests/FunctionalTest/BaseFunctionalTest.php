@@ -39,10 +39,10 @@ abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
         foreach ($finder as $file) {
             /** @var SplFileInfo $file */
             $generatedFile = $this->generatedDirectory.'/'.$file->getRelativePathname();
-            $this->assertFileExists($generatedFile, 'The file was not generated');
-            $this->assertFileEquals(
-                $file->getPathname(),
-                $generatedFile,
+            $this->assertFileExists($generatedFile, sprintf('%s was not generated', $file->getRelativePathname()));
+            $this->assertEquals(
+                trim(file_get_contents($file->getPathname())),
+                trim(file_get_contents($generatedFile)),
                 sprintf("The generated file doesn't equals the expected file: %s", $file->getRelativePathname())
             );
         }
