@@ -136,6 +136,13 @@ scripts:
     after:
         - rm website/couscous.phar
 
+# Set this variable to use a Custom Domain
+# The content of this variable will be directly inserted into the CNAME file
+cname: docs.yourdomain.com
+
+# Set the target branch in which to deploy the generated website
+branch: gh-pages
+
 # Any variable you put in this file is also available in the Twig layouts:
 title: Hello!
 
@@ -144,9 +151,7 @@ title: Hello!
 baseUrl: http://username.github.io/your-project</code></pre>
 <p><strong>Note:</strong> any variable you put in <code>couscous.yml</code> is called <strong>Metadata</strong>. You can use these variables in templates for example. Learn more about this in the <a href="metadata.html">Metadata documentation</a>.</p>
 <h2 id="using-a-domain-name-with-github-pages-and-couscous">Using a Domain Name with Github Pages and Couscous</h2>
-<p>To use a CNAME for your Couscous-generated documentation so that your docs point to <code>docs.yourdomain.com</code> or something similar, first create the CNAME file and point your DNS to <code>yourname.github.io</code>, as detailed in the <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/">Github documentation</a>.</p>
-<p>To deploy the CNAME file to your <code>gh-pages</code> branch automatically with Couscous, simply put the CNAME file in the <code>website</code> directory (or whatever template directory you configured) in <code>couscous.yml</code>.</p>
-<p>Note that this will only work if the you're using embedded templates (versus remote templates). If you're using remote templates, you'll need to copy the remote templates to your repository and configure your <code>couscous.yml</code> file to use the embedded template instead.</p>
+<p>To use a CNAME for your Couscous-generated documentation so that your docs point to <code>docs.yourdomain.com</code> or something similar, set the <code>cname</code> variable described above and point your DNS to <code>yourname.github.io</code>, as detailed in the <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/">Github documentation</a>.</p>
                 </section>
 
             </div>
