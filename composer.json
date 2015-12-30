@@ -22,14 +22,21 @@
         "symfony/process": "~2.6",
         "symfony/yaml": "~2.6",
         "twig/twig": "~1.10",
-        "erusev/parsedown": "~1.5",
-        "erusev/parsedown-extra": "~0.7",
+        "league/commonmark": "~0.12",
+        "webuni/commonmark-table-extension": "~0.4",
+        "webuni/commonmark-attributes-extension": "~0.3",
         "phine/phar": "~1.0",
-        "mnapoli/front-yaml": "~1.5",
+        "mnapoli/front-yaml": "dev-commonmark",
         "php-di/php-di": "~5.0",
         "psr/log": "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.5"
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/hason/FrontYAML"
+        }
+    ]
 }
