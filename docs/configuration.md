@@ -33,6 +33,10 @@ scripts:
     after:
         - rm website/couscous.phar
 
+# Set this variable to use a Custom Domain
+# The content of this variable will be directly inserted into the CNAME file
+cname: docs.yourdomain.com
+
 # Any variable you put in this file is also available in the Twig layouts:
 title: Hello!
 
@@ -45,8 +49,4 @@ baseUrl: http://username.github.io/your-project
 
 ## Using a Domain Name with Github Pages and Couscous
 
-To use a CNAME for your Couscous-generated documentation so that your docs point to `docs.yourdomain.com` or something similar, first create the CNAME file and point your DNS to `yourname.github.io`, as detailed in the [Github documentation](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/).
-
-To deploy the CNAME file to your `gh-pages` branch automatically with Couscous, simply put the CNAME file in the `website` directory (or whatever template directory you configured) in `couscous.yml`.
-
-Note that this will only work if the you're using embedded templates (versus remote templates). If you're using remote templates, you'll need to copy the remote templates to your repository and configure your `couscous.yml` file to use the embedded template instead.
+To use a CNAME for your Couscous-generated documentation so that your docs point to `docs.yourdomain.com` or something similar, set the `cname` variable described above and point your DNS to `yourname.github.io`, as detailed in the [Github documentation](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/).
