@@ -81,8 +81,7 @@ class DeployCommand extends Command
                 'branch',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Target branch in which to deploy the website.',
-                false
+                'Target branch in which to deploy the website.'
             );
     }
 
@@ -100,7 +99,7 @@ class DeployCommand extends Command
         // Generate the website
         $this->generator->generate($project, $output);
 
-        // Change the target branch if is needed
+        // If no branch was provided, use the configured one or the default
         if (!$targetBranch) {
             $targetBranch = isset($project->metadata['branch']) ? $project->metadata['branch'] : 'gh-pages';
         }

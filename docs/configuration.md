@@ -37,7 +37,7 @@ scripts:
 # The content of this variable will be directly inserted into the CNAME file
 cname: docs.yourdomain.com
 
-# Set a target branch for deploying your couscous project
+# Set the target branch in which to deploy the generated website
 branch: gh-pages
 
 # Any variable you put in this file is also available in the Twig layouts:
