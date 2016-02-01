@@ -58,7 +58,7 @@ class InitTemplateCommand extends Command
 
         if (!$fileExists) {
             $output->writeln('<comment>Initialising template.</comment>');
-            $template = <<<HTML
+            $template = <<<'HTML'
 <!DOCTYPE html>
 <html>
     <head>
