@@ -13,7 +13,7 @@ class RewriteMarkdownLinksTest extends \PHPUnit_Framework_TestCase
 {
     public function testReplaceLinks()
     {
-        $markdown = <<<MARKDOWN
+        $markdown = <<<'MARKDOWN'
 This is a [link](doc/some-other.file.md), can you handle it (even with these parentheses)?
 
 Here is a FILE.md.
@@ -29,7 +29,7 @@ Here is a FILE.md.
 Please leave [this](doc/test.html) and [this link](test.md.txt) alone.
 MARKDOWN;
 
-        $expected = <<<MARKDOWN
+        $expected = <<<'MARKDOWN'
 This is a [link](doc/some-other.file.html), can you handle it (even with these parentheses)?
 
 Here is a FILE.md.
@@ -61,11 +61,11 @@ MARKDOWN;
      */
     public function testReplacesMultipleLinksPerLine()
     {
-        $markdown = <<<MARKDOWN
+        $markdown = <<<'MARKDOWN'
 This is a [link](doc/some-file.md) and [another one](doc/some-other-file.md)
 MARKDOWN;
 
-        $expected = <<<MARKDOWN
+        $expected = <<<'MARKDOWN'
 This is a [link](doc/some-file.html) and [another one](doc/some-other-file.html)
 MARKDOWN;
 
@@ -81,12 +81,12 @@ MARKDOWN;
 
     public function testPreservesQueryString()
     {
-        $markdown = <<<MARKDOWN
+        $markdown = <<<'MARKDOWN'
 This is a [link](doc/some-file.md#header)
 This is a [link](doc/some-file.md?search=foo)
 MARKDOWN;
 
-        $expected = <<<MARKDOWN
+        $expected = <<<'MARKDOWN'
 This is a [link](doc/some-file.html#header)
 This is a [link](doc/some-file.html?search=foo)
 MARKDOWN;
