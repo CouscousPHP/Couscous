@@ -30,6 +30,8 @@ Alternatively, you can download [couscous.phar](http://couscous.io/couscous.phar
 $ curl -OS http://couscous.io/couscous.phar
 ```
 
+**Please note that as Github is using a DDOS protection system, if using CURL fails, just manually download the phar file.**
+
 If you want to run `couscous` instead of `php couscous.phar`, move it to `/usr/local/bin`:
 
 ```bash
