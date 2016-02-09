@@ -18,6 +18,11 @@ template:
     # Name of the index file (default is "README.md")
     index: index.md
 
+# List of directories to include in the processing (default is all markdown files)
+# Paths are relative to the repository root
+include:
+    - docs
+
 # List of directories to exclude from the processing (default contains "vendor" and "website")
 # Paths are relative to the repository root
 exclude:
