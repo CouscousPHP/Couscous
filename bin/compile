@@ -58,3 +58,5 @@ $builder->setStub(
 );
 
 chmod(__DIR__ . '/couscous.phar', 0755);
+
+exec('sha1sum bin/couscous.phar > bin/couscous.version');
