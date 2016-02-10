@@ -2,7 +2,6 @@
 
 namespace Couscous\Application\Cli;
 
-use Couscous\CommandRunner\CommandRunner;
 use Humbug\SelfUpdate\Updater;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,19 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class SelfUpdateCommand extends Command
 {
-
-    /**
-     * @var CommandRunner
-     */
-    private $commandRunner;
-
-    public function __construct(CommandRunner $commandRunner)
-    {
-        $this->commandRunner = $commandRunner;
-
-        parent::__construct();
-    }
-
     /**
      * {@inheritdoc}
      */
