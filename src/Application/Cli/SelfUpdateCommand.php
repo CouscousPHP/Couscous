@@ -5,9 +5,7 @@ namespace Couscous\Application\Cli;
 use Couscous\CommandRunner\CommandRunner;
 use Humbug\SelfUpdate\Updater;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -38,8 +36,7 @@ class SelfUpdateCommand extends Command
         $this
             ->setName('self-update')
             ->setAliases(['selfupdate'])
-            ->setDescription('Automatically update the phar file if needed.')
-        ;
+            ->setDescription('Automatically update the phar file if needed.');
     }
 
     /**
