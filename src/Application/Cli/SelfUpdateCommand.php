@@ -55,7 +55,6 @@ class SelfUpdateCommand extends Command
             $result = $updater->update();
             $result ? $output->writeln('Phar file updated successfully!') : $output->writeln('No need to update.');
         } catch (\Exception $e) {
-            die(var_dump($e->getMessage()));
             $output->writeln('Something wrong happened, please try again later.');
         }
     }
