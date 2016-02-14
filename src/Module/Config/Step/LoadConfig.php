@@ -74,6 +74,9 @@ class LoadConfig implements Step
 
     private function validateConfig($values)
     {
+        if (array_key_exists('include', $values)) {
+            $values['include'] = (array) $values['include'];
+        }
         if (array_key_exists('exclude', $values)) {
             $values['exclude'] = (array) $values['exclude'];
         }

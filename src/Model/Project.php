@@ -111,11 +111,20 @@ class Project
      */
     public function sourceFiles()
     {
+        $includedDirectories = $this->metadata['include'] ? $this->metadata['include'] : [];
+
+        // To be sure that included directories are under the source one
+        if (!empty($includedDirectories)) {
+            array_walk($includedDirectories, function (&$item) {
+                $item = $this->sourceDirectory.'/'.$item;
+            });
+        }
+
         $excludedDirectories = $this->metadata['exclude'] ? $this->metadata['exclude'] : [];
 
         $finder = new Finder();
         $finder->files()
-            ->in($this->sourceDirectory)
+            ->in(!empty($includedDirectories) ? $includedDirectories : $this->sourceDirectory)
             ->ignoreDotFiles(true)
             ->exclude(array_merge($excludedDirectories, ['.couscous']));
 

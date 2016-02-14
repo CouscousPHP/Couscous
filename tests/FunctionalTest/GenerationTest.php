@@ -65,4 +65,20 @@ class GenerationTest extends BaseFunctionalTest
     {
         $this->assertGeneratedWebsite('cname');
     }
+
+    /**
+     * Test the include configuration option.
+     */
+    public function testIncludeOnly()
+    {
+        $this->assertGeneratedWebsite('include-only');
+    }
+
+    /**
+     * Test the include configuration option with an exclude option set.
+     */
+    public function testIncludeWithExclude()
+    {
+        $this->assertGeneratedWebsite('include-with-exclude');
+    }
 }
