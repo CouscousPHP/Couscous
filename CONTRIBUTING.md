@@ -42,6 +42,8 @@ Then you can run `bin/couscous preview`.
 
 To generate the phar yourself, you need to allow Phar generation in your `php.ini` ([`phar.readonly = Off`](http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly)).
 
+You also need to be able to use the `sha1sum` cli tool.
+
 The procedure is then quite simple, check out the repository and:
 
 ```
@@ -58,6 +60,6 @@ Instructions for maintainers:
 ```
 $ composer update
 $ bin/compile
-$ cp bin/couscous.phar website/
+$ cp bin/couscous.* website/
 $ bin/couscous deploy
 ```

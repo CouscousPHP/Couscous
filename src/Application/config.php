@@ -48,6 +48,7 @@ return [
         ->method('add', DI\get('Couscous\Application\Cli\PreviewCommand'))
         ->method('add', DI\get('Couscous\Application\Cli\DeployCommand'))
         ->method('add', DI\get('Couscous\Application\Cli\ClearCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\SelfUpdateCommand'))
         ->method('add', DI\get('Couscous\Application\Cli\TravisAutoDeployCommand'))
         ->method('add', DI\get('Couscous\Application\Cli\InitTemplateCommand')),
 
