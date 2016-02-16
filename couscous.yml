@@ -13,6 +13,24 @@ scripts:
 baseUrl: http://couscous.io
 cname: couscous.io
 
+# This config is for demo purposes only. This will be removed when this feature will be merged.
+events:
+    listeners:
+        - event: 'couscous.step.after_config'
+          listener: 'Couscous\Event\Listener\AfterConfigListener'
+        - event: 'couscous.step.before_parse'
+          listener: 'Couscous\Event\Listener\BeforeParseListener'
+        - event: 'couscous.step.after_parse'
+          listener: 'Couscous\Event\Listener\AfterParseListener'
+        - event: 'couscous.step.before_render_markdown'
+          listener: 'Couscous\Event\Listener\BeforeRenderMarkdownListener'
+        - event: 'couscous.step.after_render_markdown'
+          listener: 'Couscous\Event\Listener\AfterRenderMarkdownListener'
+        - event: 'couscous.step.before_write'
+          listener: 'Couscous\Event\Listener\BeforeWriteListener'
+        - event: 'couscous.step.after_write'
+          listener: 'Couscous\Event\Listener\AfterWriteListener'
+
 menu:
     items:
         getting-started:

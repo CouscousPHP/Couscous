@@ -10,6 +10,9 @@ return [
         DI\get('Couscous\Module\Config\Step\LoadConfig'),
         DI\get('Couscous\Module\Config\Step\OverrideBaseUrlForPreview'),
 
+        DI\get('Couscous\Module\Events\Step\InitEventListeners'),
+        DI\get('Couscous\Module\Events\Step\EmitAfterConfigEvent'),
+
         DI\get('Couscous\Module\Scripts\Step\ExecuteBeforeScripts'),
 
         DI\get('Couscous\Module\Template\Step\UseDefaultTemplate'),
@@ -25,17 +28,25 @@ return [
 
         DI\get('Couscous\Module\Core\Step\AddFileNameToMetadata'),
 
+        DI\get('Couscous\Module\Events\Step\EmitBeforeParseEvent'),
         DI\get('Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter'),
+        DI\get('Couscous\Module\Events\Step\EmitAfterParseEvent'),
         DI\get('Couscous\Module\Markdown\Step\ProcessMarkdownFileName'),
         DI\get('Couscous\Module\Markdown\Step\RewriteMarkdownLinks'),
+        DI\get('Couscous\Module\Events\Step\EmitBeforeRenderMarkdownEvent'),
         DI\get('Couscous\Module\Markdown\Step\RenderMarkdown'),
+        DI\get('Couscous\Module\Events\Step\EmitAfterRenderMarkdownEvent'),
         DI\get('Couscous\Module\Markdown\Step\CreateHeadingIds'),
 
         DI\get('Couscous\Module\Template\Step\AddPageListToLayoutVariables'),
         DI\get('Couscous\Module\Template\Step\ProcessTwigLayouts'),
 
+        DI\get('Couscous\Module\Events\Step\EmitBeforeWriteEvent'),
+
         DI\get('Couscous\Module\Core\Step\ClearTargetDirectory'),
         DI\get('Couscous\Module\Core\Step\WriteFiles'),
+
+        DI\get('Couscous\Module\Events\Step\EmitAfterWriteEvent'),
 
         DI\get('Couscous\Module\Scripts\Step\ExecuteAfterScripts'),
     ],
