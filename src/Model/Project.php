@@ -124,6 +124,7 @@ class Project
 
         $finder = new Finder();
         $finder->files()
+            ->followLinks()
             ->in(!empty($includedDirectories) ? $includedDirectories : $this->sourceDirectory)
             ->ignoreDotFiles(true)
             ->exclude(array_merge($excludedDirectories, ['.couscous']));
