@@ -57,6 +57,12 @@ class PreviewCommand extends Command
                 InputOption::VALUE_REQUIRED,
                 'Target directory in which to generate the files.',
                 getcwd().'/.couscous/generated'
+            )
+            ->addOption(
+                'livereload',
+                null,
+                InputOption::VALUE_NONE,
+                'If set livereload server is launched (don\'t forget to install it before)'
             );
     }
 
@@ -75,6 +81,14 @@ class PreviewCommand extends Command
         $targetDirectory = $input->getOption('target');
 
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
+
+        if ($input->getOption('livereload') && !is_file('node_modules/.bin/livereload')) {
+            $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "npm install"?</error>');
+
+            return 1;
+        } elseif ($input->getOption('livereload')) {
+            $this->startLivereload($output, $sourceDirectory, $targetDirectory);
+        }
 
         $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
 
@@ -124,6 +138,19 @@ class PreviewCommand extends Command
         $output->writeln(sprintf('Server running on <comment>%s</comment>', $input->getArgument('address')));
 
         return $process;
+    }
+
+    private function startLivereload(OutputInterface $output, $sourceDirectory, $targetDirectory)
+    {
+        // TODO: find a way to be sure livereload does not reload before files are regenerated
+        $builder = new ProcessBuilder(['node_modules/.bin/livereload', $targetDirectory, '--debug', '--usepolling', '500']);
+        $builder->setWorkingDirectory($sourceDirectory);
+        $builder->setTimeout(null);
+
+        $process = $builder->getProcess();
+        $process->start();
+
+        $output->writeln('<info>Livereload launched!</info>');
     }
 
     private function isSupported()

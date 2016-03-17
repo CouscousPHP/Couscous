@@ -1,0 +1,14 @@
+{
+  "name": "couscous",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "watch": "node bin/watch.js"
+  },
+  "author": "Matthieu Napoli",
+  "license": "MIT",
+  "dependencies": {
+    "livereload": "^0.4.1"
+  },
+  "devDependencies": {}
+}
