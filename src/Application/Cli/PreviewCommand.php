@@ -61,8 +61,9 @@ class PreviewCommand extends Command
             ->addOption(
                 'livereload',
                 null,
-                InputOption::VALUE_NONE,
-                'If set livereload server is launched (don\'t forget to install it before)'
+                InputOption::VALUE_REQUIRED,
+                'If set livereload server is launched from the specified path (global livereload by default)',
+                exec('which livereload')
             );
     }
 
@@ -77,18 +78,18 @@ class PreviewCommand extends Command
             return 1;
         }
 
+        if (!is_executable($input->getOption('livereload'))) {
+            $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "npm install -g livereload"?</error>');
+
+            return 1;
+        }
+
         $sourceDirectory = $input->getArgument('source');
         $targetDirectory = $input->getOption('target');
 
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
 
-        if ($input->getOption('livereload') && !is_file('node_modules/.bin/livereload')) {
-            $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "npm install"?</error>');
-
-            return 1;
-        } elseif ($input->getOption('livereload')) {
-            $this->startLivereload($output, $sourceDirectory, $targetDirectory);
-        }
+        $this->startLivereload($input->getOption('livereload'), $output, $sourceDirectory, $targetDirectory);
 
         $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
 
@@ -140,10 +141,9 @@ class PreviewCommand extends Command
         return $process;
     }
 
-    private function startLivereload(OutputInterface $output, $sourceDirectory, $targetDirectory)
+    private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
     {
-        // TODO: find a way to be sure livereload does not reload before files are regenerated
-        $builder = new ProcessBuilder(['node_modules/.bin/livereload', $targetDirectory, '--debug', '--usepolling', '500']);
+        $builder = new ProcessBuilder([$executablePath, $targetDirectory, '-w', '1']);
         $builder->setWorkingDirectory($sourceDirectory);
         $builder->setTimeout(null);
 
