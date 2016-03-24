@@ -63,7 +63,7 @@ class PreviewCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'If set livereload server is launched from the specified path (global livereload by default)',
-                exec('which livereload')
+                'livereload'
             );
     }
 
@@ -78,8 +78,8 @@ class PreviewCommand extends Command
             return 1;
         }
 
-        if (!is_executable($input->getOption('livereload'))) {
-            $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "npm install -g livereload"?</error>');
+        if (!$this->isFound($input->getOption('livereload'))) {
+            $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>');
 
             return 1;
         }
@@ -143,7 +143,7 @@ class PreviewCommand extends Command
 
     private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
     {
-        $builder = new ProcessBuilder([$executablePath, $targetDirectory, '-w', '1']);
+        $builder = new ProcessBuilder([$executablePath, $targetDirectory, '-w', '3']);
         $builder->setWorkingDirectory($sourceDirectory);
         $builder->setTimeout(null);
 
@@ -160,6 +160,23 @@ class PreviewCommand extends Command
         }
 
         return true;
+    }
+
+    private function isFound($executableName)
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $folders = explode(';', getenv('PATH'));
+        } else {
+            $folders = explode(':', getenv('PATH'));
+        }
+
+        foreach ($folders as $folder) {
+            if (is_executable(realpath($folder.'/'.$executableName))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function fileListToDisplay(array $files, $sourceDirectory)

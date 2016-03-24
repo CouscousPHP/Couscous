@@ -34,6 +34,8 @@ return [
         DI\get('Couscous\Module\Template\Step\AddPageListToLayoutVariables'),
         DI\get('Couscous\Module\Template\Step\ProcessTwigLayouts'),
 
+        DI\get('Couscous\Module\Template\Step\AddLivereloadSnippet'),
+
         DI\get('Couscous\Module\Core\Step\ClearTargetDirectory'),
         DI\get('Couscous\Module\Core\Step\WriteFiles'),
 
