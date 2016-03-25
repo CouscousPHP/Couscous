@@ -61,9 +61,8 @@ class PreviewCommand extends Command
             ->addOption(
                 'livereload',
                 null,
-                InputOption::VALUE_REQUIRED,
-                'If set livereload server is launched from the specified path (global livereload by default)',
-                'livereload'
+                InputOption::VALUE_OPTIONAL,
+                'If set livereload server is launched from the specified path (global livereload by default)'
             );
     }
 
@@ -78,10 +77,16 @@ class PreviewCommand extends Command
             return 1;
         }
 
-        if (!$this->isFound($input->getOption('livereload'))) {
-            $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>');
+        if ($input->getOption('livereload')) {
+            if ($input->getOption('livereload') === null) {
+                $input->setOption('livereload', 'livereload');
+            }
 
-            return 1;
+            if (!$this->isFound($input->getOption('livereload'))) {
+                $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>');
+
+                return 1;
+            }
         }
 
         $sourceDirectory = $input->getArgument('source');
