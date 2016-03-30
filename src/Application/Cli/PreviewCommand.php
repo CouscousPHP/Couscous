@@ -77,7 +77,10 @@ class PreviewCommand extends Command
             return 1;
         }
 
-        if ($input->getOption('livereload')) {
+        $sourceDirectory = $input->getArgument('source');
+        $targetDirectory = $input->getOption('target');
+
+        if ($input->hasParameterOption('--livereload')) {
             if ($input->getOption('livereload') === null) {
                 $input->setOption('livereload', 'livereload');
             }
@@ -87,14 +90,11 @@ class PreviewCommand extends Command
 
                 return 1;
             }
+
+            $this->startLivereload($input->getOption('livereload'), $output, $sourceDirectory, $targetDirectory);
         }
 
-        $sourceDirectory = $input->getArgument('source');
-        $targetDirectory = $input->getOption('target');
-
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
-
-        $this->startLivereload($input->getOption('livereload'), $output, $sourceDirectory, $targetDirectory);
 
         $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
 
@@ -167,7 +167,7 @@ class PreviewCommand extends Command
         return true;
     }
 
-    private function isFound($executableName)
+    private function isFound($executablePath)
     {
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $folders = explode(';', getenv('PATH'));
@@ -176,7 +176,7 @@ class PreviewCommand extends Command
         }
 
         foreach ($folders as $folder) {
-            if (is_executable(realpath($folder.'/'.$executableName))) {
+            if (is_executable(realpath($folder.'/'.$executablePath))) {
                 return true;
             }
         }
