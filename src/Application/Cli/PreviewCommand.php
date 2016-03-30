@@ -57,6 +57,12 @@ class PreviewCommand extends Command
                 InputOption::VALUE_REQUIRED,
                 'Target directory in which to generate the files.',
                 getcwd().'/.couscous/generated'
+            )
+            ->addOption(
+                'livereload',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'If set livereload server is launched from the specified path (global livereload by default)'
             );
     }
 
@@ -73,6 +79,20 @@ class PreviewCommand extends Command
 
         $sourceDirectory = $input->getArgument('source');
         $targetDirectory = $input->getOption('target');
+
+        if ($input->hasParameterOption('--livereload')) {
+            if ($input->getOption('livereload') === null) {
+                $input->setOption('livereload', 'livereload');
+            }
+
+            if (!$this->isFound($input->getOption('livereload'))) {
+                $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>');
+
+                return 1;
+            }
+
+            $this->startLivereload($input->getOption('livereload'), $output, $sourceDirectory, $targetDirectory);
+        }
 
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
 
@@ -126,6 +146,18 @@ class PreviewCommand extends Command
         return $process;
     }
 
+    private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
+    {
+        $builder = new ProcessBuilder([$executablePath, $targetDirectory, '-w', '3']);
+        $builder->setWorkingDirectory($sourceDirectory);
+        $builder->setTimeout(null);
+
+        $process = $builder->getProcess();
+        $process->start();
+
+        $output->writeln('<info>Livereload launched!</info>');
+    }
+
     private function isSupported()
     {
         if (version_compare(phpversion(), '5.4.0', '<')) {
@@ -133,6 +165,23 @@ class PreviewCommand extends Command
         }
 
         return true;
+    }
+
+    private function isFound($executablePath)
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $folders = explode(';', getenv('PATH'));
+        } else {
+            $folders = explode(':', getenv('PATH'));
+        }
+
+        foreach ($folders as $folder) {
+            if (is_executable(realpath($folder.'/'.$executablePath))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function fileListToDisplay(array $files, $sourceDirectory)
