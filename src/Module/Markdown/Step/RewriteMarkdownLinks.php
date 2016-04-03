@@ -27,10 +27,9 @@ class RewriteMarkdownLinks implements Step
 
         foreach ($markdownFiles as $file) {
             $pattern = self::MARKDOWN_LINK_REGEX;
-            $callback = [$this, 'replaceFilename'];
             $subject = $file->content;
 
-            $file->content = preg_replace_callback($pattern, $callback, $subject);
+            $file->content = preg_replace_callback($pattern, [$this, 'replaceFilename'], $subject);
         }
     }
 
