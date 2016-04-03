@@ -140,6 +140,7 @@
 <p>Then you can run <code>bin/couscous preview</code>.</p>
 <h2 id="building-the-phar">Building the phar</h2>
 <p>To generate the phar yourself, you need to allow Phar generation in your <code>php.ini</code> (<a href="http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly"><code>phar.readonly = Off</code></a>).</p>
+<p>You also need to be able to use the <code>sha1sum</code> cli tool.</p>
 <p>The procedure is then quite simple, check out the repository and:</p>
 <pre><code>$ composer update
 $ bin/compile</code></pre>
@@ -148,7 +149,7 @@ $ bin/compile</code></pre>
 <p>Instructions for maintainers:</p>
 <pre><code>$ composer update
 $ bin/compile
-$ cp bin/couscous.phar website/
+$ cp bin/couscous.* website/
 $ bin/couscous deploy</code></pre>
                 </section>
 
@@ -195,7 +196,6 @@ $ bin/couscous deploy</code></pre>
         </script>
         <noscript><p><img src="http://mnapoli.piwikpro.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
         <!-- End Piwik Code -->
-
     
 </body>
 </html>
