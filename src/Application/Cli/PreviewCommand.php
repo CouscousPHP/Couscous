@@ -141,7 +141,7 @@ class PreviewCommand extends Command
         $process = $builder->getProcess();
         $process->start();
 
-        $output->writeln(sprintf('Server running on <comment>%s</comment>', $input->getArgument('address')));
+        $output->writeln(sprintf('Server running on <comment>http://%s</comment>', $input->getArgument('address')));
 
         return $process;
     }
