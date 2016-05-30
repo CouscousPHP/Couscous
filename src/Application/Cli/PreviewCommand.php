@@ -112,7 +112,7 @@ class PreviewCommand extends Command
             sleep(1);
         }
 
-        throw new RuntimeException('The HTTP server has stopped');
+        throw new RuntimeException('The HTTP server has stopped: '.PHP_EOL.$serverProcess->getErrorOutput());
     }
 
     private function generateWebsite(
