@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
@@ -98,6 +99,19 @@ class PreviewCommand extends Command
 
         $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
 
+        if (function_exists('pcntl_signal')) {
+            declare(ticks=1);
+
+            $handler = function ($signal) use ($serverProcess, $output) {
+                $this->stopWebServer($serverProcess, $output, $signal);
+            };
+
+            foreach ([SIGINT, SIGTERM] as $signal) {
+                pcntl_signal($signal, $handler);
+            }
+        }
+
+
         // Watch for changes
         while ($serverProcess->isRunning()) {
             $files = $watchlist->getChangedFiles();
@@ -144,6 +158,23 @@ class PreviewCommand extends Command
         $output->writeln(sprintf('Server running on <comment>http://%s</comment>', $input->getArgument('address')));
 
         return $process;
+    }
+
+    private function stopWebServer(Process $serverProcess, OutputInterface $output, $signal = null)
+    {
+        $signal = $signal ?: SIGTERM;
+
+        if ($serverProcess->isRunning()) {
+            $output->writeln(sprintf('Killing server with signal <comment>%s</comment>', $signal));
+
+            $serverProcess->stop(0, $signal);
+        }
+
+        if ($serverProcess->isRunning()) {
+            $output->writeln(sprintf('Server was killed with signal <comment>%s</comment>', $signal));
+        } else {
+            $output->writeln(sprintf('Unable to kill the server with signal <comment>%s</comment>', $signal));
+        }
     }
 
     private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
