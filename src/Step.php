@@ -2,8 +2,7 @@
 
 namespace Couscous;
 
-use Couscous\Model\Repository;
-use Symfony\Component\Console\Output\OutputInterface;
+use Couscous\Model\Project;
 
 /**
  * Generation step.
@@ -13,10 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 interface Step
 {
     /**
-     * Process the given repository.
+     * Process the given project.
      *
-     * @param Repository      $repository
-     * @param OutputInterface $output     Output for the user.
+     * @param Project $project
      */
-    public function __invoke(Repository $repository, OutputInterface $output);
+    public function __invoke(Project $project);
 }

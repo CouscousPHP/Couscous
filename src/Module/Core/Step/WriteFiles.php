@@ -2,9 +2,9 @@
 
 namespace Couscous\Module\Core\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -19,27 +19,31 @@ class WriteFiles implements Step
      */
     private $filesystem;
 
-    public function __construct(Filesystem $filesystem)
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(Filesystem $filesystem, LoggerInterface $logger)
     {
         $this->filesystem = $filesystem;
+        $this->logger = $logger;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
-        foreach ($repository->getFiles() as $file) {
-            $targetFilename = $repository->targetDirectory . '/' . $file->relativeFilename;
-
-            if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                $output->writeln("Writing $targetFilename");
-            }
+        foreach ($project->getFiles() as $file) {
+            $targetFilename = $project->targetDirectory.'/'.$file->relativeFilename;
 
             if ($this->filesystem->exists($targetFilename)) {
-                $output->writeln(sprintf(
-                    "<comment>Skipping '%s' because a file with the same name already exists</comment>",
-                    $file->relativeFilename
-                ));
+                $this->logger->info(
+                    "Skipping '{file}' because a file with the same name already exists",
+                    ['file' => $file->relativeFilename]
+                );
                 continue;
             }
+
+            $this->logger->debug('Writing {file}', ['file' => $targetFilename]);
 
             $this->filesystem->dumpFile($targetFilename, $file->getContent());
         }

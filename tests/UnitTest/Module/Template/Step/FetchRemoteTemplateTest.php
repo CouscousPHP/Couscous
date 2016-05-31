@@ -3,8 +3,8 @@
 namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\FetchRemoteTemplate;
-use Couscous\Tests\UnitTest\Mock\MockRepository;
-use Symfony\Component\Console\Output\NullOutput;
+use Couscous\Tests\UnitTest\Mock\MockProject;
+use Psr\Log\NullLogger;
 
 /**
  * @covers \Couscous\Module\Template\Step\FetchRemoteTemplate
@@ -17,18 +17,18 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_skip_if_no_template_url()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
+        $git = $this->getMock('Couscous\CommandRunner\Git', [], [], '', false);
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner);
+        $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
-        $repository = new MockRepository();
+        $project = new MockProject();
 
-        $commandRunner->expects($this->never())
-            ->method('run');
+        $git->expects($this->never())
+            ->method($this->anything());
 
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($project);
 
-        $this->assertNull($repository->metadata['template.directory']);
+        $this->assertNull($project->metadata['template.directory']);
     }
 
     /**
@@ -37,20 +37,20 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_clone_and_set_the_template_directory()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
+        $git = $this->getMock('Couscous\CommandRunner\Git', [], [], '', false);
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner);
+        $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
-        $repository = new MockRepository();
-        $repository->metadata['template.url'] = 'git://foo';
+        $project = new MockProject();
+        $project->metadata['template.url'] = 'git://foo';
 
-        $commandRunner->expects($this->once())
-            ->method('run')
-            ->with($this->matches('git clone git://foo %s'));
+        $git->expects($this->once())
+            ->method('cloneRepository')
+            ->with('git://foo');
 
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($project);
 
-        $this->assertNotNull($repository->metadata['template.directory']);
+        $this->assertNotNull($project->metadata['template.directory']);
     }
 
     /**
@@ -59,25 +59,25 @@ class FetchRemoteTemplateTest extends \PHPUnit_Framework_TestCase
     public function it_should_not_clone_twice_if_regenerating()
     {
         $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
-        $commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
+        $git = $this->getMock('Couscous\CommandRunner\Git', [], [], '', false);
 
-        $step = new FetchRemoteTemplate($filesystem, $commandRunner);
+        $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
-        $commandRunner->expects($this->once())
-            ->method('run')
-            ->with($this->matches('git clone git://foo %s'));
+        $git->expects($this->once())
+            ->method('cloneRepository')
+            ->with('git://foo');
 
         // Calling once
-        $repository = new MockRepository();
-        $repository->metadata['template.url'] = 'git://foo';
-        $step->__invoke($repository, new NullOutput());
-        $this->assertNotNull($repository->metadata['template.directory']);
+        $project = new MockProject();
+        $project->metadata['template.url'] = 'git://foo';
+        $step->__invoke($project);
+        $this->assertNotNull($project->metadata['template.directory']);
 
         // Calling twice
-        $repository = new MockRepository();
-        $repository->regenerate = true;
-        $repository->metadata['template.url'] = 'git://foo';
-        $step->__invoke($repository, new NullOutput());
-        $this->assertNotNull($repository->metadata['template.directory']);
+        $project = new MockProject();
+        $project->regenerate = true;
+        $project->metadata['template.url'] = 'git://foo';
+        $step->__invoke($project);
+        $this->assertNotNull($project->metadata['template.directory']);
     }
 }

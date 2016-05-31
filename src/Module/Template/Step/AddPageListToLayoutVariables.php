@@ -2,22 +2,21 @@
 
 namespace Couscous\Module\Template\Step;
 
+use Couscous\Model\Project;
 use Couscous\Module\Template\Model\HtmlFile;
-use Couscous\Model\Repository;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Add to the layout variables the list of the pages of the website.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class AddPageListToLayoutVariables implements \Couscous\Step
+class AddPageListToLayoutVariables implements Step
 {
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $repository->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
 
         $pageList = [];
         $pageTree = [];
@@ -25,7 +24,7 @@ class AddPageListToLayoutVariables implements \Couscous\Step
         foreach ($htmlFiles as $file) {
             $pageList[] = $file->relativeFilename;
 
-            $path     = dirname($file->relativeFilename);
+            $path = dirname($file->relativeFilename);
             $filename = basename($file->relativeFilename);
 
             if ($path === '.') {
@@ -41,20 +40,21 @@ class AddPageListToLayoutVariables implements \Couscous\Step
         natsort($pageList);
         $this->sortRecursively($pageTree);
 
-        $repository->metadata['pageList'] = $pageList;
-        $repository->metadata['pageTree'] = $pageTree;
+        $project->metadata['pageList'] = $pageList;
+        $project->metadata['pageTree'] = $pageTree;
     }
 
     private function setValue(array &$array, array $path, $value)
     {
         if (empty($path)) {
             $array[$value] = $value;
+
             return;
         }
 
         $dir = array_shift($path);
 
-        if (! array_key_exists($dir, $array)) {
+        if (!array_key_exists($dir, $array)) {
             $array[$dir] = [];
         }
 

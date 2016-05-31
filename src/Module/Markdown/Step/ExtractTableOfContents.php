@@ -2,15 +2,14 @@
 
 namespace Couscous\Module\Markdown\Step;
 
+use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
 use Couscous\Module\Markdown\Model\TableOfContents;
 use Couscous\Step;
 use League\CommonMark\Block\Element\Document;
 use League\CommonMark\Block\Element\Heading;
 use League\CommonMark\DocParser;
 use League\CommonMark\HtmlRenderer;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Extract the table of content from headers in the document.
@@ -35,7 +34,7 @@ class ExtractTableOfContents implements Step
         $this->htmlRenderer = $htmlRenderer;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $repository)
     {
         /** @var MarkdownFile[] $files */
         $files = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');

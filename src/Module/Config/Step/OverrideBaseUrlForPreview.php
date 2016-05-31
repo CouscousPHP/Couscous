@@ -2,9 +2,7 @@
 
 namespace Couscous\Module\Config\Step;
 
-use Couscous\Model\Repository;
-use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
+use Couscous\Model\Project;
 
 /**
  * Override the baseUrl if we are in preview.
@@ -13,10 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class OverrideBaseUrlForPreview implements \Couscous\Step
 {
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
-        if ($repository->metadata['preview'] === true) {
-            $repository->metadata['baseUrl'] = '';
+        if ($project->metadata['preview'] === true) {
+            $project->metadata['baseUrl'] = '';
         }
     }
 }

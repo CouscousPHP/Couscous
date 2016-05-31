@@ -2,10 +2,9 @@
 
 namespace Couscous\Module\Markdown\Step;
 
+use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Rewrites links from *.md to *.html.
@@ -14,21 +13,37 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class RewriteMarkdownLinks implements Step
 {
-    // OMG regexes...
-    const MARKDOWN_LINK_REGEX = '#\[([^\]]+)\]\(([^\)]+)\.md\)#';
-    const REGEX_REPLACEMENT   = '[$1]($2.html)';
+    /**
+     * OMG regexes...
+     *
+     * @link https://regex101.com/
+     */
+    const MARKDOWN_LINK_REGEX = '/\[(?:[^\]]+)\]\(([^\)]+\/)?([A-Za-z0-9_\.\-]+\.md)([^.\)][^\)]*)?\)/';
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
 
         foreach ($markdownFiles as $file) {
-            $file->content = preg_replace(
-                self::MARKDOWN_LINK_REGEX,
-                self::REGEX_REPLACEMENT,
-                $file->content
-            );
+            $pattern = self::MARKDOWN_LINK_REGEX;
+            $subject = $file->content;
+
+            $file->content = preg_replace_callback($pattern, [$this, 'replaceFilename'], $subject);
         }
+    }
+
+    private function replaceFilename(array $matches)
+    {
+        $filename = strtolower($matches[2]);
+        $filename = str_replace('.md', '.html', $filename);
+        if ($filename == 'readme.html') {
+            $filename = 'index.html';
+        }
+
+        $pattern = '/\((.+)?\b'.$matches[2].'\b(.+)?\)/';
+        $replacement = '(${1}'.$filename.'${2})';
+
+        return preg_replace($pattern, $replacement, $matches[0]);
     }
 }

@@ -2,9 +2,10 @@
 
 namespace Couscous\Application\Cli;
 
-use Couscous\Generator;
-use Couscous\Model\Repository;
+use Couscous\CommandRunner\Git;
 use Couscous\Deployer;
+use Couscous\Generator;
+use Couscous\Model\Project;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,11 +35,17 @@ class DeployCommand extends Command
      */
     private $filesystem;
 
-    public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem)
+    /**
+     * @var Git
+     */
+    private $git;
+
+    public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem, Git $git)
     {
-        $this->generator  = $generator;
-        $this->deployer   = $deployer;
+        $this->generator = $generator;
+        $this->deployer = $deployer;
         $this->filesystem = $filesystem;
+        $this->git = $git;
 
         parent::__construct();
     }
@@ -48,6 +55,12 @@ class DeployCommand extends Command
      */
     protected function configure()
     {
+        try {
+            $remoteUrl = $this->git->getRemoteUrl();
+        } catch (\Exception $e) {
+            $remoteUrl = null;
+        }
+
         $this
             ->setName('deploy')
             ->setDescription('Generate and deploy the website')
@@ -58,11 +71,17 @@ class DeployCommand extends Command
                 getcwd()
             )
             ->addOption(
+                'repository',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Target repository in which to deploy the website.',
+                $remoteUrl
+            )
+            ->addOption(
                 'branch',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Target branch in which to deploy the website.',
-                'gh-pages'
+                'Target branch in which to deploy the website.'
             );
     }
 
@@ -72,17 +91,22 @@ class DeployCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sourceDirectory = $input->getArgument('source');
-        $repositoryUrl   = trim(shell_exec('git config --get remote.origin.url'));
-        $targetBranch    = $input->getOption('branch');
+        $repositoryUrl = $input->getOption('repository');
+        $targetBranch = $input->getOption('branch');
 
-        $repository = new Repository($sourceDirectory, getcwd() . '/.couscous/generated');
+        $project = new Project($sourceDirectory, getcwd().'/.couscous/generated');
 
         // Generate the website
-        $this->generator->generate($repository, $output);
+        $this->generator->generate($project, $output);
+
+        // If no branch was provided, use the configured one or the default
+        if (!$targetBranch) {
+            $targetBranch = isset($project->metadata['branch']) ? $project->metadata['branch'] : 'gh-pages';
+        }
 
         $output->writeln('');
 
         // Deploy it
-        $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
+        $this->deployer->deploy($project, $output, $repositoryUrl, $targetBranch);
     }
 }

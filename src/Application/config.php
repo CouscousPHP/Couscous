@@ -1,56 +1,71 @@
 <?php
 
-use Interop\Container\ContainerInterface;
-use Symfony\Component\Console\Application;
+use Psr\Log\LogLevel;
+use Symfony\Component\Console\Output\OutputInterface;
 
 return [
 
     'steps' => [
-        'Couscous\Module\Core\Step\ClearTargetDirectory',
-        'Couscous\Module\Config\Step\SetDefaultConfig',
-        'Couscous\Module\Config\Step\LoadConfig',
-        'Couscous\Module\Config\Step\OverrideBaseUrlForPreview',
-        'Couscous\Module\Scripts\Step\ExecuteBeforeScripts',
-        'Couscous\Module\Template\Step\UseDefaultTemplate',
-        'Couscous\Module\Template\Step\FetchRemoteTemplate',
-        'Couscous\Module\Template\Step\ValidateTemplateDirectory',
-        'Couscous\Module\Bower\Step\RunBowerInstall',
-        'Couscous\Module\Template\Step\LoadAssets',
-        'Couscous\Module\Markdown\Step\LoadMarkdownFiles',
-        'Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter',
-        'Couscous\Module\Markdown\Step\ProcessMarkdownFileName',
-        'Couscous\Module\Markdown\Step\RewriteMarkdownLinks',
-        'Couscous\Module\Markdown\Step\ExtractTableOfContents',
-        'Couscous\Module\Markdown\Step\RenderMarkdown',
-        'Couscous\Module\Template\Step\AddPageListToLayoutVariables',
-        'Couscous\Module\Template\Step\ProcessTwigLayouts',
-        'Couscous\Module\Core\Step\WriteFiles',
-        'Couscous\Module\Scripts\Step\ExecuteAfterScripts',
+        DI\get('Couscous\Module\Config\Step\SetDefaultConfig'),
+        DI\get('Couscous\Module\Config\Step\LoadConfig'),
+        DI\get('Couscous\Module\Config\Step\OverrideBaseUrlForPreview'),
+
+        DI\get('Couscous\Module\Scripts\Step\ExecuteBeforeScripts'),
+
+        DI\get('Couscous\Module\Template\Step\UseDefaultTemplate'),
+        DI\get('Couscous\Module\Template\Step\FetchRemoteTemplate'),
+        DI\get('Couscous\Module\Template\Step\ValidateTemplateDirectory'),
+
+        DI\get('Couscous\Module\Bower\Step\RunBowerInstall'),
+
+        DI\get('Couscous\Module\Markdown\Step\LoadMarkdownFiles'),
+        DI\get('Couscous\Module\Template\Step\LoadAssets'),
+        DI\get('Couscous\Module\Core\Step\AddImages'),
+        DI\get('Couscous\Module\Core\Step\AddCname'),
+
+        DI\get('Couscous\Module\Core\Step\AddFileNameToMetadata'),
+
+        DI\get('Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter'),
+        DI\get('Couscous\Module\Markdown\Step\ProcessMarkdownFileName'),
+        DI\get('Couscous\Module\Markdown\Step\RewriteMarkdownLinks'),
+        DI\get('Couscous\Module\Markdown\Step\ExtractTableOfContents'),
+        DI\get('Couscous\Module\Markdown\Step\RenderMarkdown'),
+        DI\get('Couscous\Module\Markdown\Step\CreateHeadingIds'),
+
+        DI\get('Couscous\Module\Template\Step\AddPageListToLayoutVariables'),
+        DI\get('Couscous\Module\Template\Step\ProcessTwigLayouts'),
+
+        DI\get('Couscous\Module\Template\Step\AddLivereloadSnippet'),
+
+        DI\get('Couscous\Module\Core\Step\ClearTargetDirectory'),
+        DI\get('Couscous\Module\Core\Step\WriteFiles'),
+
+        DI\get('Couscous\Module\Scripts\Step\ExecuteAfterScripts'),
     ],
 
     'Couscous\Generator' => DI\object()
-        ->constructorParameter('steps', DI\link('steps.instances')),
+        ->constructorParameter('steps', DI\get('steps')),
 
-    'steps.instances' => DI\factory(function (ContainerInterface $c) {
-        return array_map(function ($class) use ($c) {
-            return $c->get($class);
-        }, $c->get('steps'));
-    }),
+    'application' => DI\object('Symfony\Component\Console\Application')
+        ->method('add', DI\get('Couscous\Application\Cli\GenerateCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\PreviewCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\DeployCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\ClearCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\SelfUpdateCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\TravisAutoDeployCommand'))
+        ->method('add', DI\get('Couscous\Application\Cli\InitTemplateCommand')),
 
-    'application' => DI\factory(function (ContainerInterface $c) {
-        $application = new Application('Couscous', '1.0-dev');
-
-        $application->add($c->get('Couscous\Application\Cli\GenerateCommand'));
-        $application->add($c->get('Couscous\Application\Cli\PreviewCommand'));
-        $application->add($c->get('Couscous\Application\Cli\DeployCommand'));
-        $application->add($c->get('Couscous\Application\Cli\ClearCommand'));
-
-        return $application;
-    }),
-
-    'Mni\FrontYAML\Parser' => DI\object()
-        ->constructorParameter('markdownParser', DI\link('Mni\FrontYAML\Markdown\MarkdownParser')),
-    'Mni\FrontYAML\Markdown\MarkdownParser' => DI\object('Mni\FrontYAML\Bridge\Parsedown\ParsedownParser')
-        ->constructor(DI\link('ParsedownExtra')),
+    'Symfony\Component\Console\Logger\ConsoleLogger' => DI\object()
+        ->constructorParameter('verbosityLevelMap', [
+            // Custom verbosity map
+            LogLevel::EMERGENCY => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::ALERT     => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::CRITICAL  => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::ERROR     => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::WARNING   => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::NOTICE    => OutputInterface::VERBOSITY_NORMAL,
+            LogLevel::INFO      => OutputInterface::VERBOSITY_VERBOSE,
+            LogLevel::DEBUG     => OutputInterface::VERBOSITY_VERY_VERBOSE,
+        ]),
 
 ];

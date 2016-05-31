@@ -13,17 +13,13 @@ class LazyFile extends File
 
     public function __construct($fullFilename, $relativeFilename)
     {
-        $this->fullFilename     = $fullFilename;
-        $this->relativeFilename = $relativeFilename;
+        $this->fullFilename = $fullFilename;
+
+        parent::__construct($relativeFilename);
     }
 
     public function getContent()
     {
         return file_get_contents($this->fullFilename);
-    }
-
-    public function getMetadata()
-    {
-        return new Metadata();
     }
 }

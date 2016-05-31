@@ -7,6 +7,8 @@ Couscous generates a [GitHub pages](http://pages.github.com/) website from your 
 [![Build Status](https://travis-ci.org/CouscousPHP/Couscous.svg?branch=master)](https://travis-ci.org/CouscousPHP/Couscous)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/?branch=master)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/CouscousPHP/Couscous.svg)](http://isitmaintained.com/project/CouscousPHP/Couscous "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/CouscousPHP/Couscous.svg)](http://isitmaintained.com/project/CouscousPHP/Couscous "Percentage of issues still open")
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/CouscousPHP/Couscous)
 
@@ -20,18 +22,17 @@ Couscous was designed to be as simple as possible. By embracing simplicity, it b
 
 ### Website generation
 
-The website generation is composed of a list of **steps** to process the `Repository` model object:
+The website generation is composed of a list of **steps** to process the `Project` model object:
 
 ```php
 interface Step
 {
     /**
-     * Process the given repository.
+     * Process the given project.
      *
-     * @param Repository      $repository
-     * @param OutputInterface $output     Output for the user.
+     * @param Project $project
      */
-    public function __invoke(Repository $repository, OutputInterface $output);
+    public function __invoke(Project $project);
 }
 ```
 
@@ -49,10 +50,10 @@ For example, here is a step that would preprocess Markdown files to put the word
 ```php
 class PutCouscousInBold implements \Couscous\Step
 {
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType('Couscous\Model\MarkdownFile');
 
         foreach ($markdownFiles as $file) {
             $file->content = str_replace('Couscous', '**Couscous**', $file->content);
@@ -63,7 +64,7 @@ class PutCouscousInBold implements \Couscous\Step
 
 Couscous uses [PHP-DI](http://php-di.org/) for wiring everything together with dependency injection.
 
-The full list of steps is configured in [`src/config.php`](src/config.php).
+The full list of steps is configured in [`src/Application/config.php`](src/Application/config.php).
 
 ### Website deployment
 
@@ -73,7 +74,7 @@ In the future, Couscous will support several deployment strategies.
 
 ## Contributing
 
-See the [CONTRIBUTING](contributing.md) file.
+See the [CONTRIBUTING](CONTRIBUTING.md) file.
 
 ## License
 

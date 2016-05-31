@@ -3,12 +3,14 @@
 namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
@@ -55,7 +57,13 @@ class PreviewCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Target directory in which to generate the files.',
-                getcwd() . '/.couscous/generated'
+                getcwd().'/.couscous/generated'
+            )
+            ->addOption(
+                'livereload',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'If set livereload server is launched from the specified path (global livereload by default)'
             );
     }
 
@@ -64,20 +72,48 @@ class PreviewCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (! $this->isSupported()) {
+        if (!$this->isSupported()) {
             $output->writeln('<error>PHP 5.4 or above is required to run the internal webserver</error>');
+
             return 1;
         }
 
         $sourceDirectory = $input->getArgument('source');
         $targetDirectory = $input->getOption('target');
 
+        if ($input->hasParameterOption('--livereload')) {
+            if ($input->getOption('livereload') === null) {
+                $input->setOption('livereload', 'livereload');
+            }
+
+            if (!$this->isFound($input->getOption('livereload'))) {
+                $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>');
+
+                return 1;
+            }
+
+            $this->startLivereload($input->getOption('livereload'), $output, $sourceDirectory, $targetDirectory);
+        }
+
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
 
-        $this->startWebServer($input, $output, $targetDirectory);
+        $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
+
+        if (function_exists('pcntl_signal')) {
+            declare(ticks=1);
+
+            $handler = function ($signal) use ($serverProcess, $output) {
+                $this->stopWebServer($serverProcess, $output, $signal);
+            };
+
+            foreach ([SIGINT, SIGTERM] as $signal) {
+                pcntl_signal($signal, $handler);
+            }
+        }
+
 
         // Watch for changes
-        while (true) {
+        while ($serverProcess->isRunning()) {
             $files = $watchlist->getChangedFiles();
             if (count($files) > 0) {
                 $output->writeln('');
@@ -90,7 +126,7 @@ class PreviewCommand extends Command
             sleep(1);
         }
 
-        return 0;
+        throw new RuntimeException('The HTTP server has stopped: '.PHP_EOL.$serverProcess->getErrorOutput());
     }
 
     private function generateWebsite(
@@ -99,15 +135,15 @@ class PreviewCommand extends Command
         $targetDirectory,
         $regenerate = false
     ) {
-        $repository = new Repository($sourceDirectory, $targetDirectory);
+        $project = new Project($sourceDirectory, $targetDirectory);
 
-        $repository->metadata['preview'] = true;
+        $project->metadata['preview'] = true;
 
-        $repository->regenerate = $regenerate;
+        $project->regenerate = $regenerate;
 
-        $this->generator->generate($repository, $output);
+        $this->generator->generate($project, $output);
 
-        return $repository->watchlist;
+        return $project->watchlist;
     }
 
     private function startWebServer(InputInterface $input, OutputInterface $output, $targetDirectory)
@@ -119,7 +155,38 @@ class PreviewCommand extends Command
         $process = $builder->getProcess();
         $process->start();
 
-        $output->writeln(sprintf("Server running on <info>%s</info>", $input->getArgument('address')));
+        $output->writeln(sprintf('Server running on <comment>http://%s</comment>', $input->getArgument('address')));
+
+        return $process;
+    }
+
+    private function stopWebServer(Process $serverProcess, OutputInterface $output, $signal = null)
+    {
+        $signal = $signal ?: SIGTERM;
+
+        if ($serverProcess->isRunning()) {
+            $output->writeln(sprintf('Killing server with signal <comment>%s</comment>', $signal));
+
+            $serverProcess->stop(0, $signal);
+        }
+
+        if ($serverProcess->isRunning()) {
+            $output->writeln(sprintf('Server was killed with signal <comment>%s</comment>', $signal));
+        } else {
+            $output->writeln(sprintf('Unable to kill the server with signal <comment>%s</comment>', $signal));
+        }
+    }
+
+    private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
+    {
+        $builder = new ProcessBuilder([$executablePath, $targetDirectory, '-w', '3']);
+        $builder->setWorkingDirectory($sourceDirectory);
+        $builder->setTimeout(null);
+
+        $process = $builder->getProcess();
+        $process->start();
+
+        $output->writeln('<info>Livereload launched!</info>');
     }
 
     private function isSupported()
@@ -127,7 +194,25 @@ class PreviewCommand extends Command
         if (version_compare(phpversion(), '5.4.0', '<')) {
             return false;
         }
+
         return true;
+    }
+
+    private function isFound($executablePath)
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $folders = explode(';', getenv('PATH'));
+        } else {
+            $folders = explode(':', getenv('PATH'));
+        }
+
+        foreach ($folders as $folder) {
+            if (is_executable(realpath($folder.'/'.$executablePath))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function fileListToDisplay(array $files, $sourceDirectory)
@@ -139,7 +224,7 @@ class PreviewCommand extends Command
         $str = implode(', ', $files);
 
         if (strlen($str) > 60) {
-            $str = substr($str, 0, 60) . '…';
+            $str = substr($str, 0, 60).'…';
         }
 
         return $str;

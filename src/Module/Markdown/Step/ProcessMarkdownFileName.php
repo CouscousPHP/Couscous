@@ -2,30 +2,30 @@
 
 namespace Couscous\Module\Markdown\Step;
 
+use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Processes the name of Markdown files.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ProcessMarkdownFileName implements \Couscous\Step
+class ProcessMarkdownFileName implements Step
 {
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $repository->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
 
         foreach ($markdownFiles as $markdownFile) {
-            $repository->removeFile($markdownFile);
+            $project->removeFile($markdownFile);
 
             $this->renameFileExtension($markdownFile);
-            $this->renameReadme($markdownFile);
+            $this->renameReadme($markdownFile, $project);
+            $this->renameFilename($markdownFile);
 
-            $repository->addFile($markdownFile);
+            $project->addFile($markdownFile);
         }
     }
 
@@ -34,22 +34,31 @@ class ProcessMarkdownFileName implements \Couscous\Step
         $file->relativeFilename = $this->replaceExtension($file->relativeFilename);
     }
 
-    private function renameReadme(MarkdownFile $file)
+    private function renameReadme(MarkdownFile $file, Project $project)
     {
-        $filename = basename($file->relativeFilename);
-
-        if ($filename === 'README.html') {
-            $path = dirname($file->relativeFilename);
-            $path = ($path === '.') ? '' : $path . '/';
-
-            $file->relativeFilename = $path . 'index.html';
+        $indexFile = empty($project->metadata['template']['index']) ? 'README.md' : $project->metadata['template']['index'];
+        $indexFile = $this->replaceExtension(basename($indexFile));
+        if ($file->getBasename() !== $indexFile) {
+            return;
         }
+
+        $file->relativeFilename = $file->getDirectory().'index.html';
+    }
+
+    private function renameFilename(MarkdownFile $file)
+    {
+        $basename = $file->getBasename();
+        if (!preg_match('/[A-Z]/', $basename)) {
+            return;
+        }
+
+        $file->relativeFilename = $file->getDirectory().strtolower($basename);
     }
 
     private function replaceExtension($filename)
     {
         $filename = substr($filename, 0, strrpos($filename, '.'));
 
-        return $filename . '.html';
+        return $filename.'.html';
     }
 }

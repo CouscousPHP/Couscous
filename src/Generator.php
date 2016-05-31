@@ -2,7 +2,7 @@
 
 namespace Couscous;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -24,27 +24,27 @@ class Generator
     private $steps;
 
     /**
-     * @param Filesystem      $filesystem
-     * @param Step[] $steps
+     * @param Filesystem $filesystem
+     * @param Step[]     $steps
      */
     public function __construct(Filesystem $filesystem, array $steps)
     {
         $this->filesystem = $filesystem;
-        $this->steps      = $steps;
+        $this->steps = $steps;
     }
 
-    public function generate(Repository $repository, OutputInterface $output)
+    public function generate(Project $project, OutputInterface $output)
     {
         $output->writeln(sprintf(
-            "<comment>Generating %s to %s</comment>",
-            $repository->sourceDirectory,
-            $repository->targetDirectory
+            '<comment>Generating %s to %s</comment>',
+            $project->sourceDirectory,
+            $project->targetDirectory
         ));
 
-        $this->filesystem->mkdir($repository->targetDirectory);
+        $this->filesystem->mkdir($project->targetDirectory);
 
         foreach ($this->steps as $step) {
-            $step->__invoke($repository, $output);
+            $step->__invoke($project);
         }
     }
 }

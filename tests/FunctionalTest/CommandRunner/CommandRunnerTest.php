@@ -24,12 +24,12 @@ class CommandRunnerTest extends \PHPUnit_Framework_TestCase
      */
     public function successful_command_execution_should_return_output()
     {
-        $command    = 'echo Couscous';
-        $expected   = 'Couscous';
+        $command = 'echo Couscous';
+        $expected = 'Couscous';
 
         $output = $this->commandRunner->run($command);
 
-        $this->assertEquals($expected, $output[0]);
+        $this->assertEquals($expected, $output);
     }
 
     /**

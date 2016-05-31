@@ -2,10 +2,10 @@
 
 namespace Couscous\Module\Template\Step;
 
-use Couscous\CommandRunner\CommandRunner;
-use Couscous\Model\Repository;
+use Couscous\CommandRunner\Git;
+use Couscous\Model\Project;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -13,7 +13,7 @@ use Symfony\Component\Filesystem\Filesystem;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class FetchRemoteTemplate implements \Couscous\Step
+class FetchRemoteTemplate implements Step
 {
     /**
      * @var Filesystem
@@ -21,55 +21,61 @@ class FetchRemoteTemplate implements \Couscous\Step
     private $filesystem;
 
     /**
-     * @var CommandRunner
+     * @var LoggerInterface
      */
-    private $commandRunner;
+    private $logger;
+
+    /**
+     * @var Git
+     */
+    private $git;
 
     /**
      * Temporarily save the template directory if we are in preview
      * to avoid cloning the repository every time.
      *
      * In theory we shouldn't store state in this object because it's a service
-     * but we need extensive change to avoid that.
+     * but we would need extensive change to avoid that.
      *
      * @var string
      */
     private $templateDirectory;
 
-    public function __construct(Filesystem $filesystem, CommandRunner $commandRunner)
+    public function __construct(Filesystem $filesystem, LoggerInterface $logger, Git $git)
     {
         $this->filesystem = $filesystem;
-        $this->commandRunner = $commandRunner;
+        $this->logger = $logger;
+        $this->git = $git;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
         // In preview we avoid cloning the repository every time
-        if ($repository->regenerate && $this->templateDirectory) {
-            $repository->metadata['template.directory'] = $this->templateDirectory;
+        if ($project->regenerate && $this->templateDirectory) {
+            $project->metadata['template.directory'] = $this->templateDirectory;
 
             return;
         }
 
-        $templateUrl = $repository->metadata['template.url'];
+        $templateUrl = $project->metadata['template.url'];
 
         if ($templateUrl === null) {
             return;
         }
 
-        $directory = $this->fetchGitTemplate($templateUrl, $output);
+        $directory = $this->fetchGitTemplate($templateUrl);
 
         $this->templateDirectory = $directory;
-        $repository->metadata['template.directory'] = $directory;
+        $project->metadata['template.directory'] = $directory;
     }
 
-    private function fetchGitTemplate($gitUrl, OutputInterface $output)
+    private function fetchGitTemplate($gitUrl)
     {
-        $output->writeln("Fetching template from <info>$gitUrl</info>");
+        $this->logger->notice('Fetching template from {url}', ['url' => $gitUrl]);
 
         $directory = $this->createTempDirectory('couscous_template_');
 
-        $this->commandRunner->run("git clone $gitUrl $directory");
+        $this->git->cloneRepository($gitUrl, $directory);
 
         return $directory;
     }

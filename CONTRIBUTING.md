@@ -16,7 +16,13 @@ When creating your pull request on GitHub, please write a description which give
 
 ## Requirements
 
-To be able to preview Couscous own website, you will need the following tools installed:
+To be able to preview Couscous own website on your machine, you will need the following tools installed:
+
+- Bower:
+
+    ```
+    $ npm install -g bower
+    ```
 
 - Less compiler:
 
@@ -36,6 +42,8 @@ Then you can run `bin/couscous preview`.
 
 To generate the phar yourself, you need to allow Phar generation in your `php.ini` ([`phar.readonly = Off`](http://us1.php.net/manual/en/phar.configuration.php#ini.phar.readonly)).
 
+You also need to be able to use the `sha1sum` cli tool.
+
 The procedure is then quite simple, check out the repository and:
 
 ```
@@ -44,3 +52,14 @@ $ bin/compile
 ```
 
 The phar is generated as `bin/couscous.phar`.
+
+## Releasing a new version
+
+Instructions for maintainers:
+
+```
+$ composer update
+$ bin/compile
+$ cp bin/couscous.* website/
+$ bin/couscous deploy
+```

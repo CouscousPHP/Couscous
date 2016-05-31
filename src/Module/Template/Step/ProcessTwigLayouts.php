@@ -2,10 +2,9 @@
 
 namespace Couscous\Module\Template\Step;
 
+use Couscous\Model\Project;
 use Couscous\Module\Template\Model\HtmlFile;
-use Couscous\Model\Repository;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Twig_Environment;
@@ -16,29 +15,29 @@ use Twig_Loader_Array;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ProcessTwigLayouts implements \Couscous\Step
+class ProcessTwigLayouts implements Step
 {
     const DEFAULT_LAYOUT_NAME = 'default.twig';
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
-        if (! $repository->metadata['template.directory']) {
+        if (!$project->metadata['template.directory']) {
             return;
         }
 
-        $twig = $this->createTwig($repository->metadata['template.directory']);
+        $twig = $this->createTwig($project->metadata['template.directory']);
 
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $repository->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
 
         foreach ($htmlFiles as $file) {
             $fileMetadata = $file->getMetadata();
             $layout = isset($fileMetadata['layout'])
-                ? $fileMetadata['layout'] . '.twig'
+                ? $fileMetadata['layout'].'.twig'
                 : self::DEFAULT_LAYOUT_NAME;
 
             $context = array_merge(
-                $repository->metadata->toArray(),
+                $project->metadata->toArray(),
                 $fileMetadata->toArray(),
                 ['content' => $file->content]
             );
@@ -61,17 +60,18 @@ class ProcessTwigLayouts implements \Couscous\Step
         $loader = $this->createLoader($templateDirectory);
 
         return new Twig_Environment($loader, [
-            'cache' => false,
+            'cache'       => false,
             'auto_reload' => true,
         ]);
     }
 
     /**
-     * We have to use a Twig_Loader_Array because of #12
+     * We have to use a Twig_Loader_Array because of #12.
      *
      * @link https://github.com/CouscousPHP/Couscous/issues/12
      *
      * @param string $templateDirectory
+     *
      * @return Twig_Loader_Array
      */
     private function createLoader($templateDirectory)

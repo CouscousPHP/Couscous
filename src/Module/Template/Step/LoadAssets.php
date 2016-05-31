@@ -3,9 +3,8 @@
 namespace Couscous\Module\Template\Step;
 
 use Couscous\Model\LazyFile;
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -17,7 +16,7 @@ use Symfony\Component\Finder\SplFileInfo;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class LoadAssets implements \Couscous\Step
+class LoadAssets implements Step
 {
     /**
      * @var Filesystem
@@ -29,23 +28,25 @@ class LoadAssets implements \Couscous\Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
-        if (! $repository->metadata['template.directory']) {
+        if (!$project->metadata['template.directory']) {
             return;
         }
 
         $files = new Finder();
         $files->files()
-            ->in($repository->metadata['template.directory'])
-            ->ignoreDotFiles(true)
-            ->notName('*.twig');
+            ->in($project->metadata['template.directory'])
+            ->ignoreDotFiles(false)
+            ->notName('*.twig')
+            ->notName('*.md')
+            ->notName('couscous.yml');
 
-        $repository->watchlist->watchFiles($files);
+        $project->watchlist->watchFiles($files);
 
         foreach ($files as $file) {
             /** @var SplFileInfo $file */
-            $repository->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
+            $project->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
         }
     }
 }

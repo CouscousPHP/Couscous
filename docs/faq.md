@@ -11,7 +11,12 @@ Yes.
 
 Yes, they work just like on GitHub.com.
 
-Links in Markdown are rewritten to link to HTML pages: a link to `changelog.md` will be rewritten to `changelog.html`.
+Links in Markdown are rewritten to link to HTML pages:
+
+- A link to `something.md` will be rewritten to `something.html`;
+- A link to `Something-Else.md` will be rewritten to `something-else.html`;
+- A link to `CONTRIBUTING.md` will be rewritten to `contributing.html`;
+- A link to `README.md` will be rewritten to `index.html`.
 
 #### Can I use it for a blog?
 

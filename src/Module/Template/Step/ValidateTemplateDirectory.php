@@ -2,9 +2,8 @@
 
 namespace Couscous\Module\Template\Step;
 
-use Couscous\Model\Repository;
+use Couscous\Model\Project;
 use Couscous\Step;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -12,7 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class ValidateTemplateDirectory implements \Couscous\Step
+class ValidateTemplateDirectory implements Step
 {
     const DEFAULT_TEMPLATE_DIRECTORY = 'website';
 
@@ -26,28 +25,28 @@ class ValidateTemplateDirectory implements \Couscous\Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
-        $directory = $repository->metadata['template.directory'];
+        $directory = $project->metadata['template.directory'];
 
         if ($directory === null) {
-            $directory = $repository->sourceDirectory . '/' . self::DEFAULT_TEMPLATE_DIRECTORY;
+            $directory = $project->sourceDirectory.'/'.self::DEFAULT_TEMPLATE_DIRECTORY;
         }
 
-        if (! $this->filesystem->isAbsolutePath($directory)) {
-            $directory = $repository->sourceDirectory . '/' . $directory;
+        if (!$this->filesystem->isAbsolutePath($directory)) {
+            $directory = $project->sourceDirectory.'/'.$directory;
         }
 
         $this->assertDirectoryExist($directory);
 
-        $repository->watchlist->watchDirectory($directory);
+        $project->watchlist->watchDirectory($directory);
 
-        $repository->metadata['template.directory'] = $directory;
+        $project->metadata['template.directory'] = $directory;
     }
 
     private function assertDirectoryExist($directory)
     {
-        if (! $this->filesystem->exists($directory)) {
+        if (!$this->filesystem->exists($directory)) {
             throw new \RuntimeException(sprintf(
                 "The template directory '%s' doesn't exist",
                 $directory

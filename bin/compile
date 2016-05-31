@@ -58,3 +58,5 @@ $builder->setStub(
 );
 
 chmod(__DIR__ . '/couscous.phar', 0755);
+
+file_put_contents('bin/couscous.version', sha1_file('bin/couscous.phar'));

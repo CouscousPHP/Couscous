@@ -6,23 +6,22 @@ use Couscous\Model\WatchList\WatchList;
 use Symfony\Component\Finder\Finder;
 
 /**
- * Repository containing files.
- *
- * Extends stdClass so that properties can be added by processors at will.
- * TODO should not extend stdClass anymore! It has been replaced by the metadata property...
+ * Project containing files.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class Repository extends \stdClass
+class Project
 {
     /**
      * Directory containing the sources files to process.
+     *
      * @var string
      */
     public $sourceDirectory;
 
     /**
      * Directory in which to generate the website.
+     *
      * @var string
      */
     public $targetDirectory;
@@ -58,8 +57,8 @@ class Repository extends \stdClass
     {
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
-        $this->watchlist       = new WatchList();
-        $this->metadata        = new Metadata();
+        $this->watchlist = new WatchList();
+        $this->metadata = new Metadata();
     }
 
     public function addFile(File $file)
@@ -88,11 +87,12 @@ class Repository extends \stdClass
 
     /**
      * @param string $class
+     *
      * @return File[] Instances of $class
      */
     public function findFilesByType($class)
     {
-        if (! class_exists($class)) {
+        if (!class_exists($class)) {
             throw new \InvalidArgumentException(sprintf(
                 "The class %s doesn't exist",
                 $class
@@ -111,11 +111,21 @@ class Repository extends \stdClass
      */
     public function sourceFiles()
     {
+        $includedDirectories = $this->metadata['include'] ? $this->metadata['include'] : [];
+
+        // To be sure that included directories are under the source one
+        if (!empty($includedDirectories)) {
+            array_walk($includedDirectories, function (&$item) {
+                $item = $this->sourceDirectory.'/'.$item;
+            });
+        }
+
         $excludedDirectories = $this->metadata['exclude'] ? $this->metadata['exclude'] : [];
 
         $finder = new Finder();
         $finder->files()
-            ->in($this->sourceDirectory)
+            ->followLinks()
+            ->in(!empty($includedDirectories) ? $includedDirectories : $this->sourceDirectory)
             ->ignoreDotFiles(true)
             ->exclude(array_merge($excludedDirectories, ['.couscous']));
 

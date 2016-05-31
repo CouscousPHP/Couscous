@@ -3,7 +3,6 @@ current_menu: templates
 ---
 # Templates
 
-
 ## Remote templates
 
 A **remote template** is a template that is hosted separately in a git repository.
@@ -21,7 +20,6 @@ The [Basic](https://github.com/CouscousPHP/Template-Basic) template is a good wa
 template:
     directory: .
 ```
-
 
 ## Embedded templates
 
@@ -79,9 +77,9 @@ This is my documentation.
 This is a *sub-chapter*.
 ```
 
-### Variables
+### Variables (aka Metadata)
 
-Variables can be defined in:
+Custom variables, called [**Metadata**](metadata.md), can be defined in:
 
 - `couscous.yml`
 - YAML front matter (at the top of Markdown files)
@@ -118,9 +116,7 @@ This is my documentation.
 </html>
 ```
 
-You can even override `couscous.yml` variables from the Markdown files's front matter (e.g. overriding the page title).
-
-Have a look at the [Light template](https://github.com/CouscousPHP/Template-Light): it uses variables to build a sidebar menu.
+To learn more, read the whole [Metadata documentation](metadata.md).
 
 ### Links
 
@@ -157,5 +153,4 @@ A good rule of thumb is: **if it works on GitHub.com, it will work with Couscous
 If a `bower.json` file is present in the `website/` directory, dependencies will be
 installed automatically.
 
-You don't need to have Bower installed on your machine, Couscous internally uses
-[BowerPHP](http://bowerphp.org/).
+In that case, you need [to have Bower installed](http://bower.io/). If you don't have a `bower.json`, you don't need to install Bower.

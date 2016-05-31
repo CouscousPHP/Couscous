@@ -2,51 +2,70 @@
 
 namespace Couscous\Module\Bower\Step;
 
-use Bowerphp\Command\InstallCommand;
-use Couscous\Model\Repository;
+use Couscous\CommandRunner\CommandRunner;
+use Couscous\Model\Project;
 use Couscous\Step;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\OutputInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Execute the scripts that were set in "after" in the configuration.
+ * Run Bower install.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class RunBowerInstall implements \Couscous\Step
+class RunBowerInstall implements Step
 {
     /**
      * @var Filesystem
      */
     private $filesystem;
 
-    public function __construct(Filesystem $filesystem)
-    {
+    /**
+     * @var CommandRunner
+     */
+    private $commandRunner;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(
+        Filesystem $filesystem,
+        CommandRunner $commandRunner,
+        LoggerInterface $logger
+    ) {
         $this->filesystem = $filesystem;
+        $this->commandRunner = $commandRunner;
+        $this->logger = $logger;
     }
 
-    public function __invoke(Repository $repository, OutputInterface $output)
+    public function __invoke(Project $project)
     {
-        if ($repository->regenerate) {
-            return;
-        }
-        if (! $repository->metadata['template.directory']) {
+        if ($project->regenerate || !$this->hasBowerJson($project)) {
             return;
         }
 
-        if (! $this->filesystem->exists($repository->metadata['template.directory'] . '/bower.json')) {
-            return;
+        $this->logger->notice('Executing "bower install"');
+
+        $result = $this->commandRunner->run(sprintf(
+            'cd "%s" && bower install',
+            $project->metadata['template.directory']
+        ));
+
+        if ($result) {
+            $this->logger->info($result);
+        }
+    }
+
+    private function hasBowerJson(Project $project)
+    {
+        if (!$project->metadata['template.directory']) {
+            return false;
         }
 
-        $output->writeln('Executing <info>bower install</info>');
+        $filename = $project->metadata['template.directory'].'/bower.json';
 
-        $workingDir = getcwd();
-        chdir($repository->metadata['template.directory']);
-
-        $command = new InstallCommand();
-        $command->run(new ArrayInput([]), $output);
-
-        chdir($workingDir);
+        return $this->filesystem->exists($filename);
     }
 }

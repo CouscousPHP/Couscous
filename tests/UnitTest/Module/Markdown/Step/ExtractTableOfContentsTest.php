@@ -2,6 +2,7 @@
 
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
+use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Model\Repository;
 use Couscous\Module\Markdown\Model\TableOfContents;
@@ -137,12 +138,12 @@ MARKDOWN;
     private function getTableOfContents($markdown)
     {
         $file = new MarkdownFile('foo', $markdown);
-        $repository = new Repository('foo', 'bar');
-        $repository->addFile($file);
+        $project = new Project('foo', 'bar');
+        $project->addFile($file);
 
         $environment = Environment::createCommonMarkEnvironment();
         $step = new ExtractTableOfContents(new DocParser($environment), new HtmlRenderer($environment));
-        $step->__invoke($repository, new NullOutput());
+        $step->__invoke($project, new NullOutput());
 
         $this->assertArrayHasKey('tableOfContents', $file->getMetadata());
         /** @var TableOfContents $toc */

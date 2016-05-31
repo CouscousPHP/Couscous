@@ -30,7 +30,8 @@
                         <p class="text-muted">The default template.</p>
                         <p class="template-features">
                             <span class="label label-default">optional menu</span>
-                            <span class="label label-default">syntax highlighting</span>
+                            <span class="label label-default">code highlighting</span>
+                            <span class="label label-default">responsive</span>
                         </p>
                     </div>
                 </div>
@@ -50,7 +51,8 @@
                         <p class="template-features">
                             <span class="label label-default">optional menu</span>
                             <span class="label label-default">sections</span>
-                            <span class="label label-default">syntax highlighting</span>
+                            <span class="label label-default">code highlighting</span>
+                            <span class="label label-default">responsive</span>
                         </p>
                     </div>
                 </div>
@@ -68,7 +70,8 @@
                         <h4>Basic template</h4>
                         <p class="text-muted">A basic template example.</p>
                         <p class="template-features">
-                            <span class="label label-default">syntax highlighting</span>
+                            <span class="label label-default">code highlighting</span>
+                            <span class="label label-default">responsive</span>
                         </p>
                     </div>
                 </div>
@@ -78,7 +81,27 @@
             <div class="row">
 
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="https://github.com/CouscousPHP/Couscous" class="portfolio-link">
+                    <a href="https://github.com/CouscousPHP/Template-ReadTheDocs" class="portfolio-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="https://raw.githubusercontent.com/CouscousPHP/Template-ReadTheDocs/master/screenshot.png" class="img-responsive">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Read The Docs template</h4>
+                        <p class="text-muted">template based on readthedocs.org Sphinx theme.</p>
+                        <p class="template-features">
+                            <span class="label label-default">menu</span>
+                            <span class="label label-default">code highlighting</span>
+                            <span class="label label-default">responsive</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="https://github.com/CouscousPHP/Couscous/blob/master/website/templates.twig" class="portfolio-link">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-search fa-3x"></i>
@@ -88,7 +111,9 @@
                     </a>
                     <div class="portfolio-caption">
                         <h4>Add your own</h4>
-                        <p class="text-muted">Send a pull request to add your own to the list.</p>
+                        <p class="text-muted">
+                            <a href="https://github.com/CouscousPHP/Couscous/blob/master/website/templates.twig">Send a pull request</a> to add your own to the list.
+                        </p>
                     </div>
                 </div>
 
@@ -98,3 +123,5 @@
     </section>
 
 {% endblock %}
+
+{% block footer %}{% endblock %}
