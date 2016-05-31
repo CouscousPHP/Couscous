@@ -120,14 +120,21 @@ class Project
             });
         }
 
-        $excludedDirectories = $this->metadata['exclude'] ? $this->metadata['exclude'] : [];
+        $excludedDirectories = new ExcludeList($this->metadata['exclude'] ? $this->metadata['exclude'] : []);
+
+        if (is_file($this->sourceDirectory.'/.gitignore')) {
+            $excludedDirectories->addEntries(file($this->sourceDirectory.'/.gitignore'));
+        }
 
         $finder = new Finder();
         $finder->files()
             ->followLinks()
             ->in(!empty($includedDirectories) ? $includedDirectories : $this->sourceDirectory)
-            ->ignoreDotFiles(true)
-            ->exclude(array_merge($excludedDirectories, ['.couscous']));
+            ->ignoreDotFiles(true);
+
+        $excludedDirectories
+            ->addEntry('.couscous')
+            ->excludeFromFinder($finder);
 
         return $finder;
     }

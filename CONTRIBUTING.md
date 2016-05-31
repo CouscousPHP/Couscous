@@ -27,7 +27,7 @@ To be able to preview Couscous own website on your machine, you will need the fo
 - Less compiler:
 
     ```
-    $ npm install -g less
+    $ npm install -g less less-plugin-clean-css
     ```
 
 - Phar generation enabled in `php.ini`:
