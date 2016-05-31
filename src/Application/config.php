@@ -68,4 +68,6 @@ return [
             LogLevel::DEBUG     => OutputInterface::VERBOSITY_VERY_VERBOSE,
         ]),
 
+    'League\CommonMark\Environment' => DI\factory(['League\CommonMark\Environment', 'createCommonMarkEnvironment']),
+
 ];
