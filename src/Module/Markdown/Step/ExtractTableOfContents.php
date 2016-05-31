@@ -7,14 +7,13 @@ use Couscous\Model\Repository;
 use Couscous\Module\Markdown\Model\TableOfContents;
 use Couscous\Step;
 use League\CommonMark\Block\Element\Document;
-use League\CommonMark\Block\Element\Header;
+use League\CommonMark\Block\Element\Heading;
 use League\CommonMark\DocParser;
-use League\CommonMark\Environment;
 use League\CommonMark\HtmlRenderer;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Turns Markdown to HTML.
+ * Extract the table of content from headers in the document.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
@@ -25,11 +24,15 @@ class ExtractTableOfContents implements Step
      */
     private $markdownParser;
 
-    public function __construct()
+    /**
+     * @var HtmlRenderer
+     */
+    private $htmlRenderer;
+
+    public function __construct(DocParser $markdownParser, HtmlRenderer $htmlRenderer)
     {
-        $environment = Environment::createCommonMarkEnvironment();
-        $this->markdownParser = new DocParser($environment);
-        $this->htmlRenderer = new HtmlRenderer($environment);
+        $this->markdownParser = $markdownParser;
+        $this->htmlRenderer = $htmlRenderer;
     }
 
     public function __invoke(Repository $repository, OutputInterface $output)
@@ -47,23 +50,19 @@ class ExtractTableOfContents implements Step
     }
 
     /**
-     * @param Document $document
      * @return TableOfContents
      */
     private function parseTableOfContents(Document $document)
     {
-        $title = null;
-        $headers = [];
+        $toc = new TableOfContents;
 
-        foreach ($document->getChildren() as $block) {
-            if ($block instanceof Header) {
-                $html = $this->htmlRenderer->renderBlock($block);
-                $headers[$block->getLevel()][] = strip_tags($html);
+        // Iterate only root blocks to find headers
+        foreach ($document->children() as $node) {
+            if ($node instanceof Heading) {
+                $html = $this->htmlRenderer->renderBlock($node);
+                $toc->addHeader($node->getLevel(), trim(strip_tags($html)));
             }
         }
-
-        $toc = new TableOfContents();
-        $toc->setAllHeaders($headers);
 
         return $toc;
     }

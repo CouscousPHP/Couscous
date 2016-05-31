@@ -10,51 +10,86 @@ namespace Couscous\Module\Markdown\Model;
 class TableOfContents
 {
     /**
-     * Array of headers indexed by the level.
+     * The document title.
      *
-     * @var string[][]
+     * @var string|null
+     */
+    private $title;
+
+    /**
+     * Array of headers. Starts at level 2.
+     *
+     * @var array<array<'level', 'text'>>
      */
     private $headers = [];
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getTitle()
     {
-        return reset($this->headers[1]);
+        return $this->title;
     }
 
     /**
      * @param int $level Header level (from 1 to 6)
-     * @return string[]
+     * @param string $text
      */
-    public function getHeaders($level)
+    public function addHeader($level, $text)
     {
-        return $this->headers[$level];
+        if ($level === 1) {
+            if (!$this->title && !$this->headers) {
+                $this->title = $text;
+            }
+            return;
+        }
+
+        $this->headers[] = [$level, $text];
     }
 
     /**
-     * @param int      $level   Header level (from 1 to 6)
-     * @param string[] $headers
+     * Export the table of contents to an HTML list.
+     *
+     * The list is nested: sub-levels are embedded in list items.
+     *
+     * @return string
      */
-    public function setHeaders($level, array $headers)
+    public function toHtmlList()
     {
-        $this->headers[$level] = $headers;
-    }
+        $html = '';
 
-    /**
-     * @param string[][] $headers
-     */
-    public function setAllHeaders(array $headers)
-    {
-        $this->headers = $headers;
-    }
+        $currentLevel = 1;
+        foreach ($this->headers as $item) {
+            list($level, $text) = $item;
 
-    /**
-     * @return string[][]
-     */
-    public function getAllHeaders()
-    {
-        return $this->headers;
+            if ($level > $currentLevel) {
+                // Enter a sub-level
+                $html .= '<ul>';
+                $currentLevel++;
+                while ($level > $currentLevel) {
+                    $html .= '<li><ul>';
+                    $currentLevel++;
+                }
+            } elseif ($level < $currentLevel) {
+                // Close a sub-level
+                $html .= '</li>';
+                while ($level < $currentLevel) {
+                    $html .= '</ul></li>';
+                    $currentLevel--;
+                }
+            } else {
+                $html .= '</li>';
+            }
+
+            $html .= sprintf('<li>%s', $text);
+        }
+
+        // Close nesting left
+        while ($currentLevel > 1) {
+            $html .= '</li></ul>';
+            $currentLevel--;
+        }
+
+        return $html;
     }
 }
