@@ -32,7 +32,7 @@ class TableOfContents
     }
 
     /**
-     * @param int $level Header level (from 1 to 6)
+     * @param int    $level Header level (from 1 to 6)
      * @param string $text
      */
     public function addHeader($level, $text)
@@ -41,6 +41,7 @@ class TableOfContents
             if (!$this->title && !$this->headers) {
                 $this->title = $text;
             }
+
             return;
         }
 

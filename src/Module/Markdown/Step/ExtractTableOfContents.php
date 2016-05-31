@@ -53,7 +53,7 @@ class ExtractTableOfContents implements Step
      */
     private function parseTableOfContents(Document $document)
     {
-        $toc = new TableOfContents;
+        $toc = new TableOfContents();
 
         // Iterate only root blocks to find headers
         foreach ($document->children() as $node) {

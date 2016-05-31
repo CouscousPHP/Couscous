@@ -4,13 +4,11 @@ namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
-use Couscous\Model\Repository;
 use Couscous\Module\Markdown\Model\TableOfContents;
 use Couscous\Module\Markdown\Step\ExtractTableOfContents;
 use League\CommonMark\DocParser;
 use League\CommonMark\Environment;
 use League\CommonMark\HtmlRenderer;
-use Symfony\Component\Console\Output\NullOutput;
 
 /**
  * @covers \Couscous\Module\Markdown\Step\ExtractTableOfContents
@@ -22,7 +20,7 @@ class ExtractTableOfContentsTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_extract_first_main_title()
     {
-        $markdown = <<<MARKDOWN
+        $markdown = <<<'MARKDOWN'
 # Big title
 
 ## First section
@@ -38,7 +36,7 @@ MARKDOWN;
      */
     public function it_should_dump_to_html_list()
     {
-        $markdown = <<<MARKDOWN
+        $markdown = <<<'MARKDOWN'
 ## 2.1
 
 Some paragraph.
@@ -59,7 +57,7 @@ Some paragraph.
 
 Another paragraph.
 MARKDOWN;
-        $expected = <<<HTML
+        $expected = <<<'HTML'
 <ul>
     <li>
         2.1
@@ -104,7 +102,7 @@ HTML;
      */
     public function it_should_strip_formatting()
     {
-        $markdown = <<<MARKDOWN
+        $markdown = <<<'MARKDOWN'
 # [Big `title`](link.md) <i class="icon"></i>
 
 ## A [section](http://example.com) with **bold**
@@ -119,7 +117,7 @@ MARKDOWN;
      */
     public function it_should_ignore_level_1_in_sub_levels()
     {
-        $markdown = <<<MARKDOWN
+        $markdown = <<<'MARKDOWN'
 ## Sub-section
 
 # Level 1
@@ -133,6 +131,7 @@ MARKDOWN;
 
     /**
      * @param string $markdown
+     *
      * @return TableOfContents
      */
     private function getTableOfContents($markdown)
@@ -143,13 +142,13 @@ MARKDOWN;
 
         $environment = Environment::createCommonMarkEnvironment();
         $step = new ExtractTableOfContents(new DocParser($environment), new HtmlRenderer($environment));
-        $step->__invoke($project, new NullOutput());
+        $step->__invoke($project);
 
         $this->assertArrayHasKey('tableOfContents', $file->getMetadata());
         /** @var TableOfContents $toc */
         $toc = $file->getMetadata()['tableOfContents'];
         $this->assertTrue($toc instanceof TableOfContents);
+
         return $toc;
     }
-
 }
