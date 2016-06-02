@@ -98,12 +98,13 @@ class PreviewCommand extends Command
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
 
         $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
+        $throwOnServerStop = true;
 
         if (function_exists('pcntl_signal')) {
             declare(ticks=1);
 
-            $handler = function ($signal) use ($serverProcess, $output) {
-                $this->stopWebServer($serverProcess, $output, $signal);
+            $handler = function ($signal) use ($serverProcess, $output, &$throwOnServerStop) {
+                $throwOnServerStop = !$this->stopWebServer($serverProcess, $output, $signal);
             };
 
             foreach ([SIGINT, SIGTERM] as $signal) {
@@ -126,7 +127,11 @@ class PreviewCommand extends Command
             sleep(1);
         }
 
-        throw new RuntimeException('The HTTP server has stopped: '.PHP_EOL.$serverProcess->getErrorOutput());
+        if ($throwOnServerStop) {
+            throw new RuntimeException('The HTTP server has stopped: '.PHP_EOL.$serverProcess->getErrorOutput());
+        }
+
+        return 0;
     }
 
     private function generateWebsite(
@@ -170,11 +175,15 @@ class PreviewCommand extends Command
             $serverProcess->stop(0, $signal);
         }
 
-        if ($serverProcess->isRunning()) {
+        if ($serverProcess->isRunning() === false) {
             $output->writeln(sprintf('Server was killed with signal <comment>%s</comment>', $signal));
-        } else {
-            $output->writeln(sprintf('Unable to kill the server with signal <comment>%s</comment>', $signal));
+
+            return true;
         }
+
+        $output->writeln(sprintf('Unable to kill the server with signal <comment>%s</comment>', $signal));
+
+        return false;
     }
 
     private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
