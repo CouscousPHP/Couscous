@@ -88,3 +88,11 @@ $ couscous deploy --branch master
 ## Customizing the template
 
 Couscous provides [a default template](https://github.com/CouscousPHP/Template-Light) (and a [few others to choose from](http://couscous.io/templates.html)), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the [templates documentation](templates.md).
+
+## Updating Couscous
+
+If you are using the phar file, you can update Couscous by simply running the `self-update` command:
+
+```bash
+$ couscous self-update
+```
