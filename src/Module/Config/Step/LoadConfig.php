@@ -51,6 +51,12 @@ class LoadConfig implements Step
         }
 
         $metadata = $this->parseYamlFile($filename);
+
+        if (array_key_exists('dataFiles', $metadata)) {
+            // Extend configuration with extra data files.
+            $metadata['dataFiles'] = $this->loadDataFiles($metadata['dataFiles'], $project->sourceDirectory);
+        }
+
         $metadata = $this->validateConfig($metadata);
 
         $project->metadata->setMany($metadata);
@@ -98,5 +104,24 @@ class LoadConfig implements Step
         }
 
         return $values;
+    }
+
+    /**
+     * Load extra data files defined in configuration file.
+     *
+     * @param  array $dataFiles     Array of data files to load.
+     * @param  string $relativeTo   Path from where files will be resolved.
+     *
+     * @return array                Array - key,value - of loaded data.
+     */
+    private function loadDataFiles($dataFiles, $relativeTo)
+    {
+        $loadedData = array();
+        foreach ($dataFiles as $key => $dataFile) {
+            // Load this data file.
+            $loadedData["$key"] = $this->parseYamlFile($relativeTo . DIRECTORY_SEPARATOR . $dataFile);
+        }
+
+        return $loadedData;
     }
 }
