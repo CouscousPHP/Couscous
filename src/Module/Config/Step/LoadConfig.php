@@ -54,7 +54,7 @@ class LoadConfig implements Step
 
         if (array_key_exists('dataFiles', $metadata)) {
             // Extend configuration with extra data files.
-            $metadata['dataFiles'] = $this->loadDataFiles($metadata['dataFiles'], $project->sourceDirectory);
+            $metadata['dataFiles'] = $this->loadDataFiles($metadata['dataFiles'], $project);
         }
 
         $metadata = $this->validateConfig($metadata);
@@ -114,12 +114,18 @@ class LoadConfig implements Step
      *
      * @return array Array - key,value - of loaded data.
      */
-    private function loadDataFiles($dataFiles, $relativeTo)
+    private function loadDataFiles($dataFiles, $project)
     {
         $loadedData = [];
         foreach ($dataFiles as $key => $dataFile) {
+            // Resolve path to this file.
+            $path = $project->sourceDirectory.DIRECTORY_SEPARATOR.$dataFile;
+
             // Load this data file.
-            $loadedData["$key"] = $this->parseYamlFile($relativeTo.DIRECTORY_SEPARATOR.$dataFile);
+            $loadedData["$key"] = $this->parseYamlFile($path);
+
+            // Watch this file.
+            $project->watchlist->watchFile($path);
         }
 
         return $loadedData;
