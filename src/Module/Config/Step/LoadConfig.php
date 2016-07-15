@@ -109,17 +109,17 @@ class LoadConfig implements Step
     /**
      * Load extra data files defined in configuration file.
      *
-     * @param  array $dataFiles     Array of data files to load.
-     * @param  string $relativeTo   Path from where files will be resolved.
+     * @param array  $dataFiles  Array of data files to load.
+     * @param string $relativeTo Path from where files will be resolved
      *
-     * @return array                Array - key,value - of loaded data.
+     * @return array Array - key,value - of loaded data.
      */
     private function loadDataFiles($dataFiles, $relativeTo)
     {
-        $loadedData = array();
+        $loadedData = [];
         foreach ($dataFiles as $key => $dataFile) {
             // Load this data file.
-            $loadedData["$key"] = $this->parseYamlFile($relativeTo . DIRECTORY_SEPARATOR . $dataFile);
+            $loadedData["$key"] = $this->parseYamlFile($relativeTo.DIRECTORY_SEPARATOR.$dataFile);
         }
 
         return $loadedData;
