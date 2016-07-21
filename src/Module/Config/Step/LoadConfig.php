@@ -52,9 +52,9 @@ class LoadConfig implements Step
 
         $metadata = $this->parseYamlFile($filename);
 
-        if (array_key_exists('dataFiles', $metadata)) {
+        if (array_key_exists('import', $metadata)) {
             // Extend configuration with extra data files.
-            $metadata['dataFiles'] = $this->loadDataFiles($metadata['dataFiles'], $project);
+            $metadata['import'] = $this->loadDataFiles($metadata['import'], $project);
         }
 
         $metadata = $this->validateConfig($metadata);
