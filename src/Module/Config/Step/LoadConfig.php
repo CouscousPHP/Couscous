@@ -54,7 +54,8 @@ class LoadConfig implements Step
 
         if (array_key_exists('import', $metadata)) {
             // Extend configuration with extra data files.
-            foreach ($metadata['import'] as $dataFile) {
+            $filesToImport = $metadata['import'];
+            foreach ($filesToImport as $dataFile) {
                 $metadata = array_replace_recursive(
                     $metadata,
                     $this->loadDataFile($dataFile, $project)
