@@ -34,7 +34,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
      */
     public function clone_should_run_git_clone()
     {
-        $this->expectCommandIsRun('git clone url directory');
+        $this->expectCommandIsRun('git clone url "directory"');
 
         $this->git->cloneRepository('url', 'directory');
     }

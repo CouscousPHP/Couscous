@@ -21,7 +21,7 @@ class Git
 
     public function cloneRepository($url, $directory)
     {
-        $this->commandRunner->run("git clone $url $directory");
+        $this->commandRunner->run("git clone $url \"$directory\"");
     }
 
     public function checkoutOriginBranch($directory, $branch)
