@@ -112,7 +112,6 @@ class PreviewCommand extends Command
             }
         }
 
-
         // Watch for changes
         while ($serverProcess->isRunning()) {
             $files = $watchlist->getChangedFiles();
