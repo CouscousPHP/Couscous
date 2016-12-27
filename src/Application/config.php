@@ -8,6 +8,7 @@ return [
     'steps' => [
         DI\get('Couscous\Module\Config\Step\SetDefaultConfig'),
         DI\get('Couscous\Module\Config\Step\LoadConfig'),
+        DI\get('Couscous\Module\Config\Step\OverrideConfigFromCLI'),
         DI\get('Couscous\Module\Config\Step\OverrideBaseUrlForPreview'),
 
         DI\get('Couscous\Module\Scripts\Step\ExecuteBeforeScripts'),
