@@ -46,12 +46,23 @@ class GenerateCommand extends Command
                 InputOption::VALUE_REQUIRED,
                 'Target directory in which to generate the files.',
                 getcwd().'/.couscous/generated'
+            )
+            ->addOption(
+                'config',
+                null,
+                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                'If specified will override entries in couscous.yaml (key=value)',
+                []
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $tempConfigRaw = $input->getOption('config');
+        
         $project = new Project($input->getArgument('source'), $input->getOption('target'));
+        
+        $project->metadata['tempConfigRaw'] = $tempConfigRaw;
 
         $this->generator->generate($project, $output);
     }
