@@ -80,7 +80,7 @@ class PreviewCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $tempConfigRaw = $input->getOption('config');
-        
+
         if (!$this->isSupported()) {
             $output->writeln('<error>PHP 5.4 or above is required to run the internal webserver</error>');
 
@@ -121,7 +121,6 @@ class PreviewCommand extends Command
             }
         }
 
-
         // Watch for changes
         while ($serverProcess->isRunning()) {
             $files = $watchlist->getChangedFiles();
@@ -151,7 +150,7 @@ class PreviewCommand extends Command
         $regenerate = false
     ) {
         $project = new Project($sourceDirectory, $targetDirectory);
-        
+
         $project->metadata['tempConfigRaw'] = $tempConfigRaw;
         $project->metadata['preview'] = true;
 

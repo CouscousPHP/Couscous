@@ -103,7 +103,7 @@ class DeployCommand extends Command
         $tempConfigRaw = $input->getOption('config');
 
         $project = new Project($sourceDirectory, getcwd().'/.couscous/generated');
-        
+
         $project->metadata['tempConfigRaw'] = $tempConfigRaw;
 
         // Generate the website

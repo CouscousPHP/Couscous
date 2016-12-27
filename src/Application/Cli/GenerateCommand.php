@@ -59,9 +59,9 @@ class GenerateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $tempConfigRaw = $input->getOption('config');
-        
+
         $project = new Project($input->getArgument('source'), $input->getOption('target'));
-        
+
         $project->metadata['tempConfigRaw'] = $tempConfigRaw;
 
         $this->generator->generate($project, $output);
