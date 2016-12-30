@@ -33,7 +33,7 @@ class OverrideConfigFromCLI implements \Couscous\Step
             $explosion = explode('=', $item, 2);
             $this->logger->notice('Overriding global config: '.$explosion[0].' = "'.$explosion[1].'"');
 
-            $config[$explosion[0]] = $explosion[1];
+            $cliConfig[$explosion[0]] = $explosion[1];
         }
 
         unset($project->metadata['cliConfig']);
