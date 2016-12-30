@@ -51,18 +51,18 @@ class GenerateCommand extends Command
                 'config',
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
-                'If specified will override entries in couscous.yaml (key=value)',
+                'If specified will override entries in couscous.yml (key=value)',
                 []
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $tempConfigRaw = $input->getOption('config');
+        $cliConfig = $input->getOption('config');
 
         $project = new Project($input->getArgument('source'), $input->getOption('target'));
 
-        $project->metadata['tempConfigRaw'] = $tempConfigRaw;
+        $project->metadata['cliConfig'] = $cliConfig;
 
         $this->generator->generate($project, $output);
     }

@@ -24,19 +24,20 @@ class OverrideConfigFromCLI implements \Couscous\Step
 
     public function __invoke(Project $project)
     {
-        if ($project->metadata['tempConfigRaw']) {
-            $keys = $values = [];
-            foreach ($project->metadata['tempConfigRaw'] as $item) {
-                $explosion = explode('=', $item, 2);
-                $this->logger->notice('Overriding global config: '.$explosion[0].' = "'.$explosion[1].'"');
-
-                $keys[] = $explosion[0];
-                $values[] = $explosion[1];
-            }
-
-            unset($project->metadata['tempConfigRaw']);
-
-            $project->metadata->setMany(array_combine($keys, $values));
+        if (!$project->metadata['cliConfig']) {
+            return;
         }
+        
+        $cliConfig = [];
+        foreach ($project->metadata['cliConfig'] as $item) {
+            $explosion = explode('=', $item, 2);
+            $this->logger->notice('Overriding global config: '.$explosion[0].' = "'.$explosion[1].'"');
+
+            $config[$explosion[0]] = $explosion[1];
+        }
+
+        unset($project->metadata['cliConfig']);
+
+        $project->metadata->setMany($cliConfig);
     }
 }
