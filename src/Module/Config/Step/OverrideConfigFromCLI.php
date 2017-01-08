@@ -27,7 +27,7 @@ class OverrideConfigFromCLI implements \Couscous\Step
         if (!$project->metadata['cliConfig']) {
             return;
         }
-        
+
         $cliConfig = [];
         foreach ($project->metadata['cliConfig'] as $item) {
             $explosion = explode('=', $item, 2);
