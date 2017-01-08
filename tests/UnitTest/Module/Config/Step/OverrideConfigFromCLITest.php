@@ -4,7 +4,6 @@ namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\OverrideConfigFromCLI;
 use Couscous\Tests\UnitTest\Mock\MockProject;
-use Psr\Log\LoggerInterface;
 
 /**
  * @covers \Couscous\Module\Config\Step\OverrideConfigFromCLI
@@ -19,7 +18,7 @@ class OverrideConfigFromCLITest extends \PHPUnit_Framework_TestCase
         $project = new MockProject();
         $project->metadata['title'] = 'foo';
         $project->metadata['cliConfig'] = ['title=bar'];
-        
+
         $logger = $this->getMock("Psr\Log\LoggerInterface");
 
         $step = new OverrideConfigFromCLI($logger);
@@ -36,7 +35,7 @@ class OverrideConfigFromCLITest extends \PHPUnit_Framework_TestCase
         $project = new MockProject();
         $project->metadata['title'] = 'foo';
         $project->metadata['cliConfig'] = [];
-        
+
         $logger = $this->getMock("Psr\Log\LoggerInterface");
 
         $step = new OverrideConfigFromCLI($logger);
@@ -52,7 +51,7 @@ class OverrideConfigFromCLITest extends \PHPUnit_Framework_TestCase
     {
         $project = new MockProject();
         $project->metadata['title'] = 'foo';
-        
+
         $logger = $this->getMock("Psr\Log\LoggerInterface");
 
         $step = new OverrideConfigFromCLI($logger);
