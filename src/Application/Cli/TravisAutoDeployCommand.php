@@ -99,18 +99,17 @@ class TravisAutoDeployCommand extends Command
         $this->commandRunner->run('git config --global user.name "${GIT_NAME}"');
         $this->commandRunner->run('git config --global user.email "${GIT_EMAIL}"');
 
-        if (getenv('DEPLOY_WEBSITE') == 'true') {
-            // Generate the website
-            $this->generator->generate($repository, $output);
+        // Generate the website
+        $this->generator->generate($repository, $output);
 
-            $output->writeln('');
+        $output->writeln('');
 
-            // Deploy it
-            $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
+        // Deploy it
+        $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
 
-            // generate couscous.phar to be uploaded when a new release is done
-            $this->commandRunner->run('bin/compile');
-        }
+        // generate couscous.phar to be uploaded when a new release is done
+        $this->commandRunner->run('bin/compile');
+        $output->writeln('<comment>PHAR file generated</comment>');
 
     }
 }
