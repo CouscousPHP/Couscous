@@ -58,13 +58,6 @@ class TravisAutoDeployCommand extends Command
                 getcwd()
             )
             ->addOption(
-                'php-version',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'Specify for which php version you want to deploy documentation, mainly to avoid multiple deploys',
-                '5.4'
-            )
-            ->addOption(
                 'branch',
                 null,
                 InputOption::VALUE_REQUIRED,
@@ -106,20 +99,18 @@ class TravisAutoDeployCommand extends Command
         $this->commandRunner->run('git config --global user.name "${GIT_NAME}"');
         $this->commandRunner->run('git config --global user.email "${GIT_EMAIL}"');
 
-        // getting current php version to only deploy once
-        $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
-        if ($input->getOption('php-version') != $currentPhpVersion) {
-            $output->writeln('<comment>This version of the documentation is already deployed</comment>');
+        if (getenv('DEPLOY_WEBSITE') == 'true') {
+            // Generate the website
+            $this->generator->generate($repository, $output);
 
-            return;
+            $output->writeln('');
+
+            // Deploy it
+            $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
+
+            // generate couscous.phar to be uploaded when a new release is done
+            $this->commandRunner->run('bin/compile');
         }
 
-        // Generate the website
-        $this->generator->generate($repository, $output);
-
-        $output->writeln('');
-
-        // Deploy it
-        $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
     }
 }

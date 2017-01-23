@@ -3,21 +3,39 @@ language: php
 sudo: false
 
 php:
-    - 5.4
-    - 5.5
-    - 5.6
-    - 7.0
-    - 7.1
-    - hhvm
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - 7.1
+  - hhvm
 
 matrix:
-    include:
-        - php: 5.4
-          env: dependencies=lowest
+  include:
+    - php: 5.4
+      env: dependencies=lowest
+    - php: 7.0
+      env:
+        - DEPLOY_WEBSITE=true
 
 before_script:
-    - composer install -n
-    - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-stable -n; fi;
+  - composer install -n
+  - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-stable -n; fi;
 
 script:
-    - vendor/bin/phpunit
+  - vendor/bin/phpunit
+
+after_success:
+  - if [ "$DEPLOY_WEBSITE" = "true" ]; then bin/couscous travis-auto-deploy; fi;
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: duX9ViWZ8Iin85auMS4XM4r+FqzShZ0at4sylE3QnUdXe6X5jfxBdOO+L1mhY1JyJ/BA8TjUziGDZ2e8UvwkMHIZRe+eZIifqwm/8Y9P2lMFmVNoHC4qfESl4NgHShc4gFjeUYkhMRQLgHScY+lkY+N4HVz10Y1P6B3c4EBXSxg=
+  file: bin/couscous.phar
+  on:
+    repo: CouscousPHP/Couscous
+    tags: true
+    php: '7.0'
+
