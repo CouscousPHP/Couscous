@@ -1,6 +1,6 @@
 {
 	"name": "google-code-prettify",
-	"version": "1.0.1",
+	"version": "1.0.5",
 	"main": [
 		"./bin/prettify.min.css",
 		"./bin/prettify.min.js"

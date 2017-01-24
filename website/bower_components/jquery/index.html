@@ -109,28 +109,40 @@
                 </nav>
 
                 <section class="documentation col-sm-offset-3 col-lg-offset-3 col-sm-9 col-lg-10">
-                    <h1 id="agency-by-start-bootstrap">Agency by Start Bootstrap <a href="https://travis-ci.org/IronSummitMedia/startbootstrap-agency"><img src="https://travis-ci.org/IronSummitMedia/startbootstrap-agency.svg?branch=master" alt="Build Status" /></a></h1>
-<p>Agency is a one page HTML theme for agencies created by Start Bootstrap. This repository is a pre-release that we are using to test integrating themes with Grunt, Bower, and ultimately, creating Yeoman and Brunch scaffolds for all of our open source templates and themes.</p>
-<p>To access the current version of this template, visit <a href="http://startbootstrap.com/template-overviews/agency/">http://startbootstrap.com/template-overviews/agency/</a>.</p>
-<h2 id="screenshot">Screenshot</h2>
-<p><img src="http://sbootstrap.startbootstrapc.netdna-cdn.com/assets/img/templates/agency.jpg" alt="" /></p>
-<h2 id="installation">Installation</h2>
-<ul>
-<li>Fork the source files from this repository.</li>
-<li>Run <code>npm install</code> in the root directory to install Grunt dependencies.</li>
-<li>Run <code>bower install</code> in the root directory to install Bower dependencies.</li>
-</ul>
-<p>You are now ready to work with the theme! Feel free to edit the Gruntfile as you see fit. It's recommended that you have a working knowledge of Grunt and Bower before attempting to use these source files. If you want the easy to use, HTML/CSS version of this template, you can download it at <a href="http://startbootstrap.com/template-overviews/agency/">http://startbootstrap.com/template-overviews/agency/</a>.</p>
-<h2 id="grunt-tasks">Grunt Tasks</h2>
-<ul>
-<li><code>grunt</code> will run all Grunt tasks. It will build the dist folder based on the specifications set up in the Gruntfile.</li>
-<li><code>grunt watch</code> will watch specified files for changes, and automatically build them within the dist folder.</li>
-</ul>
-<h2 id="support">Support</h2>
-<p>If you have questions about the theme you can submit an issue here on GitHub or you can leave a comment on the theme overview page on Start Bootstrap at <a href="http://startbootstrap.com/template-overviews/agency/">http://startbootstrap.com/template-overviews/agency/</a>.</p>
-<h2 id="contributing">Contributing</h2>
-<p>If you have fixed a bug with the template feel free to open a pull request and I will review and merge the request.</p>
-<p><em>NOTE: Pull requests with new features will most likely not be added to the base theme! The templates and themes on Start Bootstrap are meant to be starting points for people to work off of, and I don't typically add any new feature unless they are frequently asked for.</em></p>
+                    <h1 id="jquery">jQuery</h1>
+<blockquote>
+<p>jQuery is a fast, small, and feature-rich JavaScript library.</p>
+</blockquote>
+<p>For information on how to get started and how to use jQuery, please see <a href="http://api.jquery.com/">jQuery's documentation</a>.
+For source files and issues, please visit the <a href="https://github.com/jquery/jquery">jQuery repo</a>.</p>
+<h2 id="including-jquery">Including jQuery</h2>
+<p>Below are some of the most common ways to include jQuery.</p>
+<h3 id="browser">Browser</h3>
+<h4 id="script-tag">Script tag</h4>
+<pre><code class="language-html">&lt;script src="https://code.jquery.com/jquery-2.2.0.min.js"&gt;&lt;/script&gt;</code></pre>
+<h4 id="babel">Babel</h4>
+<p><a href="http://babeljs.io/">Babel</a> is a next generation JavaScript compiler. One of the features is the ability to use ES6/ES2015 modules now, even though browsers do not yet support this feature natively.</p>
+<pre><code class="language-js">import $ from "jquery";</code></pre>
+<h4 id="browserifywebpack">Browserify/Webpack</h4>
+<p>There are several ways to use <a href="http://browserify.org/">Browserify</a> and <a href="https://webpack.github.io/">Webpack</a>. For more information on using these tools, please refer to the corresponding project's documention. In the script, including jQuery will usually look like this...</p>
+<pre><code class="language-js">var $ = require("jquery");</code></pre>
+<h4 id="amd-asynchronous-module-definition">AMD (Asynchronous Module Definition)</h4>
+<p>AMD is a module format built for the browser. For more information, we recommend <a href="http://requirejs.org/docs/whyamd.html">require.js' documentation</a>.</p>
+<pre><code class="language-js">define(["jquery"], function($) {
+
+});</code></pre>
+<h3 id="node">Node</h3>
+<p>To include jQuery in <a href="nodejs.org">Node</a>, first install with npm.</p>
+<pre><code class="language-sh">npm install jquery</code></pre>
+<p>For jQuery to work in Node, a window with a document is required. Since no such window exists natively in Node, one can be mocked by tools such as <a href="https://github.com/tmpvar/jsdom">jsdom</a>. This can be useful for testing purposes.</p>
+<pre><code class="language-js">require("jsdom").env("", function(err, window) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+
+    var $ = require("jquery")(window);
+});</code></pre>
                 </section>
 
             </div>
@@ -140,7 +152,7 @@
             <footer>
             <div class="container">
                 <p>
-                    <a href="https://github.com/CouscousPHP/Couscous/blob/master/theme/README.md">
+                    <a href="https://github.com/CouscousPHP/Couscous/blob/master/website/bower_components/jquery/README.md">
                         Edit this page on GitHub
                     </a>
                 </p>
