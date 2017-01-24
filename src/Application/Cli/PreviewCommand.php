@@ -64,6 +64,13 @@ class PreviewCommand extends Command
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'If set livereload server is launched from the specified path (global livereload by default)'
+            )
+            ->addOption(
+                'config',
+                null,
+                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                'If specified will override entries in couscous.yml (key=value)',
+                []
             );
     }
 
@@ -72,6 +79,8 @@ class PreviewCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $cliConfig = $input->getOption('config');
+
         if (!$this->isSupported()) {
             $output->writeln('<error>PHP 5.4 or above is required to run the internal webserver</error>');
 
@@ -95,7 +104,7 @@ class PreviewCommand extends Command
             $this->startLivereload($input->getOption('livereload'), $output, $sourceDirectory, $targetDirectory);
         }
 
-        $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory);
+        $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, $cliConfig);
 
         $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
         $throwOnServerStop = true;
@@ -120,7 +129,7 @@ class PreviewCommand extends Command
                 $output->write(sprintf('<comment>%d file(s) changed: regenerating</comment>', count($files)));
                 $output->writeln(sprintf(' (%s)', $this->fileListToDisplay($files, $sourceDirectory)));
 
-                $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, true);
+                $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, $cliConfig, true);
             }
 
             sleep(1);
@@ -137,10 +146,12 @@ class PreviewCommand extends Command
         OutputInterface $output,
         $sourceDirectory,
         $targetDirectory,
+        $cliConfig,
         $regenerate = false
     ) {
         $project = new Project($sourceDirectory, $targetDirectory);
 
+        $project->metadata['cliConfig'] = $cliConfig;
         $project->metadata['preview'] = true;
 
         $project->regenerate = $regenerate;

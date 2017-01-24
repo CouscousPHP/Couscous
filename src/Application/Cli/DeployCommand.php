@@ -82,6 +82,13 @@ class DeployCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Target branch in which to deploy the website.'
+            )
+            ->addOption(
+                'config',
+                null,
+                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                'If specified will override entries in couscous.yml (key=value)',
+                []
             );
     }
 
@@ -93,8 +100,11 @@ class DeployCommand extends Command
         $sourceDirectory = $input->getArgument('source');
         $repositoryUrl = $input->getOption('repository');
         $targetBranch = $input->getOption('branch');
+        $cliConfig = $input->getOption('config');
 
         $project = new Project($sourceDirectory, getcwd().'/.couscous/generated');
+
+        $project->metadata['cliConfig'] = $cliConfig;
 
         // Generate the website
         $this->generator->generate($project, $output);
