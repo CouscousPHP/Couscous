@@ -60,3 +60,21 @@ baseUrl: http://username.github.io/your-project
 ## Using a Domain Name with Github Pages and Couscous
 
 To use a CNAME for your Couscous-generated documentation so that your docs point to `docs.yourdomain.com` or something similar, set the `cname` variable described above and point your DNS to `yourname.github.io`, as detailed in the [Github documentation](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/).
+
+## Override configuration from command line
+Metadata can also be specified from the command line:
+
+```bash
+$ couscous generate --config baseUrl=http://prod.server.com --config "fooBar=Baz Qux"
+```
+
+This command will work exactly as if the following text was included in `couscous.yml`:
+
+```yaml
+baseUrl: http://prod.server.com
+fooBar: Baz Qux
+```
+
+This feature can be used to easily set flags, override metadata, or generate the same content for a variety of `baseUrl` values, all without the need to update `couscous.yml`.
+
+**Note:** any CLI metadata will persist through regenerations caused by the `preview` command.
