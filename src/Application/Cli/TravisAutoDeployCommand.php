@@ -57,6 +57,14 @@ class TravisAutoDeployCommand extends Command
                 'Repository you want to generate.',
                 getcwd()
             )
+            // @deprecated will be deleted in next major release, see Travis configuration for new way to handle this
+            ->addOption(
+                'php-version',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Specify for which php version you want to deploy documentation, mainly to avoid multiple deploys',
+                '7.0'
+            )
             ->addOption(
                 'branch',
                 null,
@@ -94,6 +102,16 @@ class TravisAutoDeployCommand extends Command
             return;
         }
 
+        // getting current php version to only deploy once
+        // @deprecated this "hack" will be deleted in next major release, see Travis config file for new way to handle this
+        $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
+        if ($input->getOption('php-version') != $currentPhpVersion) {
+            trigger_error('Deprecated option "php-version" called.', E_USER_NOTICE);
+            $output->writeln('<comment>This version of the documentation is already deployed</comment>');
+
+            return;
+        }
+
         // set git user data
         $output->writeln('<info>Setting up git user</info>');
         $this->commandRunner->run('git config --global user.name "${GIT_NAME}"');
@@ -106,10 +124,5 @@ class TravisAutoDeployCommand extends Command
 
         // Deploy it
         $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
-
-        // generate couscous.phar to be uploaded when a new release is done
-        $this->commandRunner->run('bin/compile');
-        $output->writeln('<comment>PHAR file generated</comment>');
-
     }
 }

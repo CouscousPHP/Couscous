@@ -13,7 +13,8 @@ php:
 matrix:
   include:
     - php: 5.4
-      env: dependencies=lowest
+      env:
+        - dependencies=lowest
     - php: 7.0
       env:
         - DEPLOY_WEBSITE=true
@@ -26,7 +27,7 @@ script:
   - vendor/bin/phpunit
 
 after_success:
-  - if [ "$DEPLOY_WEBSITE" = "true" ]; then bin/couscous travis-auto-deploy; fi;
+  - if [ "$DEPLOY_WEBSITE" = "true" ]; then ./travis-prepare-release.sh && bin/couscous travis-auto-deploy; fi;
 
 deploy:
   provider: releases
