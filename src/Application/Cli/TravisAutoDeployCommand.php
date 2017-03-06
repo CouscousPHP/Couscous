@@ -57,7 +57,6 @@ class TravisAutoDeployCommand extends Command
                 'Repository you want to generate.',
                 getcwd()
             )
-            // @deprecated will be deleted in next major release, see Travis configuration for new way to handle this
             ->addOption(
                 'php-version',
                 null,
@@ -103,7 +102,6 @@ class TravisAutoDeployCommand extends Command
         }
 
         // getting current php version to only deploy once
-        // @deprecated this "hack" will be deleted in next major release, see Travis config file for new way to handle this
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
         if ($input->getOption('php-version') != $currentPhpVersion) {
             trigger_error('Deprecated option "php-version" called.', E_USER_NOTICE);
