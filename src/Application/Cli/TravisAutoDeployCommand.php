@@ -62,7 +62,7 @@ class TravisAutoDeployCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Specify for which php version you want to deploy documentation, mainly to avoid multiple deploys',
-                '5.4'
+                '7.0'
             )
             ->addOption(
                 'branch',
@@ -101,18 +101,19 @@ class TravisAutoDeployCommand extends Command
             return;
         }
 
-        // set git user data
-        $output->writeln('<info>Setting up git user</info>');
-        $this->commandRunner->run('git config --global user.name "${GIT_NAME}"');
-        $this->commandRunner->run('git config --global user.email "${GIT_EMAIL}"');
-
         // getting current php version to only deploy once
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
         if ($input->getOption('php-version') != $currentPhpVersion) {
+            trigger_error('Deprecated option "php-version" called.', E_USER_NOTICE);
             $output->writeln('<comment>This version of the documentation is already deployed</comment>');
 
             return;
         }
+
+        // set git user data
+        $output->writeln('<info>Setting up git user</info>');
+        $this->commandRunner->run('git config --global user.name "${GIT_NAME}"');
+        $this->commandRunner->run('git config --global user.email "${GIT_EMAIL}"');
 
         // Generate the website
         $this->generator->generate($repository, $output);
