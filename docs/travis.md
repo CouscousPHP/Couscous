@@ -11,7 +11,7 @@ To set this up, please follow all the steps below.
 
 In order to push to your repository from Travis, you need to authorize Travis. You do so by creating a **GitHub token** and then **encrypting** it to store it in `.travis.yml`.
 
-- from your GitHub account, go in [*Settings > Applications*](https://github.com/settings/applications)
+- from your GitHub account, go in [*Settings > Personal access tokens*](https://github.com/settings/tokens)
 - create a new **Personal Access Token** and give it the `public_repo` permission (if the repository is public)
 - install the [Travis command line tool](http://blog.travis-ci.com/2013-01-14-new-client/)
 
