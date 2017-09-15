@@ -159,6 +159,14 @@ baseUrl: http://username.github.io/your-project</code></pre>
 <p><strong>Note:</strong> any variable you put in <code>couscous.yml</code> is called <strong>Metadata</strong>. You can use these variables in templates for example. Learn more about this in the <a href="metadata.html">Metadata documentation</a>.</p>
 <h2 id="using-a-domain-name-with-github-pages-and-couscous">Using a Domain Name with Github Pages and Couscous</h2>
 <p>To use a CNAME for your Couscous-generated documentation so that your docs point to <code>docs.yourdomain.com</code> or something similar, set the <code>cname</code> variable described above and point your DNS to <code>yourname.github.io</code>, as detailed in the <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/">Github documentation</a>.</p>
+<h2 id="override-configuration-from-command-line">Override configuration from command line</h2>
+<p>Metadata can also be specified from the command line:</p>
+<pre><code class="language-bash">$ couscous generate --config baseUrl=http://prod.server.com --config "fooBar=Baz Qux"</code></pre>
+<p>This command will work exactly as if the following text was included in <code>couscous.yml</code>:</p>
+<pre><code class="language-yaml">baseUrl: http://prod.server.com
+fooBar: Baz Qux</code></pre>
+<p>This feature can be used to easily set flags, override metadata, or generate the same content for a variety of <code>baseUrl</code> values, all without the need to update <code>couscous.yml</code>.</p>
+<p><strong>Note:</strong> any CLI metadata will persist through regenerations caused by the <code>preview</code> command.</p>
                 </section>
 
             </div>
