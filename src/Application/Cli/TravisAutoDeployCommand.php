@@ -104,7 +104,6 @@ class TravisAutoDeployCommand extends Command
         // getting current php version to only deploy once
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
         if ($input->getOption('php-version') != $currentPhpVersion) {
-            trigger_error('Deprecated option "php-version" called.', E_USER_NOTICE);
             $output->writeln('<comment>This version of the documentation is already deployed</comment>');
 
             return;
