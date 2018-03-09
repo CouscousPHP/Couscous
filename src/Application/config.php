@@ -28,6 +28,7 @@ return [
 
         DI\get('Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter'),
         DI\get('Couscous\Module\Markdown\Step\ProcessMarkdownFileName'),
+        DI\get('Couscous\Module\Markdown\Step\SetBaseUrl'),
         DI\get('Couscous\Module\Markdown\Step\RewriteMarkdownLinks'),
         DI\get('Couscous\Module\Markdown\Step\RenderMarkdown'),
         DI\get('Couscous\Module\Markdown\Step\CreateHeadingIds'),
