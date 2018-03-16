@@ -5,12 +5,8 @@ layout: home
 Couscous generates a [GitHub pages](http://pages.github.com/) website from your markdown documentation.
 
 [![Build Status](https://travis-ci.org/CouscousPHP/Couscous.svg?branch=master)](https://travis-ci.org/CouscousPHP/Couscous)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/CouscousPHP/Couscous/?branch=master)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/CouscousPHP/Couscous.svg)](http://isitmaintained.com/project/CouscousPHP/Couscous "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/CouscousPHP/Couscous.svg)](http://isitmaintained.com/project/CouscousPHP/Couscous "Percentage of issues still open")
-
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CouscousPHP/Couscous)
 
 **Everything is documented on [couscous.io](http://couscous.io/).**
 
