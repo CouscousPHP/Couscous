@@ -28,7 +28,8 @@
         "mnapoli/front-yaml": "~1.5",
         "php-di/php-di": "^5.2.1",
         "psr/log": "~1.0",
-        "padraic/phar-updater": "^1.0"
+        "padraic/phar-updater": "^1.0",
+        "league/commonmark": "~0.13.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.5"

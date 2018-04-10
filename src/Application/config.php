@@ -29,6 +29,7 @@ return [
         DI\get('Couscous\Module\Markdown\Step\ParseMarkdownFrontMatter'),
         DI\get('Couscous\Module\Markdown\Step\ProcessMarkdownFileName'),
         DI\get('Couscous\Module\Markdown\Step\RewriteMarkdownLinks'),
+        DI\get('Couscous\Module\Markdown\Step\ExtractTableOfContents'),
         DI\get('Couscous\Module\Markdown\Step\RenderMarkdown'),
         DI\get('Couscous\Module\Markdown\Step\CreateHeadingIds'),
 
@@ -67,5 +68,7 @@ return [
             LogLevel::INFO      => OutputInterface::VERBOSITY_VERBOSE,
             LogLevel::DEBUG     => OutputInterface::VERBOSITY_VERY_VERBOSE,
         ]),
+
+    'League\CommonMark\Environment' => DI\factory(['League\CommonMark\Environment', 'createCommonMarkEnvironment']),
 
 ];

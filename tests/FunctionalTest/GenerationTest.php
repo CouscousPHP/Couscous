@@ -81,4 +81,12 @@ class GenerationTest extends BaseFunctionalTest
     {
         $this->assertGeneratedWebsite('include-with-exclude');
     }
+
+    /**
+     * Test the table of contents generation.
+     */
+    public function testTableOfContents()
+    {
+        $this->assertGeneratedWebsite('table-of-contents');
+    }
 }
