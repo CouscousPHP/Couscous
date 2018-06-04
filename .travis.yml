@@ -10,6 +10,10 @@ php:
   - 7.1
   - hhvm
 
+cache:
+  directories:
+    - "$HOME/.composer/cache/files"
+
 matrix:
   include:
     - php: 5.4
