@@ -96,7 +96,10 @@ class PreviewCommand extends Command
             }
 
             if (!$this->isFound($input->getOption('livereload'))) {
-                $output->writeln('<error>Impossible to launch Livereload, did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>');
+                $output->writeln(
+                    '<error>Impossible to launch Livereload, '
+                    .'did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>'
+                );
 
                 return 1;
             }
