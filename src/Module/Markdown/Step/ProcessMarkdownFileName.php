@@ -36,7 +36,9 @@ class ProcessMarkdownFileName implements Step
 
     private function renameReadme(MarkdownFile $file, Project $project)
     {
-        $indexFile = empty($project->metadata['template']['index']) ? 'README.md' : $project->metadata['template']['index'];
+        $indexFile = empty($project->metadata['template']['index'])
+            ? 'README.md'
+            : $project->metadata['template']['index'];
         $indexFile = $this->replaceExtension(basename($indexFile));
         if ($file->getBasename() !== $indexFile) {
             return;
