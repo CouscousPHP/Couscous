@@ -11,7 +11,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * Preview the website.
@@ -166,11 +165,11 @@ class PreviewCommand extends Command
 
     private function startWebServer(InputInterface $input, OutputInterface $output, $targetDirectory)
     {
-        $builder = new ProcessBuilder([PHP_BINARY, '-S', $input->getArgument('address')]);
-        $builder->setWorkingDirectory($targetDirectory);
-        $builder->setTimeout(null);
+        $processArguments = [PHP_BINARY, '-S', $input->getArgument('address')];
 
-        $process = $builder->getProcess();
+        $process = new Process($processArguments);
+        $process->setWorkingDirectory($targetDirectory);
+        $process->setTimeout(null);
         $process->start();
 
         $output->writeln(sprintf('Server running on <comment>http://%s</comment>', $input->getArgument('address')));
@@ -201,11 +200,11 @@ class PreviewCommand extends Command
 
     private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
     {
-        $builder = new ProcessBuilder([$executablePath, $targetDirectory, '-w', '3']);
-        $builder->setWorkingDirectory($sourceDirectory);
-        $builder->setTimeout(null);
+        $processArguments = [$executablePath, $targetDirectory, '-w', '3'];
 
-        $process = $builder->getProcess();
+        $process = new Process($processArguments);
+        $process->setWorkingDirectory($sourceDirectory);
+        $process->setTimeout(null);
         $process->start();
 
         $output->writeln('<info>Livereload launched!</info>');
