@@ -51,9 +51,13 @@ class Deployer
 
         $this->copyGeneratedFiles($output, $directory, $tmpDirectory);
 
-        $this->commitChanges($output, $tmpDirectory);
+        if ($this->git->hasUncommittedChanges($tmpDirectory)) {
+            $this->commitChanges($output, $tmpDirectory);
 
-        $this->pushBranch($output, $branch, $tmpDirectory);
+            $this->pushBranch($output, $branch, $tmpDirectory);
+        } else {
+            $output->writeln('<comment>Skipping deploy, no changes detected</comment>');
+        }
 
         $this->deleteTempDirectory($tmpDirectory);
     }

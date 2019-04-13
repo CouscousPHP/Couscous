@@ -91,6 +91,34 @@ class GitTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('the-remote', $remote);
     }
 
+    /**
+     * @test
+     */
+    public function has_uncommitted_changes_should_detect_changes()
+    {
+        $directory = 'directory';
+        $changes = '
+        changed_file_one.txt
+        changed_file_two.txt
+        ';
+        $this->expectCommandIsRun('cd "directory" && git diff-index --name-only HEAD', $changes);
+
+        $this->assertTrue($this->git->hasUncommittedChanges($directory));
+    }
+
+    /**
+     * @test
+     */
+    public function has_uncommitted_changes_should_detect_no_changes()
+    {
+        $directory = 'directory';
+        $changes = '
+        ';
+        $this->expectCommandIsRun('cd "directory" && git diff-index --name-only HEAD', $changes);
+
+        $this->assertFalse($this->git->hasUncommittedChanges($directory));
+    }
+
     private function expectCommandIsRun($command, $return = null)
     {
         $this->commandRunner->expects($this->once())
