@@ -21,7 +21,7 @@ class CommandRunner
      */
     public function run($command)
     {
-        if (PHP_OS == 'WINNT') {
+        if (PHP_OS === 'WINNT') {
             exec($command, $output, $returnValue);
         } else {
             exec($command . ' 2>&1', $output, $returnValue);
