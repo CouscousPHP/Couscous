@@ -21,7 +21,11 @@ class CommandRunner
      */
     public function run($command)
     {
-        exec($command.' 2>&1', $output, $returnValue);
+        if (PHP_OS === 'WINNT') {
+            exec($command, $output, $returnValue);
+        } else {
+            exec($command . ' 2>&1', $output, $returnValue);
+        }
 
         $output = implode(PHP_EOL, $output);
 
