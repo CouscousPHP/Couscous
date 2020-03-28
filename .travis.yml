@@ -23,10 +23,6 @@ matrix:
 before_script:
   - composer install -n
   - if [ "$dependencies" = "lowest" ]; then composer update --prefer-lowest --prefer-stable -n; fi;
-  - echo "Debug code:"
-  - sed -i -re "s/dev-master/`git rev-parse --short HEAD`/" src/Application/config.php
-  - cat src/Application/config.php
-  - ls -la src/Application/config.*
 
 script:
   - vendor/bin/phpunit
