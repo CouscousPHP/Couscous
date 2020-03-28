@@ -47,6 +47,7 @@ return [
         ->constructorParameter('steps', DI\get('steps')),
 
     'application' => DI\object('Symfony\Component\Console\Application')
+        ->constructor('Couscous', 'dev-master')
         ->method('add', DI\get('Couscous\Application\Cli\GenerateCommand'))
         ->method('add', DI\get('Couscous\Application\Cli\PreviewCommand'))
         ->method('add', DI\get('Couscous\Application\Cli\DeployCommand'))
