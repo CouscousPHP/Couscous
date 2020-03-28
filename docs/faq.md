@@ -35,6 +35,9 @@ Yes. In your template directory. Add a file called `twig.php` with the following
 
 use Twig\Environment;
 
+// Use "include_once" since this file may be called multiple times
+include_once dirname(__DIR__).'/Twig/MyTwigExtension.php';
+
 return function (Environment $twig) {
     $twig->addExtension(new MyTwigExtension());
 };
