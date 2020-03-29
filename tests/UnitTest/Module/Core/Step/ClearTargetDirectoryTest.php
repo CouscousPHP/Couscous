@@ -13,6 +13,7 @@ use Symfony\Component\Finder\Finder;
 class ClearTargetDirectoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Dot files like .travis.yaml or .github/workflows/action.yml should not be removed.
      * @test
      */
     public function it_should_not_clear_dot_files()
