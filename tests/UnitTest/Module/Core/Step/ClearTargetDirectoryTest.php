@@ -18,7 +18,7 @@ class ClearTargetDirectoryTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_not_clear_dot_files()
     {
-        $project = new Project('foo', dirname(__DIR__,3).'/Fixture/directory-with-dot-files');
+        $project = new Project('foo', dirname(dirname(dirname(__DIR__,))).'/Fixture/directory-with-dot-files');
 
         $filesystem = $this->getMockBuilder(Filesystem::class)
             ->disableOriginalConstructor()
@@ -40,6 +40,5 @@ class ClearTargetDirectoryTest extends \PHPUnit_Framework_TestCase
 
         $step = new ClearTargetDirectory($filesystem);
         $step->__invoke($project);
-
     }
 }
