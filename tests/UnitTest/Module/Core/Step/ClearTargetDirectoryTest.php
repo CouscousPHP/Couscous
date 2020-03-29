@@ -29,7 +29,7 @@ class ClearTargetDirectoryTest extends \PHPUnit_Framework_TestCase
             ->method('remove')
             ->with($this->callback(function (Finder $files) {
                 foreach($files as $file) {
-                    if (in_array($file->getFilename(), ['.gitignore'. 'foobar.txt', '.github'])) {
+                    if (in_array($file->getFilename(), ['.gitkeep'. 'foobar.txt', '.github'])) {
                         return false;
                     }
                 }
