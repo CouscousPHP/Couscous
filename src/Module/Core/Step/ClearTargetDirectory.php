@@ -27,7 +27,9 @@ class ClearTargetDirectory implements Step
     public function __invoke(Project $project)
     {
         $files = new Finder();
-        $files->in($project->targetDirectory);
+        $files
+            ->in($project->targetDirectory)
+            ->ignoreDotFiles(true);
 
         $this->filesystem->remove($files);
     }
