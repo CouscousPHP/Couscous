@@ -27,7 +27,7 @@ If you rather have it self-contained, use the **Phar** method just below.
 Alternatively, you can download [couscous.phar](http://couscous.io/couscous.phar):
 
 ```bash
-$ curl -OS http://couscous.io/couscous.phar
+$ curl -OSL http://couscous.io/couscous.phar
 ```
 
 **Please note that as Github is using a DDOS protection system, if using CURL fails, just manually download the phar file.**
