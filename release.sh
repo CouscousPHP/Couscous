@@ -12,6 +12,9 @@ vendor/bin/phpunit
 # Clear dev dependencies for a lighter phar
 composer install -o --no-dev
 
+# Update version
+sed -i -re "s/dev-master/`git describe --abbrev=0 --tags`-`git rev-parse --short HEAD`/" src/Application/config.php
+
 # Generate the phar
 bin/compile
 
