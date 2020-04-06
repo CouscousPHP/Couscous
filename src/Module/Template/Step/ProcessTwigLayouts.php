@@ -59,10 +59,17 @@ class ProcessTwigLayouts implements Step
     {
         $loader = $this->createLoader($templateDirectory);
 
-        return new Twig_Environment($loader, [
+        $twig = new Twig_Environment($loader, [
             'cache'       => false,
             'auto_reload' => true,
         ]);
+
+        if (file_exists($templateDirectory.'/twig.php')) {
+            $customLoader = require $templateDirectory.'/twig.php';
+            $customLoader($twig);
+        }
+
+        return $twig;
     }
 
     /**

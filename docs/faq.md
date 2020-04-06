@@ -26,6 +26,23 @@ Probably not yet, but you are welcome to try. [PHP-DI's website](http://php-di.o
 
 It is planned! In the meantime, you can simply use `couscous generate` and upload the files to your webserver manually.
 
+#### Can I add twig extensions?
+
+Yes. In your template directory. Add a file called `twig.php` with the following contents: 
+
+```php
+<?php
+
+use Twig\Environment;
+
+// Use "include_once" since this file may be called multiple times
+include_once dirname(__DIR__).'/Twig/MyTwigExtension.php';
+
+return function (Environment $twig) {
+    $twig->addExtension(new MyTwigExtension());
+};
+```
+
 #### Why not build Couscous on top of Sculpin?
 
 I tried.
