@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Module\Template\Step;
+namespace Couscous\Tests\UnitTest\Module\Core\Step;
 
 use Couscous\Module\Core\Step\AddFileNameToMetadata;
 use Couscous\Module\Template\Model\HtmlFile;

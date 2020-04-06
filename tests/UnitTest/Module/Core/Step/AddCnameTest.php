@@ -1,6 +1,6 @@
 <?php
 
-namespace Couscous\Tests\UnitTest\Module\Template\Step;
+namespace Couscous\Tests\UnitTest\Module\Core\Step;
 
 use Couscous\Model\Metadata;
 use Couscous\Model\Project;
