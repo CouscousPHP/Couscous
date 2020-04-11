@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: BilelJegham/action-couscous@v0
+      - uses: CouscousPHP/GitHub-Action@v1
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
