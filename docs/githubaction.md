@@ -3,7 +3,7 @@ current_menu: action
 ---
 # Automatic deployment using GithubAction
 
-You want to use add Couscous in your workflow Github.
+You want to use add Couscous in your workflow Github (https://github.com/marketplace/actions/couscous-generate).
 
 ## Create Workflow in `.github/workflows/***.yml`
 ```yml
