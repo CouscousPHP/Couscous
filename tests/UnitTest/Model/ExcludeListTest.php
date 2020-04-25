@@ -3,11 +3,12 @@
 namespace Couscous\Tests\UnitTest\Model;
 
 use Couscous\Model\ExcludeList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Couscous\Model\ExcludeList
  */
-class ExcludeListTest extends \PHPUnit_Framework_TestCase
+class ExcludeListTest extends TestCase
 {
     /**
      * @test

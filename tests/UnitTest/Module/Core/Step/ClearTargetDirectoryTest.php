@@ -4,13 +4,14 @@ namespace Couscous\Tests\UnitTest\Module\Core\Step;
 
 use Couscous\Model\Project;
 use Couscous\Module\Core\Step\ClearTargetDirectory;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 /**
  * @covers \Couscous\Model\Project
  */
-class ClearTargetDirectoryTest extends \PHPUnit_Framework_TestCase
+class ClearTargetDirectoryTest extends TestCase
 {
     /**
      * Dot files like .travis.yaml or .github/workflows/action.yml should not be removed.
@@ -18,7 +19,7 @@ class ClearTargetDirectoryTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_not_clear_dot_files()
     {
-        $project = new Project('foo', dirname(dirname(dirname(__DIR__,))).'/Fixture/directory-with-dot-files');
+        $project = new Project('foo', dirname(__DIR__, 3) .'/Fixture/directory-with-dot-files');
 
         $filesystem = $this->getMockBuilder(Filesystem::class)
             ->disableOriginalConstructor()

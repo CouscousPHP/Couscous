@@ -6,11 +6,12 @@ use Couscous\Model\File;
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Template\Model\HtmlFile;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Couscous\Model\Project
  */
-class ProjectTest extends \PHPUnit_Framework_TestCase
+class ProjectTest extends TestCase
 {
     /**
      * @test

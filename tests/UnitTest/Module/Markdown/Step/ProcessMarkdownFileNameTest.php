@@ -7,11 +7,12 @@ use Couscous\Model\Metadata;
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Couscous\Module\Markdown\Step\ProcessMarkdownFileName
  */
-class ProcessMarkdownFileNameTest extends \PHPUnit_Framework_TestCase
+class ProcessMarkdownFileNameTest extends TestCase
 {
     public function testRenameExtension()
     {

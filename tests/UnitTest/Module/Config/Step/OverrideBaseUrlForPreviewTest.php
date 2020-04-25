@@ -4,11 +4,12 @@ namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\OverrideBaseUrlForPreview;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Couscous\Module\Config\Step\OverrideBaseUrlForPreview
  */
-class OverrideBaseUrlForPreviewTest extends \PHPUnit_Framework_TestCase
+class OverrideBaseUrlForPreviewTest extends TestCase
 {
     /**
      * @test

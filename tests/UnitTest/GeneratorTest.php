@@ -5,13 +5,14 @@ namespace Couscous\Tests\UnitTest;
 use Couscous\Generator;
 use Couscous\Model\Project;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @covers \Couscous\Generator
  */
-class GeneratorTest extends \PHPUnit_Framework_TestCase
+class GeneratorTest extends TestCase
 {
     /**
      * @test
@@ -37,7 +38,7 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
      */
     private function createFilesystem()
     {
-        return $this->getMock('Symfony\Component\Filesystem\Filesystem');
+        return $this->createMock('Symfony\Component\Filesystem\Filesystem');
     }
 
     private function createStep(Project $project)

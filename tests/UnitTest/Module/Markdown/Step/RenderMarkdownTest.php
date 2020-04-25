@@ -6,13 +6,14 @@ use Couscous\Application\ContainerFactory;
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Markdown\Step\RenderMarkdown;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test supported Markdown features.
  *
  * @author Matthieu Napoli <matthieu@mnapoli.fr>
  */
-class RenderMarkdownTest extends \PHPUnit_Framework_TestCase
+class RenderMarkdownTest extends TestCase
 {
     /**
      * Test that classic Markdown is supported.

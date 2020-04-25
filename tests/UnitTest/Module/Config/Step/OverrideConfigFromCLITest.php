@@ -4,11 +4,12 @@ namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\OverrideConfigFromCLI;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Couscous\Module\Config\Step\OverrideConfigFromCLI
  */
-class OverrideConfigFromCLITest extends \PHPUnit_Framework_TestCase
+class OverrideConfigFromCLITest extends TestCase
 {
     /**
      * @test
@@ -19,7 +20,7 @@ class OverrideConfigFromCLITest extends \PHPUnit_Framework_TestCase
         $project->metadata['title'] = 'foo';
         $project->metadata['cliConfig'] = ['title=bar'];
 
-        $logger = $this->getMock("Psr\Log\LoggerInterface");
+        $logger = $this->createMock("Psr\Log\LoggerInterface");
 
         $step = new OverrideConfigFromCLI($logger);
         $step->__invoke($project);
@@ -36,7 +37,7 @@ class OverrideConfigFromCLITest extends \PHPUnit_Framework_TestCase
         $project->metadata['title'] = 'foo';
         $project->metadata['cliConfig'] = [];
 
-        $logger = $this->getMock("Psr\Log\LoggerInterface");
+        $logger = $this->createMock("Psr\Log\LoggerInterface");
 
         $step = new OverrideConfigFromCLI($logger);
         $step->__invoke($project);
@@ -52,7 +53,7 @@ class OverrideConfigFromCLITest extends \PHPUnit_Framework_TestCase
         $project = new MockProject();
         $project->metadata['title'] = 'foo';
 
-        $logger = $this->getMock("Psr\Log\LoggerInterface");
+        $logger = $this->createMock("Psr\Log\LoggerInterface");
 
         $step = new OverrideConfigFromCLI($logger);
         $step->__invoke($project);

@@ -5,11 +5,12 @@ namespace Couscous\Tests\UnitTest\Module\Core\Step;
 use Couscous\Module\Core\Step\AddFileNameToMetadata;
 use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Couscous\Module\Core\Step\AddFileNameToMetadata
  */
-class AddFileNameToMetadataTest extends \PHPUnit_Framework_TestCase
+class AddFileNameToMetadataTest extends TestCase
 {
     /**
      * @test

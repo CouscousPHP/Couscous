@@ -62,7 +62,7 @@ class TravisAutoDeployCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Specify for which php version you want to deploy documentation, mainly to avoid multiple deploys',
-                '7.0'
+                '7.1'
             )
             ->addOption(
                 'branch',
