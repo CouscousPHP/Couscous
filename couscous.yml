@@ -33,6 +33,9 @@ menu:
         travis:
             text: Travis integration
             relativeUrl: docs/travis.html
+        action:
+            text: Github Action integration
+            relativeUrl: docs/githubaction.html
         faq:
             text: FAQ
             relativeUrl: docs/faq.html
