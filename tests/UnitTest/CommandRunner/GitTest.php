@@ -4,12 +4,13 @@ namespace Couscous\Tests\UnitTest\CommandRunner;
 
 use Couscous\CommandRunner\CommandRunner;
 use Couscous\CommandRunner\Git;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * @covers \Couscous\CommandRunner\Git
  */
-class GitTest extends \PHPUnit_Framework_TestCase
+class GitTest extends TestCase
 {
     /**
      * @var Git
@@ -25,7 +26,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->commandRunner = $this->getMock('Couscous\CommandRunner\CommandRunner');
+        $this->commandRunner = $this->createMock('Couscous\CommandRunner\CommandRunner');
         $this->git = new Git($this->commandRunner);
     }
 

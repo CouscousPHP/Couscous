@@ -4,12 +4,13 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\ValidateTemplateDirectory;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @covers \Couscous\Module\Template\Step\ValidateTemplateDirectory
  */
-class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
+class ValidateTemplateDirectoryTest extends TestCase
 {
     /**
      * @test
@@ -94,15 +95,19 @@ class ValidateTemplateDirectoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Filesystem
+     * @return Filesystem
      */
     private function createFilesystem($existsShouldReturn = true)
     {
-        $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem', ['exists']);
-        $filesystem->expects($this->any())
-            ->method('exists')
-            ->willReturn($existsShouldReturn);
-
-        return $filesystem;
+        return new class($existsShouldReturn) extends Filesystem {
+            public function __construct($existsShouldReturn)
+            {
+                $this->existsShouldReturn = $existsShouldReturn;
+            }
+            public function exists($files)
+            {
+                return $this->existsShouldReturn;
+            }
+        };
     }
 }

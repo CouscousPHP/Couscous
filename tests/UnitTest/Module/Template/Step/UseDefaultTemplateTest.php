@@ -4,12 +4,13 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\UseDefaultTemplate;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @covers \Couscous\Module\Template\Step\UseDefaultTemplate
  */
-class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
+class UseDefaultTemplateTest extends TestCase
 {
     /**
      * @test
@@ -73,7 +74,7 @@ class UseDefaultTemplateTest extends \PHPUnit_Framework_TestCase
      */
     private function createFilesystem($return = false)
     {
-        $filesystem = $this->getMock('Symfony\Component\Filesystem\Filesystem');
+        $filesystem = $this->createMock('Symfony\Component\Filesystem\Filesystem');
         $filesystem->expects($this->any())
             ->method('exists')
             ->willReturn($return);

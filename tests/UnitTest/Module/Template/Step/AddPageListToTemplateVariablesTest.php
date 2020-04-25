@@ -6,11 +6,12 @@ use Couscous\Model\Project;
 use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Module\Template\Step\AddPageListToLayoutVariables;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Couscous\Module\Template\Step\AddPageListToLayoutVariables
  */
-class AddPageListToTemplateVariablesTest extends \PHPUnit_Framework_TestCase
+class AddPageListToTemplateVariablesTest extends TestCase
 {
     private function files()
     {

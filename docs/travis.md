@@ -49,9 +49,7 @@ Here is an example of what your `.travis.yml` might look like. This assumes **yo
 ```yml
 language: php
 php:
-  - 5.4
-  - 5.5
-  - 5.6
+  - 7.3
 env:
   global:
     - GIT_NAME: "'Couscous auto deploy'"

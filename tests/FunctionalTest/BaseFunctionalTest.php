@@ -2,11 +2,12 @@
 
 namespace Couscous\Tests\FunctionalTest;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-abstract class BaseFunctionalTest extends \PHPUnit_Framework_TestCase
+abstract class BaseFunctionalTest extends TestCase
 {
     protected $generatedDirectory;
 

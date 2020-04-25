@@ -3,11 +3,12 @@
 namespace Couscous\Tests\UnitTest\Model;
 
 use Couscous\Model\Metadata;
+use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Couscous\Model\Metadata
+ * @covers \Couscous\Model\Metadata
  */
-class MetadataTest extends \PHPUnit_Framework_TestCase
+class MetadataTest extends TestCase
 {
     private $values;
 

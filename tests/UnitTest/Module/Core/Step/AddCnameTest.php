@@ -5,11 +5,12 @@ namespace Couscous\Tests\UnitTest\Module\Core\Step;
 use Couscous\Model\Metadata;
 use Couscous\Model\Project;
 use Couscous\Module\Core\Step\AddCname;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Couscous\Model\Project
  */
-class AddCnameTest extends \PHPUnit_Framework_TestCase
+class AddCnameTest extends TestCase
 {
     /**
      * @test
