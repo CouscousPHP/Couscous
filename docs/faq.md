@@ -20,7 +20,7 @@ Links in Markdown are rewritten to link to HTML pages:
 
 #### Can I use it for a blog?
 
-Probably not yet, but you are welcome to try. [PHP-DI's website](http://php-di.org/news/) has a pseudo-blog where the article list is written manually: it's possible, but not (yet) super easy.
+Probably not yet, but you are welcome to try. [PHP-DI's website](https://php-di.org/news/) has a pseudo-blog where the article list is written manually: it's possible, but not (yet) super easy.
 
 #### Can I deploy the website to something else than GitHub Pages?
 

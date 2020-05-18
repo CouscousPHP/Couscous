@@ -11,7 +11,7 @@ It allows many projects to reuse the same template.
 To write a remote template, just write a normal template inside a directory (read below for understanding how).
 Then publish that directory online (for example on GitHub).
 
-You can find some examples of templates [here](http://couscous.io/templates.html).
+You can find some examples of templates [here](https://couscous.io/templates.html).
 The [Basic](https://github.com/CouscousPHP/Template-Basic) template is a good way to start.
 
 *ProTip:* To preview your template, you can use `couscous preview` (Couscous will use your template's Readme). In order to tell Couscous that the template is in the root of the repository (and not in a `website/` subdirectory), use the following configuration:
@@ -64,7 +64,7 @@ that overrides `default.twig`:
 {% endblock %}
 ```
 
-You can set your `README.md` (i.e. your home page) to use that layout using [YAML front matter](http://jekyllrb.com/docs/frontmatter/) in the Markdown file:
+You can set your `README.md` (i.e. your home page) to use that layout using [YAML front matter](https://jekyllrb.com/docs/frontmatter/) in the Markdown file:
 
 ```markdown
 ---
@@ -153,4 +153,4 @@ A good rule of thumb is: **if it works on GitHub.com, it will work with Couscous
 If a `bower.json` file is present in the `website/` directory, dependencies will be
 installed automatically.
 
-In that case, you need [to have Bower installed](http://bower.io/). If you don't have a `bower.json`, you don't need to install Bower.
+In that case, you need [to have Bower installed](https://bower.io/). If you don't have a `bower.json`, you don't need to install Bower.

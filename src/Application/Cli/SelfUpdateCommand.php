@@ -31,8 +31,8 @@ class SelfUpdateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $updater = new Updater(null, false);
-        $updater->getStrategy()->setPharUrl('http://couscous.io/couscous.phar');
-        $updater->getStrategy()->setVersionUrl('http://couscous.io/couscous.version');
+        $updater->getStrategy()->setPharUrl('https://couscous.io/couscous.phar');
+        $updater->getStrategy()->setVersionUrl('https://couscous.io/couscous.version');
 
         $result = $updater->update();
         $result ? $output->writeln('Phar file updated successfully!') : $output->writeln('No need to update.');

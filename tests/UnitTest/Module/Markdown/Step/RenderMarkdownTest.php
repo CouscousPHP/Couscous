@@ -28,7 +28,7 @@ class RenderMarkdownTest extends TestCase
 ##### Title 5
 ###### Title 6
 
-Hello *world*! This is a [link](http://github.com).
+Hello *world*! This is a [link](https://github.com).
 
     this is a
     code block
@@ -49,7 +49,7 @@ MARKDOWN;
 <h4>Title 4</h4>
 <h5>Title 5</h5>
 <h6>Title 6</h6>
-<p>Hello <em>world</em>! This is a <a href="http://github.com">link</a>.</p>
+<p>Hello <em>world</em>! This is a <a href="https://github.com">link</a>.</p>
 <pre><code>this is a
 code block</code></pre>
 <blockquote>

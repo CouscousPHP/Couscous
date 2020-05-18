@@ -13,7 +13,7 @@ In order to push to your repository from Travis, you need to authorize Travis. Y
 
 - from your GitHub account, go in [*Settings > Personal access tokens*](https://github.com/settings/tokens)
 - create a new **Personal Access Token** and give it the `public_repo` permission (if the repository is public)
-- install the [Travis command line tool](http://blog.travis-ci.com/2013-01-14-new-client/)
+- install the [Travis command line tool](https://blog.travis-ci.com/2013-01-14-new-client/)
 
     `gem install travis`
 
