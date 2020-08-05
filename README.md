@@ -2,13 +2,13 @@
 layout: home
 ---
 
-Couscous generates a [GitHub pages](http://pages.github.com/) website from your markdown documentation.
+Couscous generates a [GitHub pages](https://pages.github.com/) website from your markdown documentation.
 
 [![Build Status](https://travis-ci.org/CouscousPHP/Couscous.svg?branch=master)](https://travis-ci.org/CouscousPHP/Couscous)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/CouscousPHP/Couscous.svg)](http://isitmaintained.com/project/CouscousPHP/Couscous "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/CouscousPHP/Couscous.svg)](http://isitmaintained.com/project/CouscousPHP/Couscous "Percentage of issues still open")
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/CouscousPHP/Couscous.svg)](https://isitmaintained.com/project/CouscousPHP/Couscous "Average time to resolve an issue")
+[![Percentage of issues still open](https://isitmaintained.com/badge/open/CouscousPHP/Couscous.svg)](https://isitmaintained.com/project/CouscousPHP/Couscous "Percentage of issues still open")
 
-**Everything is documented on [couscous.io](http://couscous.io/).**
+**Everything is documented on [couscous.io](https://couscous.io/).**
 
 What follows is the documentation for contributors.
 
@@ -58,7 +58,7 @@ class PutCouscousInBold implements \Couscous\Step
 }
 ```
 
-Couscous uses [PHP-DI](http://php-di.org/) for wiring everything together with dependency injection.
+Couscous uses [PHP-DI](https://php-di.org/) for wiring everything together with dependency injection.
 
 The full list of steps is configured in [`src/Application/config.php`](src/Application/config.php).
 

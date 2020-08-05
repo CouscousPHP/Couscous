@@ -11,7 +11,7 @@ Couscous requires PHP 5.4 or above on your machine.
 
 ### Composer
 
-If you have already [set up a global install of Composer](http://akrabat.com/php/global-installation-of-php-tools-with-composer/) just run:
+If you have already [set up a global install of Composer](https://akrabat.com/php/global-installation-of-php-tools-with-composer/) just run:
 
 ```
 $ composer global require couscous/couscous
@@ -24,10 +24,10 @@ If you rather have it self-contained, use the **Phar** method just below.
 
 ### Phar
 
-Alternatively, you can download [couscous.phar](http://couscous.io/couscous.phar):
+Alternatively, you can download [couscous.phar](https://couscous.io/couscous.phar):
 
 ```bash
-$ curl -OSL http://couscous.io/couscous.phar
+$ curl -OSL https://couscous.io/couscous.phar
 ```
 
 **Please note that as Github is using a DDOS protection system, if using CURL fails, just manually download the phar file.**
@@ -73,7 +73,7 @@ $ couscous deploy
 
 Couscous will generate the website (in a temp directory) and publish it in the `gh-pages` branch of your git repository. This will remove everything that exists in the `gh-pages` branch, commit in your name, and **push** to GitHub.
 
-The website is now online: [http://your-username.github.io/your-project/](http://your-username.github.io/your-project/).
+The website is now online: [https://your-username.github.io/your-project/](https://your-username.github.io/your-project/).
 
 The `deploy` command will not change anything in your current branch (e.g. master branch). It will only affect the `gh-pages` branch.
 
@@ -87,7 +87,7 @@ $ couscous deploy --branch master
 
 ## Customizing the template
 
-Couscous provides [a default template](https://github.com/CouscousPHP/Template-Light) (and a [few others to choose from](http://couscous.io/templates.html)), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the [templates documentation](templates.md).
+Couscous provides [a default template](https://github.com/CouscousPHP/Template-Light) (and a [few others to choose from](https://couscous.io/templates.html)), but you can of course come up with your own. Writing templates is really simple, and it is all explained in the [templates documentation](templates.md).
 
 ## Updating Couscous
 

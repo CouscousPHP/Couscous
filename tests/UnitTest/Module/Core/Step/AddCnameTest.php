@@ -20,7 +20,7 @@ class AddCnameTest extends TestCase
         $project = new Project('foo', 'bar');
 
         $project->metadata = new Metadata();
-        $project->metadata['cname'] = 'http://www.couscous.io';
+        $project->metadata['cname'] = 'https://www.couscous.io';
 
         $step = new AddCname();
         $step->__invoke($project);

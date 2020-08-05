@@ -52,7 +52,7 @@ title: Hello!
 
 # Base URL of the published website (no "/" at the end!)
 # You are advised to set and use this variable to write your links in the HTML layouts
-baseUrl: http://username.github.io/your-project
+baseUrl: https://username.github.io/your-project
 ```
 
 **Note:** any variable you put in `couscous.yml` is called **Metadata**. You can use these variables in templates for example. Learn more about this in the [Metadata documentation](metadata.md).
@@ -65,13 +65,13 @@ To use a CNAME for your Couscous-generated documentation so that your docs point
 Metadata can also be specified from the command line:
 
 ```bash
-$ couscous generate --config baseUrl=http://prod.server.com --config "fooBar=Baz Qux"
+$ couscous generate --config baseUrl=https://prod.server.com --config "fooBar=Baz Qux"
 ```
 
 This command will work exactly as if the following text was included in `couscous.yml`:
 
 ```yaml
-baseUrl: http://prod.server.com
+baseUrl: https://prod.server.com
 fooBar: Baz Qux
 ```
 
