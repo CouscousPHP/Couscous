@@ -84,7 +84,7 @@
                                     Templates
                                 </a>
                             </li>
-                                                    <li class="active">
+                                                    <li class="">
                                 <a href="https://couscous.io/docs/metadata.html">
                                     Metadata
                                 </a>
@@ -94,7 +94,7 @@
                                     Travis integration
                                 </a>
                             </li>
-                                                    <li class="">
+                                                    <li class="active">
                                 <a href="https://couscous.io/docs/githubaction.html">
                                     Github Action integration
                                 </a>
@@ -114,36 +114,28 @@
                 </nav>
 
                 <section class="documentation col-sm-offset-3 col-lg-offset-3 col-sm-9 col-lg-9">
-                    <h1 id="metadata">Metadata</h1>
-<p>In Couscous, there are 2 kinds of data:</p>
-<ul>
-<li><strong>file content</strong> (e.g. Markdown, HTML, …)</li>
-<li><strong>metadata</strong>, which is simply an array of variables</li>
-</ul>
-<p>Metadata can contain any kind of value and can be attached to:</p>
-<ul>
-<li>the whole project</li>
-<li>a specific file</li>
-</ul>
-<p>Metadata is used by Couscous to customize the generation process and by templates to customize their content.</p>
-<h2 id="defining-metadata">Defining metadata</h2>
-<p><strong>Project</strong> metadata is defined in <code>couscous.yml</code>. For example:</p>
-<pre><code class="language-yaml">template:
-    directory: website
-title: The website title!</code></pre>
-<p><strong>File</strong> metadata is defined using YAML front matter (at the top of Markdown files):</p>
-<pre><code class="language-markdown">---
-category: "Star Wars"
----
-This is my documentation.</code></pre>
-<p>However, Couscous will also define both <strong>project and file metadata</strong> while generating the website. For example, when parsing Markdown files, it will define the <code>content</code> variable (to contain the generated HTML content for the current file).</p>
-<h2 id="metadata-reference">Metadata reference</h2>
-<p>Here is a list of <strong>all metadata variables automatically defined by Couscous</strong>:</p>
-<ul>
-<li><code>content</code>: contains the generated HTML content of the current file (Markdown turned to HTML)</li>
-<li><code>currentFile</code>: contains the relative name of the current file (e.g. the name of the Markdown file before it is turned to a HTML file)</li>
-</ul>
-<p>Remember everything you defined in <code>couscous.yml</code> or in YAML front matter is also available.</p>
+                    <h1 id="automatic-deployment-using-githubaction">Automatic deployment using GithubAction</h1>
+<p>You want to use add Couscous in your workflow Github (<a href="https://github.com/marketplace/actions/couscous-generate">https://github.com/marketplace/actions/couscous-generate</a>).</p>
+<h2 id="create-workflow-in">Create Workflow in <code>.github/workflows/***.yml</code></h2>
+<pre><code class="language-yml">name: Couscous GithubPage
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: CouscousPHP/GitHub-Action@v1
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.couscous/generated</code></pre>
                 </section>
 
             </div>
@@ -153,7 +145,7 @@ This is my documentation.</code></pre>
             <footer>
             <div class="container">
                 <p>
-                    <a href="https://github.com/CouscousPHP/Couscous/blob/master/docs/metadata.md">
+                    <a href="https://github.com/CouscousPHP/Couscous/blob/master/docs/githubaction.md">
                         Edit this page on GitHub
                     </a>
                 </p>
