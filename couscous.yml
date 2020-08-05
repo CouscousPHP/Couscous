@@ -10,7 +10,7 @@ scripts:
     before:
         - lessc --clean-css website/less/main.less website/css/all.min.css
 
-baseUrl: http://couscous.io
+baseUrl: https://couscous.io
 cname: couscous.io
 
 menu:
