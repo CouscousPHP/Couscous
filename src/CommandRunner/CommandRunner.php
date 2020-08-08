@@ -10,8 +10,7 @@ namespace Couscous\CommandRunner;
 class CommandRunner
 {
     /**
-     * Runs a command.
-     *
+     * Run a command.
      *
      * @param string $command The command to be executed.
      *
@@ -21,7 +20,7 @@ class CommandRunner
      */
     public function run($command)
     {
-        if (PHP_OS === 'WINNT') {
+        if ($this->isWindows()) {
             exec($command, $output, $returnValue);
         } else {
             exec($command . ' 2>&1', $output, $returnValue);
@@ -34,5 +33,29 @@ class CommandRunner
         }
 
         return $output;
+    }
+
+    /**
+     * Check if a command exists.
+     *
+     * @param string $command
+     *
+     * @return bool
+     */
+    public function commandExists($command)
+    {
+        $exists = $this->isWindows() ? 'where' : 'command -v';
+
+        return !empty(exec("$exists $command"));
+    }
+
+    /**
+     * Check if the OS is Windows.
+     *
+     * @return bool
+     */
+    private function isWindows()
+    {
+        return stripos(PHP_OS, 'WIN') === 0;
     }
 }
