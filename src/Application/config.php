@@ -17,7 +17,7 @@ return [
         DI\get('Couscous\Module\Template\Step\FetchRemoteTemplate'),
         DI\get('Couscous\Module\Template\Step\ValidateTemplateDirectory'),
 
-        DI\get('Couscous\Module\Bower\Step\RunBowerInstall'),
+        DI\get('Couscous\Module\Dependencies\Step\InstallDependencies'),
 
         DI\get('Couscous\Module\Markdown\Step\LoadMarkdownFiles'),
         DI\get('Couscous\Module\Template\Step\LoadAssets'),

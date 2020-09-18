@@ -34,8 +34,8 @@ interface Step
 
 Steps are very granular, thus extremely easy to write and test. For example:
 
-- `LoadConfig`: loads the `couscous.yml` config file
-- `RunBowerInstall`
+- `LoadConfig`: load the `couscous.yml` config file
+- `InstallDependencies`: install the dependencies (using yarn, npm or bower)
 - `LoadMarkdownFiles`: load the content of all the `*.md` files in memory
 - `RenderMarkdown`: render the markdown content
 - `WriteFiles`: write the in-memory processed files to the target directory

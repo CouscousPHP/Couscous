@@ -43,4 +43,30 @@ class CommandRunnerTest extends TestCase
 
         $this->commandRunner->run($command);
     }
+
+    /**
+     * @test
+     */
+    public function successful_command_exists()
+    {
+        $command = 'echo';
+        $expected = true;
+
+        $output = $this->commandRunner->commandExists($command);
+
+        $this->assertEquals($expected, $output);
+    }
+
+    /**
+     * @test
+     */
+    public function failure_command_exists()
+    {
+        $command = 'not_existing_command';
+        $expected = false;
+
+        $output = $this->commandRunner->commandExists($command);
+
+        $this->assertEquals($expected, $output);
+    }
 }

@@ -148,9 +148,9 @@ Then you can use it in the layouts:
 All your Markdown links will be rewritten by Couscous to work. However, make sure you write relative links.
 A good rule of thumb is: **if it works on GitHub.com, it will work with Couscous**.
 
-## Bower
+## Dependencies
 
-If a `bower.json` file is present in the `website/` directory, dependencies will be
-installed automatically.
+If a `package.json` or a `bower.json` file is present in the `website/` directory, dependencies will be
+installed automatically by using `yarn`, `npm` or `bower`.
 
-In that case, you need [to have Bower installed](https://bower.io/). If you don't have a `bower.json`, you don't need to install Bower.
+In that case, you need to have one of these tools installed. If you don't have a dependency file, you don't need to install one of them.
