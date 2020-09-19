@@ -2,10 +2,10 @@
 
 return [
 
-    'Mni\FrontYAML\Parser' => DI\object()
-        ->constructorParameter('markdownParser', DI\get('Mni\FrontYAML\Markdown\MarkdownParser')),
+    Mni\FrontYAML\Parser::class => DI\object()
+        ->constructorParameter('markdownParser', DI\get(Mni\FrontYAML\Markdown\MarkdownParser::class)),
 
-    'Mni\FrontYAML\Markdown\MarkdownParser' => DI\object('Mni\FrontYAML\Bridge\Parsedown\ParsedownParser')
+    Mni\FrontYAML\Markdown\MarkdownParser::class => DI\object(Mni\FrontYAML\Bridge\Parsedown\ParsedownParser::class)
         ->constructor(DI\get('ParsedownExtra')),
 
 ];

@@ -16,7 +16,7 @@ class AddPageListToLayoutVariables implements Step
     public function __invoke(Project $project): void
     {
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType(HtmlFile::class);
 
         $pageList = [];
         $pageTree = [];

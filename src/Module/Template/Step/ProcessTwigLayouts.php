@@ -28,7 +28,7 @@ class ProcessTwigLayouts implements Step
         $twig = $this->createTwig((string) $project->metadata['template.directory']);
 
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType(HtmlFile::class);
 
         /** @var HtmlFile */
         foreach ($htmlFiles as $file) {

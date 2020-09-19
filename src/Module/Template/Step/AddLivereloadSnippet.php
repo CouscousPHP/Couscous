@@ -29,7 +29,7 @@ class AddLivereloadSnippet implements Step
         }
 
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType(HtmlFile::class);
 
         foreach ($htmlFiles as $file) {
             $contentAsArray = explode('</body>', $file->content);

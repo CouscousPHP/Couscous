@@ -24,7 +24,7 @@ class CreateHeadingIds implements Step
     public function __invoke(Project $project): void
     {
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType(HtmlFile::class);
 
         foreach ($htmlFiles as $htmlFile) {
             $htmlFile->content = $this->render($htmlFile->getContent());

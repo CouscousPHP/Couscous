@@ -16,7 +16,7 @@ class ProcessMarkdownFileName implements Step
     public function __invoke(Project $project): void
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType(MarkdownFile::class);
 
         foreach ($markdownFiles as $markdownFile) {
             $project->removeFile($markdownFile);
