@@ -83,7 +83,7 @@ class PreviewCommand extends Command
         $cliConfig = $input->getOption('config');
 
         if (!$this->isSupported()) {
-            $output->writeln('<error>PHP 5.4 or above is required to run the internal webserver</error>');
+            $output->writeln('<error>PHP 7.1 or above is required to run the internal webserver</error>');
 
             return 1;
         }
@@ -225,7 +225,7 @@ class PreviewCommand extends Command
 
     private function isSupported(): bool
     {
-        if (version_compare(phpversion(), '5.4.0', '<')) {
+        if (version_compare(phpversion(), '7.1.0', '<')) {
             return false;
         }
 
