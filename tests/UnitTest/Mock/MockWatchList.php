@@ -7,7 +7,7 @@ use Symfony\Component\Finder\Finder;
 
 class MockWatchList extends WatchList
 {
-    public function watchFile($filename): void
+    public function watchFile(string $filename): void
     {
     }
 
@@ -15,7 +15,7 @@ class MockWatchList extends WatchList
     {
     }
 
-    public function watchDirectory($directory): void
+    public function watchDirectory(string $directory): void
     {
     }
 
