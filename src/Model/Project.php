@@ -86,11 +86,11 @@ class Project
     }
 
     /**
-     * @param string $class
+     * @param class-string<File> $class
      *
      * @return File[] Instances of $class
      */
-    public function findFilesByType($class): array
+    public function findFilesByType(string $class): array
     {
         if (!class_exists($class)) {
             throw new \InvalidArgumentException(sprintf(
