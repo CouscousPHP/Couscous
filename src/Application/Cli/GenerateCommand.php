@@ -56,7 +56,7 @@ class GenerateCommand extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $cliConfig = $input->getOption('config');
 
@@ -65,5 +65,7 @@ class GenerateCommand extends Command
         $project->metadata['cliConfig'] = $cliConfig;
 
         $this->generator->generate($project, $output);
+
+        return 0;
     }
 }

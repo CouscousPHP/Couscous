@@ -28,7 +28,7 @@ class SelfUpdateCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $updater = new Updater(null, false);
         $updater->getStrategy()->setPharUrl('https://couscous.io/couscous.phar');
@@ -36,5 +36,7 @@ class SelfUpdateCommand extends Command
 
         $result = $updater->update();
         $result ? $output->writeln('Phar file updated successfully!') : $output->writeln('No need to update.');
+
+        return 0;
     }
 }

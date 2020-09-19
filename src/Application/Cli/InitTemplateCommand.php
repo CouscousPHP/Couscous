@@ -33,7 +33,7 @@ class InitTemplateCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $fileExtension = '.twig';
 
@@ -53,7 +53,7 @@ class InitTemplateCommand extends Command
             $output->writeln('<error>That template exists at '.$fileLocation.', so nothing has been changed.</error>');
             $output->writeln('<error>Try another name!</error>');
 
-            return;
+            return 1;
         }
 
         if (!$fileExists) {
@@ -87,5 +87,7 @@ class InitTemplateCommand extends Command
 HTML;
             file_put_contents($fileLocation, $template);
         }
+
+        return 0;
     }
 }

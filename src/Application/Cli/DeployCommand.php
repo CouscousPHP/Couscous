@@ -95,7 +95,7 @@ class DeployCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sourceDirectory = $input->getArgument('source');
         $repositoryUrl = $input->getOption('repository');
@@ -118,5 +118,7 @@ class DeployCommand extends Command
 
         // Deploy it
         $this->deployer->deploy($project, $output, $repositoryUrl, $targetBranch);
+
+        return 0;
     }
 }

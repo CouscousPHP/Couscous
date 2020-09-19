@@ -76,7 +76,7 @@ class TravisAutoDeployCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sourceDirectory = $input->getArgument('source');
         $repositoryUrl = sprintf('https://%s@%s', getenv('GH_TOKEN'), getenv('GH_REF'));
@@ -90,7 +90,7 @@ class TravisAutoDeployCommand extends Command
         if ($travisBranch !== 'master') {
             $output->writeln('<comment>[NOT DEPLOYED] Deploying Couscous only for master branch</comment>');
 
-            return;
+            return 0;
         }
 
         $isPullRequest = (int) getenv('TRAVIS_PULL_REQUEST') > 0 ? true : false;
@@ -98,7 +98,7 @@ class TravisAutoDeployCommand extends Command
         if ($isPullRequest) {
             $output->writeln('<comment>[NOT DEPLOYED] Not deploying Couscous for pull requests</comment>');
 
-            return;
+            return 0;
         }
 
         // getting current php version to only deploy once
@@ -106,7 +106,7 @@ class TravisAutoDeployCommand extends Command
         if ($input->getOption('php-version') != $currentPhpVersion) {
             $output->writeln('<comment>This version of the documentation is already deployed</comment>');
 
-            return;
+            return 0;
         }
 
         // set git user data
@@ -121,5 +121,7 @@ class TravisAutoDeployCommand extends Command
 
         // Deploy it
         $this->deployer->deploy($repository, $output, $repositoryUrl, $targetBranch);
+
+        return 0;
     }
 }
