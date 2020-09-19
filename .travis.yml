@@ -25,6 +25,7 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+  - vendor/bin/psalm
 
 after_success:
   - if [ "$DEPLOY_WEBSITE" = "true" ]; then ./travis-prepare-release.sh && bin/couscous travis-auto-deploy; fi;
