@@ -13,7 +13,7 @@ use Couscous\Step;
  */
 class AddCname implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (isset($project->metadata['cname'])) {
             $project->addFile(new CnameFile('CNAME', $project->metadata['cname']));

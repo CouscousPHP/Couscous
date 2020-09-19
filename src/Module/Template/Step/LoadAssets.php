@@ -28,7 +28,7 @@ class LoadAssets implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (!$project->metadata['template.directory']) {
             return;

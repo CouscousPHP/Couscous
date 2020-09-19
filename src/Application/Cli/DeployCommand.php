@@ -53,7 +53,7 @@ class DeployCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         try {
             $remoteUrl = $this->git->getRemoteUrl();

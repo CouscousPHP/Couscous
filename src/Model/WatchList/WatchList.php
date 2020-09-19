@@ -13,17 +13,17 @@ class WatchList
 {
     private $watches;
 
-    public function watchFile($filename)
+    public function watchFile($filename): void
     {
         $this->watches[] = new FileWatch($filename);
     }
 
-    public function watchFiles(Finder $finder)
+    public function watchFiles(Finder $finder): void
     {
         $this->watches[] = new FinderWatch($finder);
     }
 
-    public function watchDirectory($directory)
+    public function watchDirectory($directory): void
     {
         $finder = new Finder();
         $finder->files()

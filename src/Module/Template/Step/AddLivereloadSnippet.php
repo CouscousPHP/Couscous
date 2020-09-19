@@ -22,7 +22,7 @@ class AddLivereloadSnippet implements Step
         <!-- End Livereload -->
     ';
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (!$project->metadata['preview']) {
             return;

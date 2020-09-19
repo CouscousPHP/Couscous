@@ -44,14 +44,14 @@ class Metadata implements \ArrayAccess
         return $this->recursiveGet($keys, $this->values);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $keys = explode('.', $offset);
 
         $this->recursiveSet($keys, $this->values, $value);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this[$offset] = null;
     }
@@ -61,7 +61,7 @@ class Metadata implements \ArrayAccess
      *
      * @param array $metadata
      */
-    public function setMany(array $metadata)
+    public function setMany(array $metadata): void
     {
         $this->values = array_merge($this->values, $metadata);
     }
@@ -112,7 +112,7 @@ class Metadata implements \ArrayAccess
         return $this->recursiveExist($keys, $values[$key]);
     }
 
-    private function recursiveSet($keys, &$values, $value)
+    private function recursiveSet($keys, &$values, $value): void
     {
         $key = array_shift($keys);
 

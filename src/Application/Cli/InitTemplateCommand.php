@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class InitTemplateCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('init:template')

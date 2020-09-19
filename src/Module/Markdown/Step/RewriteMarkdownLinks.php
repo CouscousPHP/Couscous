@@ -20,7 +20,7 @@ class RewriteMarkdownLinks implements Step
      */
     const MARKDOWN_LINK_REGEX = '/\[(?:[^\]]+)\]\(([^\)]+\/)?([A-Za-z0-9_\.\-]+\.md)([^.\)][^\)]*)?\)/';
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var MarkdownFile[] $markdownFiles */
         $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');

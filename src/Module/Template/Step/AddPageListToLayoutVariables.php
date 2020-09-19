@@ -13,7 +13,7 @@ use Couscous\Step;
  */
 class AddPageListToLayoutVariables implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var HtmlFile[] $htmlFiles */
         $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
@@ -44,7 +44,7 @@ class AddPageListToLayoutVariables implements Step
         $project->metadata['pageTree'] = $pageTree;
     }
 
-    private function setValue(array &$array, array $path, $value)
+    private function setValue(array &$array, array $path, $value): void
     {
         if (empty($path)) {
             $array[$value] = $value;
@@ -61,7 +61,7 @@ class AddPageListToLayoutVariables implements Step
         $this->setValue($array[$dir], $path, $value);
     }
 
-    private function sortRecursively(&$array)
+    private function sortRecursively(&$array): void
     {
         foreach ($array as &$value) {
             if (is_array($value)) {

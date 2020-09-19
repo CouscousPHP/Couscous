@@ -22,7 +22,7 @@ class OverrideConfigFromCLI implements \Couscous\Step
         $this->logger = $logger;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (!$project->metadata['cliConfig']) {
             return;

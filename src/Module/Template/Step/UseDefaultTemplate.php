@@ -25,7 +25,7 @@ class UseDefaultTemplate implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if ($this->useRemoteTemplate($project)
             || $this->hasCustomTemplateDirectory($project)

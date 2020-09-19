@@ -18,7 +18,7 @@ class SetDefaultConfig implements Step
         ],
     ];
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $project->metadata->setMany($this->defaultConfig);
     }

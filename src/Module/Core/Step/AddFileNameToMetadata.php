@@ -12,7 +12,7 @@ use Couscous\Step;
  */
 class AddFileNameToMetadata implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         foreach ($project->getFiles() as $file) {
             $fileMetadata = $file->getMetadata();

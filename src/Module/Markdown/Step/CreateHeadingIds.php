@@ -21,7 +21,7 @@ class CreateHeadingIds implements Step
     /**
      * @param Project $project
      */
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var HtmlFile[] $htmlFiles */
         $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
@@ -31,7 +31,7 @@ class CreateHeadingIds implements Step
         }
     }
 
-    private function reset()
+    private function reset(): void
     {
         $this->ids = [];
     }

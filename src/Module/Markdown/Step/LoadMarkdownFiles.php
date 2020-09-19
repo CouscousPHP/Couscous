@@ -14,7 +14,7 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class LoadMarkdownFiles implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $files = $project->sourceFiles();
         $files->name('*.md');

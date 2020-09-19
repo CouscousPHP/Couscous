@@ -48,7 +48,7 @@ class FetchRemoteTemplate implements Step
         $this->git = $git;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         // In preview we avoid cloning the repository every time
         if ($project->regenerate && $this->templateDirectory) {

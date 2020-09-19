@@ -33,7 +33,7 @@ class Generator
         $this->steps = $steps;
     }
 
-    public function generate(Project $project, OutputInterface $output)
+    public function generate(Project $project, OutputInterface $output): void
     {
         $output->writeln(sprintf(
             '<comment>Generating %s to %s</comment>',

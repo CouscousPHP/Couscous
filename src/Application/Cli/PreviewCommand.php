@@ -34,7 +34,7 @@ class PreviewCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('preview')
@@ -198,7 +198,7 @@ class PreviewCommand extends Command
         return false;
     }
 
-    private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
+    private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory): void
     {
         $processArguments = [$executablePath, $targetDirectory, '-w', '3'];
 

@@ -24,7 +24,7 @@ class ClearTargetDirectory implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $files = new Finder();
         $files->in($project->targetDirectory);

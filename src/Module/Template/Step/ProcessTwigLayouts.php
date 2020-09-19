@@ -19,7 +19,7 @@ class ProcessTwigLayouts implements Step
 {
     const DEFAULT_LAYOUT_NAME = 'default.twig';
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (!$project->metadata['template.directory']) {
             return;

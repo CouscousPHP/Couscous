@@ -38,7 +38,7 @@ class Deployer
      * @param string          $repositoryUrl Repository in which to deploy the files.
      * @param string          $branch        Git branch in which to deploy the files.
      */
-    public function deploy(Project $project, OutputInterface $output, $repositoryUrl, $branch)
+    public function deploy(Project $project, OutputInterface $output, $repositoryUrl, $branch): void
     {
         $output->writeln('<comment>Deploying the website</comment>');
 
@@ -72,14 +72,14 @@ class Deployer
         return $tempFile;
     }
 
-    private function cloneRepository(OutputInterface $output, $repositoryUrl, $tmpDirectory)
+    private function cloneRepository(OutputInterface $output, $repositoryUrl, $tmpDirectory): void
     {
         $output->writeln("Cloning <info>$repositoryUrl</info> in <info>$tmpDirectory</info>");
 
         $this->git->cloneRepository($repositoryUrl, $tmpDirectory);
     }
 
-    private function checkoutBranch(OutputInterface $output, $branch, $tmpDirectory)
+    private function checkoutBranch(OutputInterface $output, $branch, $tmpDirectory): void
     {
         $output->writeln("Checking out branch <info>$branch</info>");
 
@@ -95,7 +95,7 @@ class Deployer
         }
     }
 
-    private function copyGeneratedFiles(OutputInterface $output, $directory, $tmpDirectory)
+    private function copyGeneratedFiles(OutputInterface $output, $directory, $tmpDirectory): void
     {
         $output->writeln('Copying generated website');
 
@@ -108,21 +108,21 @@ class Deployer
         $this->filesystem->mirror($directory, $tmpDirectory);
     }
 
-    private function commitChanges(OutputInterface $output, $tmpDirectory)
+    private function commitChanges(OutputInterface $output, $tmpDirectory): void
     {
         $output->writeln('Committing changes');
 
         $this->git->commitAllChanges($tmpDirectory, 'Website generation with Couscous');
     }
 
-    private function pushBranch(OutputInterface $output, $branch, $tmpDirectory)
+    private function pushBranch(OutputInterface $output, $branch, $tmpDirectory): void
     {
         $output->writeln("Pushing <info>$branch</info> (GitHub may ask you to login)");
 
         $this->git->push($tmpDirectory, $branch);
     }
 
-    private function deleteTempDirectory($dir)
+    private function deleteTempDirectory($dir): void
     {
         $this->filesystem->remove($dir);
     }

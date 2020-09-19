@@ -40,7 +40,7 @@ class LoadConfig implements Step
         $this->logger = $logger;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $filename = $project->sourceDirectory.'/'.self::FILENAME;
 

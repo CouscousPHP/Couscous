@@ -25,7 +25,7 @@ class ValidateTemplateDirectory implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $directory = $project->metadata['template.directory'];
 
@@ -44,7 +44,7 @@ class ValidateTemplateDirectory implements Step
         $project->metadata['template.directory'] = $directory;
     }
 
-    private function assertDirectoryExist($directory)
+    private function assertDirectoryExist($directory): void
     {
         if (!$this->filesystem->exists($directory)) {
             throw new \RuntimeException(sprintf(

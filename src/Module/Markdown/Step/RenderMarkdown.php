@@ -25,7 +25,7 @@ class RenderMarkdown implements Step
         $this->markdownParser = $markdownParser;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var MarkdownFile[] $markdownFiles */
         $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');

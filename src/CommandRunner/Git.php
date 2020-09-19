@@ -19,27 +19,27 @@ class Git
         $this->commandRunner = $commandRunner;
     }
 
-    public function cloneRepository($url, $directory)
+    public function cloneRepository($url, $directory): void
     {
         $this->commandRunner->run("git clone $url \"$directory\"");
     }
 
-    public function checkoutOriginBranch($directory, $branch)
+    public function checkoutOriginBranch($directory, $branch): void
     {
         $this->run($directory, "git checkout -b $branch origin/$branch");
     }
 
-    public function createBranch($directory, $branch)
+    public function createBranch($directory, $branch): void
     {
         $this->run($directory, "git checkout -b $branch");
     }
 
-    public function commitAllChanges($directory, $message)
+    public function commitAllChanges($directory, $message): void
     {
         $this->run($directory, "git add --all . && git commit -m \"$message\"");
     }
 
-    public function push($directory, $branch, $remote = 'origin')
+    public function push($directory, $branch, $remote = 'origin'): void
     {
         $this->run($directory, "git push $remote $branch");
     }

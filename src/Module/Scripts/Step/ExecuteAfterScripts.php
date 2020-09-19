@@ -12,7 +12,7 @@ use Couscous\Step;
  */
 class ExecuteAfterScripts extends ExecuteScripts implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $scripts = $project->metadata['scripts.after'];
 

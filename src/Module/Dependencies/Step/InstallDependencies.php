@@ -40,7 +40,7 @@ class InstallDependencies implements Step
         $this->logger = $logger;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $canUseYarn = $this->canUseYarn($project);
         $canUseNpm = $this->canUseNpm($project);

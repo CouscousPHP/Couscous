@@ -61,17 +61,17 @@ class Project
         $this->metadata = new Metadata();
     }
 
-    public function addFile(File $file)
+    public function addFile(File $file): void
     {
         $this->files[$file->relativeFilename] = $file;
     }
 
-    public function removeFile(File $file)
+    public function removeFile(File $file): void
     {
         unset($this->files[$file->relativeFilename]);
     }
 
-    public function replaceFile(File $oldFile, File $newFile)
+    public function replaceFile(File $oldFile, File $newFile): void
     {
         $this->removeFile($oldFile);
         $this->addFile($newFile);
