@@ -16,7 +16,7 @@ abstract class File
      */
     private $metadata;
 
-    public function __construct($relativeFilename)
+    public function __construct(string $relativeFilename)
     {
         $this->relativeFilename = $relativeFilename;
         $this->metadata = new Metadata();
@@ -27,7 +27,7 @@ abstract class File
      *
      * @return string
      */
-    public function getBasename()
+    public function getBasename(): string
     {
         return basename($this->relativeFilename);
     }
@@ -37,7 +37,7 @@ abstract class File
      *
      * @return string
      */
-    public function getDirectory()
+    public function getDirectory(): string
     {
         $directory = dirname($this->relativeFilename);
         $directory = ($directory === '.') ? '' : $directory.'/';
@@ -50,7 +50,7 @@ abstract class File
      *
      * @return string
      */
-    abstract public function getContent();
+    abstract public function getContent(): string;
 
     /**
      * Returns an indexed array of metadata.
@@ -59,7 +59,7 @@ abstract class File
      *
      * @return Metadata
      */
-    public function getMetadata()
+    public function getMetadata(): Metadata
     {
         return $this->metadata;
     }

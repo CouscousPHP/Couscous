@@ -55,7 +55,7 @@ class ProcessTwigLayouts implements Step
         }
     }
 
-    private function createTwig($templateDirectory)
+    private function createTwig(string $templateDirectory): Twig_Environment
     {
         $loader = $this->createLoader($templateDirectory);
 
@@ -81,7 +81,7 @@ class ProcessTwigLayouts implements Step
      *
      * @return Twig_Loader_Array
      */
-    private function createLoader($templateDirectory)
+    private function createLoader(string $templateDirectory): Twig_Loader_Array
     {
         $finder = new Finder();
         $finder->files()

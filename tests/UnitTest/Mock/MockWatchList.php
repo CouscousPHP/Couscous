@@ -19,7 +19,7 @@ class MockWatchList extends WatchList
     {
     }
 
-    public function getChangedFiles()
+    public function getChangedFiles(): array
     {
         return [];
     }

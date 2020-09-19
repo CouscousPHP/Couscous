@@ -37,17 +37,17 @@ class UseDefaultTemplate implements Step
         $project->metadata['template.url'] = self::DEFAULT_TEMPLATE_URL;
     }
 
-    private function useRemoteTemplate(Project $project)
+    private function useRemoteTemplate(Project $project): bool
     {
         return $project->metadata['template.url'] !== null;
     }
 
-    private function hasCustomTemplateDirectory(Project $project)
+    private function hasCustomTemplateDirectory(Project $project): bool
     {
         return $project->metadata['template.directory'] !== null;
     }
 
-    private function hasTemplateDirectory(Project $project)
+    private function hasTemplateDirectory(Project $project): bool
     {
         $templateDirectory = $project->sourceDirectory.'/'.ValidateTemplateDirectory::DEFAULT_TEMPLATE_DIRECTORY;
 

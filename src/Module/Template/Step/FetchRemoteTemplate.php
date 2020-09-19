@@ -69,7 +69,7 @@ class FetchRemoteTemplate implements Step
         $project->metadata['template.directory'] = $directory;
     }
 
-    private function fetchGitTemplate($gitUrl)
+    private function fetchGitTemplate(string $gitUrl): string
     {
         $this->logger->notice('Fetching template from {url}', ['url' => $gitUrl]);
 
@@ -80,7 +80,7 @@ class FetchRemoteTemplate implements Step
         return $directory;
     }
 
-    private function createTempDirectory($prefix)
+    private function createTempDirectory(string $prefix): string
     {
         $tempFile = tempnam(sys_get_temp_dir(), $prefix);
         // Turn the temp file into a temp directory

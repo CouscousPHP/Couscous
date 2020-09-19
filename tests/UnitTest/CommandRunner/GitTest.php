@@ -120,7 +120,7 @@ class GitTest extends TestCase
         $this->assertFalse($this->git->hasUncommittedChanges($directory));
     }
 
-    private function expectCommandIsRun($command, $return = null)
+    private function expectCommandIsRun($command, $return = '')
     {
         $this->commandRunner->expects($this->once())
             ->method('run')

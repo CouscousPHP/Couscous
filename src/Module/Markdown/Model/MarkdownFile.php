@@ -14,14 +14,14 @@ class MarkdownFile extends File
      */
     public $content;
 
-    public function __construct($relativeFilename, $content)
+    public function __construct(string $relativeFilename, string $content)
     {
         $this->content = $content;
 
         parent::__construct($relativeFilename);
     }
 
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }

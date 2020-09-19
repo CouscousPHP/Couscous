@@ -74,7 +74,7 @@ class InstallDependencies implements Step
     /**
      * @return bool
      */
-    private function canUseYarn(Project $project)
+    private function canUseYarn(Project $project): bool
     {
         return $this->hasPackageJson($project) && $this->commandRunner->commandExists('yarn');
     }
@@ -82,7 +82,7 @@ class InstallDependencies implements Step
     /**
      * @return bool
      */
-    private function canUseNpm(Project $project)
+    private function canUseNpm(Project $project): bool
     {
         return $this->hasPackageJson($project) && $this->commandRunner->commandExists('npm');
     }
@@ -90,7 +90,7 @@ class InstallDependencies implements Step
     /**
      * @return bool
      */
-    private function canUseBower(Project $project)
+    private function canUseBower(Project $project): bool
     {
         return $this->hasBowerJson($project) && $this->commandRunner->commandExists('bower');
     }
@@ -98,7 +98,7 @@ class InstallDependencies implements Step
     /**
      * @return bool
      */
-    private function hasPackageJson(Project $project)
+    private function hasPackageJson(Project $project): bool
     {
         if (!$project->metadata['template.directory']) {
             return false;
@@ -112,7 +112,7 @@ class InstallDependencies implements Step
     /**
      * @return bool
      */
-    private function hasBowerJson(Project $project)
+    private function hasBowerJson(Project $project): bool
     {
         if (!$project->metadata['template.directory']) {
             return false;

@@ -53,7 +53,7 @@ class Project
      */
     protected $files = [];
 
-    public function __construct($sourceDirectory, $targetDirectory)
+    public function __construct(string $sourceDirectory, string $targetDirectory)
     {
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
@@ -80,7 +80,7 @@ class Project
     /**
      * @return File[]
      */
-    public function getFiles()
+    public function getFiles(): array
     {
         return $this->files;
     }
@@ -90,7 +90,7 @@ class Project
      *
      * @return File[] Instances of $class
      */
-    public function findFilesByType($class)
+    public function findFilesByType($class): array
     {
         if (!class_exists($class)) {
             throw new \InvalidArgumentException(sprintf(
@@ -99,7 +99,7 @@ class Project
             ));
         }
 
-        return array_filter($this->files, function (File $file) use ($class) {
+        return array_filter($this->files, function (File $file) use ($class): bool {
             return $file instanceof $class;
         });
     }
@@ -109,13 +109,13 @@ class Project
      *
      * @return Finder
      */
-    public function sourceFiles()
+    public function sourceFiles(): Finder
     {
         $includedDirectories = $this->metadata['include'] ? $this->metadata['include'] : [];
 
         // To be sure that included directories are under the source one
         if (!empty($includedDirectories)) {
-            array_walk($includedDirectories, function (&$item) {
+            array_walk($includedDirectories, function (string &$item): void {
                 $item = $this->sourceDirectory.'/'.$item;
             });
         }

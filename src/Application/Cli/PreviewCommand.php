@@ -114,7 +114,7 @@ class PreviewCommand extends Command
         if (function_exists('pcntl_signal')) {
             declare(ticks=1);
 
-            $handler = function ($signal) use ($serverProcess, $output, &$throwOnServerStop) {
+            $handler = function (int $signal) use ($serverProcess, $output, &$throwOnServerStop): void {
                 $throwOnServerStop = !$this->stopWebServer($serverProcess, $output, $signal);
             };
 
@@ -146,10 +146,10 @@ class PreviewCommand extends Command
 
     private function generateWebsite(
         OutputInterface $output,
-        $sourceDirectory,
-        $targetDirectory,
-        $cliConfig,
-        $regenerate = false
+        string $sourceDirectory,
+        string $targetDirectory,
+        array $cliConfig,
+        bool $regenerate = false
     ) {
         $project = new Project($sourceDirectory, $targetDirectory);
 
@@ -163,7 +163,7 @@ class PreviewCommand extends Command
         return $project->watchlist;
     }
 
-    private function startWebServer(InputInterface $input, OutputInterface $output, $targetDirectory)
+    private function startWebServer(InputInterface $input, OutputInterface $output, string $targetDirectory): Process
     {
         $processArguments = [PHP_BINARY, '-S', $input->getArgument('address')];
 
@@ -177,7 +177,7 @@ class PreviewCommand extends Command
         return $process;
     }
 
-    private function stopWebServer(Process $serverProcess, OutputInterface $output, $signal = null)
+    private function stopWebServer(Process $serverProcess, OutputInterface $output, int $signal = null): bool
     {
         $signal = $signal ?: SIGTERM;
 
@@ -198,8 +198,12 @@ class PreviewCommand extends Command
         return false;
     }
 
-    private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory): void
-    {
+    private function startLivereload(
+        string $executablePath,
+        OutputInterface $output,
+        string $sourceDirectory,
+        string $targetDirectory
+    ): void {
         $processArguments = [$executablePath, $targetDirectory, '-w', '3'];
 
         $process = new Process($processArguments);
@@ -210,7 +214,7 @@ class PreviewCommand extends Command
         $output->writeln('<info>Livereload launched!</info>');
     }
 
-    private function isSupported()
+    private function isSupported(): bool
     {
         if (version_compare(phpversion(), '5.4.0', '<')) {
             return false;
@@ -219,7 +223,7 @@ class PreviewCommand extends Command
         return true;
     }
 
-    private function isFound($executablePath)
+    private function isFound(string $executablePath): bool
     {
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $folders = explode(';', getenv('PATH'));
@@ -236,9 +240,9 @@ class PreviewCommand extends Command
         return false;
     }
 
-    private function fileListToDisplay(array $files, $sourceDirectory)
+    private function fileListToDisplay(array $files, string $sourceDirectory): string
     {
-        $files = array_map(function ($file) use ($sourceDirectory) {
+        $files = array_map(function (string $file) use ($sourceDirectory): string {
             return substr($file, strlen($sourceDirectory) + 1);
         }, $files);
 

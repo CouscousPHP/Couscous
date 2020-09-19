@@ -44,7 +44,7 @@ class ValidateTemplateDirectory implements Step
         $project->metadata['template.directory'] = $directory;
     }
 
-    private function assertDirectoryExist($directory): void
+    private function assertDirectoryExist(string $directory): void
     {
         if (!$this->filesystem->exists($directory)) {
             throw new \RuntimeException(sprintf(

@@ -16,45 +16,45 @@ class ExcludeList
         $this->excluded = $exclude;
     }
 
-    public function addEntry($entry)
+    public function addEntry(string $entry): self
     {
         $this->excluded[] = $entry;
 
         return $this;
     }
 
-    public function addEntries(array $entries)
+    public function addEntries(array $entries): self
     {
         $this->excluded = array_merge($this->excluded, $entries);
 
         return $this;
     }
 
-    public function contains($needle)
+    public function contains(string $needle): bool
     {
         return in_array($needle, $this->excluded);
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $excluded = $this->excluded;
         $excluded = array_filter($excluded, [$this, 'keepEntry']);
         $excluded = array_map([$this, 'sanitizeEntry'], $excluded);
-        $excluded = array_map(function ($entry) {
+        $excluded = array_map(function (string $entry): string {
             return trim($entry, '/');
         }, $excluded);
 
         return array_values(array_unique($excluded));
     }
 
-    public function excludeFromFinder(Finder $finder)
+    public function excludeFromFinder(Finder $finder): self
     {
         $finder->exclude($this->toArray());
 
         return $this;
     }
 
-    private function keepEntry($entry)
+    private function keepEntry($entry): bool
     {
         switch (true) {
             case !is_string($entry) && !is_numeric($entry):
@@ -68,7 +68,7 @@ class ExcludeList
         }
     }
 
-    private function sanitizeEntry($entry)
+    private function sanitizeEntry(string $entry): string
     {
         return preg_replace(
             '/\\\(\s)$/',

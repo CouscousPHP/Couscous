@@ -15,13 +15,13 @@ class FileWatch implements WatchInterface
     /**
      * @param string $filename
      */
-    public function __construct($filename)
+    public function __construct(string $filename)
     {
         $this->filename = $filename;
         $this->time = time();
     }
 
-    public function getChangedFiles()
+    public function getChangedFiles(): array
     {
         if (!file_exists($this->filename)) {
             return [];

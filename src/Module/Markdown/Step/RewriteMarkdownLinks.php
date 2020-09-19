@@ -33,7 +33,7 @@ class RewriteMarkdownLinks implements Step
         }
     }
 
-    private function replaceFilename(array $matches)
+    private function replaceFilename(array $matches): string
     {
         $filename = strtolower($matches[2]);
         $filename = str_replace('.md', '.html', $filename);

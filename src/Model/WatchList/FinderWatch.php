@@ -21,12 +21,12 @@ class FinderWatch implements WatchInterface
         $this->date = date('Y-m-d H:i:s');
     }
 
-    public function getChangedFiles()
+    public function getChangedFiles(): array
     {
         $finder = clone $this->finder;
         $finder->date('after '.$this->date);
 
-        return array_map(function (SplFileInfo $file) {
+        return array_map(function (SplFileInfo $file): string {
             return $file->getPathname();
         }, iterator_to_array($finder));
     }

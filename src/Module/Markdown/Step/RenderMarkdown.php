@@ -37,7 +37,7 @@ class RenderMarkdown implements Step
         }
     }
 
-    private function renderFile(MarkdownFile $file)
+    private function renderFile(MarkdownFile $file): HtmlFile
     {
         $document = $this->markdownParser->parse($file->getContent());
 
@@ -46,7 +46,7 @@ class RenderMarkdown implements Step
         return new HtmlFile($filename, $document->getContent(), $file);
     }
 
-    private function replaceExtension($filename)
+    private function replaceExtension(string $filename): string
     {
         $filename = substr($filename, 0, strrpos($filename, '.'));
 

@@ -13,7 +13,7 @@ class WatchList
 {
     private $watches;
 
-    public function watchFile($filename): void
+    public function watchFile(string $filename): void
     {
         $this->watches[] = new FileWatch($filename);
     }
@@ -23,7 +23,7 @@ class WatchList
         $this->watches[] = new FinderWatch($finder);
     }
 
-    public function watchDirectory($directory): void
+    public function watchDirectory(string $directory): void
     {
         $finder = new Finder();
         $finder->files()
@@ -32,9 +32,9 @@ class WatchList
         $this->watches[] = new FinderWatch($finder);
     }
 
-    public function getChangedFiles()
+    public function getChangedFiles(): array
     {
-        $files = array_map(function (WatchInterface $watch) {
+        $files = array_map(function (WatchInterface $watch): array {
             return $watch->getChangedFiles();
         }, $this->watches);
 

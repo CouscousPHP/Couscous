@@ -9,7 +9,7 @@ namespace Couscous\Module\Config\Step;
  */
 class InvalidConfigException extends \Exception
 {
-    public static function invalidYaml($file, \Exception $previous = null)
+    public static function invalidYaml(string $file, \Exception $previous = null)
     {
         return new self(sprintf(
             'The YAML configuration file %s contains invalid YAML%s',

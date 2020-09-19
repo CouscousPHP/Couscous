@@ -57,7 +57,7 @@ class LoadConfig implements Step
         $project->watchlist->watchFile($filename);
     }
 
-    private function parseYamlFile($filename)
+    private function parseYamlFile(string $filename): array
     {
         try {
             $metadata = $this->yamlParser->parse(file_get_contents($filename));
@@ -72,7 +72,7 @@ class LoadConfig implements Step
         return $metadata;
     }
 
-    private function validateConfig($values)
+    private function validateConfig(array $values): array
     {
         if (array_key_exists('include', $values)) {
             $values['include'] = (array) $values['include'];

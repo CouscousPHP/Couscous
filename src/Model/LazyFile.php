@@ -11,14 +11,14 @@ class LazyFile extends File
 {
     private $fullFilename;
 
-    public function __construct($fullFilename, $relativeFilename)
+    public function __construct(string $fullFilename, string $relativeFilename)
     {
         $this->fullFilename = $fullFilename;
 
         parent::__construct($relativeFilename);
     }
 
-    public function getContent()
+    public function getContent(): string
     {
         return file_get_contents($this->fullFilename);
     }

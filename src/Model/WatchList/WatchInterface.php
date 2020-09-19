@@ -14,5 +14,5 @@ interface WatchInterface
      *
      * @return string[]
      */
-    public function getChangedFiles();
+    public function getChangedFiles(): array;
 }

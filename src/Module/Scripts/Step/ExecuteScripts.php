@@ -30,7 +30,7 @@ abstract class ExecuteScripts
         $this->logger = $logger;
     }
 
-    protected function executeScripts($scripts, Project $project): void
+    protected function executeScripts(?array $scripts, Project $project): void
     {
         if (empty($scripts)) {
             return;
@@ -41,7 +41,7 @@ abstract class ExecuteScripts
         }
     }
 
-    private function executeScript($sourceDirectory, $script): void
+    private function executeScript(string $sourceDirectory, string $script): void
     {
         $script = 'cd "'.$sourceDirectory.'" && '.$script;
 

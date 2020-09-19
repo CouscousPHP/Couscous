@@ -15,7 +15,7 @@ class ContainerFactory
     /**
      * @return Container
      */
-    public function createContainer()
+    public function createContainer(): Container
     {
         $builder = new ContainerBuilder();
 

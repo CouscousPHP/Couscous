@@ -44,7 +44,7 @@ class AddPageListToLayoutVariables implements Step
         $project->metadata['pageTree'] = $pageTree;
     }
 
-    private function setValue(array &$array, array $path, $value): void
+    private function setValue(array &$array, array $path, string $value): void
     {
         if (empty($path)) {
             $array[$value] = $value;

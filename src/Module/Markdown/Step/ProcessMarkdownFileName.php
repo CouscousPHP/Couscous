@@ -57,7 +57,7 @@ class ProcessMarkdownFileName implements Step
         $file->relativeFilename = $file->getDirectory().strtolower($basename);
     }
 
-    private function replaceExtension($filename)
+    private function replaceExtension(string $filename): string
     {
         $filename = substr($filename, 0, strrpos($filename, '.'));
 

@@ -30,7 +30,7 @@ class Metadata implements \ArrayAccess
         $this->values = $values;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $keys = explode('.', $offset);
 
@@ -69,12 +69,12 @@ class Metadata implements \ArrayAccess
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->values;
     }
 
-    private function recursiveGet($keys, $values)
+    private function recursiveGet(array $keys, $values)
     {
         $key = array_shift($keys);
 
@@ -93,7 +93,7 @@ class Metadata implements \ArrayAccess
         return $this->recursiveGet($keys, $values[$key]);
     }
 
-    private function recursiveExist($keys, $values)
+    private function recursiveExist(array $keys, $values): bool
     {
         $key = array_shift($keys);
 
@@ -112,7 +112,7 @@ class Metadata implements \ArrayAccess
         return $this->recursiveExist($keys, $values[$key]);
     }
 
-    private function recursiveSet($keys, &$values, $value): void
+    private function recursiveSet(array $keys, &$values, $value): void
     {
         $key = array_shift($keys);
 
