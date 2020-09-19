@@ -16,8 +16,6 @@ class AddImages implements Step
 {
     /**
      * Add images to the given project.
-     *
-     * @param Project $project
      */
     public function __invoke(Project $project): void
     {

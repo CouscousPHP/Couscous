@@ -13,8 +13,6 @@ interface Step
 {
     /**
      * Process the given project.
-     *
-     * @param Project $project
      */
     public function __invoke(Project $project): void;
 }

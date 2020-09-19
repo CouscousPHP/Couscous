@@ -74,17 +74,12 @@ class Metadata implements \ArrayAccess
 
     /**
      * Merge metadata into the current metadata instance.
-     *
-     * @param array $metadata
      */
     public function setMany(array $metadata): void
     {
         $this->values = array_merge($this->values, $metadata);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return $this->values;

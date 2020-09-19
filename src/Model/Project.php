@@ -106,8 +106,6 @@ class Project
 
     /**
      * Returns a Finder correctly set up for searching in source files.
-     *
-     * @return Finder
      */
     public function sourceFiles(): Finder
     {

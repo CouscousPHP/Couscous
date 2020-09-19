@@ -73,33 +73,21 @@ class InstallDependencies implements Step
         }
     }
 
-    /**
-     * @return bool
-     */
     private function canUseYarn(Project $project): bool
     {
         return $this->hasPackageJson($project) && $this->commandRunner->commandExists('yarn');
     }
 
-    /**
-     * @return bool
-     */
     private function canUseNpm(Project $project): bool
     {
         return $this->hasPackageJson($project) && $this->commandRunner->commandExists('npm');
     }
 
-    /**
-     * @return bool
-     */
     private function canUseBower(Project $project): bool
     {
         return $this->hasBowerJson($project) && $this->commandRunner->commandExists('bower');
     }
 
-    /**
-     * @return bool
-     */
     private function hasPackageJson(Project $project): bool
     {
         if (!$project->metadata['template.directory']) {
@@ -111,9 +99,6 @@ class InstallDependencies implements Step
         return $this->filesystem->exists($filename);
     }
 
-    /**
-     * @return bool
-     */
     private function hasBowerJson(Project $project): bool
     {
         if (!$project->metadata['template.directory']) {

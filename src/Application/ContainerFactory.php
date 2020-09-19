@@ -12,9 +12,6 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class ContainerFactory
 {
-    /**
-     * @return Container
-     */
     public function createContainer(): Container
     {
         $builder = new ContainerBuilder();

@@ -27,8 +27,6 @@ abstract class File
 
     /**
      * Returns the basename of the file.
-     *
-     * @return string
      */
     public function getBasename(): string
     {
@@ -37,8 +35,6 @@ abstract class File
 
     /**
      * Returns the directory of the file.
-     *
-     * @return string
      */
     public function getDirectory(): string
     {
@@ -50,8 +46,6 @@ abstract class File
 
     /**
      * Returns the content of the file.
-     *
-     * @return string
      */
     abstract public function getContent(): string;
 
@@ -59,8 +53,6 @@ abstract class File
      * Returns an indexed array of metadata.
      *
      * Array keys are metadata names, array values are metadata values.
-     *
-     * @return Metadata
      */
     public function getMetadata(): Metadata
     {

@@ -24,8 +24,7 @@ class Generator
     private $steps;
 
     /**
-     * @param Filesystem $filesystem
-     * @param Step[]     $steps
+     * @param Step[] $steps
      */
     public function __construct(Filesystem $filesystem, array $steps)
     {

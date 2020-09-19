@@ -37,10 +37,6 @@ class CommandRunner
 
     /**
      * Check if a command exists.
-     *
-     * @param string $command
-     *
-     * @return bool
      */
     public function commandExists(string $command): bool
     {
@@ -51,8 +47,6 @@ class CommandRunner
 
     /**
      * Check if the OS is Windows.
-     *
-     * @return bool
      */
     private function isWindows(): bool
     {

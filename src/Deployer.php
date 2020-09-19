@@ -33,10 +33,8 @@ class Deployer
     }
 
     /**
-     * @param Project         $project
-     * @param OutputInterface $output
-     * @param string          $repositoryUrl Repository in which to deploy the files.
-     * @param string          $branch        Git branch in which to deploy the files.
+     * @param string $repositoryUrl Repository in which to deploy the files.
+     * @param string $branch        Git branch in which to deploy the files.
      */
     public function deploy(Project $project, OutputInterface $output, string $repositoryUrl, string $branch): void
     {

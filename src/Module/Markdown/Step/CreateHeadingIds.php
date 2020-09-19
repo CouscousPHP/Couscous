@@ -18,9 +18,6 @@ class CreateHeadingIds implements Step
      */
     private $ids = [];
 
-    /**
-     * @param Project $project
-     */
     public function __invoke(Project $project): void
     {
         /** @var HtmlFile[] $htmlFiles */
