@@ -19,8 +19,8 @@ class LoadMarkdownFiles implements Step
         $files = $project->sourceFiles();
         $files->name('*.md');
 
+        /** @var SplFileInfo $file */
         foreach ($files as $file) {
-            /** @var SplFileInfo $file */
             $content = file_get_contents($file->getPathname());
 
             $project->addFile(new MarkdownFile($file->getRelativePathname(), $content));

@@ -60,6 +60,7 @@ class LoadConfig implements Step
     private function parseYamlFile(string $filename): array
     {
         try {
+            /** @var mixed */
             $metadata = $this->yamlParser->parse(file_get_contents($filename));
         } catch (ParseException $e) {
             throw InvalidConfigException::invalidYaml(self::FILENAME, $e);
@@ -81,7 +82,7 @@ class LoadConfig implements Step
             $values['exclude'] = (array) $values['exclude'];
         }
         if (array_key_exists('directory', $values)) {
-            $values['directory'] = trim($values['directory']);
+            $values['directory'] = trim((string) $values['directory']);
         }
         if (array_key_exists('before', $values)) {
             $values['before'] = (array) $values['before'];
@@ -94,7 +95,7 @@ class LoadConfig implements Step
         }
         if (array_key_exists('baseUrl', $values)) {
             // Trim any trailing "/" in the base url
-            $values['baseUrl'] = rtrim(trim($values['baseUrl']), '/');
+            $values['baseUrl'] = rtrim(trim((string) $values['baseUrl']), '/');
         }
 
         return $values;

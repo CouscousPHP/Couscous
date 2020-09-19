@@ -27,8 +27,8 @@ class ContainerFactory
             ->path('/.+/')
             ->name('config.php');
 
+        /** @var SplFileInfo $moduleConfig */
         foreach ($moduleConfigs as $moduleConfig) {
-            /** @var SplFileInfo $moduleConfig */
             $builder->addDefinitions($moduleConfig->getPathname());
         }
 

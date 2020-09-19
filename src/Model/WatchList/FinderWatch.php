@@ -12,7 +12,13 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class FinderWatch implements WatchInterface
 {
+    /**
+     * @var Finder
+     */
     private $finder;
+    /**
+     * @var string
+     */
     private $date;
 
     public function __construct(Finder $finder)

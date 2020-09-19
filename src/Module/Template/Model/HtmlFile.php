@@ -16,7 +16,7 @@ class HtmlFile extends File
     public $content;
 
     /**
-     * @var File
+     * @var ?File
      */
     private $wrappedFile;
 

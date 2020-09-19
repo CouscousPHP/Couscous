@@ -11,7 +11,10 @@ use Symfony\Component\Finder\Finder;
  */
 class WatchList
 {
-    private $watches;
+    /**
+     * @var list<WatchInterface>
+     */
+    private $watches = [];
 
     public function watchFile(string $filename): void
     {
@@ -38,6 +41,7 @@ class WatchList
             return $watch->getChangedFiles();
         }, $this->watches);
 
+        /** @var list<string> */
         $files = call_user_func_array('array_merge', $files);
 
         return array_unique($files);

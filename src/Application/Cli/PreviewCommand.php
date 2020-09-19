@@ -4,6 +4,7 @@ namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
 use Couscous\Model\Project;
+use Couscous\Model\WatchList\WatchList;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -78,6 +79,7 @@ class PreviewCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var array */
         $cliConfig = $input->getOption('config');
 
         if (!$this->isSupported()) {
@@ -86,15 +88,20 @@ class PreviewCommand extends Command
             return 1;
         }
 
+        /** @var string */
         $sourceDirectory = $input->getArgument('source');
+        /** @var string */
         $targetDirectory = $input->getOption('target');
 
         if ($input->hasParameterOption('--livereload')) {
-            if ($input->getOption('livereload') === null) {
-                $input->setOption('livereload', 'livereload');
+            /** @var ?string */
+            $livereload = $input->getOption('livereload');
+
+            if ($livereload === null) {
+                $livereload = 'livereload';
             }
 
-            if (!$this->isFound($input->getOption('livereload'))) {
+            if (!$this->isFound($livereload)) {
                 $output->writeln(
                     '<error>Impossible to launch Livereload, '
                     .'did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>'
@@ -103,7 +110,7 @@ class PreviewCommand extends Command
                 return 1;
             }
 
-            $this->startLivereload($input->getOption('livereload'), $output, $sourceDirectory, $targetDirectory);
+            $this->startLivereload($livereload, $output, $sourceDirectory, $targetDirectory);
         }
 
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, $cliConfig);
@@ -150,7 +157,7 @@ class PreviewCommand extends Command
         string $targetDirectory,
         array $cliConfig,
         bool $regenerate = false
-    ) {
+    ): WatchList {
         $project = new Project($sourceDirectory, $targetDirectory);
 
         $project->metadata['cliConfig'] = $cliConfig;
@@ -165,14 +172,16 @@ class PreviewCommand extends Command
 
     private function startWebServer(InputInterface $input, OutputInterface $output, string $targetDirectory): Process
     {
-        $processArguments = [PHP_BINARY, '-S', $input->getArgument('address')];
+        /** @var string */
+        $address = $input->getArgument('address');
+        $processArguments = [PHP_BINARY, '-S', $address];
 
         $process = new Process($processArguments);
         $process->setWorkingDirectory($targetDirectory);
         $process->setTimeout(null);
         $process->start();
 
-        $output->writeln(sprintf('Server running on <comment>http://%s</comment>', $input->getArgument('address')));
+        $output->writeln(sprintf('Server running on <comment>http://%s</comment>', $address));
 
         return $process;
     }
@@ -226,9 +235,9 @@ class PreviewCommand extends Command
     private function isFound(string $executablePath): bool
     {
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $folders = explode(';', getenv('PATH'));
+            $folders = explode(';', (string) getenv('PATH'));
         } else {
-            $folders = explode(':', getenv('PATH'));
+            $folders = explode(':', (string) getenv('PATH'));
         }
 
         foreach ($folders as $folder) {

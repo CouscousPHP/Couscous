@@ -36,7 +36,7 @@ class LoadAssets implements Step
 
         $files = new Finder();
         $files->files()
-            ->in($project->metadata['template.directory'])
+            ->in((string) $project->metadata['template.directory'])
             ->ignoreDotFiles(false)
             ->notName('*.twig')
             ->notName('*.md')
@@ -44,8 +44,8 @@ class LoadAssets implements Step
 
         $project->watchlist->watchFiles($files);
 
+        /** @var SplFileInfo $file */
         foreach ($files as $file) {
-            /** @var SplFileInfo $file */
             $project->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
         }
     }

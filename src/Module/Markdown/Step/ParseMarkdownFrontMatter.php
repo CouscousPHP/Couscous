@@ -32,6 +32,7 @@ class ParseMarkdownFrontMatter implements Step
         foreach ($markdownFiles as $file) {
             $document = $this->markdownParser->parse($file->getContent());
 
+            /** @var mixed */
             $metadataValues = $document->getYAML();
 
             if (is_array($metadataValues)) {

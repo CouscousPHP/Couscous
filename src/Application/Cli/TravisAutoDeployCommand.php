@@ -78,8 +78,10 @@ class TravisAutoDeployCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var string */
         $sourceDirectory = $input->getArgument('source');
-        $repositoryUrl = sprintf('https://%s@%s', getenv('GH_TOKEN'), getenv('GH_REF'));
+        $repositoryUrl = sprintf('https://%s@%s', (string) getenv('GH_TOKEN'), (string) getenv('GH_REF'));
+        /** @var string */
         $targetBranch = $input->getOption('branch');
 
         $repository = new Project($sourceDirectory, getcwd().'/.couscous/generated');

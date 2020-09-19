@@ -9,7 +9,13 @@ namespace Couscous\Model\WatchList;
  */
 class FileWatch implements WatchInterface
 {
+    /**
+     * @var string
+     */
     private $filename;
+    /**
+     * @var int
+     */
     private $time;
 
     /**

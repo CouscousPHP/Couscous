@@ -33,6 +33,9 @@ class RewriteMarkdownLinks implements Step
         }
     }
 
+    /**
+     * @param array<int, string> $matches
+     */
     private function replaceFilename(array $matches): string
     {
         $filename = strtolower($matches[2]);

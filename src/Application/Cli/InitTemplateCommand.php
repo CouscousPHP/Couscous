@@ -37,9 +37,12 @@ class InitTemplateCommand extends Command
     {
         $fileExtension = '.twig';
 
+        /** @var string */
         $dirName = $input->getArgument('directory');
         $directory = getcwd().'/'.$dirName.'/';
-        $templateName = $input->getArgument('template_name').$fileExtension;
+        /** @var string */
+        $templateName = $input->getArgument('template_name');
+        $templateName = $templateName.$fileExtension;
 
         $fileLocation = $directory.$templateName;
         $fileExists = file_exists($fileLocation);
@@ -56,9 +59,8 @@ class InitTemplateCommand extends Command
             return 1;
         }
 
-        if (!$fileExists) {
-            $output->writeln('<comment>Initialising template.</comment>');
-            $template = <<<'HTML'
+        $output->writeln('<comment>Initialising template.</comment>');
+        $template = <<<'HTML'
 <!DOCTYPE html>
 <html>
     <head>
@@ -85,8 +87,7 @@ class InitTemplateCommand extends Command
     </body>
 </html>
 HTML;
-            file_put_contents($fileLocation, $template);
-        }
+        file_put_contents($fileLocation, $template);
 
         return 0;
     }

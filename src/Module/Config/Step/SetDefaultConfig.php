@@ -12,6 +12,9 @@ use Couscous\Step;
  */
 class SetDefaultConfig implements Step
 {
+    /**
+     * @var array
+     */
     private $defaultConfig = [
         'exclude' => [
             'vendor', 'website',

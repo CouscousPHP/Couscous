@@ -25,15 +25,16 @@ class ProcessTwigLayouts implements Step
             return;
         }
 
-        $twig = $this->createTwig($project->metadata['template.directory']);
+        $twig = $this->createTwig((string) $project->metadata['template.directory']);
 
         /** @var HtmlFile[] $htmlFiles */
         $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
 
+        /** @var HtmlFile */
         foreach ($htmlFiles as $file) {
             $fileMetadata = $file->getMetadata();
             $layout = isset($fileMetadata['layout'])
-                ? $fileMetadata['layout'].'.twig'
+                ? ((string) $fileMetadata['layout']).'.twig'
                 : self::DEFAULT_LAYOUT_NAME;
 
             $context = array_merge(
@@ -65,6 +66,10 @@ class ProcessTwigLayouts implements Step
         ]);
 
         if (file_exists($templateDirectory.'/twig.php')) {
+            /**
+             * @psalm-suppress UnresolvableInclude
+             * @var callable(Twig_Environment): void
+             */
             $customLoader = require $templateDirectory.'/twig.php';
             $customLoader($twig);
         }
@@ -89,8 +94,8 @@ class ProcessTwigLayouts implements Step
             ->name('*.twig');
 
         $layouts = [];
+        /** @var SplFileInfo $file */
         foreach ($finder as $file) {
-            /** @var SplFileInfo $file */
             $name = $file->getFilename();
             $layouts[$name] = $file->getContents();
         }

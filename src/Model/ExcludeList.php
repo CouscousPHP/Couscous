@@ -11,6 +11,9 @@ class ExcludeList
      */
     private $excluded;
 
+    /**
+     * @param list<string> $exclude
+     */
     public function __construct(array $exclude = [])
     {
         $this->excluded = $exclude;
@@ -23,6 +26,9 @@ class ExcludeList
         return $this;
     }
 
+    /**
+     * @param list<string> $entries
+     */
     public function addEntries(array $entries): self
     {
         $this->excluded = array_merge($this->excluded, $entries);
@@ -54,13 +60,16 @@ class ExcludeList
         return $this;
     }
 
+    /**
+     * @param mixed $entry
+     */
     private function keepEntry($entry): bool
     {
         switch (true) {
             case !is_string($entry) && !is_numeric($entry):
             case $entry === '':
-            case preg_match('/^[#!]/', $entry) > 0:
-            case strpos($entry, '*') !== false:
+            case is_string($entry) && (preg_match('/^[#!]/', $entry) > 0):
+            case is_string($entry) && (strpos($entry, '*') !== false):
                 return false;
 
             default:

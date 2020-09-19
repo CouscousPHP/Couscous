@@ -5,6 +5,7 @@ namespace Couscous\Module\Core\Step;
 use Couscous\Model\LazyFile;
 use Couscous\Model\Project;
 use Couscous\Step;
+use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Add images to the project.
@@ -30,8 +31,8 @@ class AddImages implements Step
 
         $project->watchlist->watchFiles($files);
 
+        /** @var SplFileInfo $file */
         foreach ($files as $file) {
-            /** @var SplFileInfo $file */
             $project->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
         }
     }

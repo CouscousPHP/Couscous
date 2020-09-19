@@ -36,6 +36,7 @@ class ProcessMarkdownFileName implements Step
 
     private function renameReadme(MarkdownFile $file, Project $project): void
     {
+        /** @var string */
         $indexFile = empty($project->metadata['template']['index'])
             ? 'README.md'
             : $project->metadata['template']['index'];
@@ -59,7 +60,13 @@ class ProcessMarkdownFileName implements Step
 
     private function replaceExtension(string $filename): string
     {
-        $filename = substr($filename, 0, strrpos($filename, '.'));
+        $position = strrpos($filename, '.');
+
+        if (!is_int($position)) {
+            return $filename;
+        }
+
+        $filename = substr($filename, 0, $position);
 
         return $filename.'.html';
     }

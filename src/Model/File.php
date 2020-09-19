@@ -9,6 +9,9 @@ namespace Couscous\Model;
  */
 abstract class File
 {
+    /**
+     * @var string
+     */
     public $relativeFilename;
 
     /**

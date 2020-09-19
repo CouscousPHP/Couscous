@@ -36,6 +36,7 @@ abstract class ExecuteScripts
             return;
         }
 
+        /** @var string $script */
         foreach ($scripts as $script) {
             $this->executeScript($project->sourceDirectory, $script);
         }

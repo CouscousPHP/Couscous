@@ -2,6 +2,7 @@
 
 namespace Couscous\Application\Cli;
 
+use Humbug\SelfUpdate\Strategy\ShaStrategy;
 use Humbug\SelfUpdate\Updater;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,8 +32,10 @@ class SelfUpdateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $updater = new Updater(null, false);
-        $updater->getStrategy()->setPharUrl('https://couscous.io/couscous.phar');
-        $updater->getStrategy()->setVersionUrl('https://couscous.io/couscous.version');
+        /** @var ShaStrategy We code against the default strategy created by the Updater */
+        $strategy = $updater->getStrategy();
+        $strategy->setPharUrl('https://couscous.io/couscous.phar');
+        $strategy->setVersionUrl('https://couscous.io/couscous.version');
 
         $result = $updater->update();
         $result ? $output->writeln('Phar file updated successfully!') : $output->writeln('No need to update.');

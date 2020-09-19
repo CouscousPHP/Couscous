@@ -14,6 +14,7 @@ class ExecuteAfterScripts extends ExecuteScripts implements Step
 {
     public function __invoke(Project $project): void
     {
+        /** @var ?list<string> */
         $scripts = $project->metadata['scripts.after'];
 
         $this->executeScripts($scripts, $project);

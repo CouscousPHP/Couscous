@@ -14,6 +14,7 @@ class ExecuteBeforeScripts extends ExecuteScripts implements Step
 {
     public function __invoke(Project $project): void
     {
+        /** @var ?list<string> */
         $scripts = $project->metadata['scripts.before'];
 
         $this->executeScripts($scripts, $project);

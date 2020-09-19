@@ -27,6 +27,7 @@ class ValidateTemplateDirectory implements Step
 
     public function __invoke(Project $project): void
     {
+        /** @var ?string */
         $directory = $project->metadata['template.directory'];
 
         if ($directory === null) {

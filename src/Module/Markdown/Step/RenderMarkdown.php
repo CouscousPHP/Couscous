@@ -48,7 +48,13 @@ class RenderMarkdown implements Step
 
     private function replaceExtension(string $filename): string
     {
-        $filename = substr($filename, 0, strrpos($filename, '.'));
+        $position = strrpos($filename, '.');
+
+        if (!is_int($position)) {
+            return $filename;
+        }
+
+        $filename = substr($filename, 0, $position);
 
         return $filename.'.html';
     }

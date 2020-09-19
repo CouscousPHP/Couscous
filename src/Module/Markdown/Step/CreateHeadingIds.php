@@ -14,7 +14,7 @@ use Couscous\Step;
 class CreateHeadingIds implements Step
 {
     /**
-     * @var array
+     * @var array<string, int>
      */
     private $ids = [];
 
@@ -47,6 +47,9 @@ class CreateHeadingIds implements Step
         );
     }
 
+    /**
+     * @param array<int, string> $matches
+     */
     private function addAttributeId(array $matches): string
     {
         $id = $this->slugfy($matches[2]);

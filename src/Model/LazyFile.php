@@ -9,6 +9,9 @@ namespace Couscous\Model;
  */
 class LazyFile extends File
 {
+    /**
+     * @var string
+     */
     private $fullFilename;
 
     public function __construct(string $fullFilename, string $relativeFilename)

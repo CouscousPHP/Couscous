@@ -37,7 +37,7 @@ class FetchRemoteTemplate implements Step
      * In theory we shouldn't store state in this object because it's a service
      * but we would need extensive change to avoid that.
      *
-     * @var string
+     * @var ?string
      */
     private $templateDirectory;
 
@@ -57,6 +57,7 @@ class FetchRemoteTemplate implements Step
             return;
         }
 
+        /** @var ?string */
         $templateUrl = $project->metadata['template.url'];
 
         if ($templateUrl === null) {

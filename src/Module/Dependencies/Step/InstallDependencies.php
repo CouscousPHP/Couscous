@@ -61,9 +61,11 @@ class InstallDependencies implements Step
 
         $this->logger->notice("Executing \"$command install\"");
 
+        /** @var string */
+        $templateDirectory = $project->metadata['template.directory'];
         $result = $this->commandRunner->run(sprintf(
             "cd \"%s\" && $command install",
-            $project->metadata['template.directory']
+            $templateDirectory
         ));
 
         if ($result) {
@@ -104,7 +106,7 @@ class InstallDependencies implements Step
             return false;
         }
 
-        $filename = $project->metadata['template.directory'].'/package.json';
+        $filename = ((string) $project->metadata['template.directory']).'/package.json';
 
         return $this->filesystem->exists($filename);
     }
@@ -118,7 +120,7 @@ class InstallDependencies implements Step
             return false;
         }
 
-        $filename = $project->metadata['template.directory'].'/bower.json';
+        $filename = ((string) $project->metadata['template.directory']).'/bower.json';
 
         return $this->filesystem->exists($filename);
     }
