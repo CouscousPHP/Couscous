@@ -1,25 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\FunctionalTest;
 
 class GenerationTest extends BaseFunctionalTest
 {
-    public function testBasic()
+    public function testBasic(): void
     {
         $this->assertGeneratedWebsite('basic');
     }
 
-    public function testHeadings()
+    public function testHeadings(): void
     {
         $this->assertGeneratedWebsite('headings');
     }
 
-    public function testMissingPublicDirectory()
+    public function testMissingPublicDirectory(): void
     {
         $this->assertGeneratedWebsite('missing-public-directory');
     }
 
-    public function testAssetsAreCopied()
+    public function testAssetsAreCopied(): void
     {
         $this->assertGeneratedWebsite('assets');
     }
@@ -29,7 +31,7 @@ class GenerationTest extends BaseFunctionalTest
      *     - in FrontYAML inside Markdown files
      *     - in couscous.yml.
      */
-    public function testMetadata()
+    public function testMetadata(): void
     {
         $this->assertGeneratedWebsite('metadata');
     }
@@ -37,7 +39,7 @@ class GenerationTest extends BaseFunctionalTest
     /**
      * Test the pageList and pageTree template variables.
      */
-    public function testPageList()
+    public function testPageList(): void
     {
         $this->assertGeneratedWebsite('page-list');
     }
@@ -45,7 +47,7 @@ class GenerationTest extends BaseFunctionalTest
     /**
      * Test that the images referenced by documentation are copied.
      */
-    public function testDocumentationImages()
+    public function testDocumentationImages(): void
     {
         $this->assertGeneratedWebsite('images');
     }
@@ -53,7 +55,7 @@ class GenerationTest extends BaseFunctionalTest
     /**
      * Test that the currentFile variable is available.
      */
-    public function testCurrentFileVariable()
+    public function testCurrentFileVariable(): void
     {
         $this->assertGeneratedWebsite('current-file');
     }
@@ -61,7 +63,7 @@ class GenerationTest extends BaseFunctionalTest
     /**
      * Test the CNAME file generation.
      */
-    public function testCname()
+    public function testCname(): void
     {
         $this->assertGeneratedWebsite('cname');
     }
@@ -69,7 +71,7 @@ class GenerationTest extends BaseFunctionalTest
     /**
      * Test the include configuration option.
      */
-    public function testIncludeOnly()
+    public function testIncludeOnly(): void
     {
         $this->assertGeneratedWebsite('include-only');
     }
@@ -77,7 +79,7 @@ class GenerationTest extends BaseFunctionalTest
     /**
      * Test the include configuration option with an exclude option set.
      */
-    public function testIncludeWithExclude()
+    public function testIncludeWithExclude(): void
     {
         $this->assertGeneratedWebsite('include-with-exclude');
     }

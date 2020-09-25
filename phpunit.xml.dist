@@ -5,7 +5,6 @@
          convertWarningsToExceptions="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTestsThatDoNotTestAnything="true"
-         forceCoversAnnotation="true"
          bootstrap="./vendor/autoload.php">
 
     <testsuites>

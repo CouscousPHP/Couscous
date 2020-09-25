@@ -40,4 +40,3 @@ deploy:
     repo: CouscousPHP/Couscous
     tags: true
     php: '7.1'
-

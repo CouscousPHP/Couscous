@@ -47,7 +47,7 @@ class ExcludeList
         $excluded = $this->excluded;
         $excluded = array_filter($excluded, [$this, 'keepEntry']);
         $excluded = array_map([$this, 'sanitizeEntry'], $excluded);
-        $excluded = array_map(function (string $entry): string {
+        $excluded = array_map(static function (string $entry): string {
             return trim($entry, '/');
         }, $excluded);
 
@@ -69,8 +69,8 @@ class ExcludeList
         switch (true) {
             case !is_string($entry) && !is_numeric($entry):
             case $entry === '':
-            case is_string($entry) && (preg_match('/^[#!]/', $entry) > 0):
-            case is_string($entry) && (strpos($entry, '*') !== false):
+            case preg_match('/^[#!]/', (string) $entry) > 0:
+            case strpos((string) $entry, '*') !== false:
                 return false;
 
             default:

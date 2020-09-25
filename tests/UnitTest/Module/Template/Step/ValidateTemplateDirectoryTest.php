@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\ValidateTemplateDirectory;
@@ -15,20 +17,20 @@ class ValidateTemplateDirectoryTest extends TestCase
     /**
      * @test
      */
-    public function it_should_use_the_default_directory_if_no_directory_is_set()
+    public function it_should_use_the_default_directory_if_no_directory_is_set(): void
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
         $project = new MockProject();
         $project->sourceDirectory = '/foo';
         $step->__invoke($project);
 
-        $this->assertEquals('/foo/website', $project->metadata['template.directory']);
+        self::assertEquals('/foo/website', $project->metadata['template.directory']);
     }
 
     /**
      * @test
      */
-    public function it_should_complete_a_relative_path()
+    public function it_should_complete_a_relative_path(): void
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
         $project = new MockProject();
@@ -36,13 +38,13 @@ class ValidateTemplateDirectoryTest extends TestCase
         $project->metadata['template.directory'] = 'bar';
         $step->__invoke($project);
 
-        $this->assertEquals('/foo/bar', $project->metadata['template.directory']);
+        self::assertEquals('/foo/bar', $project->metadata['template.directory']);
     }
 
     /**
      * @test
      */
-    public function it_should_not_change_an_absolute_path()
+    public function it_should_not_change_an_absolute_path(): void
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
         $project = new MockProject();
@@ -50,16 +52,17 @@ class ValidateTemplateDirectoryTest extends TestCase
         $project->metadata['template.directory'] = '/hello/world';
         $step->__invoke($project);
 
-        $this->assertEquals('/hello/world', $project->metadata['template.directory']);
+        self::assertEquals('/hello/world', $project->metadata['template.directory']);
     }
 
     /**
      * @test
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage The template directory '/foo/bar' doesn't exist
      */
-    public function it_should_error_with_an_invalid_relative_path()
+    public function it_should_error_with_an_invalid_relative_path(): void
     {
+        $this->expectExceptionMessage("The template directory '/foo/bar' doesn't exist");
+        $this->expectException(\RuntimeException::class);
+
         $step = new ValidateTemplateDirectory($this->createFilesystem(false));
         $project = new MockProject();
         $project->sourceDirectory = '/foo';
@@ -69,11 +72,12 @@ class ValidateTemplateDirectoryTest extends TestCase
 
     /**
      * @test
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage The template directory '/hello/world' doesn't exist
      */
-    public function it_should_error_with_an_invalid_absolute_path()
+    public function it_should_error_with_an_invalid_absolute_path(): void
     {
+        $this->expectExceptionMessage("The template directory '/hello/world' doesn't exist");
+        $this->expectException(\RuntimeException::class);
+
         $step = new ValidateTemplateDirectory($this->createFilesystem(false));
         $project = new MockProject();
         $project->sourceDirectory = '/foo';
@@ -83,21 +87,19 @@ class ValidateTemplateDirectoryTest extends TestCase
 
     /**
      * @test
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage The template directory '/foo/website' doesn't exist
      */
-    public function it_should_error_with_an_invalid_default_path()
+    public function it_should_error_with_an_invalid_default_path(): void
     {
+        $this->expectExceptionMessage("The template directory '/foo/website' doesn't exist");
+        $this->expectException(\RuntimeException::class);
+
         $step = new ValidateTemplateDirectory($this->createFilesystem(false));
         $project = new MockProject();
         $project->sourceDirectory = '/foo';
         $step->__invoke($project);
     }
 
-    /**
-     * @return Filesystem
-     */
-    private function createFilesystem($existsShouldReturn = true)
+    private function createFilesystem(bool $existsShouldReturn = true): Filesystem
     {
         return new class($existsShouldReturn) extends Filesystem {
             public function __construct($existsShouldReturn)

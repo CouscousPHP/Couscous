@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Mock;
 
 use Couscous\Model\WatchList\WatchList;

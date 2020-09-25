@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Core\Step;
 
 use Couscous\Model\Metadata;
@@ -15,7 +17,7 @@ class AddCnameTest extends TestCase
     /**
      * @test
      */
-    public function it_should_add_the_cname_file()
+    public function it_should_add_the_cname_file(): void
     {
         $project = new Project('foo', 'bar');
 
@@ -27,8 +29,8 @@ class AddCnameTest extends TestCase
 
         $cnameFiles = $project->findFilesByType('Couscous\Module\Template\Model\CnameFile');
 
-        $this->assertCount(1, $cnameFiles);
+        self::assertCount(1, $cnameFiles);
 
-        $this->assertEquals($cnameFiles['CNAME']->content, $project->metadata['cname']);
+        self::assertEquals($cnameFiles['CNAME']->content, $project->metadata['cname']);
     }
 }

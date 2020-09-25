@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Dependencies\Step;
 
 use Couscous\CommandRunner\CommandRunner;
 use Couscous\Module\Dependencies\Step\InstallDependencies;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Filesystem\Filesystem;
@@ -15,16 +18,16 @@ use Symfony\Component\Filesystem\Filesystem;
 class InstallDependenciesTest extends TestCase
 {
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject|Filesystem
+     * @var MockObject&Filesystem
      */
     private $filesystem;
 
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject|CommandRunner
+     * @var MockObject&CommandRunner
      */
     private $commandRunner;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,59 +35,59 @@ class InstallDependenciesTest extends TestCase
         $this->commandRunner = $this->createMock(CommandRunner::class);
     }
 
-    public function testInstallDependenciesYarn()
+    public function testInstallDependenciesYarn(): void
     {
-        $this->filesystem->method('exists')->will($this->returnValueMap([
+        $this->filesystem->method('exists')->willReturnMap([
             ['/hello/world/package.json', true],
             ['/hello/world/bower.json', false]
-        ]));
-        $this->commandRunner->method('commandExists')->will($this->returnValueMap([
+        ]);
+        $this->commandRunner->method('commandExists')->willReturnMap([
             ['yarn', true],
             ['npm', false],
             ['bower', false]
-        ]));
+        ]);
 
         $this->assertCommandRun('cd "/hello/world" && yarn install');
     }
 
-    public function testInstallDependenciesNpm()
+    public function testInstallDependenciesNpm(): void
     {
-        $this->filesystem->method('exists')->will($this->returnValueMap([
+        $this->filesystem->method('exists')->willReturnMap([
             ['/hello/world/package.json', true],
             ['/hello/world/bower.json', false]
-        ]));
-        $this->commandRunner->method('commandExists')->will($this->returnValueMap([
+        ]);
+        $this->commandRunner->method('commandExists')->willReturnMap([
             ['yarn', false],
             ['npm', true],
             ['bower', false]
-        ]));
+        ]);
 
         $this->assertCommandRun('cd "/hello/world" && npm install');
     }
 
-    public function testInstallDependenciesBower()
+    public function testInstallDependenciesBower(): void
     {
-        $this->filesystem->method('exists')->will($this->returnValueMap([
+        $this->filesystem->method('exists')->willReturnMap([
             ['/hello/world/package.json', false],
             ['/hello/world/bower.json', true]
-        ]));
-        $this->commandRunner->method('commandExists')->will($this->returnValueMap([
+        ]);
+        $this->commandRunner->method('commandExists')->willReturnMap([
             ['yarn', false],
             ['npm', false],
             ['bower', true]
-        ]));
+        ]);
 
         $this->assertCommandRun('cd "/hello/world" && bower install');
     }
 
-    private function assertCommandRun($expectedCommandRun)
+    private function assertCommandRun($expectedCommandRun): void
     {
         $step = new InstallDependencies($this->filesystem, $this->commandRunner, new NullLogger());
 
         $project = new MockProject();
         $project->metadata['template.directory'] = '/hello/world';
 
-        $this->commandRunner->expects($this->once())->method('run')->with($expectedCommandRun);
+        $this->commandRunner->expects(self::once())->method('run')->with($expectedCommandRun);
 
         $step->__invoke($project);
     }

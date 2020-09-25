@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\CommandRunner\Git;
@@ -17,7 +19,7 @@ class FetchRemoteTemplateTest extends TestCase
     /**
      * @test
      */
-    public function it_should_skip_if_no_template_url()
+    public function it_should_skip_if_no_template_url(): void
     {
         $filesystem = $this->createMock(Filesystem::class);
         $git = $this->createMock(Git::class);
@@ -26,18 +28,18 @@ class FetchRemoteTemplateTest extends TestCase
 
         $project = new MockProject();
 
-        $git->expects($this->never())
-            ->method($this->anything());
+        $git->expects(self::never())
+            ->method(self::anything());
 
         $step->__invoke($project);
 
-        $this->assertNull($project->metadata['template.directory']);
+        self::assertNull($project->metadata['template.directory']);
     }
 
     /**
      * @test
      */
-    public function it_should_clone_and_set_the_template_directory()
+    public function it_should_clone_and_set_the_template_directory(): void
     {
         $filesystem = $this->createMock(Filesystem::class);
         $git = $this->createMock(Git::class);
@@ -47,26 +49,26 @@ class FetchRemoteTemplateTest extends TestCase
         $project = new MockProject();
         $project->metadata['template.url'] = 'git://foo';
 
-        $git->expects($this->once())
+        $git->expects(self::once())
             ->method('cloneRepository')
             ->with('git://foo');
 
         $step->__invoke($project);
 
-        $this->assertNotNull($project->metadata['template.directory']);
+        self::assertNotNull($project->metadata['template.directory']);
     }
 
     /**
      * @test
      */
-    public function it_should_not_clone_twice_if_regenerating()
+    public function it_should_not_clone_twice_if_regenerating(): void
     {
         $filesystem = $this->createMock(Filesystem::class);
         $git = $this->createMock(Git::class);
 
         $step = new FetchRemoteTemplate($filesystem, new NullLogger(), $git);
 
-        $git->expects($this->once())
+        $git->expects(self::once())
             ->method('cloneRepository')
             ->with('git://foo');
 
@@ -74,13 +76,13 @@ class FetchRemoteTemplateTest extends TestCase
         $project = new MockProject();
         $project->metadata['template.url'] = 'git://foo';
         $step->__invoke($project);
-        $this->assertNotNull($project->metadata['template.directory']);
+        self::assertNotNull($project->metadata['template.directory']);
 
         // Calling twice
         $project = new MockProject();
         $project->regenerate = true;
         $project->metadata['template.url'] = 'git://foo';
         $step->__invoke($project);
-        $this->assertNotNull($project->metadata['template.directory']);
+        self::assertNotNull($project->metadata['template.directory']);
     }
 }

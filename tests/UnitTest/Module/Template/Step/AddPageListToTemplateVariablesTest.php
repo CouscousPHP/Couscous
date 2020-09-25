@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Model\Project;
@@ -13,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  */
 class AddPageListToTemplateVariablesTest extends TestCase
 {
-    private function files()
+    private function files(): array
     {
         return [
             new HtmlFile('index.html', ''),
@@ -25,7 +27,7 @@ class AddPageListToTemplateVariablesTest extends TestCase
         ];
     }
 
-    public function testPageList()
+    public function testPageList(): void
     {
         $project = new MockProject();
 
@@ -40,10 +42,10 @@ class AddPageListToTemplateVariablesTest extends TestCase
             'weird.path-test [foo]/bar.html',
         ];
 
-        $this->assertEquals($expected, $project->metadata['pageList']);
+        self::assertEquals($expected, $project->metadata['pageList']);
     }
 
-    public function testPageTree()
+    public function testPageTree(): void
     {
         $project = new MockProject();
 
@@ -68,10 +70,10 @@ class AddPageListToTemplateVariablesTest extends TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $project->metadata['pageTree']);
+        self::assertEquals($expected, $project->metadata['pageTree']);
     }
 
-    private function invokeStep(Project $project, $files)
+    private function invokeStep(Project $project, $files): void
     {
         foreach ($files as $file) {
             $project->addFile($file);

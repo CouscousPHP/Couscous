@@ -15,6 +15,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class InitTemplateCommand extends Command
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure(): void
     {
         $this
@@ -34,6 +37,9 @@ class InitTemplateCommand extends Command
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $fileExtension = '.twig';

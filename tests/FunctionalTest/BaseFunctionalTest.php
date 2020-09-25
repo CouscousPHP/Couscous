@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\FunctionalTest;
 
 use PHPUnit\Framework\TestCase;
@@ -11,25 +13,25 @@ abstract class BaseFunctionalTest extends TestCase
 {
     protected $generatedDirectory;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->generatedDirectory = __DIR__.'/generated';
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 
         $this->clearGeneratedDirectory();
     }
 
-    public function assertGeneratedWebsite($fixtureName)
+    public function assertGeneratedWebsite(string $fixtureName): void
     {
-        list($output, $return) = $this->generate($fixtureName);
+        [$output, $return] = $this->generate($fixtureName);
 
-        $this->assertSame(0, $return, implode(PHP_EOL, $output));
+        self::assertSame(0, $return, implode(PHP_EOL, $output));
 
         $fixtureDir = __DIR__.'/Fixture/'.$fixtureName;
         $expectedDir = $fixtureDir.'/expected';
@@ -40,8 +42,8 @@ abstract class BaseFunctionalTest extends TestCase
         foreach ($finder as $file) {
             /** @var SplFileInfo $file */
             $generatedFile = $this->generatedDirectory.'/'.$file->getRelativePathname();
-            $this->assertFileExists($generatedFile, sprintf('%s was not generated', $file->getRelativePathname()));
-            $this->assertEquals(
+            self::assertFileExists($generatedFile, sprintf('%s was not generated', $file->getRelativePathname()));
+            self::assertEquals(
                 trim(file_get_contents($file->getPathname())),
                 trim(file_get_contents($generatedFile)),
                 sprintf("The generated file doesn't equals the expected file: %s", $file->getRelativePathname())
@@ -58,20 +60,20 @@ abstract class BaseFunctionalTest extends TestCase
                 "The file %s was generated but wasn't expected",
                 $file->getRelativePathname()
             );
-            $this->assertFileExists($expectedFile, $message);
+            self::assertFileExists($expectedFile, $message);
         }
     }
 
-    public function assertGenerationError($fixtureName, $expectedMessage)
+    public function assertGenerationError(string $fixtureName, string $expectedMessage): void
     {
-        list($output, $return) = $this->generate($fixtureName);
+        [$output, $return] = $this->generate($fixtureName);
         $output = implode(PHP_EOL, $output);
 
-        $this->assertNotEquals(0, $return, 'Failed asserting that the generation failed: '.$output);
-        $this->assertContains($expectedMessage, $output);
+        self::assertNotEquals(0, $return, 'Failed asserting that the generation failed: '.$output);
+        self::assertStringContainsString($expectedMessage, $output);
     }
 
-    private function createCommand($fixtureName)
+    private function createCommand(string $fixtureName): string
     {
         $bin = realpath(__DIR__.'/../../bin/couscous');
         $fixtureName = __DIR__.'/Fixture/'.$fixtureName.'/source';
@@ -85,7 +87,7 @@ abstract class BaseFunctionalTest extends TestCase
         );
     }
 
-    private function generate($fixtureName)
+    private function generate(string $fixtureName): array
     {
         $this->clearGeneratedDirectory();
 
@@ -96,7 +98,7 @@ abstract class BaseFunctionalTest extends TestCase
         return [$output, $return];
     }
 
-    private function clearGeneratedDirectory()
+    private function clearGeneratedDirectory(): void
     {
         $fs = new Filesystem();
         $fs->remove($this->generatedDirectory);

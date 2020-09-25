@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Model;
 
 use Couscous\Model\File;
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Template\Model\HtmlFile;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,7 +19,7 @@ class ProjectTest extends TestCase
     /**
      * @test
      */
-    public function it_should_contain_files()
+    public function it_should_contain_files(): void
     {
         $project = new Project('source', 'target');
 
@@ -29,19 +32,19 @@ class ProjectTest extends TestCase
             'file1' => $file1,
             'file2' => $file2,
         ];
-        $this->assertSame($expected, $project->getFiles());
+        self::assertSame($expected, $project->getFiles());
 
         $project->removeFile($file1);
-        $this->assertSame(['file2' => $file2], $project->getFiles());
+        self::assertSame(['file2' => $file2], $project->getFiles());
 
         $project->removeFile($file2);
-        $this->assertSame([], $project->getFiles());
+        self::assertSame([], $project->getFiles());
     }
 
     /**
      * @test
      */
-    public function replace_should_replace_files()
+    public function replace_should_replace_files(): void
     {
         $project = new Project('source', 'target');
 
@@ -49,16 +52,16 @@ class ProjectTest extends TestCase
         $file2 = $this->createFile('file2');
 
         $project->addFile($file1);
-        $this->assertSame(['file1' => $file1], $project->getFiles());
+        self::assertSame(['file1' => $file1], $project->getFiles());
 
         $project->replaceFile($file1, $file2);
-        $this->assertSame(['file2' => $file2], $project->getFiles());
+        self::assertSame(['file2' => $file2], $project->getFiles());
     }
 
     /**
      * @test
      */
-    public function it_should_return_files_by_type()
+    public function it_should_return_files_by_type(): void
     {
         $project = new Project('source', 'target');
 
@@ -69,17 +72,17 @@ class ProjectTest extends TestCase
         $project->addFile($file2);
 
         $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
-        $this->assertSame(['file1' => $file1], $markdownFiles);
+        self::assertSame(['file1' => $file1], $markdownFiles);
 
         $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
-        $this->assertSame(['file2' => $file2], $htmlFiles);
+        self::assertSame(['file2' => $file2], $htmlFiles);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|File
+     * @return MockObject&File
      */
-    private function createFile($name)
+    private function createFile(string $name): MockObject
     {
-        return $this->getMockForAbstractClass('Couscous\Model\File', [$name]);
+        return $this->getMockForAbstractClass(File::class, [$name]);
     }
 }

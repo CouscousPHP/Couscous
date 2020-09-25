@@ -61,11 +61,13 @@ class Git
      * Check if the git repository in the provided directory has any uncommitted changes
      *
      * @param string $directory A directory containing a git repository
+     *
      * @return bool True if there are changes, false otherwise
      */
     public function hasUncommittedChanges(string $directory): bool
     {
         $changes = $this->run($directory, "git diff-index --name-only HEAD");
+
         return !(ctype_space($changes) || $changes = '');
     }
 

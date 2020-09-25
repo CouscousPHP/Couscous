@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Model\LazyFile;
@@ -14,38 +16,38 @@ use PHPUnit\Framework\TestCase;
  */
 class ProcessMarkdownFileNameTest extends TestCase
 {
-    public function testRenameExtension()
+    public function testRenameExtension(): void
     {
         $this->assertFileRenamed('test.html', 'test.md');
     }
 
-    public function testRenameUppercase()
+    public function testRenameUppercase(): void
     {
         $this->assertFileRenamed('contributing.html', 'CONTRIBUTING.md');
     }
 
-    public function testRenameReadme()
+    public function testRenameReadme(): void
     {
         $this->assertFileRenamed('index.html', 'README.md');
     }
 
-    public function testRenameIndexFile()
+    public function testRenameIndexFile(): void
     {
         $this->assertFileRenamed('foo/index.html', 'foo/index.md', true);
         $this->assertFileRenamed('readme.html', 'README.md', true);
     }
 
-    public function testRenameReadmeInSubDirectory()
+    public function testRenameReadmeInSubDirectory(): void
     {
         $this->assertFileRenamed('foo/index.html', 'foo/README.md');
     }
 
-    public function testRenameReadmeMessyFilename()
+    public function testRenameReadmeMessyFilename(): void
     {
         $this->assertFileRenamed('some-other_complicated.file.html', 'SOME-OTHER_complicated.FILE.md');
     }
 
-    public function testNonMarkdownFileNotRenamed()
+    public function testNonMarkdownFileNotRenamed(): void
     {
         $file = new LazyFile('foo.txt', 'foo.txt');
         $project = new Project('foo', 'bar');
@@ -56,15 +58,15 @@ class ProcessMarkdownFileNameTest extends TestCase
 
         $files = $project->getFiles();
 
-        $this->assertCount(1, $files);
+        self::assertCount(1, $files);
         /** @var MarkdownFile $newFile */
         $newFile = reset($files);
 
-        $this->assertEquals('foo.txt', $newFile->relativeFilename);
-        $this->assertSame($newFile, $file);
+        self::assertEquals('foo.txt', $newFile->relativeFilename);
+        self::assertSame($newFile, $file);
     }
 
-    private function assertFileRenamed($expected, $filename, $meta = false)
+    private function assertFileRenamed(string $expected, string $filename, bool $meta = false): void
     {
         $file = new MarkdownFile($filename, '');
         $project = new Project('foo', 'bar');
@@ -80,10 +82,10 @@ class ProcessMarkdownFileNameTest extends TestCase
 
         $files = $project->getFiles();
 
-        $this->assertCount(1, $files);
+        self::assertCount(1, $files);
         /** @var MarkdownFile $newFile */
         $newFile = reset($files);
 
-        $this->assertEquals($expected, $newFile->relativeFilename);
+        self::assertEquals($expected, $newFile->relativeFilename);
     }
 }

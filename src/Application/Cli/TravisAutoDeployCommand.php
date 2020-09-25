@@ -93,23 +93,23 @@ class TravisAutoDeployCommand extends Command
         if ($travisBranch !== 'master') {
             $output->writeln('<comment>[NOT DEPLOYED] Deploying Couscous only for master branch</comment>');
 
-            return 0;
+            return 1;
         }
 
-        $isPullRequest = (int) getenv('TRAVIS_PULL_REQUEST') > 0 ? true : false;
+        $isPullRequest = (int) getenv('TRAVIS_PULL_REQUEST') > 0;
 
         if ($isPullRequest) {
             $output->writeln('<comment>[NOT DEPLOYED] Not deploying Couscous for pull requests</comment>');
 
-            return 0;
+            return 1;
         }
 
         // getting current php version to only deploy once
         $currentPhpVersion = getenv('TRAVIS_PHP_VERSION');
-        if ($input->getOption('php-version') != $currentPhpVersion) {
+        if ($input->getOption('php-version') !== $currentPhpVersion) {
             $output->writeln('<comment>This version of the documentation is already deployed</comment>');
 
-            return 0;
+            return 1;
         }
 
         // set git user data

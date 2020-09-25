@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\FunctionalTest\CommandRunner;
 
+use Couscous\CommandRunner\CommandException;
 use Couscous\CommandRunner\CommandRunner;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +18,7 @@ class CommandRunnerTest extends TestCase
      */
     private $commandRunner;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->commandRunner = new CommandRunner();
     }
@@ -23,22 +26,23 @@ class CommandRunnerTest extends TestCase
     /**
      * @test
      */
-    public function successful_command_execution_should_return_output()
+    public function successful_command_execution_should_return_output(): void
     {
         $command = 'echo Couscous';
         $expected = 'Couscous';
 
         $output = $this->commandRunner->run($command);
 
-        $this->assertEquals($expected, $output);
+        self::assertEquals($expected, $output);
     }
 
     /**
      * @test
-     * @expectedException \Couscous\CommandRunner\CommandException
      */
-    public function failure_executing_command_throws_runtime_exception()
+    public function failure_executing_command_throws_runtime_exception(): void
     {
+        $this->expectException(CommandException::class);
+
         $command = 'command that produces an error';
 
         $this->commandRunner->run($command);
@@ -47,26 +51,26 @@ class CommandRunnerTest extends TestCase
     /**
      * @test
      */
-    public function successful_command_exists()
+    public function successful_command_exists(): void
     {
         $command = 'echo';
         $expected = true;
 
         $output = $this->commandRunner->commandExists($command);
 
-        $this->assertEquals($expected, $output);
+        self::assertEquals($expected, $output);
     }
 
     /**
      * @test
      */
-    public function failure_command_exists()
+    public function failure_command_exists(): void
     {
         $command = 'not_existing_command';
         $expected = false;
 
         $output = $this->commandRunner->commandExists($command);
 
-        $this->assertEquals($expected, $output);
+        self::assertEquals($expected, $output);
     }
 }

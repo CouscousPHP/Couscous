@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\OverrideBaseUrlForPreview;
@@ -14,7 +16,7 @@ class OverrideBaseUrlForPreviewTest extends TestCase
     /**
      * @test
      */
-    public function should_override_baseUrl_if_preview()
+    public function should_override_baseUrl_if_preview(): void
     {
         $project = new MockProject();
         $project->metadata['baseUrl'] = 'foo';
@@ -23,13 +25,13 @@ class OverrideBaseUrlForPreviewTest extends TestCase
         $step = new OverrideBaseUrlForPreview();
         $step->__invoke($project);
 
-        $this->assertEquals('', $project->metadata['baseUrl']);
+        self::assertEquals('', $project->metadata['baseUrl']);
     }
 
     /**
      * @test
      */
-    public function should_not_override_baseUrl_if_not_preview()
+    public function should_not_override_baseUrl_if_not_preview(): void
     {
         $project = new MockProject();
         $project->metadata['baseUrl'] = 'foo';
@@ -38,6 +40,6 @@ class OverrideBaseUrlForPreviewTest extends TestCase
         $step = new OverrideBaseUrlForPreview();
         $step->__invoke($project);
 
-        $this->assertEquals('foo', $project->metadata['baseUrl']);
+        self::assertEquals('foo', $project->metadata['baseUrl']);
     }
 }

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\CommandRunner;
 
 use Couscous\CommandRunner\CommandRunner;
 use Couscous\CommandRunner\Git;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * @covers \Couscous\CommandRunner\Git
@@ -18,22 +20,22 @@ class GitTest extends TestCase
     private $git;
 
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject|CommandRunner
+     * @var MockObject&CommandRunner
      */
     private $commandRunner;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
-        $this->commandRunner = $this->createMock('Couscous\CommandRunner\CommandRunner');
+        $this->commandRunner = $this->createMock(CommandRunner::class);
         $this->git = new Git($this->commandRunner);
     }
 
     /**
      * @test
      */
-    public function clone_should_run_git_clone()
+    public function clone_should_run_git_clone(): void
     {
         $this->expectCommandIsRun('git clone url "directory"');
 
@@ -43,7 +45,7 @@ class GitTest extends TestCase
     /**
      * @test
      */
-    public function checkout_origin_branch_should_run_git_checkout()
+    public function checkout_origin_branch_should_run_git_checkout(): void
     {
         $this->expectCommandIsRun('cd "directory" && git checkout -b branch origin/branch');
 
@@ -53,7 +55,7 @@ class GitTest extends TestCase
     /**
      * @test
      */
-    public function create_branch_should_run_git_checkout()
+    public function create_branch_should_run_git_checkout(): void
     {
         $this->expectCommandIsRun('cd "directory" && git checkout -b branch');
 
@@ -63,7 +65,7 @@ class GitTest extends TestCase
     /**
      * @test
      */
-    public function commit_should_run_git_add_and_commit()
+    public function commit_should_run_git_add_and_commit(): void
     {
         $this->expectCommandIsRun('cd "directory" && git add --all . && git commit -m "message"');
 
@@ -73,7 +75,7 @@ class GitTest extends TestCase
     /**
      * @test
      */
-    public function push_should_run_git_push()
+    public function push_should_run_git_push(): void
     {
         $this->expectCommandIsRun('cd "directory" && git push my-remote branch');
 
@@ -83,19 +85,19 @@ class GitTest extends TestCase
     /**
      * @test
      */
-    public function get_remote_url_should_return_url()
+    public function get_remote_url_should_return_url(): void
     {
         $this->expectCommandIsRun('git config --get remote.origin.url', 'the-remote');
 
         $remote = $this->git->getRemoteUrl('origin');
 
-        $this->assertEquals('the-remote', $remote);
+        self::assertEquals('the-remote', $remote);
     }
 
     /**
      * @test
      */
-    public function has_uncommitted_changes_should_detect_changes()
+    public function has_uncommitted_changes_should_detect_changes(): void
     {
         $directory = 'directory';
         $changes = '
@@ -104,25 +106,25 @@ class GitTest extends TestCase
         ';
         $this->expectCommandIsRun('cd "directory" && git diff-index --name-only HEAD', $changes);
 
-        $this->assertTrue($this->git->hasUncommittedChanges($directory));
+        self::assertTrue($this->git->hasUncommittedChanges($directory));
     }
 
     /**
      * @test
      */
-    public function has_uncommitted_changes_should_detect_no_changes()
+    public function has_uncommitted_changes_should_detect_no_changes(): void
     {
         $directory = 'directory';
         $changes = '
         ';
         $this->expectCommandIsRun('cd "directory" && git diff-index --name-only HEAD', $changes);
 
-        $this->assertFalse($this->git->hasUncommittedChanges($directory));
+        self::assertFalse($this->git->hasUncommittedChanges($directory));
     }
 
-    private function expectCommandIsRun($command, $return = '')
+    private function expectCommandIsRun($command, $return = ''): void
     {
-        $this->commandRunner->expects($this->once())
+        $this->commandRunner->expects(self::once())
             ->method('run')
             ->with($command)
             ->willReturn($return);

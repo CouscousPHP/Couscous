@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Core\Step;
 
 use Couscous\Module\Core\Step\AddFileNameToMetadata;
@@ -15,7 +17,7 @@ class AddFileNameToMetadataTest extends TestCase
     /**
      * @test
      */
-    public function it_should_add_the_metadata_variable()
+    public function it_should_add_the_metadata_variable(): void
     {
         $project = new MockProject();
         $project->addFile(new HtmlFile('foo/bar/index.html', ''));
@@ -26,6 +28,6 @@ class AddFileNameToMetadataTest extends TestCase
         $files = $project->getFiles();
         $file = current($files);
 
-        $this->assertEquals('foo/bar/index.html', $file->getMetadata()['currentFile']);
+        self::assertEquals('foo/bar/index.html', $file->getMetadata()['currentFile']);
     }
 }

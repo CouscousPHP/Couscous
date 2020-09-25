@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Application\ContainerFactory;
@@ -18,7 +20,7 @@ class RenderMarkdownTest extends TestCase
     /**
      * Test that classic Markdown is supported.
      */
-    public function testClassicMarkdown()
+    public function testClassicMarkdown(): void
     {
         $markdown = <<<'MARKDOWN'
 # Title 1
@@ -68,7 +70,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testFencedCodeBlocks()
+    public function testFencedCodeBlocks(): void
     {
         $markdown = <<<'MARKDOWN'
 ```
@@ -88,7 +90,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testInlineHtml()
+    public function testInlineHtml(): void
     {
         $this->assertGeneratedHtml(
             'This is a paragraph with a <strong>world</strong>.',
@@ -96,7 +98,7 @@ HTML;
         );
     }
 
-    public function testMarkdownInHtml1()
+    public function testMarkdownInHtml1(): void
     {
         $markdown = <<<'MARKDOWN'
 <div markdown="1">
@@ -111,7 +113,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testMarkdownInHtml2()
+    public function testMarkdownInHtml2(): void
     {
         $markdown = <<<'MARKDOWN'
 <div markdown="1">
@@ -128,7 +130,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testAttributes()
+    public function testAttributes(): void
     {
         $markdown = <<<'MARKDOWN'
 # Header 1       {#header1}
@@ -142,7 +144,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testTables1()
+    public function testTables1(): void
     {
         $markdown = <<<'MARKDOWN'
 First Header  | Second Header
@@ -173,7 +175,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testTables2()
+    public function testTables2(): void
     {
         $markdown = <<<'MARKDOWN'
 | Function name | Description                    |
@@ -204,7 +206,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testDefinitionLists()
+    public function testDefinitionLists(): void
     {
         $markdown = <<<'MARKDOWN'
 Apple
@@ -226,7 +228,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testFootnotes()
+    public function testFootnotes(): void
     {
         $markdown = <<<'MARKDOWN'
 That's some text with a footnote.[^1]
@@ -247,7 +249,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testAbbreviations()
+    public function testAbbreviations(): void
     {
         $markdown = <<<'MARKDOWN'
 The HTML specification is maintained by the W3C.
@@ -261,7 +263,7 @@ HTML;
         $this->assertGeneratedHtml($markdown, $html);
     }
 
-    public function testEmphasisInWords()
+    public function testEmphasisInWords(): void
     {
         $this->assertGeneratedHtml(
             'Please open the folder secret_magic_box.',
@@ -269,11 +271,11 @@ HTML;
         );
     }
 
-    private function assertGeneratedHtml($markdown, $expectedHtml)
+    private function assertGeneratedHtml(string $markdown, string $expectedHtml): void
     {
         $container = (new ContainerFactory())->createContainer();
         /** @var RenderMarkdown $step */
-        $step = $container->get('Couscous\Module\Markdown\Step\RenderMarkdown');
+        $step = $container->get(RenderMarkdown::class);
 
         $project = new Project('foo', 'bar');
         $project->addFile(new MarkdownFile('foo.md', $markdown));
@@ -282,10 +284,10 @@ HTML;
 
         $files = $project->getFiles();
 
-        $this->assertCount(1, $files);
+        self::assertCount(1, $files);
         /** @var MarkdownFile $newFile */
         $newFile = reset($files);
 
-        $this->assertEquals($expectedHtml, $newFile->getContent());
+        self::assertEquals($expectedHtml, $newFile->getContent());
     }
 }

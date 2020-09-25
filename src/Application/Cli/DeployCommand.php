@@ -12,7 +12,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Generate and deploy the website.
@@ -32,20 +31,14 @@ class DeployCommand extends Command
     private $deployer;
 
     /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    /**
      * @var Git
      */
     private $git;
 
-    public function __construct(Generator $generator, Deployer $deployer, Filesystem $filesystem, Git $git)
+    public function __construct(Generator $generator, Deployer $deployer, Git $git)
     {
         $this->generator = $generator;
         $this->deployer = $deployer;
-        $this->filesystem = $filesystem;
         $this->git = $git;
 
         parent::__construct();

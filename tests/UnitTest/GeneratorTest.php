@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest;
 
 use Couscous\Generator;
 use Couscous\Model\Project;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
+use Couscous\Step;
 
 /**
  * @covers \Couscous\Generator
@@ -17,7 +21,7 @@ class GeneratorTest extends TestCase
     /**
      * @test
      */
-    public function it_should_invoke_every_step()
+    public function it_should_invoke_every_step(): void
     {
         $filesystem = $this->createFileSystem();
         $project = new MockProject();
@@ -34,18 +38,21 @@ class GeneratorTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Filesystem
+     * @return MockObject&Filesystem
      */
-    private function createFilesystem()
+    private function createFilesystem(): MockObject
     {
-        return $this->createMock('Symfony\Component\Filesystem\Filesystem');
+        return $this->createMock(Filesystem::class);
     }
 
-    private function createStep(Project $project)
+    /**
+     * @return MockObject&Step
+     */
+    private function createStep(Project $project): MockObject
     {
-        $step = $this->getMockForAbstractClass('Couscous\Step');
+        $step = $this->getMockForAbstractClass(Step::class);
 
-        $step->expects($this->once())
+        $step->expects(self::once())
             ->method('__invoke')
             ->with($project);
 

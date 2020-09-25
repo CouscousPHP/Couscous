@@ -50,7 +50,7 @@ class CreateHeadingIds implements Step
      */
     private function addAttributeId(array $matches): string
     {
-        $id = $this->slugfy($matches[2]);
+        $id = $this->slugify($matches[2]);
         if (!isset($this->ids[$id])) {
             $this->ids[$id] = 0;
         }
@@ -67,7 +67,7 @@ class CreateHeadingIds implements Step
         return $replacement;
     }
 
-    private function slugfy(string $text): string
+    private function slugify(string $text): string
     {
         $slug = trim($text);
         $slug = strtr($slug, ' ', '-');

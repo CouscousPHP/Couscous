@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Model;
 
 use Couscous\Model\Metadata;
@@ -17,7 +19,7 @@ class MetadataTest extends TestCase
      */
     private $metadata;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -35,7 +37,7 @@ class MetadataTest extends TestCase
         $this->metadata = new Metadata($this->values);
     }
 
-    public function provide_existing_keys()
+    public function provide_existing_keys(): array
     {
         return [
             ['level1', 'foo'],
@@ -47,7 +49,7 @@ class MetadataTest extends TestCase
         ];
     }
 
-    public function provide_unknown_keys()
+    public function provide_unknown_keys(): array
     {
         return [
             ['level1unknown'],
@@ -66,94 +68,94 @@ class MetadataTest extends TestCase
      * @test
      * @dataProvider provide_existing_keys
      */
-    public function array_read_should_return_value($key, $expected)
+    public function array_read_should_return_value(string $key, $expected): void
     {
-        $this->assertSame($expected, $this->metadata[$key]);
+        self::assertSame($expected, $this->metadata[$key]);
     }
 
     /**
      * @test
      * @dataProvider provide_unknown_keys
      */
-    public function array_read_should_return_null_with_unknown_key($key)
+    public function array_read_should_return_null_with_unknown_key(string $key): void
     {
-        $this->assertNull($this->metadata[$key]);
+        self::assertNull($this->metadata[$key]);
     }
 
     /**
      * @test
      * @dataProvider provide_existing_keys
      */
-    public function array_isset_should_return_true_with_existing_key($key)
+    public function array_isset_should_return_true_with_existing_key(string $key): void
     {
-        $this->assertTrue(isset($this->metadata[$key]));
+        self::assertTrue(isset($this->metadata[$key]));
     }
 
     /**
      * @test
      * @dataProvider provide_unknown_keys
      */
-    public function array_isset_should_return_false_with_unknown_key($key)
+    public function array_isset_should_return_false_with_unknown_key(string $key): void
     {
-        $this->assertFalse(isset($this->metadata[$key]));
+        self::assertFalse(isset($this->metadata[$key]));
     }
 
     /**
      * @test
      * @dataProvider provide_existing_keys
      */
-    public function array_set_should_set_value_with_existing_key($key)
+    public function array_set_should_set_value_with_existing_key(string $key): void
     {
         $this->metadata[$key] = 'hello';
-        $this->assertSame('hello', $this->metadata[$key]);
+        self::assertSame('hello', $this->metadata[$key]);
     }
 
     /**
      * @test
      * @dataProvider provide_unknown_keys
      */
-    public function array_set_should_set_value_with_unknown_key($key)
+    public function array_set_should_set_value_with_unknown_key(string $key): void
     {
         $this->metadata[$key] = 'hello';
-        $this->assertSame('hello', $this->metadata[$key]);
+        self::assertSame('hello', $this->metadata[$key]);
     }
 
     /**
      * @test
      * @dataProvider provide_existing_keys
      */
-    public function array_unset_should_unset_value($key)
+    public function array_unset_should_unset_value(string $key): void
     {
-        $this->assertTrue(isset($this->metadata[$key]));
+        self::assertTrue(isset($this->metadata[$key]));
         unset($this->metadata[$key]);
-        $this->assertFalse(isset($this->metadata[$key]));
+        self::assertFalse(isset($this->metadata[$key]));
     }
 
     /**
      * @test
      */
-    public function array_set_array_with_dot_notation()
+    public function array_set_array_with_dot_notation(): void
     {
         unset($this->metadata['foo']);
 
         $this->metadata['foo.bar'] = 'Hello';
 
-        $this->assertEquals('Hello', $this->metadata['foo.bar']);
-        $this->assertEquals('Hello', $this->metadata['foo']['bar']);
+        self::assertEquals('Hello', $this->metadata['foo.bar']);
+        self::assertEquals('Hello', $this->metadata['foo']['bar']);
     }
 
     /**
      * @test
      */
-    public function toArray_should_return_array()
+    public function toArray_should_return_array(): void
     {
-        $this->assertSame($this->values, $this->metadata->toArray());
+        self::assertSame($this->values, $this->metadata->toArray());
     }
 
     /**
      * @test
      */
-    public function setMany_should_merge_values()
+    public function setMany_should_merge_values(): void
     {
         $metadata = new Metadata([
             'a' => 'a',
@@ -168,6 +170,6 @@ class MetadataTest extends TestCase
             'b' => 'test',
             'c' => 'c',
         ];
-        $this->assertEquals($expected, $metadata->toArray());
+        self::assertEquals($expected, $metadata->toArray());
     }
 }

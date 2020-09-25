@@ -25,6 +25,9 @@ class FileWatch implements WatchInterface
         $this->time = time();
     }
 
+    /**
+     * @return string[]
+     */
     public function getChangedFiles(): array
     {
         if (!file_exists($this->filename)) {

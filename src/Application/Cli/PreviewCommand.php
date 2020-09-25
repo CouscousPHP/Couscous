@@ -220,7 +220,7 @@ class PreviewCommand extends Command
 
     private function isFound(string $executablePath): bool
     {
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        if (stripos(PHP_OS, 'WIN') === 0) {
             $folders = explode(';', (string) getenv('PATH'));
         } else {
             $folders = explode(':', (string) getenv('PATH'));
@@ -237,7 +237,7 @@ class PreviewCommand extends Command
 
     private function fileListToDisplay(array $files, string $sourceDirectory): string
     {
-        $files = array_map(function (string $file) use ($sourceDirectory): string {
+        $files = array_map(static function (string $file) use ($sourceDirectory): string {
             return substr($file, strlen($sourceDirectory) + 1);
         }, $files);
 

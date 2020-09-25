@@ -18,7 +18,7 @@ use Twig_Loader_Array;
  */
 class ProcessTwigLayouts implements Step
 {
-    const DEFAULT_LAYOUT_NAME = 'default.twig';
+    private const DEFAULT_LAYOUT_NAME = 'default.twig';
 
     public function __invoke(Project $project): void
     {

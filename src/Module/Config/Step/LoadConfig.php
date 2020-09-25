@@ -17,7 +17,7 @@ use Symfony\Component\Yaml\Parser;
  */
 class LoadConfig implements Step
 {
-    const FILENAME = 'couscous.yml';
+    private const FILENAME = 'couscous.yml';
 
     /**
      * @var Filesystem

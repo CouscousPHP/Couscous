@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 
 use Couscous\Model\Project;
@@ -12,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 class RewriteMarkdownLinksTest extends TestCase
 {
-    public function testReplaceLinks()
+    public function testReplaceLinks(): void
     {
         $markdown = <<<'MARKDOWN'
 This is a [link](doc/some-other.file.md), can you handle it (even with these parentheses)?
@@ -53,14 +55,14 @@ MARKDOWN;
         $step = new RewriteMarkdownLinks();
         $step->__invoke($project);
 
-        $this->assertEquals($expected, $file->content);
+        self::assertEquals($expected, $file->content);
     }
 
     /**
      * @link https://github.com/CouscousPHP/Couscous/issues/112
      * @link https://github.com/PHP-DI/PHP-DI/issues/281
      */
-    public function testReplacesMultipleLinksPerLine()
+    public function testReplacesMultipleLinksPerLine(): void
     {
         $markdown = <<<'MARKDOWN'
 This is a [link](doc/some-file.md) and [another one](doc/some-other-file.md)
@@ -77,10 +79,10 @@ MARKDOWN;
         $step = new RewriteMarkdownLinks();
         $step->__invoke($project);
 
-        $this->assertEquals($expected, $file->content);
+        self::assertEquals($expected, $file->content);
     }
 
-    public function testPreservesQueryString()
+    public function testPreservesQueryString(): void
     {
         $markdown = <<<'MARKDOWN'
 This is a [link](doc/some-file.md#header)
@@ -99,6 +101,6 @@ MARKDOWN;
         $step = new RewriteMarkdownLinks();
         $step->__invoke($project);
 
-        $this->assertEquals($expected, $file->content);
+        self::assertEquals($expected, $file->content);
     }
 }

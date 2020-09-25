@@ -39,7 +39,7 @@ $builder->buildFromIterator(
         ->files()
         ->name('*.php')
         ->name('*.pem*')
-        ->exclude(['Tests', 'tests', 'phpunit'])
+        ->exclude(['Tests', 'tests'])
         ->in($couscousDir . '/vendor')
         ->getIterator(),
     $couscousDir

@@ -14,7 +14,7 @@ use Couscous\Step;
  */
 class AddLivereloadSnippet implements Step
 {
-    const LIVERELOAD_SNIPPET = '
+    private const LIVERELOAD_SNIPPET = '
         <!-- Livereload -->
         <script>
             document.write(\'<script src="http://\' + (location.host || \'localhost\').split(\':\')[0] +
