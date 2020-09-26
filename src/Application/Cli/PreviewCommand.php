@@ -82,12 +82,6 @@ class PreviewCommand extends Command
         /** @var array */
         $cliConfig = $input->getOption('config');
 
-        if (!$this->isSupported()) {
-            $output->writeln('<error>PHP 7.1 or above is required to run the internal webserver</error>');
-
-            return 1;
-        }
-
         /** @var string */
         $sourceDirectory = $input->getArgument('source');
         /** @var string */
@@ -221,15 +215,6 @@ class PreviewCommand extends Command
         $process->start();
 
         $output->writeln('<info>Livereload launched!</info>');
-    }
-
-    private function isSupported(): bool
-    {
-        if (version_compare(phpversion(), '7.1.0', '<')) {
-            return false;
-        }
-
-        return true;
     }
 
     private function isFound(string $executablePath): bool
