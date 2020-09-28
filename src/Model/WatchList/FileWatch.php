@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Model\WatchList;
 
@@ -9,19 +10,22 @@ namespace Couscous\Model\WatchList;
  */
 class FileWatch implements WatchInterface
 {
+    /**
+     * @var string
+     */
     private $filename;
+    /**
+     * @var int
+     */
     private $time;
 
-    /**
-     * @param string $filename
-     */
-    public function __construct($filename)
+    public function __construct(string $filename)
     {
         $this->filename = $filename;
         $this->time = time();
     }
 
-    public function getChangedFiles()
+    public function getChangedFiles(): array
     {
         if (!file_exists($this->filename)) {
             return [];

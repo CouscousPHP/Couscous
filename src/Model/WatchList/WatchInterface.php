@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Model\WatchList;
 
@@ -14,5 +15,5 @@ interface WatchInterface
      *
      * @return string[]
      */
-    public function getChangedFiles();
+    public function getChangedFiles(): array;
 }

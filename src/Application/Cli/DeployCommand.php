@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Application\Cli;
 
@@ -53,7 +54,7 @@ class DeployCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         try {
             $remoteUrl = $this->git->getRemoteUrl();
@@ -95,11 +96,15 @@ class DeployCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var string */
         $sourceDirectory = $input->getArgument('source');
+        /** @var string */
         $repositoryUrl = $input->getOption('repository');
+        /** @var ?string */
         $targetBranch = $input->getOption('branch');
+        /** @var array */
         $cliConfig = $input->getOption('config');
 
         $project = new Project($sourceDirectory, getcwd().'/.couscous/generated');
@@ -111,6 +116,7 @@ class DeployCommand extends Command
 
         // If no branch was provided, use the configured one or the default
         if (!$targetBranch) {
+            /** @var string */
             $targetBranch = isset($project->metadata['branch']) ? $project->metadata['branch'] : 'gh-pages';
         }
 
@@ -118,5 +124,7 @@ class DeployCommand extends Command
 
         // Deploy it
         $this->deployer->deploy($project, $output, $repositoryUrl, $targetBranch);
+
+        return 0;
     }
 }

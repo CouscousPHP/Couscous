@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Application\Cli;
 
@@ -29,7 +30,7 @@ class GenerateCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('generate')
@@ -56,14 +57,21 @@ class GenerateCommand extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var string */
+        $source = $input->getArgument('source');
+        /** @var string */
+        $target = $input->getOption('target');
+        /** @var array */
         $cliConfig = $input->getOption('config');
 
-        $project = new Project($input->getArgument('source'), $input->getOption('target'));
+        $project = new Project($source, $target);
 
         $project->metadata['cliConfig'] = $cliConfig;
 
         $this->generator->generate($project, $output);
+
+        return 0;
     }
 }

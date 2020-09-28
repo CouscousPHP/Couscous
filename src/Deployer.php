@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous;
 
@@ -33,12 +34,10 @@ class Deployer
     }
 
     /**
-     * @param Project         $project
-     * @param OutputInterface $output
-     * @param string          $repositoryUrl Repository in which to deploy the files.
-     * @param string          $branch        Git branch in which to deploy the files.
+     * @param string $repositoryUrl Repository in which to deploy the files.
+     * @param string $branch        Git branch in which to deploy the files.
      */
-    public function deploy(Project $project, OutputInterface $output, $repositoryUrl, $branch)
+    public function deploy(Project $project, OutputInterface $output, string $repositoryUrl, string $branch): void
     {
         $output->writeln('<comment>Deploying the website</comment>');
 
@@ -62,7 +61,7 @@ class Deployer
         $this->deleteTempDirectory($tmpDirectory);
     }
 
-    private function createTempDirectory()
+    private function createTempDirectory(): string
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'couscous_deploy_');
         // Turn the temp file into a temp directory
@@ -72,14 +71,14 @@ class Deployer
         return $tempFile;
     }
 
-    private function cloneRepository(OutputInterface $output, $repositoryUrl, $tmpDirectory)
+    private function cloneRepository(OutputInterface $output, string $repositoryUrl, string $tmpDirectory): void
     {
         $output->writeln("Cloning <info>$repositoryUrl</info> in <info>$tmpDirectory</info>");
 
         $this->git->cloneRepository($repositoryUrl, $tmpDirectory);
     }
 
-    private function checkoutBranch(OutputInterface $output, $branch, $tmpDirectory)
+    private function checkoutBranch(OutputInterface $output, string $branch, string $tmpDirectory): void
     {
         $output->writeln("Checking out branch <info>$branch</info>");
 
@@ -95,7 +94,7 @@ class Deployer
         }
     }
 
-    private function copyGeneratedFiles(OutputInterface $output, $directory, $tmpDirectory)
+    private function copyGeneratedFiles(OutputInterface $output, string $directory, string $tmpDirectory): void
     {
         $output->writeln('Copying generated website');
 
@@ -108,21 +107,21 @@ class Deployer
         $this->filesystem->mirror($directory, $tmpDirectory);
     }
 
-    private function commitChanges(OutputInterface $output, $tmpDirectory)
+    private function commitChanges(OutputInterface $output, string $tmpDirectory): void
     {
         $output->writeln('Committing changes');
 
         $this->git->commitAllChanges($tmpDirectory, 'Website generation with Couscous');
     }
 
-    private function pushBranch(OutputInterface $output, $branch, $tmpDirectory)
+    private function pushBranch(OutputInterface $output, string $branch, string $tmpDirectory): void
     {
         $output->writeln("Pushing <info>$branch</info> (GitHub may ask you to login)");
 
         $this->git->push($tmpDirectory, $branch);
     }
 
-    private function deleteTempDirectory($dir)
+    private function deleteTempDirectory(string $dir): void
     {
         $this->filesystem->remove($dir);
     }

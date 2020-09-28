@@ -1,9 +1,11 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Application\Cli;
 
 use Couscous\Generator;
 use Couscous\Model\Project;
+use Couscous\Model\WatchList\WatchList;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -34,7 +36,7 @@ class PreviewCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('preview')
@@ -76,25 +78,25 @@ class PreviewCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var array */
         $cliConfig = $input->getOption('config');
 
-        if (!$this->isSupported()) {
-            $output->writeln('<error>PHP 5.4 or above is required to run the internal webserver</error>');
-
-            return 1;
-        }
-
+        /** @var string */
         $sourceDirectory = $input->getArgument('source');
+        /** @var string */
         $targetDirectory = $input->getOption('target');
 
         if ($input->hasParameterOption('--livereload')) {
-            if ($input->getOption('livereload') === null) {
-                $input->setOption('livereload', 'livereload');
+            /** @var ?string */
+            $livereload = $input->getOption('livereload');
+
+            if ($livereload === null) {
+                $livereload = 'livereload';
             }
 
-            if (!$this->isFound($input->getOption('livereload'))) {
+            if (!$this->isFound($livereload)) {
                 $output->writeln(
                     '<error>Impossible to launch Livereload, '
                     .'did you forgot to install it with "pip install livereload" (sudo maybe required)?</error>'
@@ -103,7 +105,7 @@ class PreviewCommand extends Command
                 return 1;
             }
 
-            $this->startLivereload($input->getOption('livereload'), $output, $sourceDirectory, $targetDirectory);
+            $this->startLivereload($livereload, $output, $sourceDirectory, $targetDirectory);
         }
 
         $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, $cliConfig);
@@ -114,7 +116,7 @@ class PreviewCommand extends Command
         if (function_exists('pcntl_signal')) {
             declare(ticks=1);
 
-            $handler = function ($signal) use ($serverProcess, $output, &$throwOnServerStop) {
+            $handler = function (int $signal) use ($serverProcess, $output, &$throwOnServerStop): void {
                 $throwOnServerStop = !$this->stopWebServer($serverProcess, $output, $signal);
             };
 
@@ -146,11 +148,11 @@ class PreviewCommand extends Command
 
     private function generateWebsite(
         OutputInterface $output,
-        $sourceDirectory,
-        $targetDirectory,
-        $cliConfig,
-        $regenerate = false
-    ) {
+        string $sourceDirectory,
+        string $targetDirectory,
+        array $cliConfig,
+        bool $regenerate = false
+    ): WatchList {
         $project = new Project($sourceDirectory, $targetDirectory);
 
         $project->metadata['cliConfig'] = $cliConfig;
@@ -163,21 +165,23 @@ class PreviewCommand extends Command
         return $project->watchlist;
     }
 
-    private function startWebServer(InputInterface $input, OutputInterface $output, $targetDirectory)
+    private function startWebServer(InputInterface $input, OutputInterface $output, string $targetDirectory): Process
     {
-        $processArguments = [PHP_BINARY, '-S', $input->getArgument('address')];
+        /** @var string */
+        $address = $input->getArgument('address');
+        $processArguments = [PHP_BINARY, '-S', $address];
 
         $process = new Process($processArguments);
         $process->setWorkingDirectory($targetDirectory);
         $process->setTimeout(null);
         $process->start();
 
-        $output->writeln(sprintf('Server running on <comment>http://%s</comment>', $input->getArgument('address')));
+        $output->writeln(sprintf('Server running on <comment>http://%s</comment>', $address));
 
         return $process;
     }
 
-    private function stopWebServer(Process $serverProcess, OutputInterface $output, $signal = null)
+    private function stopWebServer(Process $serverProcess, OutputInterface $output, int $signal = null): bool
     {
         $signal = $signal ?: SIGTERM;
 
@@ -198,8 +202,12 @@ class PreviewCommand extends Command
         return false;
     }
 
-    private function startLivereload($executablePath, OutputInterface $output, $sourceDirectory, $targetDirectory)
-    {
+    private function startLivereload(
+        string $executablePath,
+        OutputInterface $output,
+        string $sourceDirectory,
+        string $targetDirectory
+    ): void {
         $processArguments = [$executablePath, $targetDirectory, '-w', '3'];
 
         $process = new Process($processArguments);
@@ -210,21 +218,12 @@ class PreviewCommand extends Command
         $output->writeln('<info>Livereload launched!</info>');
     }
 
-    private function isSupported()
-    {
-        if (version_compare(phpversion(), '5.4.0', '<')) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private function isFound($executablePath)
+    private function isFound(string $executablePath): bool
     {
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $folders = explode(';', getenv('PATH'));
+            $folders = explode(';', (string) getenv('PATH'));
         } else {
-            $folders = explode(':', getenv('PATH'));
+            $folders = explode(':', (string) getenv('PATH'));
         }
 
         foreach ($folders as $folder) {
@@ -236,9 +235,9 @@ class PreviewCommand extends Command
         return false;
     }
 
-    private function fileListToDisplay(array $files, $sourceDirectory)
+    private function fileListToDisplay(array $files, string $sourceDirectory): string
     {
-        $files = array_map(function ($file) use ($sourceDirectory) {
+        $files = array_map(function (string $file) use ($sourceDirectory): string {
             return substr($file, strlen($sourceDirectory) + 1);
         }, $files);
 

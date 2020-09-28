@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Template\Model;
 
@@ -14,14 +15,14 @@ class CnameFile extends File
      */
     public $content;
 
-    public function __construct($relativeFilename, $content)
+    public function __construct(string $relativeFilename, string $content)
     {
         parent::__construct($relativeFilename);
 
         $this->content = $content;
     }
 
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }

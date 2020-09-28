@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Model\WatchList;
 
@@ -11,19 +12,22 @@ use Symfony\Component\Finder\Finder;
  */
 class WatchList
 {
-    private $watches;
+    /**
+     * @var list<WatchInterface>
+     */
+    private $watches = [];
 
-    public function watchFile($filename)
+    public function watchFile(string $filename): void
     {
         $this->watches[] = new FileWatch($filename);
     }
 
-    public function watchFiles(Finder $finder)
+    public function watchFiles(Finder $finder): void
     {
         $this->watches[] = new FinderWatch($finder);
     }
 
-    public function watchDirectory($directory)
+    public function watchDirectory(string $directory): void
     {
         $finder = new Finder();
         $finder->files()
@@ -32,12 +36,13 @@ class WatchList
         $this->watches[] = new FinderWatch($finder);
     }
 
-    public function getChangedFiles()
+    public function getChangedFiles(): array
     {
-        $files = array_map(function (WatchInterface $watch) {
+        $files = array_map(function (WatchInterface $watch): array {
             return $watch->getChangedFiles();
         }, $this->watches);
 
+        /** @var list<string> */
         $files = call_user_func_array('array_merge', $files);
 
         return array_unique($files);

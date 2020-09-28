@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Core\Step;
 
@@ -30,7 +31,7 @@ class WriteFiles implements Step
         $this->logger = $logger;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         foreach ($project->getFiles() as $file) {
             $targetFilename = $project->targetDirectory.'/'.$file->relativeFilename;

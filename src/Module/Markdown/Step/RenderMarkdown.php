@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Markdown\Step;
 
@@ -25,10 +26,10 @@ class RenderMarkdown implements Step
         $this->markdownParser = $markdownParser;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType(MarkdownFile::class);
 
         foreach ($markdownFiles as $markdownFile) {
             $htmlFile = $this->renderFile($markdownFile);
@@ -37,7 +38,7 @@ class RenderMarkdown implements Step
         }
     }
 
-    private function renderFile(MarkdownFile $file)
+    private function renderFile(MarkdownFile $file): HtmlFile
     {
         $document = $this->markdownParser->parse($file->getContent());
 
@@ -46,9 +47,15 @@ class RenderMarkdown implements Step
         return new HtmlFile($filename, $document->getContent(), $file);
     }
 
-    private function replaceExtension($filename)
+    private function replaceExtension(string $filename): string
     {
-        $filename = substr($filename, 0, strrpos($filename, '.'));
+        $position = strrpos($filename, '.');
+
+        if (!is_int($position)) {
+            return $filename;
+        }
+
+        $filename = substr($filename, 0, $position);
 
         return $filename.'.html';
     }

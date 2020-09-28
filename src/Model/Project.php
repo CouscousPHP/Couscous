@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Model;
 
@@ -53,7 +54,7 @@ class Project
      */
     protected $files = [];
 
-    public function __construct($sourceDirectory, $targetDirectory)
+    public function __construct(string $sourceDirectory, string $targetDirectory)
     {
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
@@ -61,17 +62,17 @@ class Project
         $this->metadata = new Metadata();
     }
 
-    public function addFile(File $file)
+    public function addFile(File $file): void
     {
         $this->files[$file->relativeFilename] = $file;
     }
 
-    public function removeFile(File $file)
+    public function removeFile(File $file): void
     {
         unset($this->files[$file->relativeFilename]);
     }
 
-    public function replaceFile(File $oldFile, File $newFile)
+    public function replaceFile(File $oldFile, File $newFile): void
     {
         $this->removeFile($oldFile);
         $this->addFile($newFile);
@@ -80,17 +81,17 @@ class Project
     /**
      * @return File[]
      */
-    public function getFiles()
+    public function getFiles(): array
     {
         return $this->files;
     }
 
     /**
-     * @param string $class
+     * @param class-string<File> $class
      *
      * @return File[] Instances of $class
      */
-    public function findFilesByType($class)
+    public function findFilesByType(string $class): array
     {
         if (!class_exists($class)) {
             throw new \InvalidArgumentException(sprintf(
@@ -99,28 +100,29 @@ class Project
             ));
         }
 
-        return array_filter($this->files, function (File $file) use ($class) {
+        return array_filter($this->files, function (File $file) use ($class): bool {
             return $file instanceof $class;
         });
     }
 
     /**
      * Returns a Finder correctly set up for searching in source files.
-     *
-     * @return Finder
      */
-    public function sourceFiles()
+    public function sourceFiles(): Finder
     {
+        /** @var list<string> */
         $includedDirectories = $this->metadata['include'] ? $this->metadata['include'] : [];
 
         // To be sure that included directories are under the source one
         if (!empty($includedDirectories)) {
-            array_walk($includedDirectories, function (&$item) {
-                $item = $this->sourceDirectory.'/'.$item;
-            });
+            $includedDirectories = array_map(function (string $item): string {
+                return $this->sourceDirectory.'/'.$item;
+            }, $includedDirectories);
         }
 
-        $excludedDirectories = new ExcludeList($this->metadata['exclude'] ? $this->metadata['exclude'] : []);
+        /** @var list<string> */
+        $exclude = $this->metadata['exclude'] ? $this->metadata['exclude'] : [];
+        $excludedDirectories = new ExcludeList($exclude);
 
         if (is_file($this->sourceDirectory.'/.gitignore')) {
             $excludedDirectories->addEntries(file($this->sourceDirectory.'/.gitignore'));

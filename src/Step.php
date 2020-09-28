@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous;
 
@@ -13,8 +14,6 @@ interface Step
 {
     /**
      * Process the given project.
-     *
-     * @param Project $project
      */
-    public function __invoke(Project $project);
+    public function __invoke(Project $project): void;
 }

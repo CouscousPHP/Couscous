@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Template\Step;
 
@@ -22,14 +23,14 @@ class AddLivereloadSnippet implements Step
         <!-- End Livereload -->
     ';
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (!$project->metadata['preview']) {
             return;
         }
 
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType(HtmlFile::class);
 
         foreach ($htmlFiles as $file) {
             $contentAsArray = explode('</body>', $file->content);

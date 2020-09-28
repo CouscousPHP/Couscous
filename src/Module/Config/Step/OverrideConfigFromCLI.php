@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Config\Step;
 
@@ -22,13 +23,14 @@ class OverrideConfigFromCLI implements \Couscous\Step
         $this->logger = $logger;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (!$project->metadata['cliConfig']) {
             return;
         }
 
         $cliConfig = [];
+        /** @var string $item */
         foreach ($project->metadata['cliConfig'] as $item) {
             $explosion = explode('=', $item, 2);
             $this->logger->notice('Overriding global config: '.$explosion[0].' = "'.$explosion[1].'"');

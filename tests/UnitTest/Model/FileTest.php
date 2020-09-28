@@ -16,7 +16,7 @@ class FileTest extends TestCase
     public function it_should_have_metadata()
     {
         $file = new class('') extends File {
-            public function getContent()
+            public function getContent(): string
             {
             }
         };

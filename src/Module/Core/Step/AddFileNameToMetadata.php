@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Core\Step;
 
@@ -12,7 +13,7 @@ use Couscous\Step;
  */
 class AddFileNameToMetadata implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         foreach ($project->getFiles() as $file) {
             $fileMetadata = $file->getMetadata();

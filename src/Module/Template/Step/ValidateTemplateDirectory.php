@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Template\Step;
 
@@ -25,8 +26,9 @@ class ValidateTemplateDirectory implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
+        /** @var ?string */
         $directory = $project->metadata['template.directory'];
 
         if ($directory === null) {
@@ -44,7 +46,7 @@ class ValidateTemplateDirectory implements Step
         $project->metadata['template.directory'] = $directory;
     }
 
-    private function assertDirectoryExist($directory)
+    private function assertDirectoryExist(string $directory): void
     {
         if (!$this->filesystem->exists($directory)) {
             throw new \RuntimeException(sprintf(

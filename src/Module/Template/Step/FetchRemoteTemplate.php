@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Template\Step;
 
@@ -37,7 +38,7 @@ class FetchRemoteTemplate implements Step
      * In theory we shouldn't store state in this object because it's a service
      * but we would need extensive change to avoid that.
      *
-     * @var string
+     * @var ?string
      */
     private $templateDirectory;
 
@@ -48,7 +49,7 @@ class FetchRemoteTemplate implements Step
         $this->git = $git;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         // In preview we avoid cloning the repository every time
         if ($project->regenerate && $this->templateDirectory) {
@@ -57,6 +58,7 @@ class FetchRemoteTemplate implements Step
             return;
         }
 
+        /** @var ?string */
         $templateUrl = $project->metadata['template.url'];
 
         if ($templateUrl === null) {
@@ -69,7 +71,7 @@ class FetchRemoteTemplate implements Step
         $project->metadata['template.directory'] = $directory;
     }
 
-    private function fetchGitTemplate($gitUrl)
+    private function fetchGitTemplate(string $gitUrl): string
     {
         $this->logger->notice('Fetching template from {url}', ['url' => $gitUrl]);
 
@@ -80,7 +82,7 @@ class FetchRemoteTemplate implements Step
         return $directory;
     }
 
-    private function createTempDirectory($prefix)
+    private function createTempDirectory(string $prefix): string
     {
         $tempFile = tempnam(sys_get_temp_dir(), $prefix);
         // Turn the temp file into a temp directory

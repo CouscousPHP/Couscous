@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Template\Step;
 
@@ -28,7 +29,7 @@ class LoadAssets implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (!$project->metadata['template.directory']) {
             return;
@@ -36,7 +37,7 @@ class LoadAssets implements Step
 
         $files = new Finder();
         $files->files()
-            ->in($project->metadata['template.directory'])
+            ->in((string) $project->metadata['template.directory'])
             ->ignoreDotFiles(false)
             ->notName('*.twig')
             ->notName('*.md')
@@ -44,8 +45,8 @@ class LoadAssets implements Step
 
         $project->watchlist->watchFiles($files);
 
+        /** @var SplFileInfo $file */
         foreach ($files as $file) {
-            /** @var SplFileInfo $file */
             $project->addFile(new LazyFile($file->getPathname(), $file->getRelativePathname()));
         }
     }

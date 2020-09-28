@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Dependencies\Step;
 
@@ -40,7 +41,7 @@ class InstallDependencies implements Step
         $this->logger = $logger;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $canUseYarn = $this->canUseYarn($project);
         $canUseNpm = $this->canUseNpm($project);
@@ -61,9 +62,11 @@ class InstallDependencies implements Step
 
         $this->logger->notice("Executing \"$command install\"");
 
+        /** @var string */
+        $templateDirectory = $project->metadata['template.directory'];
         $result = $this->commandRunner->run(sprintf(
             "cd \"%s\" && $command install",
-            $project->metadata['template.directory']
+            $templateDirectory
         ));
 
         if ($result) {
@@ -71,54 +74,39 @@ class InstallDependencies implements Step
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function canUseYarn(Project $project)
+    private function canUseYarn(Project $project): bool
     {
         return $this->hasPackageJson($project) && $this->commandRunner->commandExists('yarn');
     }
 
-    /**
-     * @return bool
-     */
-    private function canUseNpm(Project $project)
+    private function canUseNpm(Project $project): bool
     {
         return $this->hasPackageJson($project) && $this->commandRunner->commandExists('npm');
     }
 
-    /**
-     * @return bool
-     */
-    private function canUseBower(Project $project)
+    private function canUseBower(Project $project): bool
     {
         return $this->hasBowerJson($project) && $this->commandRunner->commandExists('bower');
     }
 
-    /**
-     * @return bool
-     */
-    private function hasPackageJson(Project $project)
+    private function hasPackageJson(Project $project): bool
     {
         if (!$project->metadata['template.directory']) {
             return false;
         }
 
-        $filename = $project->metadata['template.directory'].'/package.json';
+        $filename = ((string) $project->metadata['template.directory']).'/package.json';
 
         return $this->filesystem->exists($filename);
     }
 
-    /**
-     * @return bool
-     */
-    private function hasBowerJson(Project $project)
+    private function hasBowerJson(Project $project): bool
     {
         if (!$project->metadata['template.directory']) {
             return false;
         }
 
-        $filename = $project->metadata['template.directory'].'/bower.json';
+        $filename = ((string) $project->metadata['template.directory']).'/bower.json';
 
         return $this->filesystem->exists($filename);
     }

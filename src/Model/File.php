@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Model;
 
@@ -9,6 +10,9 @@ namespace Couscous\Model;
  */
 abstract class File
 {
+    /**
+     * @var string
+     */
     public $relativeFilename;
 
     /**
@@ -16,7 +20,7 @@ abstract class File
      */
     private $metadata;
 
-    public function __construct($relativeFilename)
+    public function __construct(string $relativeFilename)
     {
         $this->relativeFilename = $relativeFilename;
         $this->metadata = new Metadata();
@@ -24,20 +28,16 @@ abstract class File
 
     /**
      * Returns the basename of the file.
-     *
-     * @return string
      */
-    public function getBasename()
+    public function getBasename(): string
     {
         return basename($this->relativeFilename);
     }
 
     /**
      * Returns the directory of the file.
-     *
-     * @return string
      */
-    public function getDirectory()
+    public function getDirectory(): string
     {
         $directory = dirname($this->relativeFilename);
         $directory = ($directory === '.') ? '' : $directory.'/';
@@ -47,19 +47,15 @@ abstract class File
 
     /**
      * Returns the content of the file.
-     *
-     * @return string
      */
-    abstract public function getContent();
+    abstract public function getContent(): string;
 
     /**
      * Returns an indexed array of metadata.
      *
      * Array keys are metadata names, array values are metadata values.
-     *
-     * @return Metadata
      */
-    public function getMetadata()
+    public function getMetadata(): Metadata
     {
         return $this->metadata;
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Config\Step;
 
@@ -40,7 +41,7 @@ class LoadConfig implements Step
         $this->logger = $logger;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $filename = $project->sourceDirectory.'/'.self::FILENAME;
 
@@ -57,9 +58,10 @@ class LoadConfig implements Step
         $project->watchlist->watchFile($filename);
     }
 
-    private function parseYamlFile($filename)
+    private function parseYamlFile(string $filename): array
     {
         try {
+            /** @var mixed */
             $metadata = $this->yamlParser->parse(file_get_contents($filename));
         } catch (ParseException $e) {
             throw InvalidConfigException::invalidYaml(self::FILENAME, $e);
@@ -72,7 +74,7 @@ class LoadConfig implements Step
         return $metadata;
     }
 
-    private function validateConfig($values)
+    private function validateConfig(array $values): array
     {
         if (array_key_exists('include', $values)) {
             $values['include'] = (array) $values['include'];
@@ -81,7 +83,7 @@ class LoadConfig implements Step
             $values['exclude'] = (array) $values['exclude'];
         }
         if (array_key_exists('directory', $values)) {
-            $values['directory'] = trim($values['directory']);
+            $values['directory'] = trim((string) $values['directory']);
         }
         if (array_key_exists('before', $values)) {
             $values['before'] = (array) $values['before'];
@@ -94,7 +96,7 @@ class LoadConfig implements Step
         }
         if (array_key_exists('baseUrl', $values)) {
             // Trim any trailing "/" in the base url
-            $values['baseUrl'] = rtrim(trim($values['baseUrl']), '/');
+            $values['baseUrl'] = rtrim(trim((string) $values['baseUrl']), '/');
         }
 
         return $values;

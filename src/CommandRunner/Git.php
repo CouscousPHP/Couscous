@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\CommandRunner;
 
@@ -19,27 +20,27 @@ class Git
         $this->commandRunner = $commandRunner;
     }
 
-    public function cloneRepository($url, $directory)
+    public function cloneRepository(string $url, string $directory): void
     {
         $this->commandRunner->run("git clone $url \"$directory\"");
     }
 
-    public function checkoutOriginBranch($directory, $branch)
+    public function checkoutOriginBranch(string $directory, string $branch): void
     {
         $this->run($directory, "git checkout -b $branch origin/$branch");
     }
 
-    public function createBranch($directory, $branch)
+    public function createBranch(string $directory, string $branch): void
     {
         $this->run($directory, "git checkout -b $branch");
     }
 
-    public function commitAllChanges($directory, $message)
+    public function commitAllChanges(string $directory, string $message): void
     {
         $this->run($directory, "git add --all . && git commit -m \"$message\"");
     }
 
-    public function push($directory, $branch, $remote = 'origin')
+    public function push(string $directory, string $branch, string $remote = 'origin'): void
     {
         $this->run($directory, "git push $remote $branch");
     }
@@ -49,7 +50,7 @@ class Git
      *
      * @return string The git URL
      */
-    public function getRemoteUrl($remote = 'origin')
+    public function getRemoteUrl(string $remote = 'origin'): string
     {
         $command = "git config --get remote.$remote.url";
 
@@ -62,13 +63,13 @@ class Git
      * @param string $directory A directory containing a git repository
      * @return bool True if there are changes, false otherwise
      */
-    public function hasUncommittedChanges($directory)
+    public function hasUncommittedChanges(string $directory): bool
     {
         $changes = $this->run($directory, "git diff-index --name-only HEAD");
         return !(ctype_space($changes) || $changes = '');
     }
 
-    private function run($directory, $command)
+    private function run(string $directory, string $command): string
     {
         return $this->commandRunner->run("cd \"$directory\" && $command");
     }

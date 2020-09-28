@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Application;
 
@@ -12,10 +13,7 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class ContainerFactory
 {
-    /**
-     * @return Container
-     */
-    public function createContainer()
+    public function createContainer(): Container
     {
         $builder = new ContainerBuilder();
 
@@ -27,8 +25,8 @@ class ContainerFactory
             ->path('/.+/')
             ->name('config.php');
 
+        /** @var SplFileInfo $moduleConfig */
         foreach ($moduleConfigs as $moduleConfig) {
-            /** @var SplFileInfo $moduleConfig */
             $builder->addDefinitions($moduleConfig->getPathname());
         }
 

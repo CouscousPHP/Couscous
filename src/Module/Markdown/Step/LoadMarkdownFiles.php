@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Markdown\Step;
 
@@ -14,13 +15,13 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class LoadMarkdownFiles implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $files = $project->sourceFiles();
         $files->name('*.md');
 
+        /** @var SplFileInfo $file */
         foreach ($files as $file) {
-            /** @var SplFileInfo $file */
             $content = file_get_contents($file->getPathname());
 
             $project->addFile(new MarkdownFile($file->getRelativePathname(), $content));

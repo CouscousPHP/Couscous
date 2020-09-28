@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Template\Step;
 
@@ -19,21 +20,22 @@ class ProcessTwigLayouts implements Step
 {
     const DEFAULT_LAYOUT_NAME = 'default.twig';
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if (!$project->metadata['template.directory']) {
             return;
         }
 
-        $twig = $this->createTwig($project->metadata['template.directory']);
+        $twig = $this->createTwig((string) $project->metadata['template.directory']);
 
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType(HtmlFile::class);
 
+        /** @var HtmlFile */
         foreach ($htmlFiles as $file) {
             $fileMetadata = $file->getMetadata();
             $layout = isset($fileMetadata['layout'])
-                ? $fileMetadata['layout'].'.twig'
+                ? ((string) $fileMetadata['layout']).'.twig'
                 : self::DEFAULT_LAYOUT_NAME;
 
             $context = array_merge(
@@ -55,7 +57,7 @@ class ProcessTwigLayouts implements Step
         }
     }
 
-    private function createTwig($templateDirectory)
+    private function createTwig(string $templateDirectory): Twig_Environment
     {
         $loader = $this->createLoader($templateDirectory);
 
@@ -65,6 +67,10 @@ class ProcessTwigLayouts implements Step
         ]);
 
         if (file_exists($templateDirectory.'/twig.php')) {
+            /**
+             * @psalm-suppress UnresolvableInclude
+             * @var callable(Twig_Environment): void
+             */
             $customLoader = require $templateDirectory.'/twig.php';
             $customLoader($twig);
         }
@@ -76,12 +82,8 @@ class ProcessTwigLayouts implements Step
      * We have to use a Twig_Loader_Array because of #12.
      *
      * @link https://github.com/CouscousPHP/Couscous/issues/12
-     *
-     * @param string $templateDirectory
-     *
-     * @return Twig_Loader_Array
      */
-    private function createLoader($templateDirectory)
+    private function createLoader(string $templateDirectory): Twig_Loader_Array
     {
         $finder = new Finder();
         $finder->files()
@@ -89,8 +91,8 @@ class ProcessTwigLayouts implements Step
             ->name('*.twig');
 
         $layouts = [];
+        /** @var SplFileInfo $file */
         foreach ($finder as $file) {
-            /** @var SplFileInfo $file */
             $name = $file->getFilename();
             $layouts[$name] = $file->getContents();
         }

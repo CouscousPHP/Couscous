@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Model;
 
@@ -30,13 +31,21 @@ class Metadata implements \ArrayAccess
         $this->values = $values;
     }
 
-    public function offsetExists($offset)
+    /**
+     * @param string $offset
+     */
+    public function offsetExists($offset): bool
     {
         $keys = explode('.', $offset);
 
         return $this->recursiveExist($keys, $this->values);
     }
 
+    /**
+     * @param string $offset
+     *
+     * @return mixed
+     */
     public function offsetGet($offset)
     {
         $keys = explode('.', $offset);
@@ -44,37 +53,46 @@ class Metadata implements \ArrayAccess
         return $this->recursiveGet($keys, $this->values);
     }
 
-    public function offsetSet($offset, $value)
+    /**
+     * @param string $offset
+     * @param mixed $value
+     */
+    public function offsetSet($offset, $value): void
     {
         $keys = explode('.', $offset);
 
+        /** @psalm-suppress MixedAssignment Todo refacto to avoid references */
         $this->recursiveSet($keys, $this->values, $value);
     }
 
-    public function offsetUnset($offset)
+    /**
+     * @param string $offset
+     */
+    public function offsetUnset($offset): void
     {
         $this[$offset] = null;
     }
 
     /**
      * Merge metadata into the current metadata instance.
-     *
-     * @param array $metadata
      */
-    public function setMany(array $metadata)
+    public function setMany(array $metadata): void
     {
         $this->values = array_merge($this->values, $metadata);
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->values;
     }
 
-    private function recursiveGet($keys, $values)
+    /**
+     * @param list<string> $keys
+     * @param mixed $values
+     *
+     * @return mixed
+     */
+    private function recursiveGet(array $keys, $values)
     {
         $key = array_shift($keys);
 
@@ -93,7 +111,11 @@ class Metadata implements \ArrayAccess
         return $this->recursiveGet($keys, $values[$key]);
     }
 
-    private function recursiveExist($keys, $values)
+    /**
+     * @param list<string> $keys
+     * @param mixed $values
+     */
+    private function recursiveExist(array $keys, $values): bool
     {
         $key = array_shift($keys);
 
@@ -112,7 +134,12 @@ class Metadata implements \ArrayAccess
         return $this->recursiveExist($keys, $values[$key]);
     }
 
-    private function recursiveSet($keys, &$values, $value)
+    /**
+     * @param list<string> $keys
+     * @param mixed &$values
+     * @param mixed $value
+     */
+    private function recursiveSet(array $keys, &$values, $value): void
     {
         $key = array_shift($keys);
 
@@ -121,6 +148,7 @@ class Metadata implements \ArrayAccess
         }
 
         if (empty($keys)) {
+            /** @psalm-suppress MixedAssignment */
             $values[$key] = $value;
 
             return;

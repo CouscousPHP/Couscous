@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Markdown\Step;
 
@@ -20,10 +21,10 @@ class RewriteMarkdownLinks implements Step
      */
     const MARKDOWN_LINK_REGEX = '/\[(?:[^\]]+)\]\(([^\)]+\/)?([A-Za-z0-9_\.\-]+\.md)([^.\)][^\)]*)?\)/';
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType(MarkdownFile::class);
 
         foreach ($markdownFiles as $file) {
             $pattern = self::MARKDOWN_LINK_REGEX;
@@ -33,7 +34,10 @@ class RewriteMarkdownLinks implements Step
         }
     }
 
-    private function replaceFilename(array $matches)
+    /**
+     * @param array<int, string> $matches
+     */
+    private function replaceFilename(array $matches): string
     {
         $filename = strtolower($matches[2]);
         $filename = str_replace('.md', '.html', $filename);

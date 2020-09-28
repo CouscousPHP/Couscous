@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Markdown\Step;
 
@@ -13,10 +14,10 @@ use Couscous\Step;
  */
 class ProcessMarkdownFileName implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var MarkdownFile[] $markdownFiles */
-        $markdownFiles = $project->findFilesByType('Couscous\Module\Markdown\Model\MarkdownFile');
+        $markdownFiles = $project->findFilesByType(MarkdownFile::class);
 
         foreach ($markdownFiles as $markdownFile) {
             $project->removeFile($markdownFile);
@@ -29,13 +30,14 @@ class ProcessMarkdownFileName implements Step
         }
     }
 
-    private function renameFileExtension(MarkdownFile $file)
+    private function renameFileExtension(MarkdownFile $file): void
     {
         $file->relativeFilename = $this->replaceExtension($file->relativeFilename);
     }
 
-    private function renameReadme(MarkdownFile $file, Project $project)
+    private function renameReadme(MarkdownFile $file, Project $project): void
     {
+        /** @var string */
         $indexFile = empty($project->metadata['template']['index'])
             ? 'README.md'
             : $project->metadata['template']['index'];
@@ -47,7 +49,7 @@ class ProcessMarkdownFileName implements Step
         $file->relativeFilename = $file->getDirectory().'index.html';
     }
 
-    private function renameFilename(MarkdownFile $file)
+    private function renameFilename(MarkdownFile $file): void
     {
         $basename = $file->getBasename();
         if (!preg_match('/[A-Z]/', $basename)) {
@@ -57,9 +59,15 @@ class ProcessMarkdownFileName implements Step
         $file->relativeFilename = $file->getDirectory().strtolower($basename);
     }
 
-    private function replaceExtension($filename)
+    private function replaceExtension(string $filename): string
     {
-        $filename = substr($filename, 0, strrpos($filename, '.'));
+        $position = strrpos($filename, '.');
+
+        if (!is_int($position)) {
+            return $filename;
+        }
+
+        $filename = substr($filename, 0, $position);
 
         return $filename.'.html';
     }

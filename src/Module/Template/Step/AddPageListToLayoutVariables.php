@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Template\Step;
 
@@ -13,10 +14,10 @@ use Couscous\Step;
  */
 class AddPageListToLayoutVariables implements Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType(HtmlFile::class);
 
         $pageList = [];
         $pageTree = [];
@@ -44,7 +45,11 @@ class AddPageListToLayoutVariables implements Step
         $project->metadata['pageTree'] = $pageTree;
     }
 
-    private function setValue(array &$array, array $path, $value)
+    /**
+     * @param array<string, array|string> &$array
+     * @param list<string> $path
+     */
+    private function setValue(array &$array, array $path, string $value): void
     {
         if (empty($path)) {
             $array[$value] = $value;
@@ -58,13 +63,18 @@ class AddPageListToLayoutVariables implements Step
             $array[$dir] = [];
         }
 
+        /** @psalm-suppress MixedArgumentTypeCoercion Can't find a way to express type recursion of first argument */
         $this->setValue($array[$dir], $path, $value);
     }
 
-    private function sortRecursively(&$array)
+    /**
+     * @param array<string, array|string> &$array
+     */
+    private function sortRecursively(array &$array): void
     {
         foreach ($array as &$value) {
             if (is_array($value)) {
+                /** @psalm-suppress MixedArgumentTypeCoercion Can't find a way to express type recursion */
                 $this->sortRecursively($value);
             }
         }

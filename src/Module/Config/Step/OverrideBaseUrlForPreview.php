@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Config\Step;
 
@@ -11,7 +12,7 @@ use Couscous\Model\Project;
  */
 class OverrideBaseUrlForPreview implements \Couscous\Step
 {
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if ($project->metadata['preview'] === true) {
             $project->metadata['baseUrl'] = '';

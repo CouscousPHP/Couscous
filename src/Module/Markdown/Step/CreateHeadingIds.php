@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Markdown\Step;
 
@@ -14,29 +15,26 @@ use Couscous\Step;
 class CreateHeadingIds implements Step
 {
     /**
-     * @var array
+     * @var array<string, int>
      */
     private $ids = [];
 
-    /**
-     * @param Project $project
-     */
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         /** @var HtmlFile[] $htmlFiles */
-        $htmlFiles = $project->findFilesByType('Couscous\Module\Template\Model\HtmlFile');
+        $htmlFiles = $project->findFilesByType(HtmlFile::class);
 
         foreach ($htmlFiles as $htmlFile) {
             $htmlFile->content = $this->render($htmlFile->getContent());
         }
     }
 
-    private function reset()
+    private function reset(): void
     {
         $this->ids = [];
     }
 
-    private function render($content)
+    private function render(string $content): string
     {
         $this->reset();
 
@@ -47,7 +45,10 @@ class CreateHeadingIds implements Step
         );
     }
 
-    private function addAttributeId(array $matches)
+    /**
+     * @param array<int, string> $matches
+     */
+    private function addAttributeId(array $matches): string
     {
         $id = $this->slugfy($matches[2]);
         if (!isset($this->ids[$id])) {
@@ -66,7 +67,7 @@ class CreateHeadingIds implements Step
         return $replacement;
     }
 
-    private function slugfy($text)
+    private function slugfy(string $text): string
     {
         $slug = trim($text);
         $slug = strtr($slug, ' ', '-');

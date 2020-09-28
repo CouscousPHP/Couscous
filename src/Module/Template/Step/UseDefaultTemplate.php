@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Template\Step;
 
@@ -25,7 +26,7 @@ class UseDefaultTemplate implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         if ($this->useRemoteTemplate($project)
             || $this->hasCustomTemplateDirectory($project)
@@ -37,17 +38,17 @@ class UseDefaultTemplate implements Step
         $project->metadata['template.url'] = self::DEFAULT_TEMPLATE_URL;
     }
 
-    private function useRemoteTemplate(Project $project)
+    private function useRemoteTemplate(Project $project): bool
     {
         return $project->metadata['template.url'] !== null;
     }
 
-    private function hasCustomTemplateDirectory(Project $project)
+    private function hasCustomTemplateDirectory(Project $project): bool
     {
         return $project->metadata['template.directory'] !== null;
     }
 
-    private function hasTemplateDirectory(Project $project)
+    private function hasTemplateDirectory(Project $project): bool
     {
         $templateDirectory = $project->sourceDirectory.'/'.ValidateTemplateDirectory::DEFAULT_TEMPLATE_DIRECTORY;
 

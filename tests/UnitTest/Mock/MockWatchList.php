@@ -7,19 +7,19 @@ use Symfony\Component\Finder\Finder;
 
 class MockWatchList extends WatchList
 {
-    public function watchFile($filename)
+    public function watchFile(string $filename): void
     {
     }
 
-    public function watchFiles(Finder $finder)
+    public function watchFiles(Finder $finder): void
     {
     }
 
-    public function watchDirectory($directory)
+    public function watchDirectory(string $directory): void
     {
     }
 
-    public function getChangedFiles()
+    public function getChangedFiles(): array
     {
         return [];
     }

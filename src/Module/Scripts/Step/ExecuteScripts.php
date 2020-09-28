@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Scripts\Step;
 
@@ -30,18 +31,19 @@ abstract class ExecuteScripts
         $this->logger = $logger;
     }
 
-    protected function executeScripts($scripts, Project $project)
+    protected function executeScripts(?array $scripts, Project $project): void
     {
         if (empty($scripts)) {
             return;
         }
 
+        /** @var string $script */
         foreach ($scripts as $script) {
             $this->executeScript($project->sourceDirectory, $script);
         }
     }
 
-    private function executeScript($sourceDirectory, $script)
+    private function executeScript(string $sourceDirectory, string $script): void
     {
         $script = 'cd "'.$sourceDirectory.'" && '.$script;
 

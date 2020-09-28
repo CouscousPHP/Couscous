@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Module\Core\Step;
 
@@ -24,7 +25,7 @@ class ClearTargetDirectory implements Step
         $this->filesystem = $filesystem;
     }
 
-    public function __invoke(Project $project)
+    public function __invoke(Project $project): void
     {
         $files = new Finder();
         $files->in($project->targetDirectory);

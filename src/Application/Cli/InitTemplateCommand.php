@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Couscous\Application\Cli;
 
@@ -14,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class InitTemplateCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('init:template')
@@ -33,13 +34,16 @@ class InitTemplateCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $fileExtension = '.twig';
 
+        /** @var string */
         $dirName = $input->getArgument('directory');
         $directory = getcwd().'/'.$dirName.'/';
-        $templateName = $input->getArgument('template_name').$fileExtension;
+        /** @var string */
+        $templateName = $input->getArgument('template_name');
+        $templateName = $templateName.$fileExtension;
 
         $fileLocation = $directory.$templateName;
         $fileExists = file_exists($fileLocation);
@@ -53,12 +57,11 @@ class InitTemplateCommand extends Command
             $output->writeln('<error>That template exists at '.$fileLocation.', so nothing has been changed.</error>');
             $output->writeln('<error>Try another name!</error>');
 
-            return;
+            return 1;
         }
 
-        if (!$fileExists) {
-            $output->writeln('<comment>Initialising template.</comment>');
-            $template = <<<'HTML'
+        $output->writeln('<comment>Initialising template.</comment>');
+        $template = <<<'HTML'
 <!DOCTYPE html>
 <html>
     <head>
@@ -85,7 +88,8 @@ class InitTemplateCommand extends Command
     </body>
 </html>
 HTML;
-            file_put_contents($fileLocation, $template);
-        }
+        file_put_contents($fileLocation, $template);
+
+        return 0;
     }
 }
