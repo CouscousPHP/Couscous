@@ -44,9 +44,6 @@ class DeployCommand extends Command
         parent::__construct();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         try {
@@ -86,9 +83,6 @@ class DeployCommand extends Command
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string */

@@ -16,9 +16,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class SelfUpdateCommand extends Command
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -27,9 +24,6 @@ class SelfUpdateCommand extends Command
             ->setDescription('Automatically update the phar file if needed.');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $updater = new Updater(null, false);
