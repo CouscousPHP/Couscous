@@ -25,12 +25,11 @@ include:
 
 # List of directories to exclude from the processing (default contains "vendor" and "website")
 # Paths are relative to the optional include paths given when generating the website, repository root by default
+# The ".gitignore" file will also be read if it exists to exclude the directories in it
 exclude:
     - vendor
     - website
     - some/dir
-    # This special entry will ask Couscous to read the exluded directories from your ".gitignore"  file
-    - %gitignore%
 
 scripts:
     # Scripts to execute before generating the website
