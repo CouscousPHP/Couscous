@@ -1,10 +1,9 @@
 language: php
 
 php:
-  - 7.1
-  - 7.2
   - 7.3
   - 7.4
+  - 8.0
 
 cache:
   directories:
@@ -12,10 +11,10 @@ cache:
 
 matrix:
   include:
-    - php: 7.1
+    - php: 7.3
       env:
         - dependencies=lowest
-    - php: 7.1
+    - php: 7.3
       env:
         - DEPLOY_WEBSITE=true
 
@@ -39,5 +38,5 @@ deploy:
   on:
     repo: CouscousPHP/Couscous
     tags: true
-    php: '7.1'
+    php: '7.3'
 
