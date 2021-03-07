@@ -11,14 +11,14 @@ abstract class BaseFunctionalTest extends TestCase
 {
     protected $generatedDirectory;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->generatedDirectory = __DIR__.'/generated';
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 
@@ -27,7 +27,7 @@ abstract class BaseFunctionalTest extends TestCase
 
     public function assertGeneratedWebsite($fixtureName)
     {
-        list($output, $return) = $this->generate($fixtureName);
+        [$output, $return] = $this->generate($fixtureName);
 
         $this->assertSame(0, $return, implode(PHP_EOL, $output));
 
@@ -64,14 +64,14 @@ abstract class BaseFunctionalTest extends TestCase
 
     public function assertGenerationError($fixtureName, $expectedMessage)
     {
-        list($output, $return) = $this->generate($fixtureName);
+        [$output, $return] = $this->generate($fixtureName);
         $output = implode(PHP_EOL, $output);
 
         $this->assertNotEquals(0, $return, 'Failed asserting that the generation failed: '.$output);
-        $this->assertContains($expectedMessage, $output);
+        $this->assertStringContainsString($expectedMessage, $output);
     }
 
-    private function createCommand($fixtureName)
+    private function createCommand($fixtureName): string
     {
         $bin = realpath(__DIR__.'/../../bin/couscous');
         $fixtureName = __DIR__.'/Fixture/'.$fixtureName.'/source';
@@ -85,7 +85,7 @@ abstract class BaseFunctionalTest extends TestCase
         );
     }
 
-    private function generate($fixtureName)
+    private function generate($fixtureName): array
     {
         $this->clearGeneratedDirectory();
 

@@ -14,7 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class ValidateTemplateDirectory implements Step
 {
-    const DEFAULT_TEMPLATE_DIRECTORY = 'website';
+    public const DEFAULT_TEMPLATE_DIRECTORY = 'website';
 
     /**
      * @var Filesystem

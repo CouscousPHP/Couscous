@@ -17,7 +17,7 @@ class MetadataTest extends TestCase
      */
     private $metadata;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

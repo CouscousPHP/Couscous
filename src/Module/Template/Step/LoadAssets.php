@@ -6,7 +6,6 @@ namespace Couscous\Module\Template\Step;
 use Couscous\Model\LazyFile;
 use Couscous\Model\Project;
 use Couscous\Step;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -19,16 +18,6 @@ use Symfony\Component\Finder\SplFileInfo;
  */
 class LoadAssets implements Step
 {
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    public function __construct(Filesystem $filesystem)
-    {
-        $this->filesystem = $filesystem;
-    }
-
     public function __invoke(Project $project): void
     {
         if (!$project->metadata['template.directory']) {

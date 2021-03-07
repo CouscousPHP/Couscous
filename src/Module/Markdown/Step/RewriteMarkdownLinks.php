@@ -19,7 +19,7 @@ class RewriteMarkdownLinks implements Step
      *
      * @link https://regex101.com/
      */
-    const MARKDOWN_LINK_REGEX = '/\[(?:[^\]]+)\]\(([^\)]+\/)?([A-Za-z0-9_\.\-]+\.md)([^.\)][^\)]*)?\)/';
+    private const MARKDOWN_LINK_REGEX = '/\[(?:[^\]]+)\]\(([^\)]+\/)?([A-Za-z0-9_\.\-]+\.md)([^.\)][^\)]*)?\)/';
 
     public function __invoke(Project $project): void
     {
@@ -41,7 +41,7 @@ class RewriteMarkdownLinks implements Step
     {
         $filename = strtolower($matches[2]);
         $filename = str_replace('.md', '.html', $filename);
-        if ($filename == 'readme.html') {
+        if ($filename === 'readme.html') {
             $filename = 'index.html';
         }
 

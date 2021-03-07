@@ -43,7 +43,7 @@ class WatchList
         }, $this->watches);
 
         /** @var list<string> */
-        $files = call_user_func_array('array_merge', $files);
+        $files = array_merge(...$files);
 
         return array_unique($files);
     }

@@ -49,6 +49,7 @@ class Git
      * @param string $remote Remote name
      *
      * @return string The git URL
+     * @throws CommandException
      */
     public function getRemoteUrl(string $remote = 'origin'): string
     {

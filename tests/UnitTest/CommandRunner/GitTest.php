@@ -22,7 +22,7 @@ class GitTest extends TestCase
      */
     private $commandRunner;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

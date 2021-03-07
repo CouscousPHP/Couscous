@@ -24,7 +24,7 @@ class Metadata implements \ArrayAccess
     /**
      * @var array
      */
-    private $values = [];
+    private $values;
 
     public function __construct(array $values = [])
     {

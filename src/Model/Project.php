@@ -111,7 +111,7 @@ class Project
     public function sourceFiles(): Finder
     {
         /** @var list<string> */
-        $includedDirectories = $this->metadata['include'] ? $this->metadata['include'] : [];
+        $includedDirectories = $this->metadata['include'] ?: [];
 
         // To be sure that included directories are under the source one
         if (!empty($includedDirectories)) {
@@ -121,7 +121,7 @@ class Project
         }
 
         /** @var list<string> */
-        $exclude = $this->metadata['exclude'] ? $this->metadata['exclude'] : [];
+        $exclude = $this->metadata['exclude'] ?: [];
         $excludedDirectories = new ExcludeList($exclude);
 
         if (is_file($this->sourceDirectory.'/.gitignore')) {

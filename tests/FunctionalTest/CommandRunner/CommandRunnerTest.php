@@ -2,6 +2,7 @@
 
 namespace Couscous\Tests\FunctionalTest\CommandRunner;
 
+use Couscous\CommandRunner\CommandException;
 use Couscous\CommandRunner\CommandRunner;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +16,7 @@ class CommandRunnerTest extends TestCase
      */
     private $commandRunner;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->commandRunner = new CommandRunner();
     }
@@ -35,10 +36,10 @@ class CommandRunnerTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Couscous\CommandRunner\CommandException
      */
     public function failure_executing_command_throws_runtime_exception()
     {
+        $this->expectException(CommandException::class);
         $command = 'command that produces an error';
 
         $this->commandRunner->run($command);
