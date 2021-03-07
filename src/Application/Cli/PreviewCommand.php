@@ -99,7 +99,8 @@ class PreviewCommand extends Command
             if (!$this->isFound($livereload)) {
                 $output->writeln(
                     '<error>Impossible to launch Livereload, '
-                    .'did you forgot to install it with "pip install livereload" or "npm install -g livereload"?</error>'
+                    .'did you forgot to install it with "pip install livereload" '
+                    .'or "npm install -g livereload"?</error>'
                 );
 
                 return 1;
