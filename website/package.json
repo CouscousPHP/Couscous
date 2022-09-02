@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "bootstrap": "^3.2",
+    "font-awesome": "^4.7.0",
+    "google-code-prettify": "^1.0.0",
+    "jquery": "^3.6.1"
+  }
+}
