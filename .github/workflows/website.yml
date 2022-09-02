@@ -1,0 +1,27 @@
+name: Website
+
+on:
+    # This job runs when a new release is published
+    release:
+        types: [ published ]
+
+jobs:
+
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.0
+                    coverage: none
+            -   uses: ramsey/composer-install@v1
+            -   run: |
+                    ./travis-prepare-release.sh
+                    bin/couscous travis-auto-deploy
+            -   name: Upload phar to release
+                uses: svenstaro/upload-release-action@v2
+                with:
+                    repo_token: ${{ secrets.GITHUB_TOKEN }}
+                    file: bin/couscous.phar
+                    tag: ${{ github.ref }}
