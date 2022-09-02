@@ -70,7 +70,7 @@ class CreateHeadingIds implements Step
     private function slugfy(string $text): string
     {
         $slug = trim($text);
-        $slug = strtr($slug, ' ', '-');
+        $slug = str_replace(' ', '-', $slug);
         $slug = strtolower($slug);
 
         return preg_replace('/[^a-z0-9_-]/', '', $slug);

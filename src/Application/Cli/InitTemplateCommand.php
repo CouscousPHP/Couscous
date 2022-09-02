@@ -43,7 +43,7 @@ class InitTemplateCommand extends Command
         $directory = getcwd().'/'.$dirName.'/';
         /** @var string */
         $templateName = $input->getArgument('template_name');
-        $templateName = $templateName.$fileExtension;
+        $templateName .= $fileExtension;
 
         $fileLocation = $directory.$templateName;
         $fileExists = file_exists($fileLocation);

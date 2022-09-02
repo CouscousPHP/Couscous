@@ -5,6 +5,7 @@ namespace Couscous\Tests\UnitTest\Module\Dependencies\Step;
 use Couscous\CommandRunner\CommandRunner;
 use Couscous\Module\Dependencies\Step\InstallDependencies;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Filesystem\Filesystem;
@@ -15,16 +16,16 @@ use Symfony\Component\Filesystem\Filesystem;
 class InstallDependenciesTest extends TestCase
 {
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject|Filesystem
+     * @var MockObject|Filesystem
      */
     private $filesystem;
 
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject|CommandRunner
+     * @var MockObject|CommandRunner
      */
     private $commandRunner;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

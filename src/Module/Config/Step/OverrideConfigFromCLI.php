@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Couscous\Module\Config\Step;
 
 use Couscous\Model\Project;
+use Couscous\Step;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -11,7 +12,7 @@ use Psr\Log\LoggerInterface;
  *
  * @author D.J. Marcolesco <dj.marcolesco@gmail.com>
  */
-class OverrideConfigFromCLI implements \Couscous\Step
+class OverrideConfigFromCLI implements Step
 {
     /**
      * @var LoggerInterface

@@ -46,10 +46,10 @@ return [
         DI\get(Module\Scripts\Step\ExecuteAfterScripts::class),
     ],
 
-    Couscous\Generator::class => DI\object()
+    Couscous\Generator::class => DI\autowire()
         ->constructorParameter('steps', DI\get('steps')),
 
-    'application' => DI\object(Symfony\Component\Console\Application::class)
+    'application' => DI\create(Symfony\Component\Console\Application::class)
         ->constructor('Couscous', 'dev-master')
         ->method('add', DI\get(Application\Cli\GenerateCommand::class))
         ->method('add', DI\get(Application\Cli\PreviewCommand::class))
@@ -59,7 +59,7 @@ return [
         ->method('add', DI\get(Application\Cli\TravisAutoDeployCommand::class))
         ->method('add', DI\get(Application\Cli\InitTemplateCommand::class)),
 
-    Symfony\Component\Console\Logger\ConsoleLogger::class => DI\object()
+    Symfony\Component\Console\Logger\ConsoleLogger::class => DI\autowire()
         ->constructorParameter('verbosityLevelMap', [
             // Custom verbosity map
             LogLevel::EMERGENCY => OutputInterface::VERBOSITY_NORMAL,

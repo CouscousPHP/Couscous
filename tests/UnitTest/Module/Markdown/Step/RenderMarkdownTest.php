@@ -273,7 +273,7 @@ HTML;
     {
         $container = (new ContainerFactory())->createContainer();
         /** @var RenderMarkdown $step */
-        $step = $container->get('Couscous\Module\Markdown\Step\RenderMarkdown');
+        $step = $container->get(RenderMarkdown::class);
 
         $project = new Project('foo', 'bar');
         $project->addFile(new MarkdownFile('foo.md', $markdown));
