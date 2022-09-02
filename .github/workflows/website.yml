@@ -15,6 +15,7 @@ jobs:
                 with:
                     php-version: 8.0
                     coverage: none
+                    ini-values: phar.readonly=Off
             -   uses: ramsey/composer-install@v1
             -   run: |
                     ./travis-prepare-release.sh
