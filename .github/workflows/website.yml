@@ -22,7 +22,7 @@ jobs:
                     ini-values: phar.readonly=Off
             -   uses: ramsey/composer-install@v1
             -   run: ./github-prepare-release.sh
-            -   uses: CouscousPHP/GitHub-Action@v1
+            -   run: bin/couscous generate
             -   name: Deploy website
                 uses: peaceiris/actions-gh-pages@v3
                 with:
