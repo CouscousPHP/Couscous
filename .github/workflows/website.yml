@@ -23,6 +23,7 @@ jobs:
             -   uses: ramsey/composer-install@v1
             -   run: ./github-prepare-release.sh
             -   run: bin/couscous generate
+            -   run: 'rm .couscous/generated/.gitignore'
             -   name: Deploy website
                 uses: peaceiris/actions-gh-pages@v3
                 with:
