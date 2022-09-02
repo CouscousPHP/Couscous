@@ -21,9 +21,13 @@ jobs:
                     coverage: none
                     ini-values: phar.readonly=Off
             -   uses: ramsey/composer-install@v1
-            -   run: |
-                    ./travis-prepare-release.sh
-                    bin/couscous travis-auto-deploy
+            -   run: ./github-prepare-release.sh
+            -   uses: CouscousPHP/GitHub-Action@v1
+            -   name: Deploy website
+                uses: peaceiris/actions-gh-pages@v3
+                with:
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
+                    publish_dir: ./.couscous/generated
             -   name: Upload phar to release
                 uses: svenstaro/upload-release-action@v2
                 with:
