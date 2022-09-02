@@ -46,6 +46,7 @@ class Metadata implements \ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $keys = explode('.', $offset);
