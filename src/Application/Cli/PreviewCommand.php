@@ -67,6 +67,13 @@ class PreviewCommand extends Command
                 'If set livereload server is launched from the specified path (global livereload by default)'
             )
             ->addOption(
+                'config-file',
+                'f',
+                InputOption::VALUE_REQUIRED,
+                'If specified, use the given file as configuration file.',
+                'couscous.yml'
+            )
+            ->addOption(
                 'config',
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
@@ -80,6 +87,8 @@ class PreviewCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /** @var string */
+        $configFile = $input->getOption('config-file');
         /** @var array */
         $cliConfig = $input->getOption('config');
 
@@ -109,7 +118,7 @@ class PreviewCommand extends Command
             $this->startLivereload($livereload, $output, $sourceDirectory, $targetDirectory);
         }
 
-        $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, $cliConfig);
+        $watchlist = $this->generateWebsite($output, $configFile, $sourceDirectory, $targetDirectory, $cliConfig);
 
         $serverProcess = $this->startWebServer($input, $output, $targetDirectory);
         $throwOnServerStop = true;
@@ -134,7 +143,14 @@ class PreviewCommand extends Command
                 $output->write(sprintf('<comment>%d file(s) changed: regenerating</comment>', count($files)));
                 $output->writeln(sprintf(' (%s)', $this->fileListToDisplay($files, $sourceDirectory)));
 
-                $watchlist = $this->generateWebsite($output, $sourceDirectory, $targetDirectory, $cliConfig, true);
+                $watchlist = $this->generateWebsite(
+                    $output,
+                    $configFile,
+                    $sourceDirectory,
+                    $targetDirectory,
+                    $cliConfig,
+                    true
+                );
             }
 
             sleep(1);
@@ -149,12 +165,13 @@ class PreviewCommand extends Command
 
     private function generateWebsite(
         OutputInterface $output,
+        string $configFile,
         string $sourceDirectory,
         string $targetDirectory,
         array $cliConfig,
         bool $regenerate = false
     ): WatchList {
-        $project = new Project($sourceDirectory, $targetDirectory);
+        $project = new Project($configFile, $sourceDirectory, $targetDirectory);
 
         $project->metadata['cliConfig'] = $cliConfig;
         $project->metadata['preview'] = true;

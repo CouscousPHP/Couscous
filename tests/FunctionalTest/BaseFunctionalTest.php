@@ -77,6 +77,8 @@ abstract class BaseFunctionalTest extends TestCase
         $fixtureName = __DIR__.'/Fixture/'.$fixtureName.'/source';
         $targetDirectory = __DIR__.'/generated';
 
+        chdir($fixtureName);
+
         return sprintf(
             '%s generate -v --target="%s" %s 2>&1',
             $bin,

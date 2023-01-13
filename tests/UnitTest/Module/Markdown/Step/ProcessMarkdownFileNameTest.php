@@ -48,7 +48,7 @@ class ProcessMarkdownFileNameTest extends TestCase
     public function testNonMarkdownFileNotRenamed()
     {
         $file = new LazyFile('foo.txt', 'foo.txt');
-        $project = new Project('foo', 'bar');
+        $project = new Project('config', 'foo', 'bar');
         $project->addFile($file);
 
         $step = new ProcessMarkdownFileName();
@@ -67,7 +67,7 @@ class ProcessMarkdownFileNameTest extends TestCase
     private function assertFileRenamed($expected, $filename, $meta = false)
     {
         $file = new MarkdownFile($filename, '');
-        $project = new Project('foo', 'bar');
+        $project = new Project('config', 'foo', 'bar');
         $project->addFile($file);
 
         if ($meta) {

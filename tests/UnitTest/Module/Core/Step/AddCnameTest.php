@@ -17,7 +17,7 @@ class AddCnameTest extends TestCase
      */
     public function it_should_add_the_cname_file()
     {
-        $project = new Project('foo', 'bar');
+        $project = new Project('config', 'foo', 'bar');
 
         $project->metadata = new Metadata();
         $project->metadata['cname'] = 'https://www.couscous.io';

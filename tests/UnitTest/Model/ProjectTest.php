@@ -18,7 +18,7 @@ class ProjectTest extends TestCase
      */
     public function it_should_contain_files()
     {
-        $project = new Project('source', 'target');
+        $project = new Project('config', 'source', 'target');
 
         $file1 = $this->createFile('file1');
         $file2 = $this->createFile('file2');
@@ -43,7 +43,7 @@ class ProjectTest extends TestCase
      */
     public function replace_should_replace_files()
     {
-        $project = new Project('source', 'target');
+        $project = new Project('config', 'source', 'target');
 
         $file1 = $this->createFile('file1');
         $file2 = $this->createFile('file2');
@@ -60,7 +60,7 @@ class ProjectTest extends TestCase
      */
     public function it_should_return_files_by_type()
     {
-        $project = new Project('source', 'target');
+        $project = new Project('config', 'source', 'target');
 
         $file1 = new MarkdownFile('file1', 'Hello');
         $file2 = new HtmlFile('file2', 'Hello');

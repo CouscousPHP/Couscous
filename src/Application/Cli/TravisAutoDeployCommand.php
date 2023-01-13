@@ -59,6 +59,13 @@ class TravisAutoDeployCommand extends Command
                 getcwd()
             )
             ->addOption(
+                'config-file',
+                'f',
+                InputOption::VALUE_REQUIRED,
+                'If specified, use the given file as configuration file.',
+                'couscous.yml'
+            )
+            ->addOption(
                 'php-version',
                 null,
                 InputOption::VALUE_REQUIRED,
@@ -84,8 +91,10 @@ class TravisAutoDeployCommand extends Command
         $repositoryUrl = sprintf('https://%s@%s', (string) getenv('GH_TOKEN'), (string) getenv('GH_REF'));
         /** @var string */
         $targetBranch = $input->getOption('branch');
+        /** @var string */
+        $configFile = $input->getOption('config-file');
 
-        $repository = new Project($sourceDirectory, getcwd().'/.couscous/generated');
+        $repository = new Project($configFile, $sourceDirectory, getcwd().'/.couscous/generated');
 
         // verify some env variables
         $travisBranch = getenv('TRAVIS_BRANCH');

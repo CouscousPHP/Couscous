@@ -47,7 +47,7 @@ Please leave [this](doc/test.html) and [this link](test.md.txt) alone.
 MARKDOWN;
 
         $file = new MarkdownFile('foo', $markdown);
-        $project = new Project('foo', 'bar');
+        $project = new Project('config', 'foo', 'bar');
         $project->addFile($file);
 
         $step = new RewriteMarkdownLinks();
@@ -71,7 +71,7 @@ This is a [link](doc/some-file.html) and [another one](doc/some-other-file.html)
 MARKDOWN;
 
         $file = new MarkdownFile('foo', $markdown);
-        $project = new Project('foo', 'bar');
+        $project = new Project('config', 'foo', 'bar');
         $project->addFile($file);
 
         $step = new RewriteMarkdownLinks();
@@ -93,7 +93,7 @@ This is a [link](doc/some-file.html?search=foo)
 MARKDOWN;
 
         $file = new MarkdownFile('foo', $markdown);
-        $project = new Project('foo', 'bar');
+        $project = new Project('config', 'foo', 'bar');
         $project->addFile($file);
 
         $step = new RewriteMarkdownLinks();
