@@ -25,9 +25,9 @@ abstract class BaseFunctionalTest extends TestCase
         $this->clearGeneratedDirectory();
     }
 
-    public function assertGeneratedWebsite($fixtureName)
+    public function assertGeneratedWebsite($fixtureName, $configFile = null)
     {
-        [$output, $return] = $this->generate($fixtureName);
+        [$output, $return] = $this->generate($fixtureName, $configFile);
 
         $this->assertSame(0, $return, implode(PHP_EOL, $output));
 
@@ -71,27 +71,27 @@ abstract class BaseFunctionalTest extends TestCase
         $this->assertStringContainsString($expectedMessage, $output);
     }
 
-    private function createCommand($fixtureName): string
+    private function createCommand($fixtureName, $configFile = null): string
     {
         $bin = realpath(__DIR__.'/../../bin/couscous');
         $fixtureName = __DIR__.'/Fixture/'.$fixtureName.'/source';
         $targetDirectory = __DIR__.'/generated';
-
-        chdir($fixtureName);
+        $configOption = ($configFile !== null) ? "--config-file=$configFile" : '';
 
         return sprintf(
-            '%s generate -v --target="%s" %s 2>&1',
+            '%s generate -v --target="%s" %s %s 2>&1',
             $bin,
             $targetDirectory,
+            $configOption,
             $fixtureName
         );
     }
 
-    private function generate($fixtureName): array
+    private function generate($fixtureName, $configFile = null): array
     {
         $this->clearGeneratedDirectory();
 
-        $command = $this->createCommand($fixtureName);
+        $command = $this->createCommand($fixtureName, $configFile);
 
         exec($command, $output, $return);
 
