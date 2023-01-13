@@ -24,6 +24,10 @@ jobs:
         steps:
             -   name: Checkout
                 uses: actions/checkout@v2
+            -   name: Setup Node
+                uses: actions/setup-node@v3
+            -   name: Install less
+                run: npm install -g less less-plugin-clean-css
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
