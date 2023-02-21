@@ -275,7 +275,7 @@ HTML;
         /** @var RenderMarkdown $step */
         $step = $container->get(RenderMarkdown::class);
 
-        $project = new Project('foo', 'bar');
+        $project = new Project('config', 'foo', 'bar');
         $project->addFile(new MarkdownFile('foo.md', $markdown));
 
         $step->__invoke($project);

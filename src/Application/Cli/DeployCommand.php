@@ -78,6 +78,13 @@ class DeployCommand extends Command
                 'Target branch in which to deploy the website.'
             )
             ->addOption(
+                'config-file',
+                'f',
+                InputOption::VALUE_REQUIRED,
+                'If specified, use the given file as configuration file.',
+                'couscous.yml'
+            )
+            ->addOption(
                 'config',
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
@@ -97,10 +104,12 @@ class DeployCommand extends Command
         $repositoryUrl = $input->getOption('repository');
         /** @var ?string */
         $targetBranch = $input->getOption('branch');
+        /** @var string $configFile */
+        $configFile = $input->getOption('config-file');
         /** @var array */
         $cliConfig = $input->getOption('config');
 
-        $project = new Project($sourceDirectory, getcwd().'/.couscous/generated');
+        $project = new Project($configFile, $sourceDirectory, getcwd().'/.couscous/generated');
 
         $project->metadata['cliConfig'] = $cliConfig;
 

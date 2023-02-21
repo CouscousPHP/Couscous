@@ -81,4 +81,12 @@ class GenerationTest extends BaseFunctionalTest
     {
         $this->assertGeneratedWebsite('include-with-exclude');
     }
+
+    /**
+     * Test to specify non default configuration file
+     */
+    public function testCustomConfigFile()
+    {
+        $this->assertGeneratedWebsite('config-file', 'project-config-file.yaml');
+    }
 }

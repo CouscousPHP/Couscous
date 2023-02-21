@@ -9,7 +9,7 @@ class MockProject extends Project
 {
     public function __construct()
     {
-        parent::__construct('', '');
+        parent::__construct('', '', '');
 
         $this->metadata = new Metadata();
         $this->watchlist = new MockWatchList();

@@ -49,6 +49,13 @@ class GenerateCommand extends Command
                 getcwd().'/.couscous/generated'
             )
             ->addOption(
+                'config-file',
+                'f',
+                InputOption::VALUE_REQUIRED,
+                'If specified, use the given file as configuration file.',
+                'couscous.yml'
+            )
+            ->addOption(
                 'config',
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
@@ -63,10 +70,12 @@ class GenerateCommand extends Command
         $source = $input->getArgument('source');
         /** @var string */
         $target = $input->getOption('target');
+        /** @var string */
+        $configFile = $input->getOption('config-file');
         /** @var array */
         $cliConfig = $input->getOption('config');
 
-        $project = new Project($source, $target);
+        $project = new Project($configFile, $source, $target);
 
         $project->metadata['cliConfig'] = $cliConfig;
 

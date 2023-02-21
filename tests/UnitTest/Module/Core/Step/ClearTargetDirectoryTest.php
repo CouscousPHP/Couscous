@@ -19,7 +19,7 @@ class ClearTargetDirectoryTest extends TestCase
      */
     public function it_should_not_clear_dot_files()
     {
-        $project = new Project('foo', dirname(__DIR__, 3) .'/Fixture/directory-with-dot-files');
+        $project = new Project('config', 'foo', dirname(__DIR__, 3) .'/Fixture/directory-with-dot-files');
 
         $filesystem = $this->getMockBuilder(Filesystem::class)
             ->disableOriginalConstructor()

@@ -14,6 +14,11 @@ use Symfony\Component\Finder\Finder;
 class Project
 {
     /**
+     * Configuration file to load
+     */
+    public $configFile;
+
+    /**
      * Directory containing the sources files to process.
      *
      * @var string
@@ -54,8 +59,9 @@ class Project
      */
     protected $files = [];
 
-    public function __construct(string $sourceDirectory, string $targetDirectory)
+    public function __construct(string $configFile, string $sourceDirectory, string $targetDirectory)
     {
+        $this->configFile = "$sourceDirectory/$configFile";
         $this->sourceDirectory = $sourceDirectory;
         $this->targetDirectory = $targetDirectory;
         $this->watchlist = new WatchList();
