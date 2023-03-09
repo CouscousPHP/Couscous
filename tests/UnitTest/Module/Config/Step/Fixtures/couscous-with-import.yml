@@ -1,0 +1,12 @@
+
+template:
+  index: index.md
+
+include:
+  - some/dir
+  - some/other/dir
+
+title: coucous-simple!
+
+import:
+  - imported-file1.yml

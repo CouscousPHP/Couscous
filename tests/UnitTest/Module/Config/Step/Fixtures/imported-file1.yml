@@ -1,0 +1,6 @@
+include:
+  - some/dir
+  - some/other/dir
+  - other/dir/imported
+
+title: overwritten by imported-file1.yml
