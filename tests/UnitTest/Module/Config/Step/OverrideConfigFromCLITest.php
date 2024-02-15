@@ -60,4 +60,22 @@ class OverrideConfigFromCLITest extends TestCase
 
         $this->assertEquals('foo', $project->metadata['title']);
     }
+
+    /**
+     * @test
+     */
+    public function should_override_template_url()
+    {
+        $project = new MockProject();
+        $project->metadata['title'] = 'foo';
+        $project->metadata['template'] = ['url' => 'https://github.com/template.git'];
+        $project->metadata['cliConfig'] = ['template.url=https://gitlab.com/template.git'];
+        $logger = $this->createMock("Psr\Log\LoggerInterface");
+        $step = new OverrideConfigFromCLI($logger);
+
+        $step->__invoke($project);
+
+        $this->assertEquals('foo', $project->metadata['title']);
+        $this->assertEquals('https://gitlab.com/template.git', $project->metadata['template']['url']);
+    }
 }
