@@ -33,10 +33,16 @@ class OverrideConfigFromCLI implements Step
         $cliConfig = [];
         /** @var string $item */
         foreach ($project->metadata['cliConfig'] as $item) {
-            $explosion = explode('=', $item, 2);
-            $this->logger->notice('Overriding global config: '.$explosion[0].' = "'.$explosion[1].'"');
+            $setting = explode('=', $item, 2);
+            $this->logger->notice('Overriding global config: '.$setting[0].' = "'.$setting[1].'"');
 
-            $cliConfig[$explosion[0]] = $explosion[1];
+            $settingKey = explode('.', $setting[0]);
+            $settingValue = $setting[1];
+            foreach (array_reverse($settingKey) as $valueAsKey) {
+                $settingValue = [$valueAsKey => $settingValue];
+            }
+
+            $cliConfig = array_merge($cliConfig, $settingValue);
         }
 
         unset($project->metadata['cliConfig']);
