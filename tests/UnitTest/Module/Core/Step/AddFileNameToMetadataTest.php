@@ -5,16 +5,14 @@ namespace Couscous\Tests\UnitTest\Module\Core\Step;
 use Couscous\Module\Core\Step\AddFileNameToMetadata;
 use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Couscous\Module\Core\Step\AddFileNameToMetadata
- */
+#[CoversClass(AddFileNameToMetadata::class)]
 class AddFileNameToMetadataTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_add_the_metadata_variable()
     {
         $project = new MockProject();

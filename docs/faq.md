@@ -33,7 +33,7 @@ Yes. In your template directory. Add a file called `twig.php` with the following
 ```php
 <?php
 
-use Twig_Environment as Environment;
+use Twig\Environment;
 
 // Use "include_once" since this file may be called multiple times
 include_once dirname(__DIR__).'/Twig/MyTwigExtension.php';

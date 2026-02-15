@@ -85,6 +85,7 @@ class FetchRemoteTemplate implements Step
     private function createTempDirectory(string $prefix): string
     {
         $tempFile = tempnam(sys_get_temp_dir(), $prefix);
+        assert($tempFile !== false);
         // Turn the temp file into a temp directory
         $this->filesystem->remove($tempFile);
         $this->filesystem->mkdir($tempFile);

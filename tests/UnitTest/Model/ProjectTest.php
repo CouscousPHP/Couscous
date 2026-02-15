@@ -6,16 +6,15 @@ use Couscous\Model\File;
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Template\Model\HtmlFile;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Couscous\Model\Project
- */
+#[CoversClass(Project::class)]
 class ProjectTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_contain_files()
     {
         $project = new Project('config', 'source', 'target');
@@ -38,9 +37,7 @@ class ProjectTest extends TestCase
         $this->assertSame([], $project->getFiles());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function replace_should_replace_files()
     {
         $project = new Project('config', 'source', 'target');
@@ -55,9 +52,7 @@ class ProjectTest extends TestCase
         $this->assertSame(['file2' => $file2], $project->getFiles());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_return_files_by_type()
     {
         $project = new Project('config', 'source', 'target');
@@ -76,10 +71,10 @@ class ProjectTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|File
+     * @return MockObject|File
      */
     private function createFile($name)
     {
-        return $this->getMockForAbstractClass('Couscous\Model\File', [$name]);
+        return $this->getMockBuilder(File::class)->setConstructorArgs([$name])->getMock();
     }
 }

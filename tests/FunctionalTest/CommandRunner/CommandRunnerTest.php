@@ -4,11 +4,11 @@ namespace Couscous\Tests\FunctionalTest\CommandRunner;
 
 use Couscous\CommandRunner\CommandException;
 use Couscous\CommandRunner\CommandRunner;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Couscous\CommandRunner\CommandRunner
- */
+#[CoversClass(CommandRunner::class)]
 class CommandRunnerTest extends TestCase
 {
     /**
@@ -21,9 +21,7 @@ class CommandRunnerTest extends TestCase
         $this->commandRunner = new CommandRunner();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function successful_command_execution_should_return_output()
     {
         $command = 'echo Couscous';
@@ -34,9 +32,7 @@ class CommandRunnerTest extends TestCase
         $this->assertEquals($expected, $output);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function failure_executing_command_throws_runtime_exception()
     {
         $this->expectException(CommandException::class);
@@ -45,9 +41,7 @@ class CommandRunnerTest extends TestCase
         $this->commandRunner->run($command);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function successful_command_exists()
     {
         $command = 'echo';
@@ -58,9 +52,7 @@ class CommandRunnerTest extends TestCase
         $this->assertEquals($expected, $output);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function failure_command_exists()
     {
         $command = 'not_existing_command';

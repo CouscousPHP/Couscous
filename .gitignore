@@ -10,4 +10,4 @@
 /Vagrantfile
 /.vagrant
 /node_modules
-.phpunit.result.cache
+/.phpunit.cache/

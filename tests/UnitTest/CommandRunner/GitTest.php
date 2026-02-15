@@ -4,12 +4,12 @@ namespace Couscous\Tests\UnitTest\CommandRunner;
 
 use Couscous\CommandRunner\CommandRunner;
 use Couscous\CommandRunner\Git;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 
-/**
- * @covers \Couscous\CommandRunner\Git
- */
+#[CoversClass(Git::class)]
 class GitTest extends TestCase
 {
     /**
@@ -18,7 +18,7 @@ class GitTest extends TestCase
     private $git;
 
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject|CommandRunner
+     * @var MockObject|CommandRunner
      */
     private $commandRunner;
 
@@ -30,9 +30,7 @@ class GitTest extends TestCase
         $this->git = new Git($this->commandRunner);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function clone_should_run_git_clone()
     {
         $this->expectCommandIsRun('git clone url "directory"');
@@ -40,9 +38,7 @@ class GitTest extends TestCase
         $this->git->cloneRepository('url', 'directory');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkout_origin_branch_should_run_git_checkout()
     {
         $this->expectCommandIsRun('cd "directory" && git checkout -b branch origin/branch');
@@ -50,9 +46,7 @@ class GitTest extends TestCase
         $this->git->checkoutOriginBranch('directory', 'branch');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function create_branch_should_run_git_checkout()
     {
         $this->expectCommandIsRun('cd "directory" && git checkout -b branch');
@@ -60,9 +54,7 @@ class GitTest extends TestCase
         $this->git->createBranch('directory', 'branch');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function commit_should_run_git_add_and_commit()
     {
         $this->expectCommandIsRun('cd "directory" && git add --all . && git commit -m "message"');
@@ -70,9 +62,7 @@ class GitTest extends TestCase
         $this->git->commitAllChanges('directory', 'message');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function push_should_run_git_push()
     {
         $this->expectCommandIsRun('cd "directory" && git push my-remote branch');
@@ -80,9 +70,7 @@ class GitTest extends TestCase
         $this->git->push('directory', 'branch', 'my-remote');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function get_remote_url_should_return_url()
     {
         $this->expectCommandIsRun('git config --get remote.origin.url', 'the-remote');
@@ -92,9 +80,7 @@ class GitTest extends TestCase
         $this->assertEquals('the-remote', $remote);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function has_uncommitted_changes_should_detect_changes()
     {
         $directory = 'directory';
@@ -107,9 +93,7 @@ class GitTest extends TestCase
         $this->assertTrue($this->git->hasUncommittedChanges($directory));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function has_uncommitted_changes_should_detect_no_changes()
     {
         $directory = 'directory';

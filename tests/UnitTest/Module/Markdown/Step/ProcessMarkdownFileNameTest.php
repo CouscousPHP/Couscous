@@ -7,11 +7,10 @@ use Couscous\Model\Metadata;
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Markdown\Step\ProcessMarkdownFileName;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Couscous\Module\Markdown\Step\ProcessMarkdownFileName
- */
+#[CoversClass(ProcessMarkdownFileName::class)]
 class ProcessMarkdownFileNameTest extends TestCase
 {
     public function testRenameExtension()

@@ -4,16 +4,14 @@ namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\OverrideConfigFromCLI;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Couscous\Module\Config\Step\OverrideConfigFromCLI
- */
+#[CoversClass(OverrideConfigFromCLI::class)]
 class OverrideConfigFromCLITest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function should_override_title_if_specified()
     {
         $project = new MockProject();
@@ -28,9 +26,7 @@ class OverrideConfigFromCLITest extends TestCase
         $this->assertEquals('bar', $project->metadata['title']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function should_not_override_title_if_not_specified()
     {
         $project = new MockProject();
@@ -45,9 +41,7 @@ class OverrideConfigFromCLITest extends TestCase
         $this->assertEquals('foo', $project->metadata['title']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function should_not_override_title_if_no_cliConfig()
     {
         $project = new MockProject();

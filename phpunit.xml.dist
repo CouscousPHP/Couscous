@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phpunit colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTestsThatDoNotTestAnything="true"
-         forceCoversAnnotation="true"
+         cacheDirectory=".phpunit.cache"
+         requireCoverageMetadata="true"
          bootstrap="./vendor/autoload.php">
 
     <testsuites>
