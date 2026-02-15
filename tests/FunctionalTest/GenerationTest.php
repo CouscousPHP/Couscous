@@ -2,6 +2,9 @@
 
 namespace Couscous\Tests\FunctionalTest;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[CoversNothing]
 class GenerationTest extends BaseFunctionalTest
 {
     public function testBasic()

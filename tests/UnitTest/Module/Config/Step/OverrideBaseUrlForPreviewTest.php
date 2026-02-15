@@ -4,16 +4,14 @@ namespace Couscous\Tests\UnitTest\Module\Config\Step;
 
 use Couscous\Module\Config\Step\OverrideBaseUrlForPreview;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Couscous\Module\Config\Step\OverrideBaseUrlForPreview
- */
+#[CoversClass(OverrideBaseUrlForPreview::class)]
 class OverrideBaseUrlForPreviewTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function should_override_baseUrl_if_preview()
     {
         $project = new MockProject();
@@ -26,9 +24,7 @@ class OverrideBaseUrlForPreviewTest extends TestCase
         $this->assertEquals('', $project->metadata['baseUrl']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function should_not_override_baseUrl_if_not_preview()
     {
         $project = new MockProject();

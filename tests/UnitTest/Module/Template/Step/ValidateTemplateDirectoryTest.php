@@ -4,18 +4,16 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\ValidateTemplateDirectory;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @covers \Couscous\Module\Template\Step\ValidateTemplateDirectory
- */
+#[CoversClass(ValidateTemplateDirectory::class)]
 class ValidateTemplateDirectoryTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_use_the_default_directory_if_no_directory_is_set()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
@@ -26,9 +24,7 @@ class ValidateTemplateDirectoryTest extends TestCase
         $this->assertEquals('/foo/website', $project->metadata['template.directory']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_complete_a_relative_path()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
@@ -40,9 +36,7 @@ class ValidateTemplateDirectoryTest extends TestCase
         $this->assertEquals('/foo/bar', $project->metadata['template.directory']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_not_change_an_absolute_path()
     {
         $step = new ValidateTemplateDirectory($this->createFilesystem());
@@ -54,9 +48,7 @@ class ValidateTemplateDirectoryTest extends TestCase
         $this->assertEquals('/hello/world', $project->metadata['template.directory']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_error_with_an_invalid_relative_path()
     {
         $this->expectException(RuntimeException::class);
@@ -69,9 +61,7 @@ class ValidateTemplateDirectoryTest extends TestCase
         $step->__invoke($project);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_error_with_an_invalid_absolute_path()
     {
         $this->expectException(RuntimeException::class);
@@ -84,11 +74,7 @@ class ValidateTemplateDirectoryTest extends TestCase
         $step->__invoke($project);
     }
 
-    /**
-     * @test
-     *
-     *
-     */
+    #[Test]
     public function it_should_error_with_an_invalid_default_path()
     {
         $this->expectException(RuntimeException::class);
@@ -103,11 +89,10 @@ class ValidateTemplateDirectoryTest extends TestCase
     private function createFilesystem($existsShouldReturn = true): Filesystem
     {
         return new class($existsShouldReturn) extends Filesystem {
-            public function __construct($existsShouldReturn)
+            public function __construct(private bool $existsShouldReturn)
             {
-                $this->existsShouldReturn = $existsShouldReturn;
             }
-            public function exists($files)
+            public function exists(string|iterable $files): bool
             {
                 return $this->existsShouldReturn;
             }

@@ -5,18 +5,18 @@ namespace Couscous\Tests\UnitTest;
 use Couscous\Generator;
 use Couscous\Model\Project;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
+use Couscous\Step;
 
-/**
- * @covers \Couscous\Generator
- */
+#[CoversClass(Generator::class)]
 class GeneratorTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_invoke_every_step()
     {
         $filesystem = $this->createFileSystem();
@@ -34,16 +34,16 @@ class GeneratorTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Filesystem
+     * @return MockObject|Filesystem
      */
     private function createFilesystem()
     {
-        return $this->createMock('Symfony\Component\Filesystem\Filesystem');
+        return $this->createMock(Filesystem::class);
     }
 
     private function createStep(Project $project)
     {
-        $step = $this->getMockForAbstractClass('Couscous\Step');
+        $step = $this->getMockBuilder(Step::class)->onlyMethods(['__invoke'])->getMock();
 
         $step->expects($this->once())
             ->method('__invoke')

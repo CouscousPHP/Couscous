@@ -11,7 +11,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 if (version_compare(phpversion(), '5.4', '<')) {
-    die('You must use PHP >= 5.4 in order to use Couscous. Please upgrade your PHP version.');
+    die('You must use PHP >= 8.2 in order to use Couscous. Please upgrade your PHP version.');
 }
 
 if (!ini_get('date.timezone')) {

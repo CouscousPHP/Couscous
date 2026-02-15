@@ -5,18 +5,16 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 use Couscous\CommandRunner\Git;
 use Couscous\Module\Template\Step\FetchRemoteTemplate;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @covers \Couscous\Module\Template\Step\FetchRemoteTemplate
- */
+#[CoversClass(FetchRemoteTemplate::class)]
 class FetchRemoteTemplateTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_skip_if_no_template_url()
     {
         $filesystem = $this->createMock(Filesystem::class);
@@ -34,9 +32,7 @@ class FetchRemoteTemplateTest extends TestCase
         $this->assertNull($project->metadata['template.directory']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_clone_and_set_the_template_directory()
     {
         $filesystem = $this->createMock(Filesystem::class);
@@ -56,9 +52,7 @@ class FetchRemoteTemplateTest extends TestCase
         $this->assertNotNull($project->metadata['template.directory']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_not_clone_twice_if_regenerating()
     {
         $filesystem = $this->createMock(Filesystem::class);

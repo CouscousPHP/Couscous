@@ -4,17 +4,16 @@ namespace Couscous\Tests\UnitTest\Module\Template\Step;
 
 use Couscous\Module\Template\Step\UseDefaultTemplate;
 use Couscous\Tests\UnitTest\Mock\MockProject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @covers \Couscous\Module\Template\Step\UseDefaultTemplate
- */
+#[CoversClass(UseDefaultTemplate::class)]
 class UseDefaultTemplateTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function use_default_template_when_no_template_configured()
     {
         $step = new UseDefaultTemplate($this->createFilesystem());
@@ -25,9 +24,7 @@ class UseDefaultTemplateTest extends TestCase
         $this->assertEquals(UseDefaultTemplate::DEFAULT_TEMPLATE_URL, $project->metadata['template.url']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function dont_use_default_template_when_template_directory()
     {
         $step = new UseDefaultTemplate($this->createFilesystem(true));
@@ -38,9 +35,7 @@ class UseDefaultTemplateTest extends TestCase
         $this->assertNull($project->metadata['template.url']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function dont_use_default_template_when_template_directory_set()
     {
         $step = new UseDefaultTemplate($this->createFilesystem());
@@ -53,9 +48,7 @@ class UseDefaultTemplateTest extends TestCase
         $this->assertNull($project->metadata['template.url']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function dont_use_default_template_when_template_url_set()
     {
         $step = new UseDefaultTemplate($this->createFilesystem());
@@ -70,7 +63,7 @@ class UseDefaultTemplateTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Filesystem
+     * @return MockObject|Filesystem
      */
     private function createFilesystem($return = false)
     {

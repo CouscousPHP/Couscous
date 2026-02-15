@@ -80,7 +80,7 @@ class ExcludeList
 
     private function sanitizeEntry(string $entry): string
     {
-        return preg_replace(
+        $sanitized = preg_replace(
             '/\\\(\s)$/',
             '$1',
             preg_replace(
@@ -89,5 +89,8 @@ class ExcludeList
                 $entry
             )
         );
+        assert($sanitized !== null);
+
+        return $sanitized;
     }
 }

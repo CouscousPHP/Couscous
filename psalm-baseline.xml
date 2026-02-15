@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.5.0@38fc8444edf0cebc9205296ee6e30e906ade783b">
+  <file src="src/Application/Cli/ClearCommand.php">
+    <PossiblyFalseOperand>
+      <code><![CDATA[getcwd()]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Cli/DeployCommand.php">
+    <PossiblyFalseOperand>
+      <code><![CDATA[getcwd()]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[!$targetBranch]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Application/Cli/GenerateCommand.php">
+    <PossiblyFalseOperand>
+      <code><![CDATA[getcwd()]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/Cli/InitTemplateCommand.php">
+    <PossiblyFalseOperand>
+      <code><![CDATA[getcwd()]]></code>
+      <code><![CDATA[getcwd()]]></code>
+      <code><![CDATA[getcwd()]]></code>
+    </PossiblyFalseOperand>
+  </file>
+  <file src="src/Application/Cli/PreviewCommand.php">
+    <MixedArgument>
+      <code><![CDATA[$signal]]></code>
+      <code><![CDATA[$signal]]></code>
+      <code><![CDATA[$signal]]></code>
+      <code><![CDATA[$signal]]></code>
+      <code><![CDATA[$signal]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$signal]]></code>
+      <code><![CDATA[$signal]]></code>
+    </MixedAssignment>
+    <PossiblyFalseArgument>
+      <code><![CDATA[realpath($folder.'/'.$executablePath)]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand>
+      <code><![CDATA[getcwd()]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$signal]]></code>
+    </RiskyTruthyFalsyComparison>
+    <UndefinedConstant>
+      <code><![CDATA[SIGINT]]></code>
+      <code><![CDATA[SIGTERM]]></code>
+      <code><![CDATA[SIGTERM]]></code>
+    </UndefinedConstant>
+  </file>
+  <file src="src/Application/Cli/SelfUpdateCommand.php">
+    <MixedAssignment>
+      <code><![CDATA[$result]]></code>
+      <code><![CDATA[$updater]]></code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code><![CDATA[getStrategy]]></code>
+      <code><![CDATA[update]]></code>
+    </MixedMethodCall>
+    <UndefinedClass>
+      <code><![CDATA[Updater]]></code>
+    </UndefinedClass>
+    <UndefinedDocblockClass>
+      <code><![CDATA[$strategy]]></code>
+      <code><![CDATA[$strategy]]></code>
+      <code><![CDATA[$strategy]]></code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="src/Application/Cli/TravisAutoDeployCommand.php">
+    <PossiblyFalseOperand>
+      <code><![CDATA[getcwd()]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/ContainerFactory.php">
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[SplFileInfo]]></code>
+    </UnnecessaryVarAnnotation>
+    <UnusedClass>
+      <code><![CDATA[ContainerFactory]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/CommandRunner/CommandRunner.php">
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[empty(exec("$exists $command"))]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/CommandRunner/Git.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <TypeDoesNotContainType>
+      <code><![CDATA[$changes = '']]></code>
+    </TypeDoesNotContainType>
+    <UnusedVariable>
+      <code><![CDATA[$changes]]></code>
+    </UnusedVariable>
+  </file>
+  <file src="src/Deployer.php">
+    <FalsableReturnStatement>
+      <code><![CDATA[$tempFile]]></code>
+    </FalsableReturnStatement>
+    <InvalidFalsableReturnType>
+      <code><![CDATA[string]]></code>
+    </InvalidFalsableReturnType>
+    <PossiblyFalseArgument>
+      <code><![CDATA[$tempFile]]></code>
+      <code><![CDATA[$tempFile]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Generator.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Model/ExcludeList.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[preg_replace(
+                '/(?<!\\\)(\s)$/',
+                '',
+                $entry
+            )]]></code>
+    </PossiblyNullArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[contains]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Model/LazyFile.php">
+    <FalsableReturnStatement>
+      <code><![CDATA[file_get_contents($this->fullFilename)]]></code>
+    </FalsableReturnStatement>
+    <InvalidFalsableReturnType>
+      <code><![CDATA[string]]></code>
+    </InvalidFalsableReturnType>
+  </file>
+  <file src="src/Model/Metadata.php">
+    <MissingTemplateParam>
+      <code><![CDATA[\ArrayAccess]]></code>
+    </MissingTemplateParam>
+    <PossiblyNullArrayOffset>
+      <code><![CDATA[$values]]></code>
+      <code><![CDATA[$values]]></code>
+    </PossiblyNullArrayOffset>
+  </file>
+  <file src="src/Model/Project.php">
+    <MissingPropertyType>
+      <code><![CDATA[$configFile]]></code>
+    </MissingPropertyType>
+    <PossiblyFalseArgument>
+      <code><![CDATA[file($this->sourceDirectory.'/.gitignore')]]></code>
+    </PossiblyFalseArgument>
+    <RedundantConditionGivenDocblockType>
+      <code><![CDATA[return $file instanceof $class;]]></code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Module/Config/Step/LoadConfig.php">
+    <MissingPropertyType>
+      <code><![CDATA[$project->configFile]]></code>
+    </MissingPropertyType>
+    <MixedArgument>
+      <code><![CDATA[$filename]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$filename]]></code>
+    </MixedAssignment>
+    <PossiblyFalseArgument>
+      <code><![CDATA[file_get_contents($filename)]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$filename]]></code>
+      <code><![CDATA[$filename]]></code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidCast>
+      <code><![CDATA[$filename]]></code>
+      <code><![CDATA[$filename]]></code>
+    </PossiblyInvalidCast>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Module/Config/Step/OverrideConfigFromCLI.php">
+    <PossiblyUndefinedArrayOffset>
+      <code><![CDATA[$explosion[1]]]></code>
+    </PossiblyUndefinedArrayOffset>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Module/Core/Step/AddImages.php">
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[SplFileInfo]]></code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Module/Core/Step/ClearTargetDirectory.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Module/Core/Step/WriteFiles.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Module/Dependencies/Step/InstallDependencies.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Module/Markdown/Step/CreateHeadingIds.php">
+    <InvalidNullableReturnType>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+    </InvalidNullableReturnType>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[[$this, 'addAttributeId']]]></code>
+    </MixedArgumentTypeCoercion>
+    <NullableReturnStatement>
+      <code><![CDATA[preg_replace('/[^a-z0-9_-]/', '', $slug)]]></code>
+      <code><![CDATA[preg_replace_callback(
+            '/<(h[0-6])>([^<]+)/',
+            [$this, 'addAttributeId'],
+            $content
+        )]]></code>
+    </NullableReturnStatement>
+  </file>
+  <file src="src/Module/Markdown/Step/LoadMarkdownFiles.php">
+    <PossiblyFalseArgument>
+      <code><![CDATA[$content]]></code>
+    </PossiblyFalseArgument>
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[SplFileInfo]]></code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Module/Markdown/Step/ParseMarkdownFrontMatter.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Module/Markdown/Step/RenderMarkdown.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Module/Markdown/Step/RewriteMarkdownLinks.php">
+    <InvalidNullableReturnType>
+      <code><![CDATA[string]]></code>
+    </InvalidNullableReturnType>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[[$this, 'replaceFilename']]]></code>
+    </MixedArgumentTypeCoercion>
+    <NullableReturnStatement>
+      <code><![CDATA[preg_replace($pattern, $replacement, $matches[0])]]></code>
+    </NullableReturnStatement>
+    <PossiblyNullPropertyAssignmentValue>
+      <code><![CDATA[preg_replace_callback($pattern, [$this, 'replaceFilename'], $subject)]]></code>
+    </PossiblyNullPropertyAssignmentValue>
+  </file>
+  <file src="src/Module/Markdown/config.php">
+    <MixedArgument>
+      <code><![CDATA[Mni\FrontYAML\Bridge\Parsedown\ParsedownParser::class]]></code>
+    </MixedArgument>
+    <UndefinedClass>
+      <code><![CDATA[Mni\FrontYAML\Bridge\Parsedown\ParsedownParser]]></code>
+    </UndefinedClass>
+  </file>
+  <file src="src/Module/Scripts/Step/ExecuteScripts.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[empty($scripts)]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Module/Template/Step/FetchRemoteTemplate.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$this->templateDirectory]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Module/Template/Step/LoadAssets.php">
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[SplFileInfo]]></code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Module/Template/Step/ProcessTwigLayouts.php">
+    <UnnecessaryVarAnnotation>
+      <code><![CDATA[HtmlFile]]></code>
+      <code><![CDATA[SplFileInfo]]></code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/Module/Template/Step/UseDefaultTemplate.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Module/Template/Step/ValidateTemplateDirectory.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+</files>

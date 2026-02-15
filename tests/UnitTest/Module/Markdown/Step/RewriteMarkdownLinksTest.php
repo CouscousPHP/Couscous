@@ -5,11 +5,10 @@ namespace Couscous\Tests\UnitTest\Module\Markdown\Step;
 use Couscous\Model\Project;
 use Couscous\Module\Markdown\Model\MarkdownFile;
 use Couscous\Module\Markdown\Step\RewriteMarkdownLinks;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Couscous\Module\Markdown\Step\RewriteMarkdownLinks
- */
+#[CoversClass(RewriteMarkdownLinks::class)]
 class RewriteMarkdownLinksTest extends TestCase
 {
     public function testReplaceLinks()

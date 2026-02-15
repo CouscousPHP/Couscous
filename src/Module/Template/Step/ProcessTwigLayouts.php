@@ -8,8 +8,8 @@ use Couscous\Module\Template\Model\HtmlFile;
 use Couscous\Step;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
-use Twig_Environment;
-use Twig_Loader_Array;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 /**
  * Renders file layouts using Twig.
@@ -57,11 +57,11 @@ class ProcessTwigLayouts implements Step
         }
     }
 
-    private function createTwig(string $templateDirectory): Twig_Environment
+    private function createTwig(string $templateDirectory): Environment
     {
         $loader = $this->createLoader($templateDirectory);
 
-        $twig = new Twig_Environment($loader, [
+        $twig = new Environment($loader, [
             'cache'       => false,
             'auto_reload' => true,
         ]);
@@ -69,7 +69,7 @@ class ProcessTwigLayouts implements Step
         if (file_exists($templateDirectory.'/twig.php')) {
             /**
              * @psalm-suppress UnresolvableInclude
-             * @var callable(Twig_Environment): void
+             * @var callable(Environment): void
              */
             $customLoader = require $templateDirectory.'/twig.php';
             $customLoader($twig);
@@ -79,11 +79,11 @@ class ProcessTwigLayouts implements Step
     }
 
     /**
-     * We have to use a Twig_Loader_Array because of #12.
+     * We have to use a ArrayLoader because of #12.
      *
      * @link https://github.com/CouscousPHP/Couscous/issues/12
      */
-    private function createLoader(string $templateDirectory): Twig_Loader_Array
+    private function createLoader(string $templateDirectory): ArrayLoader
     {
         $finder = new Finder();
         $finder->files()
@@ -97,6 +97,6 @@ class ProcessTwigLayouts implements Step
             $layouts[$name] = $file->getContents();
         }
 
-        return new Twig_Loader_Array($layouts);
+        return new ArrayLoader($layouts);
     }
 }

@@ -5,16 +5,14 @@ namespace Couscous\Tests\UnitTest\Module\Core\Step;
 use Couscous\Model\Metadata;
 use Couscous\Model\Project;
 use Couscous\Module\Core\Step\AddCname;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Couscous\Model\Project
- */
+#[CoversClass(Project::class)]
 class AddCnameTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_add_the_cname_file()
     {
         $project = new Project('config', 'foo', 'bar');

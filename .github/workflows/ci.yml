@@ -16,10 +16,10 @@ jobs:
         timeout-minutes: 15
         strategy:
             matrix:
-                php: [ '7.4', '8.0', '8.1' ]
+                php: [ '8.2', '8.3', '8.4' ]
                 dependency-version: [ '' ]
                 include:
-                    -   php: '7.4'
+                    -   php: '8.2'
                         dependency-version: '--prefer-lowest'
         steps:
             -   name: Checkout
@@ -54,7 +54,7 @@ jobs:
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 7.4
+                    php-version: 8.4
                     tools: composer:v2, cs2pr
                     coverage: none
             -   name: Cache Composer dependencies
@@ -76,7 +76,7 @@ jobs:
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 7.4
+                    php-version: 8.4
                     tools: composer:v2, cs2pr
                     coverage: none
             -   name: Cache Composer dependencies

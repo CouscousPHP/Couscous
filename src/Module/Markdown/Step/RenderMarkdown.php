@@ -44,7 +44,7 @@ class RenderMarkdown implements Step
 
         $filename = $this->replaceExtension($file->relativeFilename);
 
-        return new HtmlFile($filename, $document->getContent(), $file);
+        return new HtmlFile($filename, rtrim($document->getContent(), "\n"), $file);
     }
 
     private function replaceExtension(string $filename): string
